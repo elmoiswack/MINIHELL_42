@@ -2,23 +2,32 @@
 # define MINISHELL_H 
 
 enum type_arg{
-	INFILE, //0
-	OUTFILE, //1
-	COMMAND, //2
-	FLAG, //3
-	PIPE, //4
-	ENV_VAR, //5
-	DELIMITER, //6
-	APPENDER, //7
-	REDIRECT_IN, //8
-	REDIRECT_OUT, //9
-	PIPE_READ, //10
-	PIPE_WRITE, //11
+	PIPE_READ, //0
+	PIPE_WRITE, //1
+	INFILE, //2
+	OUTFILE, //3
+	COMMAND, //4
+	FLAG, //5
+	PIPE, //6
+	ENV_VAR, //7
+	DELIMITER, //8
+	APPENDER, //9
+	REDIRECT_IN, //10
+	REDIRECT_OUT, //11
 	NONE, //12
 	APPEND, //13
 	STDIN_IN, //14
 	STDOUT_OUT, //15
 } ;
+
+enum e_builtin {
+	ECHO,
+	CD,
+	PWD,
+	ENV,
+	EXIT,
+	NO_BUILTIN,
+} t_builtin;
 
 typedef struct lexerinfo {
 	char				**content; 		//INFILE/OUTFILE/CMD + OPTIONAL FLAGS (file could also be absolute/relative path);
@@ -30,7 +39,7 @@ typedef struct lexerinfo {
 	struct lexerinfo	*next;
 }	t_lexer;
 
-//LEXER FUNCTIOS
+//LEXER FUNCTIONS
 //lexer.c
 t_lexer	*lexing(char *line);
 t_lexer	*parsing_line(t_lexer *info_list, char *line);
@@ -71,5 +80,35 @@ int		check_for_envvar(char **splitted_line, int *enum_array);
 //Free functions
 //error.c
 void	free_2d_array(char **array);
+
+//EXECUTION FUNCTIONS
+
+//		execution_processes.c
+int		execute_cmds(t_lexer *head, char *envp[]);
+
+//		execution_utilities.c
+char	*get_path(char *cmd);
+int		arg_is_env(char *raw_input, char **value);
+
+//		utilities_double_arrays.c
+char	**copy_double_array(char **array);
+void	print_double_array(char **arr);
+void	free_double_array(char **array);
+
+//		execution_builtin_operations.c
+void	execute_echo(char **raw_input, int *exit_status);
+void	execute_cd(char **raw_input, int *exit_status);
+void	execute_pwd();
+void	execute_env(char *envp[]);
+
+//		interface_frontend.c
+void	init_ascii_art();
+
+//		execution_builtin.c
+void	execute_builtin(char **raw_input, char *envp[], int builtin, int *exit_status);
+int		is_builtin(char **raw_input, int *builtin);
+
+//		execution_heredoc.c
+void	create_heredoc_tmp(char *delim);
 
 #endif

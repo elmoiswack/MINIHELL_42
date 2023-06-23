@@ -1,4 +1,5 @@
 #include "../includes/minishell.h"
+#include "../libft/libft.h"
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -29,23 +30,39 @@ void	printing_lexer(t_lexer *info_lexer)
 	return ;
 }
 
-int	main(void)
-{
-	char 	*line;
+void	display_prompt(char *envp[])
+{	
+	char	*line;
 	t_lexer *info_lexer;
-	
+	int		builtin;
+	int		status;
+
+	builtin = 0;
+	status = 0;
+	init_ascii_art();
 	while (1)
 	{
-		line = readline("Minishell > ");
+		if (status == 0)	
+			line = readline("\033[0;37m \033[1m MINIHELL_\033[0m> ");
+		else
+			line = readline("\033[0;31m \033[1m Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚\033[0m> ");
 		add_history(line);
 		info_lexer = lexing(line);
 		if (!info_lexer)
-		{
-			printf("nani da fuq\n");
 			exit(1);
-		}
 		printing_lexer(info_lexer);
+		if (!info_lexer->next && is_builtin(info_lexer->content, &builtin) != -1)
+			execute_builtin(info_lexer->content, envp, builtin, &status);
+		else
+			status = execute_cmds(info_lexer, envp);
 	}
+}
+
+int	main(int argc, char *argv[], char *envp[])
+{
+	if (argc != 1)
+		exit(1);
+	argv = NULL;
+	display_prompt(envp);
 	return (0);
 }
-//kdasdas

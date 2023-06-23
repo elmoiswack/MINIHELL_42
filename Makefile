@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+         #
+#    By: fvan-wij <fvan-wij@student.codam.nl>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 00:00:50 by flip              #+#    #+#              #
-#    Updated: 2023/06/22 15:03:15 by dhussain         ###   ########.fr        #
+#    Updated: 2023/06/23 19:33:05 by fvan-wij         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,13 @@ SRCS		:= 	main.c \
 				lexer_data_envvar.c \
 				lexer_into_list.c \
 				error.c \
+				execution_processes.c \
+				execution_utilities.c \
+				execution_builtin_operations.c \
+				execution_heredoc.c \
+				execution_builtin.c \
+				interface_frontend.c \
+				utilities_double_arrays.c \
 
 SRCDIR 		:= 	./srcs
 OBJDIR 		:= 	./objs
