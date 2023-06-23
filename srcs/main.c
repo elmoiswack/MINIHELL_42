@@ -7,9 +7,30 @@
 #include <unistd.h>
 #include <signal.h>
 
+const static char *g_enum[] = {
+[PIPE_READ] = "PIPE_READ", //0
+[PIPE_WRITE] = "PIPE_WRITE", //1
+[INFILE] = "INFILE", //2
+[OUTFILE] = "OUTFILE", //3
+[COMMAND] = "COMMAND", //4
+[FLAG] = "FLAG", //5
+[PIPE] = "PIPE", //6
+[ENV_VAR] = "ENV_VAR", //7
+[DELIMITER] = "DELIMITER",//8
+[APPENDER] = "APPENDER", //9
+[REDIRECT_IN] = "REDIRECT_IN", //10
+[REDIRECT_OUT] = "REDIRECT_OUT", //11
+[NONE] = "NONE", //12
+[APPEND] = "APPEND", //13
+[STDIN_IN] = "STDIN_IN", //14
+[STDOUT_OUT] = "STDOUT_OUT", //15
+};
+
 void	printing_lexer(t_lexer *info_lexer)
 {
 	int	index;
+
+	printf("----------PARSER-----------");
 	while(info_lexer)
 	{
 		printf("\n");
@@ -21,9 +42,10 @@ void	printing_lexer(t_lexer *info_lexer)
 		}
 		printf("content path = %s\n", info_lexer->path);
 		printf("file name = %s\n", info_lexer->file);
-		printf("if there is a pipe input = %i\n", info_lexer->input);
-		printf("if there is a pipe output = %i\n", info_lexer->output);
+		printf("if there is a pipe input = [%i] %s\n", info_lexer->input, g_enum[info_lexer->input]);
+		printf("if there is a pipe output = [%i] %s\n", info_lexer->output, g_enum[info_lexer->output]);
 		printf("delim = %s\n", info_lexer->delim);
+		printf("---------------------------");
 		printf("\n");
 		info_lexer = info_lexer->next;
 	}

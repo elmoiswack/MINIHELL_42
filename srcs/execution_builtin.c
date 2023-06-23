@@ -30,4 +30,5 @@ void	execute_builtin(char **raw_input, char *envp[], int builtin, int *exit_stat
 		return (execute_env(envp));
 	else if (builtin == EXIT)
 		exit(0);
+	*exit_status = 0;
 }

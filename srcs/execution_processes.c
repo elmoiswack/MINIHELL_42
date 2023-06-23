@@ -52,12 +52,11 @@ static void	route_output(int out, t_lexer *node)
 	close(out);
 }
 
-static void	run_child_process(int in, int out, t_lexer *node, char *envp[])
+static void	run_child_process(int in, int out, t_lexer *node, char *envp[], int n)
 {
-	fprintf(stderr, "node->input %d,\tnode->output %d,\tnode->file %s\n", node->input, node->output, node->file);
+	fprintf(stderr, "PROCES[%d]: node->input %d,\tnode->output %d,\tnode->file %s\n", n, node->input, node->output, node->file);
 	route_input(in, node);
 	route_output(out, node);
-	printf("content[0]: %s\tcontent[1]: %s\n\n", node->content[0], node->content[1]);
 	if (execve(node->path, node->content, envp) < 0)
 		perror("execve");
 	exit(-1);
@@ -70,27 +69,31 @@ int	execute_cmds(t_lexer *head, char *envp[])
 	int		pipe_fd[2];
 	int		prev_pipe;
 	int		status;
+	int		n;
 
 	pid = 1;
 	prev_pipe = STDIN_FILENO;
-
+	n = 0;
 	// copy_envp = copy_double_array(envp);
 	current = head;
 	if (current->delim)
 		create_heredoc_tmp(current->delim);
+	fprintf(stderr, "--------EXECUTIONER--------\n");
 	while (current)
 	{
 		if (pipe(pipe_fd) < 0)
 			perror("pipe");
 		pid = fork();
 		if (pid == 0)
-			run_child_process(prev_pipe, pipe_fd[PIPE_WRITE], current, envp);
+			run_child_process(prev_pipe, pipe_fd[PIPE_WRITE], current, envp, n);
 		close(pipe_fd[PIPE_WRITE]);
 		prev_pipe = pipe_fd[PIPE_READ];
+		n++;
 		current = current->next;
 	}
 	close(prev_pipe);
 	waitpid(pid, &status, 0);
 	while (wait(NULL) != -1);
+	fprintf(stderr, "---------------------------\n");
 	return (WEXITSTATUS(status));
 }
