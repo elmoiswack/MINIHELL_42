@@ -7,10 +7,29 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+//Global array - used to print out the enum strings. Must be deleted before handing in the project.
+static const char *g_enum[] = {
+[PIPE_READ] = "READ", //0
+[PIPE_WRITE] = "WRITE", //1
+[INFILE] = "INFILE", //2
+[OUTFILE] = "OUTFILE", //3
+[COMMAND] = "COMMAND", //4
+[FLAG] = "FLAG", //5
+[PIPE] = "PIPE", //6
+[ENV_VAR] = "ENV_VAR", //7
+[DELIMITER] = "DELIMITER",//8
+[APPENDER] = "APPENDER", //9
+[REDIRECT_IN] = "REDIRECT_IN", //10
+[REDIRECT_OUT] = "REDIRECT_OUT", //11
+[NONE] = "NONE", //12
+[APPEND] = "APPEND", //13
+[STDIN_IN] = "STDIN", //14
+[STDOUT_OUT] = "STDOUT", //15
+};
+
 static void	route_input(int in, t_lexer *node)
 {
 	int infile;
-
 	if (node->input == INFILE)
 	{
 		if ((infile = open(node->file, O_RDONLY)) < 0)
@@ -54,9 +73,8 @@ static void	route_output(int out, t_lexer *node)
 	close(out);
 }
 
-static void	run_child_process(int in, int out, t_lexer *node, char *envp[], int n)
+static void	run_child_process(int in, int out, t_lexer *node, char *envp[])
 {
-	fprintf(stderr, "PROCES[%d]: node->input %d,\tnode->output %d,\tnode->file %s\n", n, node->input, node->output, node->file);
 	route_input(in, node);
 	route_output(out, node);
 	if (check_access(node->content[0]) == -1)
@@ -66,6 +84,24 @@ static void	run_child_process(int in, int out, t_lexer *node, char *envp[], int 
 	exit(-1);
 }
 
+void	print_cmd_lst(t_lexer *head)
+{
+	t_lexer	*current;
+	int		n;
+
+	current = head;
+	n = 0;
+	fprintf(stderr, "\033[0;36m--------EXECUTIONER--------\n");
+	fprintf(stderr, "PROCESS\tCMD\tINPUT\tOUTPUT\tFILE\n");
+	while (current)
+	{
+		fprintf(stderr, "%d\t%s\t%s\t%s\t%s\n", n, current->content[0], g_enum[current->input], g_enum[current->output], current->file);
+		n++;
+		current = current->next;
+	}
+	fprintf(stderr, "---------------------------\033[0m\n");
+}
+
 int	execute_cmds(t_lexer *head, char *envp[])
 {
 	t_lexer	*current;
@@ -73,31 +109,26 @@ int	execute_cmds(t_lexer *head, char *envp[])
 	int		pipe_fd[2];
 	int		prev_pipe;
 	int		status;
-	int		n;
 
 	pid = 1;
 	prev_pipe = STDIN_FILENO;
-	n = 0;
-	// copy_envp = copy_double_array(envp);
 	current = head;
+	print_cmd_lst(head);
 	if (current->delim)
 		create_heredoc_tmp(current->delim);
-	fprintf(stderr, "--------EXECUTIONER--------\n");
 	while (current)
 	{
 		if (pipe(pipe_fd) < 0)
 			perror("pipe");
 		pid = fork();
 		if (pid == 0)
-			run_child_process(prev_pipe, pipe_fd[PIPE_WRITE], current, envp, n);
+			run_child_process(prev_pipe, pipe_fd[PIPE_WRITE], current, envp);
 		close(pipe_fd[PIPE_WRITE]);
 		prev_pipe = pipe_fd[PIPE_READ];
-		n++;
 		current = current->next;
 	}
 	close(prev_pipe);
 	waitpid(pid, &status, 0);
 	while (wait(NULL) != -1);
-	fprintf(stderr, "---------------------------\n");
 	return (WEXITSTATUS(status));
 }

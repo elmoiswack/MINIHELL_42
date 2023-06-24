@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <signal.h>
 
-//Global array, used to print out the enum strings. Must be deleted before handing in the project.
+//Global array - used to print out the enum strings. Must be deleted before handing in the project.
 static const char *g_enum[] = {
 [PIPE_READ] = "PIPE_READ", //0
 [PIPE_WRITE] = "PIPE_WRITE", //1
@@ -23,33 +23,34 @@ static const char *g_enum[] = {
 [REDIRECT_OUT] = "REDIRECT_OUT", //11
 [NONE] = "NONE", //12
 [APPEND] = "APPEND", //13
-[STDIN_IN] = "STDIN_IN", //14
-[STDOUT_OUT] = "STDOUT_OUT", //15
+[STDIN_IN] = "STDIN", //14
+[STDOUT_OUT] = "STDOUT", //15
 };
 
 void	printing_lexer(t_lexer *info_lexer)
 {
 	int	index;
 
-	fprintf(stderr, "----------PARSER-----------");
+	fprintf(stderr, "\033[0;36m----------PARSER-----------");
 	while(info_lexer)
 	{
 		fprintf(stderr, "\n");
 		index = 0;
 		while (info_lexer->content[index])
 		{
-			fprintf(stderr, "info_lexer->content = %s\n", info_lexer->content[index]);
+			fprintf(stderr, "content[%d] = %s\n", index, info_lexer->content[index]);
 			index++;
 		}
-		fprintf(stderr, "content path = %s\n", info_lexer->path);
+		fprintf(stderr, "path = %s\n", info_lexer->path);
 		fprintf(stderr, "file name = %s\n", info_lexer->file);
-		fprintf(stderr, "if there is a pipe input = [%i] %s\n", info_lexer->input, g_enum[info_lexer->input]);
-		fprintf(stderr, "if there is a pipe output = [%i] %s\n", info_lexer->output, g_enum[info_lexer->output]);
+		fprintf(stderr, "input = %s\n", g_enum[info_lexer->input]);
+		fprintf(stderr, "output = %s\n", g_enum[info_lexer->output]);
 		fprintf(stderr, "delim = %s\n", info_lexer->delim);
 		fprintf(stderr, "---------------------------");
 		fprintf(stderr, "\n");
 		info_lexer = info_lexer->next;
 	}
+	fprintf(stderr, "\033[0m");
 	return ;
 }
 
