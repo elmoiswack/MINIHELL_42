@@ -50,6 +50,6 @@ char	**copy_double_array(char **array)
 		ft_strlcpy(copy[i], array[i], len);
 		i++;
 	}
-	print_double_array(copy);
+	// print_double_array(copy);
 	return (copy);
 }

@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 static void	route_input(int in, t_lexer *node)
 {
@@ -57,7 +59,9 @@ static void	run_child_process(int in, int out, t_lexer *node, char *envp[], int 
 	fprintf(stderr, "PROCES[%d]: node->input %d,\tnode->output %d,\tnode->file %s\n", n, node->input, node->output, node->file);
 	route_input(in, node);
 	route_output(out, node);
-	if (execve(node->path, node->content, envp) < 0)
+	if (check_access(node->content[0]) == -1)
+		error_command_not_found(node->content[0]);
+	else if (execve(node->path, node->content, envp) < 0)
 		perror("execve");
 	exit(-1);
 }

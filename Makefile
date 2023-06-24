@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    Makefile                                          :+:    :+:              #
 #                                                     +:+ +:+         +:+      #
 #    By: fvan-wij <fvan-wij@student.codam.nl>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 00:00:50 by flip              #+#    #+#              #
-#    Updated: 2023/06/23 19:33:05 by fvan-wij         ###   ########.fr        #
+#    Updated: 2023/06/24 12:55:39 by flip          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(MAKE) -C libft
-	@$(CC) $^ $(LIBFT) $(HEADERS) -o $(NAME)
+	@$(CC) $^ $(LIBFT) -lreadline $(HEADERS) -o $(NAME)
 	@echo $(Green) $(Bold) Minishell compiled succesfully ✅ $(Text_Off)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
@@ -71,7 +71,7 @@ clean:
 	@$(MAKE) -C libft clean
 
 fclean:	clean
-	@rm -f $(NAME) $(LIBFT)
+	@rm -f $(NAME) 
 	@echo $(Yellow) Minishell: cleaned executable! $(Text_Off)
 	@$(MAKE) -C libft fclean
 

@@ -61,7 +61,7 @@ t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, int *enum_arr
 				info_list = into_linklist(info_list, splitted_line[index + 1], enum_array[index]);
 			if (!info_list)
 				return (NULL);
-				index++;
+			index++;
 		}
 		index++;
 	}

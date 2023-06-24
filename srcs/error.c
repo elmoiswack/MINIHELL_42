@@ -1,6 +1,8 @@
 #include "../includes/minishell.h"
+#include "../libft/libft.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 void	free_2d_array(char **array)
 {
@@ -14,5 +16,11 @@ void	free_2d_array(char **array)
 	}
 	free(array);
 	return ;
+}
+
+void	error_command_not_found(char *cmd)
+{
+	ft_putstr_fd(cmd, STDERR_FILENO);
+	ft_putstr_fd(": command not found\n", STDERR_FILENO);
 }
 //kdasdas

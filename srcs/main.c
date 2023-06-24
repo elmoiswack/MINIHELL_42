@@ -7,7 +7,8 @@
 #include <unistd.h>
 #include <signal.h>
 
-const static char *g_enum[] = {
+//Global array, used to print out the enum strings. Must be deleted before handing in the project.
+static const char *g_enum[] = {
 [PIPE_READ] = "PIPE_READ", //0
 [PIPE_WRITE] = "PIPE_WRITE", //1
 [INFILE] = "INFILE", //2
@@ -30,61 +31,78 @@ void	printing_lexer(t_lexer *info_lexer)
 {
 	int	index;
 
-	printf("----------PARSER-----------");
+	fprintf(stderr, "----------PARSER-----------");
 	while(info_lexer)
 	{
-		printf("\n");
+		fprintf(stderr, "\n");
 		index = 0;
 		while (info_lexer->content[index])
 		{
-			printf("info_lexer->content = %s\n", info_lexer->content[index]);
+			fprintf(stderr, "info_lexer->content = %s\n", info_lexer->content[index]);
 			index++;
 		}
-		printf("content path = %s\n", info_lexer->path);
-		printf("file name = %s\n", info_lexer->file);
-		printf("if there is a pipe input = [%i] %s\n", info_lexer->input, g_enum[info_lexer->input]);
-		printf("if there is a pipe output = [%i] %s\n", info_lexer->output, g_enum[info_lexer->output]);
-		printf("delim = %s\n", info_lexer->delim);
-		printf("---------------------------");
-		printf("\n");
+		fprintf(stderr, "content path = %s\n", info_lexer->path);
+		fprintf(stderr, "file name = %s\n", info_lexer->file);
+		fprintf(stderr, "if there is a pipe input = [%i] %s\n", info_lexer->input, g_enum[info_lexer->input]);
+		fprintf(stderr, "if there is a pipe output = [%i] %s\n", info_lexer->output, g_enum[info_lexer->output]);
+		fprintf(stderr, "delim = %s\n", info_lexer->delim);
+		fprintf(stderr, "---------------------------");
+		fprintf(stderr, "\n");
 		info_lexer = info_lexer->next;
 	}
 	return ;
 }
 
-void	display_prompt(char *envp[])
+void	display_prompt(t_minishell *shell)
 {	
 	char	*line;
-	t_lexer *info_lexer;
-	int		builtin;
-	int		status;
 
-	builtin = 0;
-	status = 0;
 	init_ascii_art();
 	while (1)
 	{
-		if (status == 0)	
+		if (shell->status == 0)	
 			line = readline("\033[0;37m \033[1m MINIHELL_\033[0m> ");
 		else
-			line = readline("\033[0;31m \033[1m Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚\033[0m> ");
+			line = readline("\033[0;31m \033[1m Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚_\033[0m> ");
 		add_history(line);
-		info_lexer = lexing(line);
-		if (!info_lexer)
+		shell->cmd_lst = lexing(line);
+		if (!shell->cmd_lst)
 			exit(1);
-		printing_lexer(info_lexer);
-		if (!info_lexer->next && is_builtin(info_lexer->content, &builtin) != -1)
-			execute_builtin(info_lexer->content, envp, builtin, &status);
+		printing_lexer(shell->cmd_lst);
+		if (!shell->cmd_lst->next && is_builtin(shell) != -1)
+			shell->status = execute_builtin(shell);
 		else
-			status = execute_cmds(info_lexer, envp);
+			shell->status = execute_cmds(shell->cmd_lst, shell->env_cpy);
 	}
+}
+
+t_minishell	init_minishell(int argc, char *argv[], char *envp[])
+{
+	t_minishell shell;
+
+	argv[0] = NULL;
+	if (argc != 1)
+	{
+		ft_printf("executable: too many arguments. Executable can only be run as follows: './minishell'\n");
+		exit(1);
+	}
+	shell.cmd_lst = malloc(sizeof(t_lexer));
+	if (!shell.cmd_lst)
+	{
+		ft_printf("malloc: could not allocate memory for t_minishell shell\n");
+		exit(1);
+	}
+	shell.env_cpy = copy_double_array(envp);
+	shell.status = 0;
+	shell.builtin = NO_BUILTIN;
+	return (shell);
 }
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	if (argc != 1)
-		exit(1);
-	argv = NULL;
-	display_prompt(envp);
+	t_minishell	shell;
+
+	shell = init_minishell(argc, argv, envp);
+	display_prompt(&shell);
 	return (0);
 }
