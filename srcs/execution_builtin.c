@@ -12,6 +12,8 @@ int	is_builtin(t_minishell *shell)
 		return (shell->builtin = PWD, 1);
 	else if (ft_strncmp(shell->cmd_lst->content[0], "env", 4) == 0 && shell->cmd_lst->content[1] == NULL)
 		return (shell->builtin = ENV, 1);
+	else if (ft_strncmp(shell->cmd_lst->content[0], "export", 7) == 0)
+		return (shell->builtin = EXPORT, 1);
 	else if (ft_strncmp(shell->cmd_lst->content[0], "exit", 5) == 0 && shell->cmd_lst->content[1] == NULL)
 		exit(0);
 	else
@@ -28,6 +30,8 @@ int	execute_builtin(t_minishell *shell)
 		return (execute_pwd(), 0);
 	else if (shell->builtin == ENV)
 		return (execute_env(shell->env_cpy), 0);
+	else if (shell->builtin == EXPORT)
+		return (execute_export(shell), 0);
 	else if (shell->builtin == EXIT)
 		exit(0);
 	return (shell->status = 1, 1);

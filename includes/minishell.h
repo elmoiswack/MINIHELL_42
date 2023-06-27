@@ -32,6 +32,8 @@ typedef enum e_builtin {
 	PWD,
 	ENV,
 	EXIT,
+	EXPORT,
+	UNSET,
 	NO_BUILTIN,
 } t_builtin;
 
@@ -108,6 +110,7 @@ int		check_for_envvar(char **splitted_line, int *enum_array);
 		//error.c
 void	free_2d_array(char **array);
 void	error_command_not_found(char *cmd);
+void	error_export_invalid_identifier(char *input);
 
 //###############################################################
 //		EXECUTION FUNCTIONS
@@ -125,12 +128,15 @@ int		check_access(char *cmd);
 char	**copy_double_array(char **array);
 void	print_double_array(char **arr);
 void	free_double_array(char **array);
+char	**append_to_double_array(char **src, char *str);
+char	**replace_str_in_array(char **src, char *str, int index);
 
 //		execution_builtin_operations.c
 void	execute_echo(char **raw_input, int *exit_status);
 void	execute_cd(char **raw_input, int *exit_status);
 void	execute_pwd();
 void	execute_env(char *envp[]);
+void	execute_export(t_minishell *shell);
 
 //		interface_frontend.c
 void	init_ascii_art();

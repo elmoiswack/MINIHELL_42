@@ -67,3 +67,41 @@ void	execute_env(char *envp[])
 {
 	print_double_array(envp);
 }
+
+int	var_exists(char	**env, char *var, int var_len)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], var, var_len) == 0)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+//		[] export lol=jo
+
+void	execute_export(t_minishell *shell)
+{
+	char	*var;
+	int		eq_index;
+	int		replace_index;
+
+	if (shell->cmd_lst->content[1] == NULL)
+		execute_env(shell->env_cpy);
+	eq_index = ft_strchr_index(shell->cmd_lst->content[1], '=');
+	var = ft_substr(shell->cmd_lst->content[1], 0, eq_index);
+	replace_index = var_exists(shell->env_cpy, var, eq_index);
+	if (ft_strchr(shell->cmd_lst->content[1], '=') == NULL && ft_strisalpha(shell->cmd_lst->content[1]) == 0)
+	{
+		shell->status = -1;
+		return (error_export_invalid_identifier(shell->cmd_lst->content[1]));
+	}
+	else if (replace_index >= 0)
+		shell->env_cpy = replace_str_in_array(shell->env_cpy, shell->cmd_lst->content[1], replace_index);
+	else
+		shell->env_cpy = append_to_double_array(shell->env_cpy, shell->cmd_lst->content[1]);
+}

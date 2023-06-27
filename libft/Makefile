@@ -6,7 +6,7 @@
 #    By: fvan-wij <fvan-wij@student.codam.nl>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/01 18:08:39 by fvan-wij          #+#    #+#              #
-#    Updated: 2023/05/30 15:59:04 by fvan-wij      ########   odam.nl          #
+#    Updated: 2023/06/27 13:09:34 by fvan-wij      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,7 @@ SRC			:=	ft_atoi.c \
 			ft_split_quotations.c \
 			ft_find_envp_path_index.c \
 			ft_del_2d.c \
+			ft_strisalpha.c \
 
 			
 # Regular Colors #############################################
