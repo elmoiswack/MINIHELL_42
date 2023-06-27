@@ -6,7 +6,7 @@
 #    By: fvan-wij <fvan-wij@student.codam.nl>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 00:00:50 by flip              #+#    #+#              #
-#    Updated: 2023/06/24 12:55:39 by flip          ########   odam.nl          #
+#    Updated: 2023/06/27 12:34:27 by fvan-wij      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,9 @@ fclean:	clean
 	@rm -f $(NAME) 
 	@echo $(Yellow) Minishell: cleaned executable! $(Text_Off)
 	@$(MAKE) -C libft fclean
+
+compile_cmd: fclean
+	@compiledb make; mv *.json ./data
 
 re:	fclean all
 

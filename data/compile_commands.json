@@ -1,0 +1,1162 @@
+[
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-o",
+   "objs/main.o",
+   "-c",
+   "srcs/main.c",
+   "-I",
+   "./includes/libft",
+   "-I",
+   "./includes"
+  ],
+  "file": "srcs/main.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-o",
+   "objs/lexer.o",
+   "-c",
+   "srcs/lexer.c",
+   "-I",
+   "./includes/libft",
+   "-I",
+   "./includes"
+  ],
+  "file": "srcs/lexer.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-o",
+   "objs/lexer_utils.o",
+   "-c",
+   "srcs/lexer_utils.c",
+   "-I",
+   "./includes/libft",
+   "-I",
+   "./includes"
+  ],
+  "file": "srcs/lexer_utils.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-o",
+   "objs/lexer_dataorg_utils.o",
+   "-c",
+   "srcs/lexer_dataorg_utils.c",
+   "-I",
+   "./includes/libft",
+   "-I",
+   "./includes"
+  ],
+  "file": "srcs/lexer_dataorg_utils.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-o",
+   "objs/lexer_get_path.o",
+   "-c",
+   "srcs/lexer_get_path.c",
+   "-I",
+   "./includes/libft",
+   "-I",
+   "./includes"
+  ],
+  "file": "srcs/lexer_get_path.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-o",
+   "objs/lexer_super_splitt.o",
+   "-c",
+   "srcs/lexer_super_splitt.c",
+   "-I",
+   "./includes/libft",
+   "-I",
+   "./includes"
+  ],
+  "file": "srcs/lexer_super_splitt.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-o",
+   "objs/lexer_data_org.o",
+   "-c",
+   "srcs/lexer_data_org.c",
+   "-I",
+   "./includes/libft",
+   "-I",
+   "./includes"
+  ],
+  "file": "srcs/lexer_data_org.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-o",
+   "objs/lexer_data_envvar.o",
+   "-c",
+   "srcs/lexer_data_envvar.c",
+   "-I",
+   "./includes/libft",
+   "-I",
+   "./includes"
+  ],
+  "file": "srcs/lexer_data_envvar.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-o",
+   "objs/lexer_into_list.o",
+   "-c",
+   "srcs/lexer_into_list.c",
+   "-I",
+   "./includes/libft",
+   "-I",
+   "./includes"
+  ],
+  "file": "srcs/lexer_into_list.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-o",
+   "objs/error.o",
+   "-c",
+   "srcs/error.c",
+   "-I",
+   "./includes/libft",
+   "-I",
+   "./includes"
+  ],
+  "file": "srcs/error.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-o",
+   "objs/execution_processes.o",
+   "-c",
+   "srcs/execution_processes.c",
+   "-I",
+   "./includes/libft",
+   "-I",
+   "./includes"
+  ],
+  "file": "srcs/execution_processes.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-o",
+   "objs/execution_utilities.o",
+   "-c",
+   "srcs/execution_utilities.c",
+   "-I",
+   "./includes/libft",
+   "-I",
+   "./includes"
+  ],
+  "file": "srcs/execution_utilities.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-o",
+   "objs/execution_builtin_operations.o",
+   "-c",
+   "srcs/execution_builtin_operations.c",
+   "-I",
+   "./includes/libft",
+   "-I",
+   "./includes"
+  ],
+  "file": "srcs/execution_builtin_operations.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-o",
+   "objs/execution_heredoc.o",
+   "-c",
+   "srcs/execution_heredoc.c",
+   "-I",
+   "./includes/libft",
+   "-I",
+   "./includes"
+  ],
+  "file": "srcs/execution_heredoc.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-o",
+   "objs/execution_builtin.o",
+   "-c",
+   "srcs/execution_builtin.c",
+   "-I",
+   "./includes/libft",
+   "-I",
+   "./includes"
+  ],
+  "file": "srcs/execution_builtin.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-o",
+   "objs/interface_frontend.o",
+   "-c",
+   "srcs/interface_frontend.c",
+   "-I",
+   "./includes/libft",
+   "-I",
+   "./includes"
+  ],
+  "file": "srcs/interface_frontend.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-o",
+   "objs/utilities_double_arrays.o",
+   "-c",
+   "srcs/utilities_double_arrays.c",
+   "-I",
+   "./includes/libft",
+   "-I",
+   "./includes"
+  ],
+  "file": "srcs/utilities_double_arrays.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_atoi.o",
+   "ft_atoi.c"
+  ],
+  "file": "ft_atoi.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_bzero.o",
+   "ft_bzero.c"
+  ],
+  "file": "ft_bzero.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_calloc.o",
+   "ft_calloc.c"
+  ],
+  "file": "ft_calloc.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_isalnum.o",
+   "ft_isalnum.c"
+  ],
+  "file": "ft_isalnum.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_isalpha.o",
+   "ft_isalpha.c"
+  ],
+  "file": "ft_isalpha.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_isascii.o",
+   "ft_isascii.c"
+  ],
+  "file": "ft_isascii.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_isdigit.o",
+   "ft_isdigit.c"
+  ],
+  "file": "ft_isdigit.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_isprint.o",
+   "ft_isprint.c"
+  ],
+  "file": "ft_isprint.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_memchr.o",
+   "ft_memchr.c"
+  ],
+  "file": "ft_memchr.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_memcmp.o",
+   "ft_memcmp.c"
+  ],
+  "file": "ft_memcmp.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_memcpy.o",
+   "ft_memcpy.c"
+  ],
+  "file": "ft_memcpy.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_memmove.o",
+   "ft_memmove.c"
+  ],
+  "file": "ft_memmove.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_memset.o",
+   "ft_memset.c"
+  ],
+  "file": "ft_memset.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_strchr.o",
+   "ft_strchr.c"
+  ],
+  "file": "ft_strchr.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_strdup.o",
+   "ft_strdup.c"
+  ],
+  "file": "ft_strdup.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_strcpy.o",
+   "ft_strcpy.c"
+  ],
+  "file": "ft_strcpy.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_strlcat.o",
+   "ft_strlcat.c"
+  ],
+  "file": "ft_strlcat.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_strlcpy.o",
+   "ft_strlcpy.c"
+  ],
+  "file": "ft_strlcpy.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_strlen.o",
+   "ft_strlen.c"
+  ],
+  "file": "ft_strlen.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_strncmp.o",
+   "ft_strncmp.c"
+  ],
+  "file": "ft_strncmp.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_strnstr.o",
+   "ft_strnstr.c"
+  ],
+  "file": "ft_strnstr.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_strrchr.o",
+   "ft_strrchr.c"
+  ],
+  "file": "ft_strrchr.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_tolower.o",
+   "ft_tolower.c"
+  ],
+  "file": "ft_tolower.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_toupper.o",
+   "ft_toupper.c"
+  ],
+  "file": "ft_toupper.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_putchar_fd.o",
+   "ft_putchar_fd.c"
+  ],
+  "file": "ft_putchar_fd.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_putendl_fd.o",
+   "ft_putendl_fd.c"
+  ],
+  "file": "ft_putendl_fd.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_putnbr_fd.o",
+   "ft_putnbr_fd.c"
+  ],
+  "file": "ft_putnbr_fd.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_putstr_fd.o",
+   "ft_putstr_fd.c"
+  ],
+  "file": "ft_putstr_fd.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_itoa.o",
+   "ft_itoa.c"
+  ],
+  "file": "ft_itoa.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_strtrim.o",
+   "ft_strtrim.c"
+  ],
+  "file": "ft_strtrim.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_substr.o",
+   "ft_substr.c"
+  ],
+  "file": "ft_substr.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_strjoin.o",
+   "ft_strjoin.c"
+  ],
+  "file": "ft_strjoin.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_split.o",
+   "ft_split.c"
+  ],
+  "file": "ft_split.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_striteri.o",
+   "ft_striteri.c"
+  ],
+  "file": "ft_striteri.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_strmapi.o",
+   "ft_strmapi.c"
+  ],
+  "file": "ft_strmapi.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_lstnew_bonus.o",
+   "ft_lstnew_bonus.c"
+  ],
+  "file": "ft_lstnew_bonus.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_lstadd_front_bonus.o",
+   "ft_lstadd_front_bonus.c"
+  ],
+  "file": "ft_lstadd_front_bonus.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_lstsize_bonus.o",
+   "ft_lstsize_bonus.c"
+  ],
+  "file": "ft_lstsize_bonus.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_lstlast_bonus.o",
+   "ft_lstlast_bonus.c"
+  ],
+  "file": "ft_lstlast_bonus.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_lstadd_back_bonus.o",
+   "ft_lstadd_back_bonus.c"
+  ],
+  "file": "ft_lstadd_back_bonus.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_lstdelone_bonus.o",
+   "ft_lstdelone_bonus.c"
+  ],
+  "file": "ft_lstdelone_bonus.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_lstclear_bonus.o",
+   "ft_lstclear_bonus.c"
+  ],
+  "file": "ft_lstclear_bonus.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_lstiter_bonus.o",
+   "ft_lstiter_bonus.c"
+  ],
+  "file": "ft_lstiter_bonus.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_lstmap_bonus.o",
+   "ft_lstmap_bonus.c"
+  ],
+  "file": "ft_lstmap_bonus.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "get_next_line.o",
+   "get_next_line.c"
+  ],
+  "file": "get_next_line.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_printf.o",
+   "ft_printf.c"
+  ],
+  "file": "ft_printf.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_printspecifier.o",
+   "ft_printspecifier.c"
+  ],
+  "file": "ft_printspecifier.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_put_cap_hex.o",
+   "ft_put_cap_hex.c"
+  ],
+  "file": "ft_put_cap_hex.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_put_ui_nbr.o",
+   "ft_put_ui_nbr.c"
+  ],
+  "file": "ft_put_ui_nbr.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_putadr.o",
+   "ft_putadr.c"
+  ],
+  "file": "ft_putadr.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_putchar.o",
+   "ft_putchar.c"
+  ],
+  "file": "ft_putchar.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_puthex.o",
+   "ft_puthex.c"
+  ],
+  "file": "ft_puthex.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_putnbr.o",
+   "ft_putnbr.c"
+  ],
+  "file": "ft_putnbr.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_putstr.o",
+   "ft_putstr.c"
+  ],
+  "file": "ft_putstr.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_strjoin_and_free.o",
+   "ft_strjoin_and_free.c"
+  ],
+  "file": "ft_strjoin_and_free.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_split_nl.o",
+   "ft_split_nl.c"
+  ],
+  "file": "ft_split_nl.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_atoh.o",
+   "ft_atoh.c"
+  ],
+  "file": "ft_atoh.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_word_counter_quotations.o",
+   "ft_word_counter_quotations.c"
+  ],
+  "file": "ft_word_counter_quotations.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_split_quotations.o",
+   "ft_split_quotations.c"
+  ],
+  "file": "ft_split_quotations.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_find_envp_path_index.o",
+   "ft_find_envp_path_index.c"
+  ],
+  "file": "ft_find_envp_path_index.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_del_2d.o",
+   "ft_del_2d.c"
+  ],
+  "file": "ft_del_2d.c"
+ }
+]
