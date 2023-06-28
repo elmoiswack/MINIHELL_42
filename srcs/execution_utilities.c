@@ -59,3 +59,17 @@ int	arg_is_env(char *raw_input, char **value)
 		return (0);
 	}
 }
+
+int	var_exists(char	**env, char *var, int var_len)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], var, var_len) == 0)
+			return (i);
+		i++;
+	}
+	return (-1);
+}

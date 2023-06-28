@@ -1158,5 +1158,19 @@
    "ft_del_2d.c"
   ],
   "file": "ft_del_2d.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-c",
+   "-o",
+   "ft_strisalpha.o",
+   "ft_strisalpha.c"
+  ],
+  "file": "ft_strisalpha.c"
  }
 ]

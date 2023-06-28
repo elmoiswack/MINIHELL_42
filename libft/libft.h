@@ -6,7 +6,7 @@
 /*   By: fvan-wij <fvan-wij@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:46:37 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/06/22 15:34:39 by flip          ########   odam.nl         */
+/*   Updated: 2023/06/27 12:59:42 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ int				ft_word_counter_quotations(char const *s, char c);
 char			**ft_split_quotations(char const *s, char c);
 int				ft_find_envp_path_index(char *envp[]);
 void			ft_del_2d(char **arr);
+int				ft_strisalpha(char *str);
 
 #endif

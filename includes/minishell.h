@@ -32,6 +32,8 @@ typedef enum e_builtin {
 	PWD,
 	ENV,
 	EXIT,
+	EXPORT,
+	UNSET,
 	NO_BUILTIN,
 } t_builtin;
 
@@ -108,6 +110,8 @@ int		check_for_envvar(char **splitted_line, int *enum_array);
 		//error.c
 void	free_2d_array(char **array);
 void	error_command_not_found(char *cmd);
+void	error_export_invalid_identifier(char *input);
+void	error_unset_too_few_args();
 
 //###############################################################
 //		EXECUTION FUNCTIONS
@@ -120,17 +124,23 @@ int		execute_cmds(t_lexer *head, char *envp[]);
 char	*get_path(char *cmd);
 int		arg_is_env(char *raw_input, char **value);
 int		check_access(char *cmd);
+int		var_exists(char	**env, char *var, int var_len);
 
 //		utilities_double_arrays.c
 char	**copy_double_array(char **array);
 void	print_double_array(char **arr);
 void	free_double_array(char **array);
+char	**append_to_double_array(char **src, char *str);
+char	**replace_str_in_array(char **src, char *str, int index);
+char	**remove_str_from_array(char **src, int index);
 
 //		execution_builtin_operations.c
 void	execute_echo(char **raw_input, int *exit_status);
 void	execute_cd(char **raw_input, int *exit_status);
 void	execute_pwd();
 void	execute_env(char *envp[]);
+void	execute_export(t_minishell *shell);
+void	execute_unset(t_minishell *shell);
 
 //		interface_frontend.c
 void	init_ascii_art();

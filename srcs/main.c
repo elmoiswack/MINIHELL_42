@@ -71,7 +71,7 @@ void	display_prompt(t_minishell *shell)
 			exit(1);
 		printing_lexer(shell->cmd_lst);
 		if (!shell->cmd_lst->next && is_builtin(shell) != -1)
-			shell->status = execute_builtin(shell);
+			execute_builtin(shell);
 		else
 			shell->status = execute_cmds(shell->cmd_lst, shell->env_cpy);
 	}

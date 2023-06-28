@@ -67,3 +67,40 @@ void	execute_env(char *envp[])
 {
 	print_double_array(envp);
 }
+
+void	execute_export(t_minishell *shell)
+{
+	char	*var;
+	int		eq_index;
+	int		replace_index;
+
+	if (!shell->cmd_lst->content[1])
+		return (execute_env(shell->env_cpy));
+	eq_index = ft_strchr_index(shell->cmd_lst->content[1], '=');
+	var = ft_substr(shell->cmd_lst->content[1], 0, eq_index);
+	replace_index = var_exists(shell->env_cpy, var, eq_index);
+	if (ft_strchr(shell->cmd_lst->content[1], '=') == NULL && ft_strisalpha(shell->cmd_lst->content[1]) == 0)
+	{
+		shell->status = -1;
+		return (error_export_invalid_identifier(shell->cmd_lst->content[1]));
+	}
+	else if (replace_index >= 0)
+		shell->env_cpy = replace_str_in_array(shell->env_cpy, shell->cmd_lst->content[1], replace_index);
+	else
+		shell->env_cpy = append_to_double_array(shell->env_cpy, shell->cmd_lst->content[1]);
+}
+
+void	execute_unset(t_minishell *shell)
+{
+	int	var_index;
+
+	var_index = 0;
+	if (shell->cmd_lst->content[1] == NULL)
+	{
+		shell->status = -1;
+		return (error_unset_too_few_args());
+	}
+	var_index = var_exists(shell->env_cpy, shell->cmd_lst->content[1], ft_strlen(shell->cmd_lst->content[1]));
+	if (var_index >= 0)
+		shell->env_cpy = remove_str_from_array(shell->env_cpy, var_index);
+}
