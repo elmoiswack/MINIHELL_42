@@ -129,7 +129,7 @@ char	*put_spaces_in_line(char *line)
 			space_to_add += 2;
 		index++;
 	}
-	temp = ft_calloc(index + space_to_add, sizeof(char));
+	temp = ft_calloc(index + space_to_add + 1, sizeof(char));
 	if (!temp)
 		return (NULL);
 	temp = edit_line(line, temp);

@@ -67,7 +67,7 @@ t_lexer	*parsing_line(t_lexer *info_list, char *line)
 	splitted_line = super_split(line);
 	while (splitted_line[index])
 		index++;
-	enum_array = ft_calloc(index, sizeof(int));
+	enum_array = ft_calloc(index + 1, sizeof(int));
 	if (!enum_array)
 		return (NULL);
 	enum_array = into_enum_array(splitted_line, enum_array);
