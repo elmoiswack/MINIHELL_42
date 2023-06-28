@@ -37,23 +37,21 @@ t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, int *enum_arr
 		}
 		if (enum_array[index] == PIPE)
 		{
-			if (info_list->file)
-				info_list->input = INFILE;
-			else
-				info_list->input = STDIN_IN;	
+			info_list->input = STDIN_IN;	
 			info_list->output = PIPE_WRITE;
 			info_list = create_new_node(info_list);
 			info_list->input = PIPE_READ;
-			if (check_for_outfile(splitted_line, enum_array, index) == 1)
-				info_list->output = OUTFILE;
-			else
-				info_list->output = STDOUT_OUT;
+			info_list->output = STDOUT_OUT;
 		}
 		if (enum_array[index] == INFILE || enum_array[index] == OUTFILE)
 		{
 			info_list = into_linklist(info_list, splitted_line[index], enum_array[index]);
 			if (!info_list)
 				return (NULL);
+			if (enum_array[index] == INFILE)
+				info_list->input = INFILE;
+			if (enum_array[index] == OUTFILE)
+				info_list->output = OUTFILE;
 		}
 		if (enum_array[index] == DELIMITER)
 		{
@@ -63,7 +61,8 @@ t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, int *enum_arr
 				return (NULL);
 			index++;
 		}
-		index++;
+		if (splitted_line[index] != NULL)
+			index++;
 	}
 	info_list->next = NULL;
 	free_2d_array(splitted_line);

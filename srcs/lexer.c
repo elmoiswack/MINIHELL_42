@@ -71,13 +71,20 @@ t_lexer	*parsing_line(t_lexer *info_list, char *line)
 	if (!enum_array)
 		return (NULL);
 	enum_array = into_enum_array(splitted_line, enum_array);
+	index = 0;
+	while (splitted_line[index])
+	{
+		printf("line = %s\n", splitted_line[index]);
+		printf("enum_awa = %i\n", enum_array[index]);
+		index++;
+	}
 	info_list = organizing_data(info_list, splitted_line, enum_array);
 	return (info_list);
 }
 
 t_lexer	*lexing(char *line)
 {
-	int	ammount_words;
+	int		ammount_words;
 	t_lexer	*info_list;
 
 	info_list = ft_calloc(1, sizeof(t_lexer));
@@ -94,4 +101,3 @@ t_lexer	*lexing(char *line)
 	free(line);
 	return (info_list);
 }
-//kdasdas

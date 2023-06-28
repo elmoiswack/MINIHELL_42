@@ -11,18 +11,11 @@ int	ammount_of_words(char *line)
 	count = 0;
 	while (line[index])
 	{
-		if (line[index] == ' ')
-			count++;
-		if (line[index] == '"')
-		{
+		while (line[index] && (line[index] != ' '))
 			index++;
-			while (line[index] != '"')
-				index++;
-			count++;
-		}
-		index++;
+		count++;
+		index = skip_spaces(line, index);
 	}
-	count += 1;
 	return (count);
 }
 
@@ -43,4 +36,3 @@ int	skip_spaces(char *line, int index)
 		index++;
 	return (index);	
 }
-//kdasdas

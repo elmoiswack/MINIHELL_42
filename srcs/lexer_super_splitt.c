@@ -43,14 +43,8 @@ char	**super_split(char *line)
 			arr[index_y] = put_line_in_arr(line, index, begin_word);
 			if (!arr[index_y])
 				return (free_2d_array(arr), NULL);
-			index++;
-			if (ft_isalpha(line[index]))
-				begin_word = index;
-			else
-			{
-				index = skip_spaces(line, index);
-				begin_word = index;
-			}
+			index = skip_spaces(line, index);
+			begin_word = index;
 			index_y++;
 		}
 		if (line[index] == '"')
@@ -67,12 +61,17 @@ char	**super_split(char *line)
 			}
 			index_y++;		
 		}
-		index++;
+		if (line[index] != '\0')
+			index++;
 	}
-	arr[index_y] = put_line_in_arr(line, index, begin_word);
-	if (!arr[index_y])
-		return (free_2d_array(arr), NULL);
-	index_y++;
+	if (!((line[index - 1] == ' ') || (line[index - 1] == '\t') || (line[index - 1] == '\n')))
+	{
+		index--;
+		arr[index_y] = put_line_in_arr(line, index + 1, begin_word);
+		if (!arr[index_y])
+			return (free_2d_array(arr), NULL);
+		index_y++;
+	}
 	arr[index_y] = NULL;
 	return (arr);
 }
@@ -136,4 +135,3 @@ char	*put_spaces_in_line(char *line)
 	free(line);
 	return (temp);
 }
-//kdasdas
