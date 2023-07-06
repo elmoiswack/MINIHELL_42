@@ -6,7 +6,7 @@
 #    By: fvan-wij <fvan-wij@student.codam.nl>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 00:00:50 by flip              #+#    #+#              #
-#    Updated: 2023/06/27 12:34:27 by fvan-wij      ########   odam.nl          #
+#    Updated: 2023/07/06 19:22:40 by flip          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS		:= 	main.c \
 				execution_builtin.c \
 				interface_frontend.c \
 				utilities_double_arrays.c \
+				signal_handler.c \
 
 SRCDIR 		:= 	./srcs
 OBJDIR 		:= 	./objs
