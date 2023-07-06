@@ -6,26 +6,20 @@
 
 void	execute_echo(char **raw_input, int *exit_status)
 {
-	int		i;
 	char	*value;
 
 	value = NULL;
-	i = 0;
-	if (ft_strncmp(raw_input[1], "$$", 2) == 0)
+	if (!raw_input[1])
+		ft_printf("\n");
+	else if (ft_strncmp(raw_input[1], "$$", 2) == 0)
 		ft_printf("%d\n", (int)getpid());
 	else if (ft_strncmp(raw_input[1], "$?", 2) == 0)
 		ft_printf("%d\n", *exit_status);
 	else if (arg_is_env(raw_input[1], &value) == 1)
 		ft_printf("%s\n", value);
 	else
-	{
-		while (raw_input[i++])
-		{
-			if (raw_input[i])
-				ft_printf("%s ", raw_input[i]);
-		}
-		ft_printf("\n");
-	}
+		print_double_array(raw_input);
+	*exit_status = 0;
 }
 
 void	execute_cd(char **raw_input, int *exit_status)
