@@ -11,18 +11,6 @@ t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, int *enum_arr
 
 	index = 0;
 	head = info_list;
-	if (check_for_envvar(splitted_line, enum_array) == 1)
-	{
-		splitted_line = edit_arr_env(splitted_line, enum_array);
-		free(enum_array);
-		while (splitted_line[index])
-			index++;
-		enum_array = ft_calloc(index, sizeof(int));
-		if (!enum_array)
-			return (NULL);
-		enum_array = into_enum_array(splitted_line, enum_array);
-		index = 0;
-	}
 	while (splitted_line[index])
 	{
 		if (enum_array[index] == COMMAND)
@@ -37,11 +25,13 @@ t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, int *enum_arr
 		}
 		if (enum_array[index] == PIPE)
 		{
-			info_list->input = STDIN_IN;	
+			if (info_list->input != INFILE)
+				info_list->input = STDIN_IN;	
 			info_list->output = PIPE_WRITE;
 			info_list = create_new_node(info_list);
 			info_list->input = PIPE_READ;
-			info_list->output = STDOUT_OUT;
+			if (info_list->input != OUTFILE)
+				info_list->output = STDOUT_OUT;
 		}
 		if (enum_array[index] == INFILE || enum_array[index] == OUTFILE)
 		{
@@ -66,8 +56,5 @@ t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, int *enum_arr
 	}
 	info_list->next = NULL;
 	free_2d_array(splitted_line);
-	free(enum_array);
 	return (head);
 }
-
-//kdasdas

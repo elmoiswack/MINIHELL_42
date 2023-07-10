@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                          :+:    :+:              #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fvan-wij <fvan-wij@student.codam.nl>       +#+  +:+       +#+         #
+#    By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 00:00:50 by flip              #+#    #+#              #
-#    Updated: 2023/06/27 12:34:27 by fvan-wij      ########   odam.nl          #
+#    Updated: 2023/07/10 17:18:49 by dhussain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRCS		:= 	main.c \
 				lexer_utils.c \
 				lexer_dataorg_utils.c \
 				lexer_get_path.c \
-				lexer_super_splitt.c \
+				lexer_eddit_line.c \
+				lexer_split_quotes.c \
 				lexer_data_org.c \
 				lexer_data_envvar.c \
 				lexer_into_list.c \
