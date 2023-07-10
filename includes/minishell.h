@@ -8,7 +8,8 @@
 //Token enumerator - defines the possible types of tokens;
 typedef enum e_token{
 	PIPE_READ, //0
-	PIPE_WRITE, //1 INFILE, //2
+	PIPE_WRITE, //1 
+	INFILE, //2
 	OUTFILE, //3
 	COMMAND, //4
 	FLAG, //5

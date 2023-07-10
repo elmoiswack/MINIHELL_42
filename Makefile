@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/04/22 00:00:50 by flip              #+#    #+#              #
-#    Updated: 2023/07/10 19:10:11 by dhussain         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME		:=	minishell
 FLAGS		:= 	-Wall -Wextra -Werror
 LIBS		:= 	./libft/libft.a -lreadline -I /Users/$(USER)/.brew/opt/readline/include -L/Users/$(USER)/.brew/opt/readline/lib
