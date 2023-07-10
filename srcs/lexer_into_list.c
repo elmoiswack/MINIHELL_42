@@ -2,9 +2,9 @@
 #include "../libft/libft.h"
 #include <stdio.h>
 
-t_lexer	*one_word_lexer(t_lexer *info_list, char *line)
+t_lexer	*one_word_lexer(t_lexer *info_list, char **splitted_line)
 {
-	info_list->content = super_split(line);
+	info_list->content = splitted_line;
 	if (!info_list->content)
 		return (NULL);
 	info_list->path = get_path_of_command(info_list->content[0]);
@@ -14,9 +14,9 @@ t_lexer	*one_word_lexer(t_lexer *info_list, char *line)
 	return (info_list);
 }
 
-t_lexer	*two_word_lexer(t_lexer *info_list, char *line)
+t_lexer	*two_word_lexer(t_lexer *info_list, char **splitted_line)
 {
-	info_list->content = super_split(line);
+	info_list->content = splitted_line;
 	if (!info_list->content)
 		return (NULL);
 	info_list->path = get_path_of_command(info_list->content[0]);
@@ -59,4 +59,3 @@ t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var)
 	}
 	return (info_list);
 }
-//kdasdas

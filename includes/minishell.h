@@ -61,7 +61,7 @@ typedef struct s_minishell {
 
 		//lexer.c
 t_lexer	*lexing(char *line);
-t_lexer	*parsing_line(t_lexer *info_list, char *line);
+t_lexer	*parsing_array(t_lexer *info_list, char **splitted_line, int *enum_array);
 int		*into_enum_array(char **splitted_line, int *enum_array);
 int		which_enum(char **splitted_line, int index);
 
@@ -70,12 +70,14 @@ int		skip_spaces(char *line, int index);
 int		ammount_of_words(char *line);
 int 	get_env_end(char *line, int index);
 
-		//lexer_super_split.c
+		//lexer_eddit_line.c
 char	*put_spaces_in_line(char *line);
 char	*edit_line(char *old, char *new);
 int		is_metacharachter(char c);
-char	**super_split(char *line);
-char	*put_line_in_arr(char *line, int max, int begin_word);
+
+		//lexer_split_quotes.c
+int		check_for_quotes(char *line);
+char	**split_with_quotes(char *line);
 
 		//lexer_get_path.c
 char	*get_path_of_command(char *command);
@@ -89,8 +91,8 @@ int		check_for_flags(char **splitted_line, int *enum_arr, int index);
 int		check_for_outfile(char **splitted_line, int *enum_array, int index);
 
 		//lexer_into_list.c
-t_lexer	*one_word_lexer(t_lexer *info_lexer, char *line);
-t_lexer	*two_word_lexer(t_lexer *info_lexer, char *line);
+t_lexer	*one_word_lexer(t_lexer *info_list, char **splitted_line);
+t_lexer	*two_word_lexer(t_lexer *info_list, char **splitted_line);
 t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var);
 
 		//lexer_data_org.c
