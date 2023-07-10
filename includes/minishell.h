@@ -8,8 +8,7 @@
 //Token enumerator - defines the possible types of tokens;
 typedef enum e_token{
 	PIPE_READ, //0
-	PIPE_WRITE, //1
-	INFILE, //2
+	PIPE_WRITE, //1 INFILE, //2
 	OUTFILE, //3
 	COMMAND, //4
 	FLAG, //5
@@ -137,7 +136,7 @@ char	**remove_str_from_array(char **src, int index);
 //		execution_builtin_operations.c
 void	execute_echo(char **raw_input, int *exit_status);
 void	execute_cd(char **raw_input, int *exit_status);
-void	execute_pwd(void);
+void	execute_pwd(int *exit_status);
 void	execute_env(char *envp[]);
 void	execute_export(t_minishell *shell);
 void	execute_unset(t_minishell *shell);
