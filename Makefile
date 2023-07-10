@@ -15,9 +15,9 @@ SRCS		:= 	main.c \
 				error/error.c \
 				execution/execution_processes.c \
 				execution/execution_utilities.c \
-				execution/execution_builtin_operations.c \
 				execution/execution_heredoc.c \
-				execution/execution_builtin.c \
+				builtins/builtin_operations.c \
+				builtins/builtin_execution.c \
 				interface/interface_frontend.c \
 				utilities/utilities_double_arrays.c \
 				signals/signal_handler.c \

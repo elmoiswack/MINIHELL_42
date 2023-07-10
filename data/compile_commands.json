@@ -6,14 +6,16 @@
    "-Wall",
    "-Wextra",
    "-Werror",
-   "-o",
-   "objs/main.o",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
    "srcs/main.c",
-   "-I",
-   "./includes/libft",
-   "-I",
-   "./includes"
+   "-o",
+   "objs/main.o"
   ],
   "file": "srcs/main.c"
  },
@@ -24,16 +26,18 @@
    "-Wall",
    "-Wextra",
    "-Werror",
-   "-o",
-   "objs/lexer.o",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/lexer.c",
-   "-I",
-   "./includes/libft",
-   "-I",
-   "./includes"
+   "srcs/lexing/lexer.c",
+   "-o",
+   "objs/lexing/lexer.o"
   ],
-  "file": "srcs/lexer.c"
+  "file": "srcs/lexing/lexer.c"
  },
  {
   "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
@@ -42,16 +46,18 @@
    "-Wall",
    "-Wextra",
    "-Werror",
-   "-o",
-   "objs/lexer_utils.o",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/lexer_utils.c",
-   "-I",
-   "./includes/libft",
-   "-I",
-   "./includes"
+   "srcs/lexing/lexer_utils.c",
+   "-o",
+   "objs/lexing/lexer_utils.o"
   ],
-  "file": "srcs/lexer_utils.c"
+  "file": "srcs/lexing/lexer_utils.c"
  },
  {
   "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
@@ -60,16 +66,18 @@
    "-Wall",
    "-Wextra",
    "-Werror",
-   "-o",
-   "objs/lexer_dataorg_utils.o",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/lexer_dataorg_utils.c",
-   "-I",
-   "./includes/libft",
-   "-I",
-   "./includes"
+   "srcs/lexing/lexer_dataorg_utils.c",
+   "-o",
+   "objs/lexing/lexer_dataorg_utils.o"
   ],
-  "file": "srcs/lexer_dataorg_utils.c"
+  "file": "srcs/lexing/lexer_dataorg_utils.c"
  },
  {
   "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
@@ -78,16 +86,18 @@
    "-Wall",
    "-Wextra",
    "-Werror",
-   "-o",
-   "objs/lexer_get_path.o",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/lexer_get_path.c",
-   "-I",
-   "./includes/libft",
-   "-I",
-   "./includes"
+   "srcs/lexing/lexer_get_path.c",
+   "-o",
+   "objs/lexing/lexer_get_path.o"
   ],
-  "file": "srcs/lexer_get_path.c"
+  "file": "srcs/lexing/lexer_get_path.c"
  },
  {
   "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
@@ -96,16 +106,18 @@
    "-Wall",
    "-Wextra",
    "-Werror",
-   "-o",
-   "objs/lexer_super_splitt.o",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/lexer_super_splitt.c",
-   "-I",
-   "./includes/libft",
-   "-I",
-   "./includes"
+   "srcs/lexing/lexer_eddit_line.c",
+   "-o",
+   "objs/lexing/lexer_eddit_line.o"
   ],
-  "file": "srcs/lexer_super_splitt.c"
+  "file": "srcs/lexing/lexer_eddit_line.c"
  },
  {
   "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
@@ -114,16 +126,18 @@
    "-Wall",
    "-Wextra",
    "-Werror",
-   "-o",
-   "objs/lexer_data_org.o",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/lexer_data_org.c",
-   "-I",
-   "./includes/libft",
-   "-I",
-   "./includes"
+   "srcs/lexing/lexer_split_quotes.c",
+   "-o",
+   "objs/lexing/lexer_split_quotes.o"
   ],
-  "file": "srcs/lexer_data_org.c"
+  "file": "srcs/lexing/lexer_split_quotes.c"
  },
  {
   "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
@@ -132,16 +146,18 @@
    "-Wall",
    "-Wextra",
    "-Werror",
-   "-o",
-   "objs/lexer_data_envvar.o",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/lexer_data_envvar.c",
-   "-I",
-   "./includes/libft",
-   "-I",
-   "./includes"
+   "srcs/lexing/lexer_data_org.c",
+   "-o",
+   "objs/lexing/lexer_data_org.o"
   ],
-  "file": "srcs/lexer_data_envvar.c"
+  "file": "srcs/lexing/lexer_data_org.c"
  },
  {
   "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
@@ -150,16 +166,18 @@
    "-Wall",
    "-Wextra",
    "-Werror",
-   "-o",
-   "objs/lexer_into_list.o",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/lexer_into_list.c",
-   "-I",
-   "./includes/libft",
-   "-I",
-   "./includes"
+   "srcs/lexing/lexer_data_envvar.c",
+   "-o",
+   "objs/lexing/lexer_data_envvar.o"
   ],
-  "file": "srcs/lexer_into_list.c"
+  "file": "srcs/lexing/lexer_data_envvar.c"
  },
  {
   "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
@@ -168,16 +186,18 @@
    "-Wall",
    "-Wextra",
    "-Werror",
-   "-o",
-   "objs/error.o",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/error.c",
-   "-I",
-   "./includes/libft",
-   "-I",
-   "./includes"
+   "srcs/lexing/lexer_into_list.c",
+   "-o",
+   "objs/lexing/lexer_into_list.o"
   ],
-  "file": "srcs/error.c"
+  "file": "srcs/lexing/lexer_into_list.c"
  },
  {
   "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
@@ -186,16 +206,18 @@
    "-Wall",
    "-Wextra",
    "-Werror",
-   "-o",
-   "objs/execution_processes.o",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/execution_processes.c",
-   "-I",
-   "./includes/libft",
-   "-I",
-   "./includes"
+   "srcs/error/error.c",
+   "-o",
+   "objs/error/error.o"
   ],
-  "file": "srcs/execution_processes.c"
+  "file": "srcs/error/error.c"
  },
  {
   "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
@@ -204,16 +226,18 @@
    "-Wall",
    "-Wextra",
    "-Werror",
-   "-o",
-   "objs/execution_utilities.o",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/execution_utilities.c",
-   "-I",
-   "./includes/libft",
-   "-I",
-   "./includes"
+   "srcs/execution/execution_processes.c",
+   "-o",
+   "objs/execution/execution_processes.o"
   ],
-  "file": "srcs/execution_utilities.c"
+  "file": "srcs/execution/execution_processes.c"
  },
  {
   "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
@@ -222,16 +246,18 @@
    "-Wall",
    "-Wextra",
    "-Werror",
-   "-o",
-   "objs/execution_builtin_operations.o",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/execution_builtin_operations.c",
-   "-I",
-   "./includes/libft",
-   "-I",
-   "./includes"
+   "srcs/execution/execution_utilities.c",
+   "-o",
+   "objs/execution/execution_utilities.o"
   ],
-  "file": "srcs/execution_builtin_operations.c"
+  "file": "srcs/execution/execution_utilities.c"
  },
  {
   "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
@@ -240,16 +266,18 @@
    "-Wall",
    "-Wextra",
    "-Werror",
-   "-o",
-   "objs/execution_heredoc.o",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/execution_heredoc.c",
-   "-I",
-   "./includes/libft",
-   "-I",
-   "./includes"
+   "srcs/execution/execution_heredoc.c",
+   "-o",
+   "objs/execution/execution_heredoc.o"
   ],
-  "file": "srcs/execution_heredoc.c"
+  "file": "srcs/execution/execution_heredoc.c"
  },
  {
   "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
@@ -258,16 +286,18 @@
    "-Wall",
    "-Wextra",
    "-Werror",
-   "-o",
-   "objs/execution_builtin.o",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/execution_builtin.c",
-   "-I",
-   "./includes/libft",
-   "-I",
-   "./includes"
+   "srcs/builtins/builtin_operations.c",
+   "-o",
+   "objs/builtins/builtin_operations.o"
   ],
-  "file": "srcs/execution_builtin.c"
+  "file": "srcs/builtins/builtin_operations.c"
  },
  {
   "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
@@ -276,16 +306,18 @@
    "-Wall",
    "-Wextra",
    "-Werror",
-   "-o",
-   "objs/interface_frontend.o",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/interface_frontend.c",
-   "-I",
-   "./includes/libft",
-   "-I",
-   "./includes"
+   "srcs/builtins/builtin_execution.c",
+   "-o",
+   "objs/builtins/builtin_execution.o"
   ],
-  "file": "srcs/interface_frontend.c"
+  "file": "srcs/builtins/builtin_execution.c"
  },
  {
   "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
@@ -294,16 +326,58 @@
    "-Wall",
    "-Wextra",
    "-Werror",
-   "-o",
-   "objs/utilities_double_arrays.o",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/utilities_double_arrays.c",
-   "-I",
-   "./includes/libft",
-   "-I",
-   "./includes"
+   "srcs/interface/interface_frontend.c",
+   "-o",
+   "objs/interface/interface_frontend.o"
   ],
-  "file": "srcs/utilities_double_arrays.c"
+  "file": "srcs/interface/interface_frontend.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
+   "-c",
+   "srcs/utilities/utilities_double_arrays.c",
+   "-o",
+   "objs/utilities/utilities_double_arrays.o"
+  ],
+  "file": "srcs/utilities/utilities_double_arrays.c"
+ },
+ {
+  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
+   "-c",
+   "srcs/signals/signal_handler.c",
+   "-o",
+   "objs/signals/signal_handler.o"
+  ],
+  "file": "srcs/signals/signal_handler.c"
  },
  {
   "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
