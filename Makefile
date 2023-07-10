@@ -3,24 +3,24 @@ FLAGS		:= 	-Wall -Wextra -Werror
 LIBS		:= 	./libft/libft.a -lreadline -I /Users/$(USER)/.brew/opt/readline/include -L/Users/$(USER)/.brew/opt/readline/lib
 HEADERS		:= 	-I libft -I includes -I /Users/$(USER)/.brew/opt/readline/include
 SRCS		:= 	main.c \
-				lexer.c \
-				lexer_utils.c \
-				lexer_dataorg_utils.c \
-				lexer_get_path.c \
-				lexer_eddit_line.c \
-				lexer_split_quotes.c \
-				lexer_data_org.c \
-				lexer_data_envvar.c \
-				lexer_into_list.c \
-				error.c \
-				execution_processes.c \
-				execution_utilities.c \
-				execution_builtin_operations.c \
-				execution_heredoc.c \
-				execution_builtin.c \
-				interface_frontend.c \
-				utilities_double_arrays.c \
-				signal_handler.c \
+				lexing/lexer.c \
+				lexing/lexer_utils.c \
+				lexing/lexer_dataorg_utils.c \
+				lexing/lexer_get_path.c \
+				lexing/lexer_eddit_line.c \
+				lexing/lexer_split_quotes.c \
+				lexing/lexer_data_org.c \
+				lexing/lexer_data_envvar.c \
+				lexing/lexer_into_list.c \
+				error/error.c \
+				execution/execution_processes.c \
+				execution/execution_utilities.c \
+				execution/execution_builtin_operations.c \
+				execution/execution_heredoc.c \
+				execution/execution_builtin.c \
+				interface/interface_frontend.c \
+				utilities/utilities_double_arrays.c \
+				signals/signal_handler.c \
 
 SRCDIR 		:= 	./srcs
 OBJDIR 		:= 	./objs
@@ -51,18 +51,22 @@ $(NAME): $(OBJS)
 	@$(CC) $^ $(LIBS) -o $(NAME)
 	@echo $(Green) $(Bold) Minishell compiled succesfully ✅ $(Text_Off)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@mkdir -p $(OBJDIR)
-	@$(CC) $(FLAGS) -o $@ -c $< $(HEADERS)
+$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
+	@mkdir -p $(@D) 
+	@echo $(Cyan) Building... [$<] $(Text_Off)
+	@$(CC) $(FLAGS) $(HEADERS) -c $< -o $@
+
+$(OBJDIR):
+	@mkdir $@
 
 clean:
 	@rm -rf $(OBJDIR)
-	@echo $(Yellow) Minishell: cleaned object files! $(Text_Off)
+	@echo $(Yellow) Cleaned object files! $(Text_Off)
 	@$(MAKE) -C libft clean
 
 fclean:	clean
 	@rm -f $(NAME) 
-	@echo $(Yellow) Minishell: cleaned executable! $(Text_Off)
+	@echo $(Yellow) Cleaned executable! $(Text_Off)
 	@$(MAKE) -C libft fclean
 
 compile_cmd: fclean

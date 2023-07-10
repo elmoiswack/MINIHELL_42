@@ -6,7 +6,7 @@
 #    By: fvan-wij <fvan-wij@student.codam.nl>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/01 18:08:39 by fvan-wij          #+#    #+#              #
-#    Updated: 2023/06/27 13:09:34 by fvan-wij      ########   odam.nl          #
+#    Updated: 2023/07/10 20:01:55 by fvan-wij      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,18 +107,17 @@ RMV			:= rm -f
 
 $(NAME): 	$(OBJ)
 			@ar -rcs $(NAME) $(OBJ)
-			@echo $(Green) $(Bold) Completed ✅ $(Text_Off)
 
 all: 		$(NAME)
 
 %.o: 		%.c
+			@echo $(Cyan) Building... [$<] $(Text_Off)
 			@$(CC) $(CFLAGS) -c -o $@ $^
 
 clean: 		
 			@$(RMV) $(OBJ)
 
 fclean: 	clean
-			@echo $(Yellow) Cleaned ✅ $(Text_Off)
 			@$(RMV) $(NAME)
 
 re: 		fclean $(NAME)
