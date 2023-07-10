@@ -31,6 +31,8 @@ void	printing_lexer(t_lexer *info_lexer)
 {
 	int	index;
 
+	if (!info_lexer)
+		return ;
 	fprintf(stderr, "\033[0;36m----------PARSER-----------");
 	while(info_lexer)
 	{
@@ -57,23 +59,35 @@ void	printing_lexer(t_lexer *info_lexer)
 void	display_prompt(t_minishell *shell)
 {	
 	char	*line;
+	int		terminate;
 
+	terminate = 0;
 	init_ascii_art();
-	while (1)
+	while (!terminate)
 	{
 		if (shell->status == 0)	
 			line = readline("\033[0;37m \033[1m MINIHELL_\033[0m> ");
 		else
 			line = readline("\033[0;31m \033[1m Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚_\033[0m> ");
-		add_history(line);
-		shell->cmd_lst = lexing(line);
-		if (!shell->cmd_lst)
-			exit(1);
-		printing_lexer(shell->cmd_lst);
-		if (!shell->cmd_lst->next && is_builtin(shell) != -1)
-			execute_builtin(shell);
+		if (line == NULL)
+		{
+			free(line);
+			terminate = 1;
+		}
+		else if (line[0] != '\0')
+		{
+			add_history(line);
+			shell->cmd_lst = lexing(line);
+			if (!shell->cmd_lst)
+				exit(1);
+			printing_lexer(shell->cmd_lst);
+			if (!shell->cmd_lst->next && is_builtin(shell) != -1)
+				execute_builtin(shell);
+			else
+				shell->status = execute_cmds(shell->cmd_lst, shell->env_cpy);
+		}
 		else
-			shell->status = execute_cmds(shell->cmd_lst, shell->env_cpy);
+			free(line);
 	}
 }
 
@@ -104,6 +118,7 @@ int	main(int argc, char *argv[], char *envp[])
 	t_minishell	shell;
 
 	shell = init_minishell(argc, argv, envp);
+	catch_signals();
 	display_prompt(&shell);
 	return (0);
 }

@@ -6,14 +6,14 @@
 #    By: fvan-wij <fvan-wij@student.codam.nl>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 00:00:50 by flip              #+#    #+#              #
-#    Updated: 2023/06/27 12:34:27 by fvan-wij      ########   odam.nl          #
+#    Updated: 2023/07/10 17:36:20 by fvan-wij      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:=	minishell
 FLAGS		:= 	-Wall -Wextra -Werror
-LIBFT		:= 	./libft/libft.a -lreadline
-HEADERS		:= 	-I ./includes/libft -I ./includes
+LIBS		:= 	./libft/libft.a -lreadline -I /Users/$(USER)/.brew/opt/readline/include -L/Users/$(USER)/.brew/opt/readline/lib
+HEADERS		:= 	-I libft -I includes -I /Users/$(USER)/.brew/opt/readline/include
 SRCS		:= 	main.c \
 				lexer.c \
 				lexer_utils.c \
@@ -31,6 +31,7 @@ SRCS		:= 	main.c \
 				execution_builtin.c \
 				interface_frontend.c \
 				utilities_double_arrays.c \
+				signal_handler.c \
 
 SRCDIR 		:= 	./srcs
 OBJDIR 		:= 	./objs
@@ -58,7 +59,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(MAKE) -C libft
-	@$(CC) $^ $(LIBFT) -lreadline $(HEADERS) -o $(NAME)
+	@$(CC) $^ $(LIBS) -o $(NAME)
 	@echo $(Green) $(Bold) Minishell compiled succesfully ✅ $(Text_Off)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c

@@ -36,16 +36,22 @@ void	execute_cd(char **raw_input, int *exit_status)
 	{
 		perror("cd");
 		*exit_status = 1;
+		return ;
 	}
+	*exit_status = 0;
 }
 		
-void	execute_pwd()
+void	execute_pwd(int *exit_status)
 {
 	char	cwd[256];
 	int	cd_len;
 	int	total_len;
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
+	{
 		perror("getcwd()");
+		*exit_status = 1;
+		return ;
+	}
 	else
 	{
 		cd_len = ft_strlen(ft_strrchr(cwd, '/'));
@@ -54,6 +60,8 @@ void	execute_pwd()
 		write(1, "\033[0;31m", 8);
 		write(1, ft_strrchr(cwd, '/'), ft_strlen(ft_strrchr(cwd, '/')));
 		write(1, "\033[0m\n", 6);
+		*exit_status = 0;
+		return ;
 	}
 }
 
