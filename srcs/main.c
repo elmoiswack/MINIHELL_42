@@ -85,6 +85,7 @@ void	display_prompt(t_minishell *shell)
 				execute_builtin(shell);
 			else
 				shell->status = execute_cmds(shell->cmd_lst, shell->env_cpy);
+			free_ll(&shell->cmd_lst);
 		}
 		else
 			free(line);
@@ -113,12 +114,19 @@ t_minishell	init_minishell(int argc, char *argv[], char *envp[])
 	return (shell);
 }
 
+// void f()
+// {
+// 	system("leaks minishell");
+// }
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_minishell	shell;
-
+	
+	// atexit(f);
 	shell = init_minishell(argc, argv, envp);
 	catch_signals();
 	display_prompt(&shell);
+	free_double_array(shell.env_cpy);
 	return (0);
 }

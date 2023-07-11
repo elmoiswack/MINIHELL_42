@@ -36,7 +36,10 @@ int	check_access(char *cmd)
 	{
 		temp = ft_strjoin(paths[i], ft_strjoin("/", cmd));
 		if (access(temp, X_OK) == 0)
+		{
+			free_double_array(paths);
 			return (1);
+		}
 		else
 			free(temp);
 		i++;

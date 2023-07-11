@@ -157,6 +157,10 @@ void	create_heredoc_tmp(char *delim);
 //		signal_handling.c
 void	catch_signals(void);
 
+//		memory_management.c		
+void	clean_up(t_minishell *shell);
+void	free_ll(t_lexer **lst);
+
 //###############################################################
 
 
