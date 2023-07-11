@@ -1,5 +1,5 @@
-#include "../includes/minishell.h"
-#include "../libft/libft.h"
+#include "../../includes/minishell.h"
+#include "../../libft/libft.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <readline/readline.h>

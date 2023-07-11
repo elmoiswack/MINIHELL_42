@@ -1,5 +1,5 @@
-#include "../includes/minishell.h"
-#include "../libft/libft.h"
+#include "../../includes/minishell.h"
+#include "../../libft/libft.h"
 #include <stdio.h>
 
 t_lexer	*one_word_lexer(t_lexer *info_list, char **splitted_line)

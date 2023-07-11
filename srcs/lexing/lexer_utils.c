@@ -1,5 +1,5 @@
-#include "../includes/minishell.h"
-#include "../libft/libft.h"
+#include "../../includes/minishell.h"
+#include "../../libft/libft.h"
 #include <stdio.h>
 
 int	ammount_of_words(char *line)

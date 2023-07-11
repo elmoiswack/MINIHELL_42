@@ -1,5 +1,5 @@
-#include "../includes/minishell.h"
-#include "../libft/libft.h"
+#include "../../includes/minishell.h"
+#include "../../libft/libft.h"
 #include <stdlib.h>
 
 int	is_builtin(t_minishell *shell)
