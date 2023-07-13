@@ -79,7 +79,7 @@ void	display_prompt(t_minishell *shell)
 			add_history(line);
 			shell->cmd_lst = lexing(line);
 			if (!shell->cmd_lst)
-				exit(1);
+				exit(1); //should display an error
 			printing_lexer(shell->cmd_lst);
 			if (!shell->cmd_lst->next && is_builtin(shell) != -1)
 				execute_builtin(shell);

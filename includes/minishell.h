@@ -99,6 +99,10 @@ t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var);
 		//lexer_data_org.c
 t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, int *enum_array);
 
+		//data_org_special.c
+t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, int *enum_array);
+t_lexer	*special_case_cat(t_lexer *info_list, char **splitted_line, int *enum_array);
+
 		//lexer_data_envvar.c
 char	**edit_arr_env(char **splitted_line, int *enum_array);
 char	**new_2d_array(char **splitted_line);

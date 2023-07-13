@@ -64,17 +64,6 @@ t_lexer	*parsing_array(t_lexer *info_list, char **splitted_line, int *enum_array
 
 	ammount_words = 0;
 	index = 0;
-	if (check_for_envvar(splitted_line, enum_array) == 1)
-	{
-		splitted_line = edit_arr_env(splitted_line, enum_array);
-		free(enum_array);
-		while (splitted_line[index])
-			index++;
-		enum_array = ft_calloc(index, sizeof(int));
-		if (!enum_array)
-			return (NULL);
-		enum_array = into_enum_array(splitted_line, enum_array);
-	}
 	while (splitted_line[ammount_words])
 		ammount_words++;
 	if (ammount_words == 1)
@@ -86,32 +75,52 @@ t_lexer	*parsing_array(t_lexer *info_list, char **splitted_line, int *enum_array
 	return (info_list);
 }
 
-t_lexer	*lexing(char *line)
+t_lexer	*which_case(t_lexer	*info_list, char **splitted_line)
 {
-	char	**splitted_line;
-	int		*enum_array;
-	t_lexer	*info_list;
-	int		index;
+	int	index;
+	int	*enum_array;
 
 	index = 0;
-	info_list = ft_calloc(1, sizeof(t_lexer));
-	if (!info_list)
-		return (NULL);
-	line = put_spaces_in_line(line);
-	if (check_for_quotes(line) == 1)
-		splitted_line = split_with_quotes(line);
-	else
-		splitted_line = ft_split(line, ' ');
-	if (!splitted_line)
-		return (NULL);
 	while (splitted_line[index])
 		index++;
 	enum_array = ft_calloc(index + 1, sizeof(int));
 	if (!enum_array)
 		return (NULL);
 	enum_array = into_enum_array(splitted_line, enum_array);
+	if (ft_strncmp(splitted_line[0], "echo", ft_strlen(splitted_line[0])) == 0)
+		return (special_case_echo(info_list, splitted_line, enum_array));
+	if (check_for_envvar(splitted_line, enum_array) == 1)
+	{
+		index = 0;
+		splitted_line = edit_arr_env(splitted_line, enum_array);
+		free(enum_array);
+		while (splitted_line[index])
+			index++;
+		enum_array = ft_calloc(index + 1, sizeof(int));
+		if (!enum_array)
+			return (NULL);
+		enum_array = into_enum_array(splitted_line, enum_array);
+	}
 	info_list = parsing_array(info_list, splitted_line, enum_array);
-	free(line);
-	free(enum_array);
+	return (info_list);
+}
+
+t_lexer	*lexing(char *line)
+{
+	char	**splitted_line;
+	t_lexer	*info_list;
+
+	info_list = ft_calloc(1, sizeof(t_lexer));
+	if (!info_list)
+		return (NULL);
+	line = put_spaces_in_line(line);
+	if (check_for_quotes(line) == 1 && ft_strncmp(line, "echo", 4) != 0)
+		splitted_line = split_with_quotes(line);
+	else
+		splitted_line = ft_split(line, ' ');
+	if (!splitted_line)
+		return (NULL);
+	info_list = which_case(info_list, splitted_line);
+	//free(line); buggie shit
 	return (info_list);
 }
