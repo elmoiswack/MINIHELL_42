@@ -97,13 +97,13 @@ char	**replace_str_in_array(char **src, char *str, int index)
 		if (i == index)
 		{
 			len = ft_strlen(str) + 1;
-			new[i] = malloc(sizeof(char) * len + 1);
+			new[i] = ft_calloc(sizeof(char), len + 1);
 			ft_strlcpy(new[i], str, len);
 		}
 		else
 		{
-			len = ft_strlen(src[i]);
-			new[i] = malloc(sizeof(char) * len + 1);
+			len = ft_strlen(src[i]) + 1;
+			new[i] = ft_calloc(sizeof(char), len + 1);
 			ft_strlcpy(new[i], src[i], len);
 		}
 		i++;

@@ -142,7 +142,7 @@ char	**remove_str_from_array(char **src, int index);
 
 //		execution_builtin_operations.c
 void	execute_echo(char **raw_input, int *exit_status);
-void	execute_cd(char **raw_input, int *exit_status);
+void	execute_cd(t_minishell *shell);
 void	execute_pwd(int *exit_status);
 void	execute_env(char *envp[]);
 void	execute_export(t_minishell *shell);
