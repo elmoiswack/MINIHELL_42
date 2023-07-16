@@ -11,6 +11,8 @@ t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, int *enum_arr
 
 	index = 0;
 	head = info_list;
+	// if (ft_strncmp(splitted_line[0], "cat", ft_strlen(splitted_line[0])) == 0)
+	// 	return (special_case_cat(info_list, splitted_line, enum_array));
 	while (splitted_line[index])
 	{
 		if (enum_array[index] == COMMAND)
@@ -56,5 +58,6 @@ t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, int *enum_arr
 	}
 	info_list->next = NULL;
 	free_2d_array(splitted_line);
+	free(enum_array);
 	return (head);
 }
