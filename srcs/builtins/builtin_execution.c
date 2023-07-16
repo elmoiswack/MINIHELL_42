@@ -27,7 +27,7 @@ int	execute_builtin(t_minishell *shell)
 	if (shell->builtin == ECHO)
 		return(execute_echo(shell->cmd_lst->content, &shell->status), 0);
 	else if (shell->builtin == CD)
-		return (execute_cd(shell->cmd_lst->content, &shell->status), 0);
+		return (execute_cd(shell), 0);
 	else if (shell->builtin == PWD)
 		return (execute_pwd(&shell->status), 0);
 	else if (shell->builtin == ENV)

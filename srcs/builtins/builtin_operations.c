@@ -22,23 +22,68 @@ void	execute_echo(char **raw_input, int *exit_status)
 	*exit_status = 0;
 }
 
-void	execute_cd(char **raw_input, int *exit_status)
+void	update_pwd(t_minishell *shell)
+{
+	int		index;
+	char	cwd[256];
+	char	*new_pwd;
+
+	if (getcwd(cwd, sizeof(cwd)) == NULL)
+	{
+		perror("getcwd()");
+		shell->status = 1;
+		return ;
+	} 
+	index = var_exists(shell->env_cpy, "PWD", 3);
+	if (index == -1)
+		return ;
+	else
+	{
+		new_pwd = ft_strjoin("PWD=", cwd);		
+		shell->env_cpy = replace_str_in_array(shell->env_cpy, new_pwd, index);
+	}
+}
+
+void	update_old_pwd(t_minishell *shell)
+{
+	int		index;
+	char	cwd[256];
+	char	*new_pwd;
+
+	if (getcwd(cwd, sizeof(cwd)) == NULL)
+	{
+		perror("getcwd()");
+		shell->status = 1;
+		return ;
+	} 
+	index = var_exists(shell->env_cpy, "OLDPWD", 6);
+	if (index == -1)
+		return ;
+	else
+	{
+		new_pwd = ft_strjoin("OLDPWD=", cwd);		
+		shell->env_cpy = replace_str_in_array(shell->env_cpy, new_pwd, index);
+	}
+}
+
+void	execute_cd(t_minishell *shell)
 {
 	int	arg_len;
-	
-	if (raw_input[1])
-		arg_len = ft_strlen(raw_input[1]);
-	if (!raw_input[1])
+
+	update_old_pwd(shell);	
+	if (shell->cmd_lst->content[1])
+		arg_len = ft_strlen(shell->cmd_lst->content[1]);
+	if (!shell->cmd_lst->content[1])
 		chdir(getenv("HOME"));
-	else if (ft_strncmp(raw_input[1], "..", arg_len) == 0 || ft_strncmp(raw_input[1], "../", arg_len) == 0)
+	else if (ft_strncmp(shell->cmd_lst->content[1], "..", arg_len) == 0 || ft_strncmp(shell->cmd_lst->content[1], "../", arg_len) == 0)
 		chdir("../");
-	else if (chdir(raw_input[1]) == -1)
+	else if (chdir(shell->cmd_lst->content[1]) == -1)
 	{
-		perror("cd");
-		*exit_status = 1;
-		return ;
+		shell->status = 1;
+		return (perror("cd"));
 	}
-	*exit_status = 0;
+	update_pwd(shell);
+	shell->status = 0;
 }
 		
 void	execute_pwd(int *exit_status)
@@ -46,6 +91,7 @@ void	execute_pwd(int *exit_status)
 	char	cwd[256];
 	int	cd_len;
 	int	total_len;
+
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{
 		perror("getcwd()");
