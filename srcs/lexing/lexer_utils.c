@@ -2,6 +2,16 @@
 #include "../../libft/libft.h"
 #include <stdio.h>
 
+int	get_max_array(char **array)
+{
+	int	index;
+
+	index = 0;
+	while (array[index])
+		index++;
+	return (index);
+}
+
 int	ammount_of_words(char *line)
 {
 	int	index;
@@ -19,7 +29,7 @@ int	ammount_of_words(char *line)
 	return (count);
 }
 
-int get_env_end(char *line, int index)
+int	get_env_end(char *line, int index)
 {
 	while (line[index])
 	{
@@ -32,7 +42,8 @@ int get_env_end(char *line, int index)
 
 int	skip_spaces(char *line, int index)
 {
-	while (line[index] && ((line[index] == ' ') || (line[index] == '\t') || (line[index] == '\n')))
+	while (line[index] && ((line[index] == ' ') \
+		|| (line[index] == '\t') || (line[index] == '\n')))
 		index++;
-	return (index);	
+	return (index);
 }

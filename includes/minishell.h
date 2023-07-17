@@ -63,13 +63,14 @@ typedef struct s_minishell {
 		//lexer.c
 t_lexer	*lexing(char *line);
 t_lexer	*parsing_array(t_lexer *info_list, char **splitted_line, int *enum_array);
-int		*into_enum_array(char **splitted_line, int *enum_array);
+int		*into_enum_array(char **splitted_line, int *enum_array, int index);
 int		which_enum(char **splitted_line, int index);
 
 		//lexer_utils.c
 int		skip_spaces(char *line, int index);
 int		ammount_of_words(char *line);
 int 	get_env_end(char *line, int index);
+int		get_max_array(char **array);
 
 		//lexer_eddit_line.c
 char	*put_spaces_in_line(char *line);
@@ -97,11 +98,15 @@ t_lexer	*two_word_lexer(t_lexer *info_list, char **splitted_line);
 t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var);
 
 		//lexer_data_org.c
-t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, int *enum_array);
+t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
+t_lexer	*data_org_command(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
+t_lexer	*data_org_pipe(t_lexer *info_list);
+t_lexer	*data_org_file(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
+t_lexer	*data_org_delim(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
 
 		//data_org_special.c
 t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, int *enum_array);
-t_lexer	*special_case_cat(t_lexer *info_list, char **splitted_line, int *enum_array);
+t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, int *enum_array);
 
 		//lexer_data_envvar.c
 char	**edit_arr_env(char **splitted_line, int *enum_array);

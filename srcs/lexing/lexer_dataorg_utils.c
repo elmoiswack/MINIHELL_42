@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-t_lexer *create_new_node(t_lexer *info_lexer)
+t_lexer	*create_new_node(t_lexer *info_lexer)
 {
 	info_lexer->next = ft_calloc(1, sizeof(t_lexer));
 	if (!info_lexer->next)

@@ -48,10 +48,10 @@ char	*trim_envvar(char *line)
 
 char	**new_2d_array(char **splitted_line)
 {
-	char **temp;
-	int	max;
-	int	index;
-	int	index_temp;
+	char	**temp;
+	int		max;
+	int		index;
+	int		index_temp;
 
 	index = 1;
 	max = 0;
@@ -78,7 +78,7 @@ char	**new_2d_array(char **splitted_line)
 char	**edit_arr_env(char **splitted_line, int *enum_array)
 {
 	int	index;
-	
+
 	index = 0;
 	while (enum_array[index] != ENV_VAR)
 		index++;

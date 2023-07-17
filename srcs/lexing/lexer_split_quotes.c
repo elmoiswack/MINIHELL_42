@@ -46,7 +46,7 @@ char	*store_quote_data(char *line, int index_line, int end)
 	return (temp);
 }
 
-char 	*finish_temp_rmsp(char *line, int index_line, char *temp, int index)
+char	*finish_temp_rmsp(char *line, int index_line, char *temp, int index)
 {
 	while (line[index_line] != '"' && line[index_line] != 39)
 	{
@@ -60,7 +60,7 @@ char 	*finish_temp_rmsp(char *line, int index_line, char *temp, int index)
 	{
 		temp[index] = line[index_line];
 		index++;
-		index_line++;		
+		index_line++;
 	}
 	temp[index] = '\0';
 	return (temp);
@@ -71,7 +71,7 @@ char	*remove_spaces_quote(char *line)
 	int		index;
 	int		index_line;
 	char	*temp;
-	
+
 	index = 0;
 	index_line = 0;
 	temp = ft_calloc(ft_strlen(line), sizeof(char));
@@ -102,7 +102,8 @@ char	**split_with_quotes(char *line)
 	index_line = 0;
 	end = 0;
 	index = 0;
-	while (line[index_line] && (line[index_line] != '"' && line[index_line] != 39))
+	while (line[index_line] \
+		&& (line[index_line] != '"' && line[index_line] != 39))
 		index_line++;
 	if (line[index_line] == '\0')
 		return (NULL);
