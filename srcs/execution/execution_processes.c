@@ -43,6 +43,11 @@ static void	route_input(int in, t_lexer *node)
 		if (dup2(in, STDIN_FILENO) < 0)
 			perror("dup2");
 	}
+	// else if (node->delim) ---> this should route the input from the heredoc accordingly.
+	// {
+	// 	if (dup2(in, STDIN_FILENO) < 0)
+	// 		perror("dup2");
+	// }
 }
 
 static void	route_output(int out, t_lexer *node)
@@ -102,6 +107,23 @@ void	print_cmd_lst(t_lexer *head)
 	fprintf(stderr, "---------------------------\033[0m\n");
 }
 
+void	clean_tmp_files()
+{
+	char	**argv;
+	pid_t	pid;
+	
+	pid = fork();
+	argv = NULL;
+	if (pid == 0)
+	{
+		argv = ft_calloc(sizeof(char *), 3);
+		argv[0] = ft_strdup("rm");
+		argv[1] = ft_strdup("heredoc_tmp");
+		if (execve("/usr/bin/rm", argv, NULL) < 0)
+			perror("error cleanup tmp");
+	}
+}
+
 int	execute_cmds(t_lexer *head, char *envp[])
 {
 	t_lexer	*current;
@@ -109,13 +131,20 @@ int	execute_cmds(t_lexer *head, char *envp[])
 	int		pipe_fd[2];
 	int		prev_pipe;
 	int		status;
+	int		clean_tmp;
 
+	clean_tmp = 0;
 	pid = 1;
 	prev_pipe = STDIN_FILENO;
 	current = head;
-	print_cmd_lst(head);
+	if (!current->path && !current->delim)
+		return (error_command_not_found(current->content[0]), 127);
 	if (current->delim)
+	{
 		create_heredoc_tmp(current->delim);
+		clean_tmp = 1;
+	}
+	print_cmd_lst(head);
 	while (current)
 	{
 		if (pipe(pipe_fd) < 0)
@@ -130,5 +159,7 @@ int	execute_cmds(t_lexer *head, char *envp[])
 	close(prev_pipe);
 	waitpid(pid, &status, 0);
 	while (wait(NULL) != -1);
+	if (clean_tmp == 1)
+		clean_tmp_files();
 	return (WEXITSTATUS(status));
 }
