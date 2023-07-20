@@ -3,61 +3,83 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, int *enum_array)
+t_lexer	*data_org_command(t_lexer *info_list, char **splitted_line, \
+	int *enum_array, int index)
 {
-	int		index;
-	int		check;
+	int	check;
+
+	info_list = into_linklist(info_list, splitted_line[index], enum_array[index]);
+	if (!info_list)
+		return (NULL);
+	index++;
+	check = check_for_flags(splitted_line, enum_array, index);
+	if (check > 0)
+		info_list = into_linklist(info_list, splitted_line[check], enum_array[check]);
+	return (info_list);
+}
+
+t_lexer	*data_org_pipe(t_lexer *info_list)
+{
+	if (info_list->input != INFILE)
+		info_list->input = STDIN_IN;
+	info_list->output = PIPE_WRITE;
+	info_list = create_new_node(info_list);
+	info_list->input = PIPE_READ;
+	if (info_list->input != OUTFILE)
+		info_list->output = STDOUT_OUT;
+	return (info_list);
+}
+
+t_lexer	*data_org_file(t_lexer *info_list, char **splitted_line, \
+	int *enum_array, int index)
+{
+	info_list = into_linklist(info_list, splitted_line[index], enum_array[index]);
+	if (!info_list)
+		return (NULL);
+	if (enum_array[index] == INFILE)
+		info_list->input = INFILE;
+	if (enum_array[index] == OUTFILE)
+		info_list->output = OUTFILE;
+	return (info_list);
+}
+
+t_lexer	*data_org_delim(t_lexer *info_list, char **splitted_line, \
+	int *enum_array, int index)
+{
+	if (splitted_line[index + 1])
+		info_list = into_linklist(info_list, splitted_line[index + 1], enum_array[index]);
+	if (!info_list)
+		return (NULL);
+	return (info_list);
+}
+
+t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, \
+	int *enum_array, int index)
+{
 	t_lexer	*head;
 
-	index = 0;
 	head = info_list;
-	// if (ft_strncmp(splitted_line[0], "cat", ft_strlen(splitted_line[0])) == 0)
-	// 	return (special_case_cat(info_list, splitted_line, enum_array));
 	while (splitted_line[index])
 	{
 		if (enum_array[index] == COMMAND)
 		{
-			info_list = into_linklist(info_list, splitted_line[index], enum_array[index]);
-			if (!info_list)
-				return (NULL);
+			info_list = data_org_command(info_list, splitted_line, enum_array, index);
 			index++;
-			check = check_for_flags(splitted_line, enum_array, index);
-			if (check > 0)
-				info_list = into_linklist(info_list, splitted_line[check], enum_array[check]);	
 		}
 		if (enum_array[index] == PIPE)
-		{
-			if (info_list->input != INFILE)
-				info_list->input = STDIN_IN;	
-			info_list->output = PIPE_WRITE;
-			info_list = create_new_node(info_list);
-			info_list->input = PIPE_READ;
-			if (info_list->input != OUTFILE)
-				info_list->output = STDOUT_OUT;
-		}
+			info_list = data_org_pipe(info_list);
 		if (enum_array[index] == INFILE || enum_array[index] == OUTFILE)
-		{
-			info_list = into_linklist(info_list, splitted_line[index], enum_array[index]);
-			if (!info_list)
-				return (NULL);
-			if (enum_array[index] == INFILE)
-				info_list->input = INFILE;
-			if (enum_array[index] == OUTFILE)
-				info_list->output = OUTFILE;
-		}
+			info_list = data_org_file(info_list, splitted_line, enum_array, index);
 		if (enum_array[index] == DELIMITER)
 		{
-			if (splitted_line[index + 1])
-				info_list = into_linklist(info_list, splitted_line[index + 1], enum_array[index]);
-			if (!info_list)
-				return (NULL);
+			info_list = data_org_delim(info_list, splitted_line, enum_array, index);
 			index++;
 		}
+		if (!info_list)
+			return (NULL);
 		if (splitted_line[index] != NULL)
 			index++;
 	}
 	info_list->next = NULL;
-	free_2d_array(splitted_line);
-	free(enum_array);
 	return (head);
 }

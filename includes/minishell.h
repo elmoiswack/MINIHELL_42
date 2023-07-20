@@ -45,6 +45,7 @@ typedef struct lexerinfo {
 	int					input;			//ENUM_IO:PIPE_READ/FILE/STDIN/NONE
 	int					output;			//ENUM_IO:PIPE_WRITE/FILE/STDOUT/NONE
 	char				*delim;
+	int					check_free;
 	struct lexerinfo	*next;
 }	t_lexer;
 
@@ -62,14 +63,17 @@ typedef struct s_minishell {
 
 		//lexer.c
 t_lexer	*lexing(char *line);
+t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array);
 t_lexer	*parsing_array(t_lexer *info_list, char **splitted_line, int *enum_array);
-int		*into_enum_array(char **splitted_line, int *enum_array);
+int		*into_enum_array(char **splitted_line, int *enum_array, int index);
 int		which_enum(char **splitted_line, int index);
 
 		//lexer_utils.c
 int		skip_spaces(char *line, int index);
 int		ammount_of_words(char *line);
 int 	get_env_end(char *line, int index);
+int		get_max_array(char **array);
+int		check_for_quotes(char *line);
 
 		//lexer_eddit_line.c
 char	*put_spaces_in_line(char *line);
@@ -77,7 +81,6 @@ char	*edit_line(char *old, char *new);
 int		is_metacharachter(char c);
 
 		//lexer_split_quotes.c
-int		check_for_quotes(char *line);
 char	**split_with_quotes(char *line);
 
 		//lexer_get_path.c
@@ -85,6 +88,13 @@ char	*get_path_of_command(char *command);
 char	*find_path_loop(char **paths, char *command);
 char	**put_slash_behind(char **paths);
 
+		//lexer_data_org.c
+t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
+t_lexer	*data_org_command(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
+t_lexer	*data_org_pipe(t_lexer *info_list);
+t_lexer	*data_org_file(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
+t_lexer	*data_org_delim(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
+		
 		//lexer_dataorg_utils.c
 t_lexer *create_new_node(t_lexer *info_lexer);
 char	**allocate_2d_arr(int size);
@@ -96,12 +106,21 @@ t_lexer	*one_word_lexer(t_lexer *info_list, char **splitted_line);
 t_lexer	*two_word_lexer(t_lexer *info_list, char **splitted_line);
 t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var);
 
-		//lexer_data_org.c
-t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, int *enum_array);
-
 		//data_org_special.c
-t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, int *enum_array);
-t_lexer	*special_case_cat(t_lexer *info_list, char **splitted_line, int *enum_array);
+int		check_special_cases(char **splitted_line);
+t_lexer *which_special_case(t_lexer *info_list, char **splitted_line, int *enum_array);
+t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
+t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, int *enum_array);
+
+		//parsing_grep.c
+int		check_for_grep(t_lexer *info_list);
+t_lexer *grep_parser(t_lexer *info_list, char **splitted_line);
+t_lexer	*rm_quotes_grep(t_lexer *info_list);
+
+		//parser_cat.c 
+int		check_for_cat(t_lexer *info_list);
+t_lexer *cat_parser(t_lexer *info_list, char **splitted_line);
+t_lexer *check_content(t_lexer *info_list, char **splitted_line, int index);
 
 		//lexer_data_envvar.c
 char	**edit_arr_env(char **splitted_line, int *enum_array);

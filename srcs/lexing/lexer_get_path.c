@@ -33,7 +33,7 @@ char	*find_path_loop(char **paths, char *command)
 
 	index = 0;
 	paths = put_slash_behind(paths);
-	while(paths[index])
+	while (paths[index])
 	{
 		temp = ft_strjoin(paths[index], command);
 		if (!temp)
@@ -48,9 +48,9 @@ char	*find_path_loop(char **paths, char *command)
 
 char	*get_path_of_command(char *command)
 {
-	char 	*get_path;
+	char	*get_path;
 	char	**paths;
-	char 	*command_path;
+	char	*command_path;
 
 	get_path = getenv("PATH");
 	if (!get_path)
@@ -58,7 +58,6 @@ char	*get_path_of_command(char *command)
 	paths = ft_split(get_path, ':');
 	if (!paths)
 		return (NULL);
-	//free(get_path);
 	command_path = find_path_loop(paths, command);
 	if (!command_path)
 		return (NULL);
