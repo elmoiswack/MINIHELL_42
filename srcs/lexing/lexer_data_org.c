@@ -22,7 +22,7 @@ t_lexer	*data_org_command(t_lexer *info_list, char **splitted_line, \
 
 t_lexer	*data_org_pipe(t_lexer *info_list)
 {
-	if (info_list->input != INFILE)
+	if (info_list->input != INFILE && info_list->input != PIPE_READ)
 		info_list->input = STDIN_IN;
 	info_list->output = PIPE_WRITE;
 	info_list = create_new_node(info_list);
@@ -87,7 +87,8 @@ t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, \
 			if (splitted_line[index + 1])
 			{
 				index++;
-				info_list->file = ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
+				info_list->file = ft_calloc(ft_strlen(splitted_line[index]) + 1, \
+					sizeof(char));
 				if (!info_list->file)
 					return (NULL);
 				ft_strcpy(info_list->file, splitted_line[index]);
