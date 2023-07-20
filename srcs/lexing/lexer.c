@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//IN ASCII THE NUMBER 39 MEANS '
+
 int	which_enum(char **splitted_line, int index)
 {
 	if (splitted_line[index][0] == '<' && splitted_line[index][1] != '<')
@@ -18,6 +20,8 @@ int	which_enum(char **splitted_line, int index)
 	if (splitted_line[index][0] == '$' && ft_isalpha(splitted_line[index][1]))
 		return (ENV_VAR);
 	if (splitted_line[index][0] == '-' && ft_isalpha(splitted_line[index][1]))
+		return (FLAG);
+	if (splitted_line[index][0] == 39 && ft_isalpha(splitted_line[index][1]))
 		return (FLAG);
 	return (COMMAND);
 }
@@ -68,20 +72,11 @@ t_lexer	*parsing_array(t_lexer *info_list, \
 	return (info_list);
 }
 
-t_lexer	*which_case(t_lexer	*info_list, char **splitted_line)
+t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array)
 {
 	int	index;
-	int	*enum_array;
 
-	index = get_max_array(splitted_line);
-	enum_array = ft_calloc(index + 1, sizeof(int));
-	if (!enum_array)
-		return (NULL);
 	enum_array = into_enum_array(splitted_line, enum_array, 0);
-	if (ft_strncmp(splitted_line[0], "echo", ft_strlen(splitted_line[0])) == 0)
-		return (special_case_echo(info_list, splitted_line, enum_array));
-	if (ft_strncmp(splitted_line[0], "rm", ft_strlen(splitted_line[0])) == 0)
-		return (special_case_rm(info_list, splitted_line, enum_array));
 	if (check_for_envvar(splitted_line, enum_array) == 1)
 	{
 		splitted_line = edit_arr_env(splitted_line, enum_array);
@@ -92,26 +87,40 @@ t_lexer	*which_case(t_lexer	*info_list, char **splitted_line)
 			return (NULL);
 		enum_array = into_enum_array(splitted_line, enum_array, 0);
 	}
+	if (check_special_cases(splitted_line) == 1)
+		return (which_special_case(info_list, splitted_line, enum_array));
 	info_list = parsing_array(info_list, splitted_line, enum_array);
+	if (check_for_grep(info_list) == 1)
+		info_list = grep_parser(info_list, splitted_line);
+	if (check_for_cat(info_list) == 1)
+		info_list = cat_parser(info_list, splitted_line);
+	// if ammount of words = 1 or 2, i dont want to free splitted-line yet. but if not i want to free it here!!
+	free(enum_array);
 	return (info_list);
 }
 
 t_lexer	*lexing(char *line)
 {
 	char	**splitted_line;
+	int		*enum_array;
+	int		index;
 	t_lexer	*info_list;
 
 	info_list = ft_calloc(1, sizeof(t_lexer));
 	if (!info_list)
 		return (NULL);
 	line = put_spaces_in_line(line);
-	if (check_for_quotes(line) == 1 && ft_strncmp(line, "echo", 4) != 0)
+	if (check_for_quotes(line) == 1)
 		splitted_line = split_with_quotes(line);
 	else
 		splitted_line = ft_split(line, ' ');
 	if (!splitted_line)
 		return (NULL);
-	info_list = which_case(info_list, splitted_line);
+	index = get_max_array(splitted_line);
+	enum_array = ft_calloc(index + 1, sizeof(int));
+	if (!enum_array)
+		return (NULL);
+	info_list = which_case(info_list, splitted_line, enum_array);
 	//free(line); buggie shit
 	return (info_list);
 }

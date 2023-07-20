@@ -17,7 +17,7 @@ char	**allocate_2d_arr(int size)
 {
 	char	**arr;
 
-	arr = ft_calloc(3, sizeof(char *));
+	arr = ft_calloc(4, sizeof(char *));
 	if (!arr)
 		return (NULL);
 	arr[0] = ft_calloc(size, sizeof(char));
@@ -25,6 +25,7 @@ char	**allocate_2d_arr(int size)
 		return (NULL);
 	arr[1] = NULL;
 	arr[2] = NULL;
+	arr[3] = NULL;
 	return (arr);
 }
 

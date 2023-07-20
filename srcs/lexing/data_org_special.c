@@ -28,11 +28,8 @@ t_lexer	*echo_with_meta(t_lexer *info_list, char **splitted_line, int *enum_arra
 	return (info_list);
 }
 
-t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, int *enum_array)
+t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, int *enum_array, int index)
 {
-	int		index;
-
-	index = 0;
 	while (splitted_line[index])
 	{
 		if (is_metacharachter(splitted_line[index][0]) == 1)
@@ -55,7 +52,6 @@ t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, int *enum_a
 	info_list->output = STDOUT_OUT;
 	info_list->path = get_path_of_command(splitted_line[0]);
 	info_list->next = NULL;
-	free_2d_array(splitted_line);
 	return (info_list);
 }
 
@@ -79,10 +75,38 @@ t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, int *enum_arr
 		ft_strcpy(info_list->content[index], splitted_line[index]);
 		index++;
 	}
-	info_list->file = ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
-	if (!info_list->file)
+	info_list->content[index] = ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
+	if (!info_list->content[index])
 		return (NULL);
-	ft_strcpy(info_list->file, splitted_line[index]);
+	ft_strcpy(info_list->content[index], splitted_line[index]);
 	info_list->next = NULL;
 	return (info_list);
+}
+
+t_lexer *which_special_case(t_lexer *info_list, char **splitted_line, int *enum_array)
+{
+	if (ft_strncmp(splitted_line[0], "echo", ft_strlen(splitted_line[0])) == 0)
+	{
+		info_list = special_case_echo(info_list, splitted_line, enum_array, 0);
+		free_2d_array(splitted_line);
+		free(enum_array);
+		return (info_list);
+	}
+	if (ft_strncmp(splitted_line[0], "rm", ft_strlen(splitted_line[0])) == 0)
+	{
+		info_list = special_case_rm(info_list, splitted_line, enum_array);
+		free_2d_array(splitted_line);
+		free(enum_array);
+		return (info_list);
+	}
+	return (NULL);
+}
+
+int	check_special_cases(char **splitted_line)
+{
+	if (ft_strncmp(splitted_line[0], "echo", ft_strlen(splitted_line[0])) == 0)
+		return (1);
+	if (ft_strncmp(splitted_line[0], "rm", ft_strlen(splitted_line[0])) == 0)
+		return (1);
+	return (-1);
 }

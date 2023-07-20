@@ -47,3 +47,25 @@ int	skip_spaces(char *line, int index)
 		index++;
 	return (index);
 }
+
+int	check_for_quotes(char *line)
+{
+	int	index;
+
+	index = 0;
+	while (line[index])
+	{
+		if (line[index] == '"')
+		{
+			if (line[index - 1] == ' ')
+				return (1);
+		}
+		if (line[index] == 39)
+		{
+			if (line[index - 1] == ' ')
+				return (1);
+		}
+		index++;
+	}
+	return (-1);
+}

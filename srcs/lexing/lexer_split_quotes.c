@@ -5,28 +5,6 @@
 
 //ASCII VALUE OF ' IS 39
 
-int	check_for_quotes(char *line)
-{
-	int	index;
-
-	index = 0;
-	while (line[index])
-	{
-		if (line[index] == '"')
-		{
-			if (line[index - 1] == ' ')
-				return (1);
-		}
-		if (line[index] == 39)
-		{
-			if (line[index - 1] == ' ')
-				return (1);
-		}
-		index++;
-	}
-	return (-1);
-}
-
 char	*store_quote_data(char *line, int index_line, int end)
 {
 	int		index_temp;
@@ -74,7 +52,7 @@ char	*remove_spaces_quote(char *line)
 
 	index = 0;
 	index_line = 0;
-	temp = ft_calloc(ft_strlen(line), sizeof(char));
+	temp = ft_calloc(ft_strlen(line) + 1, sizeof(char));
 	if (!temp)
 		return (NULL);
 	while (line[index_line] != '"' && line[index_line] != 39)
@@ -95,13 +73,11 @@ char	**split_with_quotes(char *line)
 {
 	int		index_line;
 	int		end;
-	int		index;
 	char	*temp;
 	char	**split_arr;
 
 	index_line = 0;
 	end = 0;
-	index = 0;
 	while (line[index_line] \
 		&& (line[index_line] != '"' && line[index_line] != 39))
 		index_line++;
@@ -122,9 +98,10 @@ char	**split_with_quotes(char *line)
 	split_arr = ft_split(line, ' ');
 	if (!split_arr)
 		return (NULL);
-	while (split_arr[index][0] != '"' && split_arr[index][0] != 39)
-		index++;
-	free(split_arr[index]);
-	split_arr[index] = temp;
+	index_line = 0;
+	while (split_arr[index_line][0] != '"' && split_arr[index_line][0] != 39)
+		index_line++;
+	free(split_arr[index_line]);
+	split_arr[index_line] = temp;
 	return (split_arr);
 }

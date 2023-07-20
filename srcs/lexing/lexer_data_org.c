@@ -81,7 +81,5 @@ t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, \
 			index++;
 	}
 	info_list->next = NULL;
-	free_2d_array(splitted_line);
-	free(enum_array);
 	return (head);
 }
