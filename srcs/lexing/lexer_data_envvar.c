@@ -27,12 +27,16 @@ char	*trim_envvar(char *line)
 	index = 0;
 	index_temp = 0;
 	begin_word = 0;
-	while (line[index] && line[begin_word] != '"')
+	while (line[begin_word] && line[begin_word] != '"')
 		begin_word++;
+	if (line[begin_word] == '\0')
+		return (NULL);
 	begin_word++;
 	index = begin_word;
 	while (line[index] && line[index] != '"')
 		index++;
+	if (line[index] == '\0')
+		return (NULL);
 	temp = ft_calloc((index - begin_word) + 1, sizeof(char));
 	if (!temp)
 		return (NULL);
