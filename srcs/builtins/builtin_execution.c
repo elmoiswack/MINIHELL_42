@@ -4,7 +4,7 @@
 
 int	is_builtin(t_minishell *shell)
 {
-	if (ft_strncmp(shell->cmd_lst->content[0], "echo", 5) == 0 && shell->cmd_lst->output != OUTFILE && shell->cmd_lst->output != APPEND)
+	if (ft_strncmp(shell->cmd_lst->content[0], "echo", 5) == 0 && shell->cmd_lst->next)
 		return (shell->builtin = ECHO, 1);
 	else if (ft_strncmp(shell->cmd_lst->content[0], "cd", 3) == 0)
 		return (shell->builtin = CD, 1);
