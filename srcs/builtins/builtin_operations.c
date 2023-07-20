@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void	execute_echo(char **raw_input, int *exit_status)
+void	execute_echo(char **raw_input, int *exit_status, char *envp[])
 {
 	char	*value;
 
@@ -15,7 +15,7 @@ void	execute_echo(char **raw_input, int *exit_status)
 		ft_printf("%d\n", (int)getpid());
 	else if (ft_strncmp(raw_input[1], "$?", 2) == 0)
 		ft_printf("%d\n", *exit_status);
-	else if (arg_is_env(raw_input[1], &value) == 1)
+	else if (arg_is_env(raw_input[1], &value, envp) == 1)
 		ft_printf("%s\n", value);
 	else
 		print_double_array(raw_input);

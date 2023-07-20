@@ -137,7 +137,6 @@ char **replace_var_expander(char **splitted_line);
 //###############################################################
 
 		//error.c
-void	free_2d_array(char **array);
 void	error_command_not_found(char *cmd);
 void	error_export_invalid_identifier(char *input);
 void	error_unset_too_few_args();
@@ -151,7 +150,7 @@ int		execute_cmds(t_lexer *head, char *envp[]);
 
 //		execution_utilities.c
 char	*get_path(char *cmd);
-int		arg_is_env(char *raw_input, char **value);
+int		arg_is_env(char *raw_input, char **value, char *envp[]);
 int		check_access(char *cmd);
 int		var_exists(char	**env, char *var, int var_len);
 
@@ -164,7 +163,7 @@ char	**replace_str_in_array(char **src, char *str, int index);
 char	**remove_str_from_array(char **src, int index);
 
 //		execution_builtin_operations.c
-void	execute_echo(char **raw_input, int *exit_status);
+void	execute_echo(char **raw_input, int *exit_status, char *envp[]);
 void	execute_cd(t_minishell *shell);
 void	execute_pwd(int *exit_status);
 void	execute_env(char *envp[]);

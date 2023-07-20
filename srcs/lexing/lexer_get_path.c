@@ -61,7 +61,7 @@ char	*get_path_of_command(char *command)
 	command_path = find_path_loop(paths, command);
 	if (!command_path)
 		return (NULL);
-	free_2d_array(paths);
+	free_double_array(paths);
 	return (command_path);
 }
 //kdasdas
