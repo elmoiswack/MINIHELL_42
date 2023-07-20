@@ -38,7 +38,8 @@ t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var)
 	}
 	if (enum_var == FLAG)
 	{
-		info_list->content[1] = ft_calloc(ft_strlen(word_var) + 1, sizeof(char));
+		info_list->content[1] = ft_calloc(ft_strlen(word_var) + 1, \
+			sizeof(char));
 		if (!info_list->content[1])
 			return (NULL);
 		ft_strcpy(info_list->content[1], word_var);

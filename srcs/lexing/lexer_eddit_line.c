@@ -25,13 +25,15 @@ char	*edit_line(char *old, char *new)
 	while (old[index_o])
 	{
 		new[index_n] = old[index_o];
-		if ((is_metacharachter(old[index_o + 1]) == 1) && old[index_o] != '<')
+		if ((is_metacharachter(old[index_o + 1]) == 1) \
+			&& (old[index_o] != '<' && old[index_o] != '>'))
 		{
 			index_n++;
 			new[index_n] = ' ';
 		}
 		if ((is_metacharachter(old[index_o]) == 1) \
-			&& ((old[index_o + 1] == '$') || (ft_isalpha(old[index_o + 1]) == 1)))
+			&& ((old[index_o + 1] == '$') \
+			|| (ft_isalpha(old[index_o + 1]) == 1)))
 		{
 			index_n++;
 			new[index_n] = ' ';

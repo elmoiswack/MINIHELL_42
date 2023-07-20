@@ -8,17 +8,18 @@ int	check_for_cat(t_lexer *info_list)
 	while (info_list)
 	{
 		if (ft_strncmp(info_list->content[0], "cat", ft_strlen("cat")) == 0)
-				return (1);
+			return (1);
 		info_list = info_list->next;
 	}
 	return (-1);
 }
 
-t_lexer *check_content(t_lexer *info_list, char **splitted_line, int index)
+t_lexer	*check_content(t_lexer *info_list, char **splitted_line, int index)
 {
 	if (!info_list->content[1])
 	{
-		info_list->content[1] = ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
+		info_list->content[1] = ft_calloc(ft_strlen(splitted_line[index]) + 1, \
+			sizeof(char));
 		if (!info_list->content[1])
 			return (NULL);
 		ft_strcpy(info_list->content[1], splitted_line[index]);
@@ -26,26 +27,27 @@ t_lexer *check_content(t_lexer *info_list, char **splitted_line, int index)
 	return (info_list);
 }
 
-t_lexer *cat_parser(t_lexer *info_list, char **splitted_line)
+t_lexer	*cat_parser(t_lexer *info_list, char **splitted_line)
 {
 	int		index;
 	t_lexer	*head;
-	
+
 	head = info_list;
 	index = 0;
 	while (info_list)
 	{
 		if (ft_strncmp(info_list->content[0], "cat", ft_strlen("cat")) == 0)
-				break ;
+			break ;
 		info_list = info_list->next;
 	}
 	while (splitted_line[index])
 	{
 		if (ft_strncmp(splitted_line[index], "cat", ft_strlen("cat")) == 0)
-				break ;
-		index++;		
+			break ;
+		index++;
 	}
-	if (splitted_line[index + 1] != NULL && is_metacharachter(splitted_line[index + 1][0]) != 1)
+	if (splitted_line[index + 1] != NULL && \
+		is_metacharachter(splitted_line[index + 1][0]) != 1)
 	{
 		info_list = check_content(info_list, splitted_line, index + 1);
 		if (!info_list)
