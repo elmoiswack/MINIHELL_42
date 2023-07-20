@@ -30,18 +30,16 @@ static const char *g_enum[] = {
 static void	route_input(int in, t_lexer *node)
 {
 	int infile;
-	// int hd_fd;
-	//
-	// hd_fd = open("./data/heredoc_tmp", O_RDONLY);
-	// if (hd_fd > 0 && node->delim)
-	// {
-	// 	if (dup2(hd_fd, STDIN_FILENO) < 0)
-	// 		perror("dup2");
-	// 	close(hd_fd);
-	// 	return ;
-	// }
+	int hd_fd;
+
 	if (node->delim)
-		return(create_heredoc_tmp(node->delim));
+	{
+		if ((hd_fd = open("./data/heredoc.tmp", O_RDONLY)) < 0)
+			perror("Cannot create temporary heredoc.tmp");
+		if (dup2(hd_fd, STDIN_FILENO) < 0)
+			perror("dup2");
+		close(hd_fd);
+	}
 	if (node->input == INFILE)
 	{
 		if ((infile = open(node->file, O_RDONLY)) < 0)
@@ -143,6 +141,8 @@ int	execute_cmds(t_lexer *head, char *envp[])
 	current = head;
 	if (!current->path && !current->delim)
 		return (error_command_not_found(current->content[0]), 127);
+	if (current->delim)
+		create_heredoc_tmp(current->delim);
 	print_cmd_lst(head);
 	while (current)
 	{
@@ -158,5 +158,7 @@ int	execute_cmds(t_lexer *head, char *envp[])
 	close(prev_pipe);
 	waitpid(pid, &status, 0);
 	while (wait(NULL) != -1);
+	if (head->delim)
+		clean_tmp_files(envp);
 	return (WEXITSTATUS(status));
 }
