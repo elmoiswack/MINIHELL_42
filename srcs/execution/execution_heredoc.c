@@ -14,14 +14,14 @@ void	change_permission_heredoc_tmp()
 	char	*args[] = {"chmod", "777", "./data/heredoc.tmp", NULL};
 	int		status;
 	pid_t	pid;
-	// int		hd_fd;
-	
-	// if ((hd_fd = open("./data/heredoc.tmp", O_EXCL | O_RDWR)) < 0)
-	// 	return ;
-	pid = fork();
-	if (pid == 0 && execve(get_path("chmod"), args, NULL) < 0)
-		exit(-1);
-	waitpid(pid, &status, 0);
+
+	if (access("./data/heredoc.tmp", F_OK) == 0)
+	{
+		pid = fork();
+		if (pid == 0 && execve(get_path("chmod"), args, NULL) < 0)
+			exit(-1);
+		waitpid(pid, &status, 0);
+	}
 }
 
 void	create_heredoc_tmp(char *delim)
