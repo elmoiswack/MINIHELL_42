@@ -86,6 +86,10 @@ t_lexer	*parsing_array(t_lexer *info_list, \
 t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array)
 {
 	enum_array = into_enum_array(splitted_line, enum_array, 0);
+	if (check_var_expander(splitted_line) == 1)
+		splitted_line = replace_var_expander(splitted_line);
+	if (!splitted_line)
+		return (NULL);
 	if (check_special_cases(splitted_line) == 1)
 		return (which_special_case(info_list, splitted_line, enum_array));
 	info_list = parsing_array(info_list, splitted_line, enum_array);

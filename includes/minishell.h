@@ -128,6 +128,10 @@ char	**new_2d_array(char **splitted_line);
 char	*trim_envvar(char *line);
 int		check_for_envvar(char **splitted_line, int *enum_array);
 
+//		lexer_variable_expander.c
+int		check_var_expander(char **splitted_line);
+char **replace_var_expander(char **splitted_line);
+
 //###############################################################
 //		ERROR AND FREE FUNCTIONS
 //###############################################################
