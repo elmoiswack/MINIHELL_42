@@ -110,7 +110,7 @@ t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var);
 int		check_special_cases(char **splitted_line);
 t_lexer *which_special_case(t_lexer *info_list, char **splitted_line, int *enum_array);
 t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
-t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, int *enum_array);
+t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
 
 		//parsing_grep.c
 int		check_for_grep(t_lexer *info_list);

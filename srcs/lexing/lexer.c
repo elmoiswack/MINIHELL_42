@@ -63,7 +63,7 @@ t_lexer	*parsing_array(t_lexer *info_list, \
 	while (splitted_line[ammount_words])
 		ammount_words++;
 	if (ammount_words == 1 || ammount_words == 2)
-			info_list->check_free = 1;
+		info_list->check_free = 1;
 	if (ammount_words == 1)
 		return (one_word_lexer(info_list, splitted_line));
 	if (ammount_words == 2)

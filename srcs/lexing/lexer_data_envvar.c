@@ -67,7 +67,8 @@ char	**new_2d_array(char **splitted_line)
 		return (NULL);
 	while (index < max)
 	{
-		temp[index_temp] = ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
+		temp[index_temp] = ft_calloc(ft_strlen(splitted_line[index]) + 1, \
+			sizeof(char));
 		if (!temp[index_temp])
 			return (NULL);
 		ft_strcpy(temp[index_temp], splitted_line[index]);
@@ -90,7 +91,8 @@ char	**edit_arr_env(char **splitted_line, int *enum_array)
 	if (!splitted_line[0])
 		return (NULL);
 	free(splitted_line[index]);
-	splitted_line[index] = ft_calloc(ft_strlen(splitted_line[0]) + 1, sizeof(char));
+	splitted_line[index] = ft_calloc(ft_strlen(splitted_line[0]) + 1, \
+		sizeof(char));
 	if (!splitted_line[index])
 		return (NULL);
 	ft_strcpy(splitted_line[index], splitted_line[0]);

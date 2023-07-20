@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-t_lexer	*echo_with_meta(t_lexer *info_list, char **splitted_line, int *enum_array)
+t_lexer	*echo_with_meta(t_lexer *info_list, char **splitted_line, \
+	int *enum_array)
 {
 	int	index;
 
@@ -13,11 +14,14 @@ t_lexer	*echo_with_meta(t_lexer *info_list, char **splitted_line, int *enum_arra
 		return (NULL);
 	ft_strcpy(info_list->content[0], splitted_line[0]);
 	info_list->path = get_path_of_command(splitted_line[0]);
-	while (splitted_line[index] && is_metacharachter(splitted_line[index][0]) != 1)
+	while (splitted_line[index] && \
+		is_metacharachter(splitted_line[index][0]) != 1)
 	{
-		info_list->content[1] = ft_strjoin_and_free(info_list->content[1], splitted_line[index]);
+		info_list->content[1] = ft_strjoin_and_free(info_list->content[1], \
+			splitted_line[index]);
 		if (splitted_line[index + 1] != NULL)
-			info_list->content[1] = ft_strjoin_and_free(info_list->content[1], " ");
+			info_list->content[1] = ft_strjoin_and_free(info_list->content[1], \
+				" ");
 		index++;
 	}
 	info_list->input = STDIN_IN;
@@ -28,7 +32,8 @@ t_lexer	*echo_with_meta(t_lexer *info_list, char **splitted_line, int *enum_arra
 	return (info_list);
 }
 
-t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, int *enum_array, int index)
+t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, \
+	int *enum_array, int index)
 {
 	while (splitted_line[index])
 	{
@@ -43,9 +48,11 @@ t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, int *enum_a
 	ft_strcpy(info_list->content[0], splitted_line[0]);
 	while (splitted_line[index])
 	{
-		info_list->content[1] = ft_strjoin_and_free(info_list->content[1], splitted_line[index]);
+		info_list->content[1] = ft_strjoin_and_free(info_list->content[1], \
+			splitted_line[index]);
 		if (splitted_line[index + 1] != NULL)
-			info_list->content[1] = ft_strjoin_and_free(info_list->content[1], " ");
+			info_list->content[1] = ft_strjoin_and_free(info_list->content[1], \
+				" ");
 		index++;
 	}
 	info_list->input = STDIN_IN;
@@ -55,10 +62,9 @@ t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, int *enum_a
 	return (info_list);
 }
 
-t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, int *enum_array)
+t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, \
+	int *enum_array, int index)
 {
-	int	index;
-
 	info_list->input = NONE;
 	info_list->output = NONE;
 	info_list->content = allocate_2d_arr(ft_strlen(splitted_line[0]) + 1);
@@ -69,13 +75,15 @@ t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, int *enum_arr
 	index = 1;
 	if (enum_array[index] && enum_array[index] == FLAG)
 	{
-		info_list->content[index] = ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
+		info_list->content[index] = \
+			ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
 		if (!info_list->content[index])
 			return (NULL);
 		ft_strcpy(info_list->content[index], splitted_line[index]);
 		index++;
 	}
-	info_list->content[index] = ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
+	info_list->content[index] = ft_calloc(ft_strlen(splitted_line[index]) + 1, \
+		sizeof(char));
 	if (!info_list->content[index])
 		return (NULL);
 	ft_strcpy(info_list->content[index], splitted_line[index]);
@@ -83,7 +91,8 @@ t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, int *enum_arr
 	return (info_list);
 }
 
-t_lexer *which_special_case(t_lexer *info_list, char **splitted_line, int *enum_array)
+t_lexer	*which_special_case(t_lexer *info_list, char **splitted_line, \
+	int *enum_array)
 {
 	if (ft_strncmp(splitted_line[0], "echo", ft_strlen(splitted_line[0])) == 0)
 	{
@@ -94,7 +103,7 @@ t_lexer *which_special_case(t_lexer *info_list, char **splitted_line, int *enum_
 	}
 	if (ft_strncmp(splitted_line[0], "rm", ft_strlen(splitted_line[0])) == 0)
 	{
-		info_list = special_case_rm(info_list, splitted_line, enum_array);
+		info_list = special_case_rm(info_list, splitted_line, enum_array, 0);
 		free_2d_array(splitted_line);
 		free(enum_array);
 		return (info_list);
