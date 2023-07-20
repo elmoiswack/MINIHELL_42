@@ -10,14 +10,15 @@ int	check_var_expander(char **splitted_line)
 	index = 0;
 	while (splitted_line[index])
 	{
-		if (splitted_line[index][0] == '$' && ft_isalpha(splitted_line[index][1]) == 1)
+		if (splitted_line[index][0] == '$' \
+			&& ft_isalpha(splitted_line[index][1]) == 1)
 			return (1);
 		index++;
 	}
 	return (-1);
 }
 
-char *remove_dollar(char **splitted_line, int index)
+char	*remove_dollar(char **splitted_line, int index)
 {
 	int		index_te;
 	int		index_sp;
@@ -37,7 +38,7 @@ char *remove_dollar(char **splitted_line, int index)
 	return (temp);
 }
 
-char **replace_var_expander(char **splitted_line)
+char	**replace_var_expander(char **splitted_line)
 {
 	int		index;
 	char	*temp;
@@ -46,7 +47,8 @@ char **replace_var_expander(char **splitted_line)
 	index = 0;
 	while (splitted_line[index])
 	{
-		if (splitted_line[index][0] == '$' && ft_isalpha(splitted_line[index][1]) == 1)
+		if (splitted_line[index][0] == '$' \
+			&& ft_isalpha(splitted_line[index][1]) == 1)
 			break ;
 		index++;
 	}
