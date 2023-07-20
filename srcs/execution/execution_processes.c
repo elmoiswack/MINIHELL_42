@@ -30,6 +30,16 @@ static const char *g_enum[] = {
 static void	route_input(int in, t_lexer *node)
 {
 	int infile;
+	int hd_fd;
+
+	if (node->delim)
+	{
+		if ((hd_fd = open("./data/heredoc.tmp", O_RDONLY)) < 0)
+			perror("Cannot create temporary heredoc.tmp");
+		if (dup2(hd_fd, STDIN_FILENO) < 0)
+			perror("dup2");
+		close(hd_fd);
+	}
 	if (node->input == INFILE)
 	{
 		if ((infile = open(node->file, O_RDONLY)) < 0)
@@ -48,7 +58,23 @@ static void	route_input(int in, t_lexer *node)
 static void	route_output(int out, t_lexer *node)
 {
 	int outfile;
-
+	// int hd_fd;
+	// int bytes;
+	// char buf[256];
+	//
+	// bytes = 0;
+	// if (node->delim)
+	// {
+	// 	if ((hd_fd = open("./data/heredoc_tmp", O_RDONLY)) < 0)
+	// 		perror("heredoc route output");
+	// 	// if (dup2(out, STDOUT_FILENO) < 0)
+	// 	// 	perror("dup2");
+	// 	while ((bytes = read(hd_fd, buf, sizeof(buf))) != 0)
+	// 		write(out, &buf, bytes);
+	// 	close(hd_fd);
+	// 	// close(out);
+	// 	// return;
+	// }
 	if (node->output == OUTFILE)
 	{
 		if ((outfile = open(node->file, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
@@ -113,9 +139,11 @@ int	execute_cmds(t_lexer *head, char *envp[])
 	pid = 1;
 	prev_pipe = STDIN_FILENO;
 	current = head;
-	print_cmd_lst(head);
+	if (!current->path && !current->delim)
+		return (error_command_not_found(current->content[0]), 127);
 	if (current->delim)
 		create_heredoc_tmp(current->delim);
+	print_cmd_lst(head);
 	while (current)
 	{
 		if (pipe(pipe_fd) < 0)
@@ -130,5 +158,7 @@ int	execute_cmds(t_lexer *head, char *envp[])
 	close(prev_pipe);
 	waitpid(pid, &status, 0);
 	while (wait(NULL) != -1);
+	if (head->delim)
+		clean_tmp_files(envp);
 	return (WEXITSTATUS(status));
 }
