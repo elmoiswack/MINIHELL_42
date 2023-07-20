@@ -64,9 +64,15 @@ t_lexer	*parsing_array(t_lexer *info_list, \
 	while (splitted_line[ammount_words])
 		ammount_words++;
 	if (ammount_words == 1)
+	{
+		info_list->check_free = 1;
 		return (one_word_lexer(info_list, splitted_line));
+	}
 	if (ammount_words == 2)
+	{
+		info_list->check_free = 1;
 		return (two_word_lexer(info_list, splitted_line));
+	}
 	if (ammount_words > 2)
 		info_list = organizing_data(info_list, splitted_line, enum_array, 0);
 	return (info_list);
@@ -94,7 +100,8 @@ t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array)
 		info_list = grep_parser(info_list, splitted_line);
 	if (check_for_cat(info_list) == 1)
 		info_list = cat_parser(info_list, splitted_line);
-	// if ammount of words = 1 or 2, i dont want to free splitted-line yet. but if not i want to free it here!!
+	if (info_list->check_free != 1)
+		free_2d_array(splitted_line);
 	free(enum_array);
 	return (info_list);
 }
@@ -109,6 +116,7 @@ t_lexer	*lexing(char *line)
 	info_list = ft_calloc(1, sizeof(t_lexer));
 	if (!info_list)
 		return (NULL);
+	info_list->check_free = -1;
 	line = put_spaces_in_line(line);
 	if (check_for_quotes(line) == 1)
 		splitted_line = split_with_quotes(line);

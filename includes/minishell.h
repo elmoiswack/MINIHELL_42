@@ -45,6 +45,7 @@ typedef struct lexerinfo {
 	int					input;			//ENUM_IO:PIPE_READ/FILE/STDIN/NONE
 	int					output;			//ENUM_IO:PIPE_WRITE/FILE/STDOUT/NONE
 	char				*delim;
+	int					check_free;
 	struct lexerinfo	*next;
 }	t_lexer;
 
