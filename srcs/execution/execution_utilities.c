@@ -47,12 +47,25 @@ int	check_access(char *cmd)
 	return (-1);
 }
 
-int	arg_is_env(char *raw_input, char **value)
+char *ft_getenv(char *var_name, char **env)
+{
+	char	*value;
+	int		var_index;
+	
+	var_index = var_exists(env, var_name, ft_strlen(var_name));
+	if (var_index == -1)
+		return (NULL);
+	else
+		value = ft_strdup(ft_strchr(env[var_index], '=') + 1);
+	return (value);
+}
+
+int	arg_is_env(char *raw_input, char **value, char *envp[])
 {
 	char	*temp;
 
 	temp = ft_strdup(raw_input + 1);
-	*value = getenv(temp);
+	*value = ft_getenv(temp, envp);
 	if (raw_input[0] == '$' && *value)
 		return (1);
 	else
@@ -76,3 +89,4 @@ int	var_exists(char	**env, char *var, int var_len)
 	}
 	return (-1);
 }
+

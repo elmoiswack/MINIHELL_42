@@ -94,7 +94,7 @@ t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array)
 	if (check_for_cat(info_list) == 1)
 		info_list = cat_parser(info_list, splitted_line);
 	if (info_list->check_free != 1)
-		free_2d_array(splitted_line);
+		free_double_array(splitted_line);
 	free(enum_array);
 	return (info_list);
 }

@@ -32,3 +32,17 @@ void clean_up(t_minishell *shell)
 	// free lexer
 	free_ll(&shell->cmd_lst);
 }
+
+void	free_double_array(char **array)
+{
+	int i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
+

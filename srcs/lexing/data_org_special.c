@@ -97,14 +97,14 @@ t_lexer	*which_special_case(t_lexer *info_list, char **splitted_line, \
 	if (ft_strncmp(splitted_line[0], "echo", ft_strlen(splitted_line[0])) == 0)
 	{
 		info_list = special_case_echo(info_list, splitted_line, enum_array, 0);
-		free_2d_array(splitted_line);
+		free_double_array(splitted_line);
 		free(enum_array);
 		return (info_list);
 	}
 	if (ft_strncmp(splitted_line[0], "rm", ft_strlen(splitted_line[0])) == 0)
 	{
 		info_list = special_case_rm(info_list, splitted_line, enum_array, 0);
-		free_2d_array(splitted_line);
+		free_double_array(splitted_line);
 		free(enum_array);
 		return (info_list);
 	}

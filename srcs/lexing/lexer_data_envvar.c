@@ -75,7 +75,7 @@ char	**new_2d_array(char **splitted_line)
 		index_temp++;
 		index++;
 	}
-	free_2d_array(splitted_line);
+	free_double_array(splitted_line);
 	temp[index_temp] = NULL;
 	return (temp);
 }
@@ -99,4 +99,3 @@ char	**edit_arr_env(char **splitted_line, int *enum_array)
 	splitted_line = new_2d_array(splitted_line);
 	return (splitted_line);
 }
-//kdasdas
