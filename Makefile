@@ -12,7 +12,6 @@ SRCS		:= 	main.c \
 				lexing/lexer_split_quotes.c \
 				lexing/lexer_data_org.c \
 				lexing/data_org_special.c \
-				lexing/lexer_data_envvar.c \
 				lexing/lexer_into_list.c \
 				lexing/parsing_grep.c \
 				lexing/parser_cat.c \
