@@ -34,6 +34,8 @@ t_lexer	*cat_parser(t_lexer *info_list, char **splitted_line)
 
 	head = info_list;
 	index = 0;
+	if (!splitted_line)
+		return (head);
 	while (info_list)
 	{
 		if (ft_strncmp(info_list->content[0], "cat", ft_strlen("cat")) == 0)
@@ -49,6 +51,7 @@ t_lexer	*cat_parser(t_lexer *info_list, char **splitted_line)
 	if (splitted_line[index + 1] != NULL && \
 		is_metacharachter(splitted_line[index + 1][0]) != 1)
 	{
+		printf("dhsakdhjksaadks\n\n\n");
 		info_list = check_content(info_list, splitted_line, index + 1);
 		if (!info_list)
 			return (NULL);

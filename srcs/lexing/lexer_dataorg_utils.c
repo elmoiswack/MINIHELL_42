@@ -10,6 +10,7 @@ t_lexer	*create_new_node(t_lexer *info_lexer)
 	if (!info_lexer->next)
 		return (NULL);
 	info_lexer = info_lexer->next;
+	info_lexer->next = NULL;
 	return (info_lexer);
 }
 

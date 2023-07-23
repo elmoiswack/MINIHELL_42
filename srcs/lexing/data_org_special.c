@@ -67,13 +67,17 @@ t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, \
 {
 	info_list->input = NONE;
 	info_list->output = NONE;
-	info_list->content = allocate_2d_arr(ft_strlen(splitted_line[0]) + 1);
+	index = get_max_array(splitted_line);
+	info_list->content = ft_calloc(index + 1, sizeof(char *));
 	if (!info_list->content)
+		return (NULL);
+	info_list->content[0] = ft_calloc(ft_strlen(splitted_line[0] + 1), sizeof(char));
+	if (!info_list->content[0])
 		return (NULL);
 	ft_strcpy(info_list->content[0], splitted_line[0]);
 	info_list->path = get_path_of_command(splitted_line[0]);
 	index = 1;
-	if (enum_array[index] && enum_array[index] == FLAG)
+	while (splitted_line[index])
 	{
 		info_list->content[index] = \
 			ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
@@ -82,11 +86,7 @@ t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, \
 		ft_strcpy(info_list->content[index], splitted_line[index]);
 		index++;
 	}
-	info_list->content[index] = ft_calloc(ft_strlen(splitted_line[index]) + 1, \
-		sizeof(char));
-	if (!info_list->content[index])
-		return (NULL);
-	ft_strcpy(info_list->content[index], splitted_line[index]);
+	info_list->content[index] = NULL;
 	info_list->next = NULL;
 	return (info_list);
 }

@@ -38,11 +38,9 @@ char	*remove_dollar(char **splitted_line, int index)
 	return (temp);
 }
 
-char	**replace_var_expander(char **splitted_line)
+int	get_index_var(char **splitted_line)
 {
-	int		index;
-	char	*temp;
-	char	*env_temp;
+	int	index;
 
 	index = 0;
 	while (splitted_line[index])
@@ -52,10 +50,23 @@ char	**replace_var_expander(char **splitted_line)
 			break ;
 		index++;
 	}
+	return (index);	
+}
+
+char	**replace_var_expander(char **splitted_line)
+{
+	int		index;
+	char	*temp;
+	char	*env_temp;
+
+	index = get_index_var(splitted_line);
 	temp = remove_dollar(splitted_line, index);
 	env_temp = getenv(temp);
 	if (!env_temp)
-		return (splitted_line);
+	{
+		free_double_array(splitted_line);
+		return (NULL);
+	}
 	free(temp);
 	temp = ft_calloc(ft_strlen(env_temp) + 1, sizeof(char));
 	if (!temp)

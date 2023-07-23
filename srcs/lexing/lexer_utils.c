@@ -7,6 +7,8 @@ int	get_max_array(char **array)
 	int	index;
 
 	index = 0;
+	if (!array)
+		return (-1);
 	while (array[index])
 		index++;
 	return (index);

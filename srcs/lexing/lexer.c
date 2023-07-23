@@ -56,28 +56,34 @@ int	*into_enum_array(char **splitted_line, int *enum_array, int index)
 t_lexer	*parsing_array(t_lexer *info_list, \
 	char **splitted_line, int *enum_array)
 {
-	int		index;
+	//int		index;
 	int		ammount_words;
 
-	ammount_words = 0;
-	while (splitted_line[ammount_words])
-		ammount_words++;
+	ammount_words = get_max_array(splitted_line);
 	if (ammount_words == 1 || ammount_words == 2)
 		info_list->check_free = 1;
 	if (ammount_words == 1)
 		return (one_word_lexer(info_list, splitted_line));
 	if (ammount_words == 2)
 		return (two_word_lexer(info_list, splitted_line));
-	if (check_for_envvar(splitted_line, enum_array) == 1)
-	{
-		splitted_line = edit_arr_env(splitted_line, enum_array);
-		free(enum_array);
-		index = get_max_array(splitted_line);
-		enum_array = ft_calloc(index + 1, sizeof(int));
-		if (!enum_array)
-			return (NULL);
-		enum_array = into_enum_array(splitted_line, enum_array, 0);
-	}
+	// if (check_for_envvar(splitted_line, enum_array) == 1)
+	// {
+	// 	printf("%p\n", splitted_line);
+	// 	splitted_line = edit_arr_env(splitted_line, enum_array);
+	// 	printf("%p\n", splitted_line);
+	// 	free(enum_array);
+	// 	index = get_max_array(splitted_line);
+	// 	enum_array = ft_calloc(index + 1, sizeof(int));
+	// 	if (!enum_array)
+	// 		return (NULL);
+	// 	enum_array = into_enum_array(splitted_line, enum_array, 0);
+	// 	index = 0;
+	// 	while (splitted_line[index])
+	// 	{
+	// 		printf("%s\n", splitted_line[index]);
+	// 		index++;
+	// 	}
+	// }
 	if (ammount_words > 2)
 		info_list = organizing_data(info_list, splitted_line, enum_array, 0);
 	return (info_list);
@@ -85,7 +91,7 @@ t_lexer	*parsing_array(t_lexer *info_list, \
 
 t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array)
 {
-	enum_array = into_enum_array(splitted_line, enum_array, 0);
+	enum_array = into_enum_array(splitted_line, enum_array, 0);         
 	if (check_var_expander(splitted_line) == 1)
 		splitted_line = replace_var_expander(splitted_line);
 	if (!splitted_line)
