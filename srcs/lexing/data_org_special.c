@@ -63,7 +63,7 @@ t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, \
 }
 
 t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, \
-	int *enum_array, int index)
+	int index)
 {
 	info_list->input = NONE;
 	info_list->output = NONE;
@@ -103,7 +103,7 @@ t_lexer	*which_special_case(t_lexer *info_list, char **splitted_line, \
 	}
 	if (ft_strncmp(splitted_line[0], "rm", ft_strlen(splitted_line[0])) == 0)
 	{
-		info_list = special_case_rm(info_list, splitted_line, enum_array, 0);
+		info_list = special_case_rm(info_list, splitted_line, 0);
 		free_double_array(splitted_line);
 		free(enum_array);
 		return (info_list);

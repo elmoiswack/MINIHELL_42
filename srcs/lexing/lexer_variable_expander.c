@@ -3,76 +3,65 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	check_var_expander(char **splitted_line)
+char	**one_case(char **double_array, int index)
 {
-	int	index;
-
-	index = 0;
-	while (splitted_line[index])
-	{
-		if (splitted_line[index][0] == '$' \
-			&& ft_isalpha(splitted_line[index][1]) == 1)
-			return (1);
-		index++;
-	}
-	return (-1);
-}
-
-char	*remove_dollar(char **splitted_line, int index)
-{
-	int		index_te;
-	int		index_sp;
-	char	*temp;
-
-	index_te = 0;
-	index_sp = 1;
-	temp = ft_calloc(ft_strlen(splitted_line[index]), sizeof(char));
-	if (!temp)
-		return (NULL);
-	while (splitted_line[index][index_sp])
-	{
-		temp[index_te] = splitted_line[index][index_sp];
-		index_te++;
-		index_sp++;
-	}
-	return (temp);
-}
-
-int	get_index_var(char **splitted_line)
-{
-	int	index;
-
-	index = 0;
-	while (splitted_line[index])
-	{
-		if (splitted_line[index][0] == '$' \
-			&& ft_isalpha(splitted_line[index][1]) == 1)
-			break ;
-		index++;
-	}
-	return (index);	
-}
-
-char	**replace_var_expander(char **splitted_line)
-{
-	int		index;
 	char	*temp;
 	char	*env_temp;
 
-	index = get_index_var(splitted_line);
-	temp = remove_dollar(splitted_line, index);
+	temp = remove_dollar(double_array, index);
 	env_temp = getenv(temp);
+	free(temp);
 	if (!env_temp)
 	{
-		free_double_array(splitted_line);
+		free_double_array(double_array);
 		return (NULL);
 	}
-	free(temp);
 	temp = ft_calloc(ft_strlen(env_temp) + 1, sizeof(char));
 	if (!temp)
 		return (NULL);
 	ft_strcpy(temp, env_temp);
-	free(splitted_line[index]);
-	splitted_line[index] = temp;
+	free(double_array[index]);
+	double_array[index] = temp;
+	return (double_array);
+}
+
+char	**which_case_env(char **splitted_line, int index)
+{
+	if (splitted_line[index][0] == '"')
+		splitted_line[index] = remove_quotes_env(splitted_line, index);
+	if (!splitted_line[index])
+		return (NULL);
+	if (check_multiple_env(splitted_line, index) == 1)
+		return (one_line_multenv(splitted_line, index));
+	return (one_case(splitted_line, index));
+}
+
+char	**replace_var_expander(char **splitted_line)
+{
+	int	index;
+	int	index_x;
+
+	index = 0;
+	while (splitted_line[index])
+	{
+		index_x = 0;
+		while (splitted_line[index][index_x])
+		{
+			if (splitted_line[index][0] == 39)
+			{
+				splitted_line[index] = remove_quotes_env(splitted_line, index);
+				break ;
+			}
+			if (splitted_line[index][index_x] == '$')
+			{
+				splitted_line = which_case_env(splitted_line, index);
+				break ;
+			}
+			if (!splitted_line)
+				return (NULL);
+			index_x++;
+		}
+		index++;
+	}
 	return (splitted_line);
 }

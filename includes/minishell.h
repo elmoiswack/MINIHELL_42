@@ -110,7 +110,7 @@ t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var);
 int		check_special_cases(char **splitted_line);
 t_lexer *which_special_case(t_lexer *info_list, char **splitted_line, int *enum_array);
 t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
-t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
+t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, int index);
 
 		//parsing_grep.c
 int		check_for_grep(t_lexer *info_list);
@@ -122,15 +122,21 @@ int		check_for_cat(t_lexer *info_list);
 t_lexer *cat_parser(t_lexer *info_list, char **splitted_line);
 t_lexer *check_content(t_lexer *info_list, char **splitted_line, int index);
 
-		//lexer_data_envvar.c
-char	**edit_arr_env(char **splitted_line, int *enum_array);
-char	**new_2d_array(char **splitted_line);
-char	*trim_envvar(char *line);
-int		check_for_envvar(char **splitted_line, int *enum_array);
-
 //		lexer_variable_expander.c
+char	**replace_var_expander(char **splitted_line);
+char	**which_case_env(char **splitted_line, int index);
+char	**one_case(char **splitted_line, int index);
+
+//		lexer_varexp_mult.c
+char	**one_line_multenv(char **splitted_line, int index);
+char	**fill_2d_array_env(char **splitted_line, int index, char **temp);
+
+//		lexer_varexp_utils.c
 int		check_var_expander(char **splitted_line);
-char **replace_var_expander(char **splitted_line);
+char	*remove_dollar(char **splitted_line, int index);
+int		check_multiple_env(char **splitted_line, int index);
+char	*remove_quotes_env(char **splitted_line, int index);
+int		how_many_env(char **splitted_line, int index);
 
 //###############################################################
 //		ERROR AND FREE FUNCTIONS

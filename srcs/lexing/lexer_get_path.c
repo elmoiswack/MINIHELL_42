@@ -15,7 +15,7 @@ char	**put_slash_behind(char **paths)
 		temp = ft_calloc(ft_strlen(paths[index]) + 1, sizeof(char));
 		if (!temp)
 			return (NULL);
-		ft_strlcpy(temp, paths[index], ft_strlen(paths[index]) + 1);
+		ft_strcpy(temp, paths[index]);
 		free(paths[index]);
 		paths[index] = ft_strjoin(temp, "/");
 		free(temp);
