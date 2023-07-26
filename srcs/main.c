@@ -63,6 +63,7 @@ void	display_prompt(t_minishell *shell)
 
 	terminate = 0;
 	init_ascii_art();
+	remove_ctl_echo();
 	while (!terminate)
 	{
 		if (shell->status == 0)	

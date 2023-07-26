@@ -2,6 +2,8 @@
 #include "../../libft/libft.h"
 #include <stdlib.h>
 #include <fcntl.h>
+#include <termios.h>
+#include <unistd.h>
 
 void	init_ascii_art()
 {
@@ -21,4 +23,12 @@ void	init_ascii_art()
 		free(sc_line);
 		sc_line = get_next_line(sc_fd);
 	}
+}
+
+void	remove_ctl_echo()
+{
+	struct termios term_attr;
+	tcgetattr(STDIN_FILENO, &term_attr);
+	term_attr.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term_attr);
 }

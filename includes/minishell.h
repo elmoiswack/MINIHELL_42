@@ -153,6 +153,7 @@ char	*get_path(char *cmd);
 int		arg_is_env(char *raw_input, char **value, char *envp[]);
 int		check_access(char *cmd);
 int		var_exists(char	**env, char *var, int var_len);
+char	*ft_getenv(char *var_name, char **env);
 
 //		utilities_double_arrays.c
 char	**copy_double_array(char **array);
@@ -172,6 +173,7 @@ void	execute_unset(t_minishell *shell);
 
 //		interface_frontend.c
 void	init_ascii_art(void);
+void	remove_ctl_echo();
 
 //		execution_builtin.c
 int		execute_builtin(t_minishell *shell);
