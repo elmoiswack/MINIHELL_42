@@ -16,6 +16,8 @@ SRCS		:= 	main.c \
 				lexing/parsing_grep.c \
 				lexing/parser_cat.c \
 				lexing/lexer_variable_expander.c \
+				lexing/lexer_varexp_utils.c \
+				lexing/lexer_varexp_mult.c \
 				error/error.c \
 				execution/execution_processes.c \
 				execution/execution_utilities.c \

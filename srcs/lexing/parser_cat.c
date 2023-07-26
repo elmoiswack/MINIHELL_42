@@ -51,7 +51,6 @@ t_lexer	*cat_parser(t_lexer *info_list, char **splitted_line)
 	if (splitted_line[index + 1] != NULL && \
 		is_metacharachter(splitted_line[index + 1][0]) != 1)
 	{
-		printf("dhsakdhjksaadks\n\n\n");
 		info_list = check_content(info_list, splitted_line, index + 1);
 		if (!info_list)
 			return (NULL);
