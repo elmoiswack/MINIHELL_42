@@ -28,6 +28,7 @@ void	init_ascii_art()
 void	remove_ctl_echo()
 {
 	struct termios term_attr;
+
 	tcgetattr(STDIN_FILENO, &term_attr);
 	term_attr.c_lflag &= ~ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSANOW, &term_attr);
