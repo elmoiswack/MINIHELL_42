@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <signal.h>
 
+int g_exit_status;
 //Global array - used to print out the enum strings. Must be deleted before handing in the project.
 static const char *g_enum[] = {
 [PIPE_READ] = "PIPE_READ", //0
