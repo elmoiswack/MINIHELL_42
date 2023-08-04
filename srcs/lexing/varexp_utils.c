@@ -6,19 +6,18 @@
 int	check_var_expander(char **splitted_line)
 {
 	int	index;
+	int	index_x;
 
 	index = 0;
 	while (splitted_line[index])
 	{
-		if (splitted_line[index][0] == '$' \
-			&& ft_isalpha(splitted_line[index][1]) == 1)
-			return (1);
-		if (splitted_line[index][0] == '"' && splitted_line[index][1] == '$' \
-			&& ft_isalpha(splitted_line[index][2]) == 1)
-			return (1);
-		if (splitted_line[index][0] == 39 && splitted_line[index][1] == '$' \
-			&& ft_isalpha(splitted_line[index][2]) == 1)
-			return (1);
+		index_x = 0;
+		while (splitted_line[index][index_x])
+		{
+			if (splitted_line[index][index_x] == '$')
+				return (1);
+			index_x++;
+		}
 		index++;
 	}
 	return (-1);
@@ -31,14 +30,17 @@ char	*remove_dollar(char **splitted_line, int index)
 	char	*temp;
 
 	index_te = 0;
-	index_sp = 1;
-	temp = ft_calloc(ft_strlen(splitted_line[index]), sizeof(char));
+	index_sp = 0;
+	temp = ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
 	if (!temp)
 		return (NULL);
 	while (splitted_line[index][index_sp])
 	{
-		temp[index_te] = splitted_line[index][index_sp];
-		index_te++;
+		if (splitted_line[index][index_sp] != '$')
+		{
+			temp[index_te] = splitted_line[index][index_sp];
+			index_te++;
+		}
 		index_sp++;
 	}
 	return (temp);
@@ -62,7 +64,7 @@ int	check_multiple_env(char **splitted_line, int index)
 	return (-1);
 }
 
-char	*remove_quotes_env(char **splitted_line, int index)
+char	*remove_quotes_string(char **splitted_line, int index)
 {
 	char	*temp;
 	int		index_tp;

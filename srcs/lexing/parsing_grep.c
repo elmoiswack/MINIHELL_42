@@ -94,18 +94,18 @@ t_lexer	*grep_parser(t_lexer *info_list, char **splitted_line)
 			break ;
 		info_list = info_list->next;
 	}
+	if (!info_list->content[1])
+	{
+		info_list = add_flag_grep(info_list, splitted_line);
+		if (!info_list)
+			return (NULL);
+	}
 	if (info_list->content[1] && info_list->content[1][0] == 39)
 	{
 		info_list = rm_quotes_grep(info_list);
 		if (!info_list)
 			return (NULL);
 		return (head);
-	}
-	if (!info_list->content[1])
-	{
-		info_list = add_flag_grep(info_list, splitted_line);
-		if (!info_list)
-			return (NULL);
 	}
 	return (head);
 }

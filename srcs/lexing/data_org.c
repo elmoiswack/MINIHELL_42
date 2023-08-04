@@ -27,8 +27,7 @@ t_lexer	*data_org_pipe(t_lexer *info_list)
 	info_list->output = PIPE_WRITE;
 	info_list = create_new_node(info_list);
 	info_list->input = PIPE_READ;
-	if (info_list->input != OUTFILE)
-		info_list->output = STDOUT_OUT;
+	info_list->output = STDOUT_OUT;
 	return (info_list);
 }
 

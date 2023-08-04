@@ -59,12 +59,10 @@ int	check_for_quotes(char *line)
 	{
 		if (line[index] == '"')
 		{
-			if (line[index - 1] == ' ')
 				return (1);
 		}
 		if (line[index] == 39)
 		{
-			if (line[index - 1] == ' ')
 				return (1);
 		}
 		index++;

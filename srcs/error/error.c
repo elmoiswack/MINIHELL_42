@@ -21,4 +21,9 @@ void	error_unset_too_few_args()
 {
 	ft_putstr_fd("unset: not enough arguments\n", STDERR_FILENO);
 }
-//kdasdas
+
+void	error_lexing(t_lexer *list)
+{
+	
+	free_lexing_struct(list);
+}

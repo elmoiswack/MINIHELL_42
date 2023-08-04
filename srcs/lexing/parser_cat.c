@@ -34,8 +34,8 @@ t_lexer	*cat_parser(t_lexer *info_list, char **splitted_line)
 
 	head = info_list;
 	index = 0;
-	if (!splitted_line)
-		return (head);
+	// if (!splitted_line) why is this here
+	// 	return (head);
 	while (info_list)
 	{
 		if (ft_strncmp(info_list->content[0], "cat", ft_strlen("cat")) == 0)

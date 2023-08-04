@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//IN ASCII THE NUMBER 39 MEANS '
-
 int	which_enum(char **splitted_line, int index)
 {
 	if (splitted_line[index][0] == '<' && splitted_line[index][1] != '<')
@@ -21,7 +19,7 @@ int	which_enum(char **splitted_line, int index)
 		return (ENV_VAR);
 	if (splitted_line[index][0] == '-' && ft_isalpha(splitted_line[index][1]))
 		return (FLAG);
-	if (splitted_line[index][0] == 39 && ft_isalpha(splitted_line[index][1]))
+	if (splitted_line[index][0] == '\'' && ft_isalpha(splitted_line[index][1]))
 		return (FLAG);
 	return (COMMAND);
 }
@@ -34,18 +32,12 @@ int	*into_enum_array(char **splitted_line, int *enum_array, int index)
 		if (enum_array[index] == REDIRECT_IN)
 		{
 			index++;
-			if (splitted_line[index][0] == '$')
-				enum_array[index] = ENV_VAR;
-			else
-				enum_array[index] = INFILE;
+			enum_array[index] = INFILE;
 		}
 		else if (enum_array[index] == REDIRECT_OUT)
 		{
 			index++;
-			if (splitted_line[index][0] == '$')
-				enum_array[index] = ENV_VAR;
-			else
-				enum_array[index] = OUTFILE;
+			enum_array[index] = OUTFILE;
 		}
 		index++;
 	}
@@ -72,6 +64,7 @@ t_lexer	*parsing_array(t_lexer *info_list, \
 
 t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array)
 {
+	info_list->check_free = -1;
 	enum_array = into_enum_array(splitted_line, enum_array, 0);         
 	if (check_var_expander(splitted_line) == 1)
 		splitted_line = replace_var_expander(splitted_line);
@@ -100,8 +93,9 @@ t_lexer	*lexing(char *line)
 	info_list = ft_calloc(1, sizeof(t_lexer));
 	if (!info_list)
 		return (NULL);
-	info_list->check_free = -1;
 	line = put_spaces_in_line(line);
+	if (!line)
+		return (NULL);
 	if (check_for_quotes(line) == 1)
 		splitted_line = split_with_quotes(line);
 	else

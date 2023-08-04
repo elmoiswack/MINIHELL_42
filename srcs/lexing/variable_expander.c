@@ -25,14 +25,30 @@ char	**one_case(char **double_array, int index)
 	return (double_array);
 }
 
+int	are_there_spaces(char **splitted_line, int index)
+{
+	int	index_x;
+
+	index_x = 0;
+	while (splitted_line[index][index_x])
+	{
+		if (splitted_line[index][index_x] == ' ')
+			return (1);
+		index_x++;
+	}
+	return (-1);
+}
+
 char	**which_case_env(char **splitted_line, int index)
 {
 	if (splitted_line[index][0] == '"')
-		splitted_line[index] = remove_quotes_env(splitted_line, index);
+		splitted_line[index] = remove_quotes_string(splitted_line, index);
 	if (!splitted_line[index])
 		return (NULL);
-	if (check_multiple_env(splitted_line, index) == 1)
+	if (check_multiple_env(splitted_line, index) == 1 && are_there_spaces(splitted_line, index) != 1)
 		return (one_line_multenv(splitted_line, index));
+	if (check_multiple_env(splitted_line, index) == 1 || check_env_in_string(splitted_line, index) == 1)
+		return (mult_line_multenv(splitted_line, index));
 	return (one_case(splitted_line, index));
 }
 
@@ -49,7 +65,7 @@ char	**replace_var_expander(char **splitted_line)
 		{
 			if (splitted_line[index][0] == 39)
 			{
-				splitted_line[index] = remove_quotes_env(splitted_line, index);
+				splitted_line[index] = remove_quotes_string(splitted_line, index);
 				break ;
 			}
 			if (splitted_line[index][index_x] == '$')
@@ -57,10 +73,10 @@ char	**replace_var_expander(char **splitted_line)
 				splitted_line = which_case_env(splitted_line, index);
 				break ;
 			}
-			if (!splitted_line)
-				return (NULL);
 			index_x++;
 		}
+		if (!splitted_line)
+			return (NULL);
 		index++;
 	}
 	return (splitted_line);

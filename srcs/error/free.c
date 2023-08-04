@@ -1,0 +1,41 @@
+#include "../../includes/minishell.h"
+#include "../../libft/libft.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+void	free_double_array(char **array)
+{
+	int i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
+
+void	free_lexing_struct(t_lexer *list)
+{
+	t_lexer	*head;
+
+	head = list;
+	while (list)
+	{
+		if (list->content)
+			free_double_array(list->content);
+		if (list->path)
+			free(list->path);
+		if (list->file)
+			free(list->file);
+		if (list->delim)
+			free(list->delim);
+		list = list->next;
+	}
+	while (head)
+	{
+		free(head);
+		head = head->next;
+	}
+}
