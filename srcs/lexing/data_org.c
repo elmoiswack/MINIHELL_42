@@ -89,7 +89,7 @@ t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, \
 				info_list->file = ft_calloc(ft_strlen(splitted_line[index]) + 1, \
 					sizeof(char));
 				if (!info_list->file)
-					return (NULL);
+					return (set_error_lex(info_list, 3, "data_org.c/L89"), NULL);
 				ft_strcpy(info_list->file, splitted_line[index]);
 				info_list->output = APPEND;
 			}

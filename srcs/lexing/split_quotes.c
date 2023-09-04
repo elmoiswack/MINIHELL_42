@@ -12,6 +12,8 @@ char	*remove_spaces_quotes_line(char *line)
 	index_n = 0;
 	index_l = 0;
 	new_line = ft_calloc(ft_strlen(line), sizeof(char));
+	if (!new_line)
+		return (NULL);
 	while (line[index_l])
 	{
 		new_line[index_n] = line[index_l];
@@ -33,7 +35,7 @@ char	*remove_spaces_quotes_line(char *line)
 		index_n++;
 		index_l++;
 	}
-	free(line);
+	//free(line);
 	return (new_line);
 }
 
@@ -51,10 +53,16 @@ char	**store_all_quote_data(char *line, char **temp)
 		{
 			index_end = get_end_quote(line, index_l);
 			if (index_end == -1)
+			{
+				free_double_array(temp);
 				return (NULL);
+			}
 			temp[index_temp] = my_random_strcpy(line, index_l, index_end); //I NEED A BETTER NAME FOR THE STRCPY FUNCT
 			if (!temp[index_temp])
+			{
+				free_double_array(temp);
 				return (NULL);
+			}
 			index_l = index_end;
 			index_temp++;
 		}
@@ -85,27 +93,25 @@ char	**replace_quotes_array(char **split_array, char	**temp_quotes)
 	return (split_array);
 }
 
-char	**split_with_quotes(char *line)
+char	**split_with_quotes(char *line, t_lexer *info_list)
 {
 	char	**split_array;
 	char	**temp_quotes;
 	int		ammount_quotes;
 
 	ammount_quotes = how_many_quotes(line);
-	if (ammount_quotes == -1)
-		return (NULL);
 	temp_quotes = ft_calloc(ammount_quotes + 1, sizeof(char *));
 	if (!temp_quotes)
-		return (NULL);
+		return (set_error_lex(info_list, 3, "split_quotes.c/L97"), NULL);
 	temp_quotes = store_all_quote_data(line, temp_quotes);
 	if (!temp_quotes)
-		return (NULL);
+		return (set_error_lex(info_list, 2, "split_quotes.c/L54"), NULL);
 	line = remove_spaces_quotes_line(line);
 	if (!line)
-		return (NULL);
+		return (set_error_lex(info_list, 3, "split_quotes.c/L14"), NULL);
 	split_array = ft_split(line, ' ');
 	if (!split_array)
-		return (NULL);
+		return (set_error_lex(info_list, 3, "split_quotes.c/L104"), NULL);
 	split_array = replace_quotes_array(split_array, temp_quotes);
 	return (split_array);
 }

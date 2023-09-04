@@ -22,8 +22,22 @@ void	error_unset_too_few_args()
 	ft_putstr_fd("unset: not enough arguments\n", STDERR_FILENO);
 }
 
-void	error_lexing(t_lexer *list)
+void	error_lexing_message(t_lexer *list)
 {
-	
-	free_lexing_struct(list);
+	if (list->error_code == 1)
+		printf("%s\n", list->error_str);
+	if (list->error_code == 2)
+		printf("Syntax error at %s\n", list->error_str);
+	if (list->error_code == 3)
+		printf("Allocation error at %s\n", list->error_str);
+}
+
+void	set_error_lex(t_lexer *info_list, int error_code, const char *str)
+{
+	free_lexing_content_struct(info_list);
+	info_list->error_code = error_code;
+	info_list->error_str = str;
+	error_lexing_message(info_list);
+	free_lexing_content_struct(info_list);
+	free_lexing_struct(info_list);
 }

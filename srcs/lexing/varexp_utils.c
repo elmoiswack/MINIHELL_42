@@ -3,26 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	check_var_expander(char **splitted_line)
-{
-	int	index;
-	int	index_x;
-
-	index = 0;
-	while (splitted_line[index])
-	{
-		index_x = 0;
-		while (splitted_line[index][index_x])
-		{
-			if (splitted_line[index][index_x] == '$')
-				return (1);
-			index_x++;
-		}
-		index++;
-	}
-	return (-1);
-}
-
 char	*remove_dollar(char **splitted_line, int index)
 {
 	int		index_te;
@@ -44,24 +24,6 @@ char	*remove_dollar(char **splitted_line, int index)
 		index_sp++;
 	}
 	return (temp);
-}
-
-int	check_multiple_env(char **splitted_line, int index)
-{
-	int	index_x;
-	int	count;
-
-	count = 1;
-	index_x = 0;
-	while (splitted_line[index][index_x])
-	{
-		if (splitted_line[index][index_x] == '$')
-			count--;
-		if (count < 0)
-			return (1);
-		index_x++;
-	}
-	return (-1);
 }
 
 char	*remove_quotes_string(char **splitted_line, int index)
@@ -86,20 +48,4 @@ char	*remove_quotes_string(char **splitted_line, int index)
 	}
 	free(splitted_line[index]);
 	return (temp);
-}
-
-int	how_many_env(char **splitted_line, int index)
-{
-	int	index_x;
-	int	count;
-
-	count = 0;
-	index_x = 0;
-	while(splitted_line[index][index_x])
-	{
-		if (splitted_line[index][index_x] == '$')
-			count++;
-		index_x++;
-	}
-	return (count);
 }

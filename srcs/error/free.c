@@ -18,9 +18,18 @@ void	free_double_array(char **array)
 
 void	free_lexing_struct(t_lexer *list)
 {
-	t_lexer	*head;
+	t_lexer *temp;
 
-	head = list;
+	while (list)
+	{
+		temp = list;
+		list = list->next;
+		free(temp);
+	}
+}
+
+void	free_lexing_content_struct(t_lexer *list)
+{
 	while (list)
 	{
 		if (list->content)
@@ -32,10 +41,5 @@ void	free_lexing_struct(t_lexer *list)
 		if (list->delim)
 			free(list->delim);
 		list = list->next;
-	}
-	while (head)
-	{
-		free(head);
-		head = head->next;
 	}
 }

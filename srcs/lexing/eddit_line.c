@@ -44,7 +44,7 @@ char	*edit_line(char *old, char *new)
 	return (new);
 }
 
-char	*put_spaces_in_line(char *line)
+char	*put_spaces_in_line(char *line, t_lexer *info_list)
 {
 	int		index;
 	int		space_to_add;
@@ -62,8 +62,8 @@ char	*put_spaces_in_line(char *line)
 		return (line);
 	temp = ft_calloc(index + space_to_add + 2, sizeof(char));
 	if (!temp)
-		return (NULL);
+		return (set_error_lex(info_list, 3, "dataorg_utis.c/L24"), NULL);
 	temp = edit_line(line, temp);
-	free(line);
+	//free(line);
 	return (temp);
 }

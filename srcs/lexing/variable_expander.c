@@ -25,20 +25,6 @@ char	**one_case(char **double_array, int index)
 	return (double_array);
 }
 
-int	are_there_spaces(char **splitted_line, int index)
-{
-	int	index_x;
-
-	index_x = 0;
-	while (splitted_line[index][index_x])
-	{
-		if (splitted_line[index][index_x] == ' ')
-			return (1);
-		index_x++;
-	}
-	return (-1);
-}
-
 char	**which_case_env(char **splitted_line, int index)
 {
 	if (splitted_line[index][0] == '"')
@@ -47,6 +33,7 @@ char	**which_case_env(char **splitted_line, int index)
 		return (NULL);
 	if (check_multiple_env(splitted_line, index) == 1 && are_there_spaces(splitted_line, index) != 1)
 		return (one_line_multenv(splitted_line, index));
+	printf("nani da qdsa\n\n");
 	if (check_multiple_env(splitted_line, index) == 1 || check_env_in_string(splitted_line, index) == 1)
 		return (mult_line_multenv(splitted_line, index));
 	return (one_case(splitted_line, index));

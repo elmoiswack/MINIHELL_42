@@ -46,8 +46,15 @@ typedef struct lexerinfo {
 	int					output;			//ENUM_IO:PIPE_WRITE/FILE/STDOUT/NONE
 	char				*delim;
 	int					check_free;
+	int					error_code;
+	const char			*error_str;
 	struct lexerinfo	*next;
 }	t_lexer;
+
+//ERROR CODES:
+//1 = 
+//2 = SYNTAX_ERROR
+//3 = MALLOC_ERROR
 
 //Main struct - contains all the meta data about minishell such as environmental variables, access to the t_lexer list, status, builtin token and more.
 typedef struct s_minishell {
@@ -65,6 +72,8 @@ typedef struct s_minishell {
 t_lexer	*lexing(char *line);
 t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array);
 t_lexer	*parsing_array(t_lexer *info_list, char **splitted_line, int *enum_array);
+
+		//enum_arrayfts.cw
 int		*into_enum_array(char **splitted_line, int *enum_array, int index);
 int		which_enum(char **splitted_line, int index);
 
@@ -76,12 +85,12 @@ int		get_max_array(char **array);
 int		check_for_quotes(char *line);
 
 		//eddit_line.c
-char	*put_spaces_in_line(char *line);
+char	*put_spaces_in_line(char *line, t_lexer *info_list);
 char	*edit_line(char *old, char *new);
 int		is_metacharachter(char c);
 
 		//split_quotes.c
-char	**split_with_quotes(char *line);
+char	**split_with_quotes(char *line, t_lexer *info_list);
 char	**replace_quotes_array(char **split_array, char	**temp_quotes);
 char	**store_all_quote_data(char *line, char **temp);
 char	*remove_spaces_quotes_line(char *line);
@@ -105,7 +114,7 @@ t_lexer	*data_org_delim(t_lexer *info_list, char **splitted_line, int *enum_arra
 		
 		//dataorg_utils.c
 t_lexer *create_new_node(t_lexer *info_lexer);
-char	**allocate_2d_arr(int size);
+char	**allocate_2d_arr(int size, t_lexer *info_list);
 int		check_for_flags(char **splitted_line, int *enum_arr, int index);
 int		check_for_outfile(char **splitted_line, int *enum_array, int index);
 
@@ -132,8 +141,6 @@ t_lexer *check_content(t_lexer *info_list, char **splitted_line, int index);
 		//parsing_echo.c
 t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, int index);
 t_lexer	*echo_with_meta(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
-t_lexer	*echo_unclosed_string(t_lexer *info_list, char **splitted_line, int index);
-int		check_for_closed_string(char **splitted_line);
 
 		//variable_expander.c
 char	**replace_var_expander(char **splitted_line);
@@ -144,13 +151,16 @@ char	**one_case(char **splitted_line, int index);
 char	**one_line_multenv(char **splitted_line, int index);
 char	**mult_line_multenv(char **splitted_line, int index);
 char	**fill_2d_array_env(char **splitted_line, int index, char **temp);
-int		check_env_in_string(char **splitted_line, int index);;
 
 		//varexp_utils.c
-int		check_var_expander(char **splitted_line);
 char	*remove_dollar(char **splitted_line, int index);
-int		check_multiple_env(char **splitted_line, int index);
 char	*remove_quotes_string(char **splitted_line, int index);
+
+		//varexp_checks.c
+int		check_env_in_string(char **splitted_line, int index);
+int		check_multiple_env(char **splitted_line, int index);
+int		check_var_expander(char **splitted_line);
+int	are_there_spaces(char **splitted_line, int index);
 int		how_many_env(char **splitted_line, int index);
 
 //###############################################################
@@ -161,8 +171,11 @@ int		how_many_env(char **splitted_line, int index);
 void	error_command_not_found(char *cmd);
 void	error_export_invalid_identifier(char *input);
 void	error_unset_too_few_args();
+void	error_lexing_message(t_lexer *list);
+void	set_error_lex(t_lexer *info_list, int error_code, const char *str);
 
 		//free.c
+void	free_lexing_content_struct(t_lexer *list);
 void	free_lexing_struct(t_lexer *list);
 
 //###############################################################

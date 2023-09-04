@@ -3,21 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	check_env_in_string(char **splitted_line, int index)
-{
-	int	index_x;
-
-	index_x = 0;
-	while (splitted_line[index][index_x])
-	{
-		if (splitted_line[index][index_x] == '$' \
-			&& ft_isalpha(splitted_line[index][index_x + 1]) == 1)
-			return (1);
-		index_x++;
-	}
-	return (-1);
-}
-
 char	**fill_2d_array_env(char **splitted_line, int index, char **temp)
 {
 	int	index_x;

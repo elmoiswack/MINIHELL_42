@@ -33,6 +33,8 @@ char	*find_path_loop(char **paths, char *command)
 
 	index = 0;
 	paths = put_slash_behind(paths);
+	if (!paths)
+		return (NULL);
 	while (paths[index])
 	{
 		temp = ft_strjoin(paths[index], command);
@@ -59,9 +61,9 @@ char	*get_path_of_command(char *command)
 	if (!paths)
 		return (NULL);
 	command_path = find_path_loop(paths, command);
+	free_double_array(paths);
 	if (!command_path)
 		return (NULL);
-	free_double_array(paths);
 	return (command_path);
 }
 //kdasdas

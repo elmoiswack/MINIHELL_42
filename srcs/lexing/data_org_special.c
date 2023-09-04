@@ -11,10 +11,10 @@ t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, \
 	index = get_max_array(splitted_line);
 	info_list->content = ft_calloc(index + 1, sizeof(char *));
 	if (!info_list->content)
-		return (NULL);
+		return (set_error_lex(info_list, 3, "data_org_special.c/L12"), NULL);
 	info_list->content[0] = ft_calloc(ft_strlen(splitted_line[0] + 1), sizeof(char));
 	if (!info_list->content[0])
-		return (NULL);
+		return (set_error_lex(info_list, 3, "data_org_special.c/L15"), NULL);
 	ft_strcpy(info_list->content[0], splitted_line[0]);
 	info_list->path = get_path_of_command(splitted_line[0]);
 	index = 1;
@@ -23,7 +23,7 @@ t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, \
 		info_list->content[index] = \
 			ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
 		if (!info_list->content[index])
-			return (NULL);
+			return (set_error_lex(info_list, 3, "data_org_special.c/L24"), NULL);
 		ft_strcpy(info_list->content[index], splitted_line[index]);
 		index++;
 	}
