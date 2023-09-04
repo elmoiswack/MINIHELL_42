@@ -27,8 +27,7 @@ t_lexer	*data_org_pipe(t_lexer *info_list)
 	info_list->output = PIPE_WRITE;
 	info_list = create_new_node(info_list);
 	info_list->input = PIPE_READ;
-	if (info_list->input != OUTFILE)
-		info_list->output = STDOUT_OUT;
+	info_list->output = STDOUT_OUT;
 	return (info_list);
 }
 
@@ -90,7 +89,7 @@ t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, \
 				info_list->file = ft_calloc(ft_strlen(splitted_line[index]) + 1, \
 					sizeof(char));
 				if (!info_list->file)
-					return (NULL);
+					return (set_error_lex(info_list, 3, "data_org.c/L89"), NULL);
 				ft_strcpy(info_list->file, splitted_line[index]);
 				info_list->output = APPEND;
 			}

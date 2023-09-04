@@ -21,7 +21,7 @@ t_lexer	*check_content(t_lexer *info_list, char **splitted_line, int index)
 		info_list->content[1] = ft_calloc(ft_strlen(splitted_line[index]) + 1, \
 			sizeof(char));
 		if (!info_list->content[1])
-			return (NULL);
+			return (set_error_lex(info_list, 3, "parses_cat.c/L21"), NULL);
 		ft_strcpy(info_list->content[1], splitted_line[index]);
 	}
 	return (info_list);
@@ -34,8 +34,6 @@ t_lexer	*cat_parser(t_lexer *info_list, char **splitted_line)
 
 	head = info_list;
 	index = 0;
-	if (!splitted_line)
-		return (head);
 	while (info_list)
 	{
 		if (ft_strncmp(info_list->content[0], "cat", ft_strlen("cat")) == 0)

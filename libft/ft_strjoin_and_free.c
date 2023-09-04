@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_and_free.c                             :+:    :+:             */
+/*   ft_strjoin_and_free.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvan-wij <fvan-wij@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:28:28 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/06/22 15:36:03 by flip          ########   odam.nl         */
+/*   Updated: 2023/08/04 14:19:19 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 char	*ft_strjoin_and_free(char *s1, char *s2)
 {
 	int		len;
 	char	*strjoin;
 
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
 	len = (ft_strlen(s1) + ft_strlen(s2)) + 1;
 	strjoin = malloc(len * sizeof(char));
 	if (!strjoin)

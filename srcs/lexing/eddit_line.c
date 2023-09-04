@@ -41,11 +41,10 @@ char	*edit_line(char *old, char *new)
 		index_n++;
 		index_o++;
 	}
-	new[index_n] = '\0';
 	return (new);
 }
 
-char	*put_spaces_in_line(char *line)
+char	*put_spaces_in_line(char *line, t_lexer *info_list)
 {
 	int		index;
 	int		space_to_add;
@@ -59,10 +58,12 @@ char	*put_spaces_in_line(char *line)
 			space_to_add += 2;
 		index++;
 	}
-	temp = ft_calloc(index + space_to_add + 1, sizeof(char));
+	if (space_to_add == 0)
+		return (line);
+	temp = ft_calloc(index + space_to_add + 2, sizeof(char));
 	if (!temp)
-		return (NULL);
+		return (set_error_lex(info_list, 3, "dataorg_utis.c/L24"), NULL);
 	temp = edit_line(line, temp);
-	free(line);
+	//free(line);
 	return (temp);
 }
