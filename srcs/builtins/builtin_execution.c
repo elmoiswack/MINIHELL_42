@@ -4,7 +4,7 @@
 
 int	is_builtin(t_minishell *shell)
 {
-	if (ft_strncmp(shell->cmd_lst->content[0], "echo", 5) == 0 && shell->cmd_lst->next)
+	if (ft_strncmp(shell->cmd_lst->content[0], "echo", 5) == 0 && shell->cmd_lst->output == STDOUT_OUT)
 		return (shell->builtin = ECHO, 1);
 	else if (ft_strncmp(shell->cmd_lst->content[0], "cd", 3) == 0)
 		return (shell->builtin = CD, 1);
@@ -25,11 +25,11 @@ int	is_builtin(t_minishell *shell)
 int	execute_builtin(t_minishell *shell)
 {
 	if (shell->builtin == ECHO)
-		return(execute_echo(shell->cmd_lst->content, &shell->status, shell->env_cpy), 0);
+		return(execute_echo(shell->cmd_lst->content, shell->env_cpy), 0);
 	else if (shell->builtin == CD)
 		return (execute_cd(shell), 0);
 	else if (shell->builtin == PWD)
-		return (execute_pwd(&shell->status), 0);
+		return (execute_pwd(), 0);
 	else if (shell->builtin == ENV)
 		return (execute_env(shell->env_cpy), 0);
 	else if (shell->builtin == EXPORT)
@@ -38,5 +38,5 @@ int	execute_builtin(t_minishell *shell)
 		return (execute_unset(shell), 0);
 	else if (shell->builtin == EXIT)
 		exit(0);
-	return (shell->status = 1, 1);
+	return (g_exit_status = 1, 1);
 }
