@@ -43,7 +43,10 @@ static void	route_input(int in, t_lexer *node)
 	if (node->input == INFILE)
 	{
 		if ((infile = open(node->file, O_RDONLY)) < 0)
+		{
 			perror("infile");
+			exit(1);
+		}
 		if (dup2(infile, STDIN_FILENO) < 0)
 			perror("dup2");
 		close(infile);
@@ -58,23 +61,6 @@ static void	route_input(int in, t_lexer *node)
 static void	route_output(int out, t_lexer *node)
 {
 	int outfile;
-	// int hd_fd;
-	// int bytes;
-	// char buf[256];
-	//
-	// bytes = 0;
-	// if (node->delim)
-	// {
-	// 	if ((hd_fd = open("./data/heredoc_tmp", O_RDONLY)) < 0)
-	// 		perror("heredoc route output");
-	// 	// if (dup2(out, STDOUT_FILENO) < 0)
-	// 	// 	perror("dup2");
-	// 	while ((bytes = read(hd_fd, buf, sizeof(buf))) != 0)
-	// 		write(out, &buf, bytes);
-	// 	close(hd_fd);
-	// 	// close(out);
-	// 	// return;
-	// }
 	if (node->output == OUTFILE)
 	{
 		if ((outfile = open(node->file, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
@@ -150,7 +136,10 @@ int	execute_cmds(t_lexer *head, char *envp[])
 			perror("pipe");
 		pid = fork();
 		if (pid == 0)
+		{
+			catch_signals_child();
 			run_child_process(prev_pipe, pipe_fd[PIPE_WRITE], current, envp);
+		}
 		close(pipe_fd[PIPE_WRITE]);
 		prev_pipe = pipe_fd[PIPE_READ];
 		current = current->next;

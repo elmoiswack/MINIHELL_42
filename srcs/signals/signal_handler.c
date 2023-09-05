@@ -7,30 +7,64 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-static void	handle_sigint(int signum)
+
+static void	handle_parent_signals(int signum)
 {	
 	if (signum == SIGINT)
 	{
 		write(STDOUT_FILENO, "\n", 1);
-		//rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
 }
 
-void	catch_signals(void)
+static void	handle_child_signals(int signum)
+{	
+	if (signum == SIGINT)
+	{
+		write(STDERR_FILENO, "YEET\n", 4);
+		g_exit_status = 130;
+		kill(getpid(), SIGINT);
+	}
+	else if (signum == SIGQUIT)
+	{
+		write(STDERR_FILENO, "YEET\n", 4);
+		g_exit_status = 131;
+		kill(getpid(), SIGQUIT);
+	}
+}
+
+void	catch_signals_parent(void)
 {
-	struct sigaction interrupt;
-	struct sigaction quit;
+	struct sigaction sigparent_int;
+	struct sigaction sigparent_quit;
 
-	interrupt.sa_handler = &handle_sigint;
-	interrupt.sa_flags = SA_RESTART;
+	sigparent_int.sa_handler = &handle_parent_signals;
+	sigparent_quit.sa_handler = SIG_IGN;
 
-	quit.sa_handler = SIG_IGN;
-	quit.sa_flags = SA_RESTART;
-
-	if (sigaction(SIGINT, &interrupt, NULL) == -1)
+	if (sigaction(SIGINT, &sigparent_int, NULL) == -1)
 		perror("SIGINT: ");
-	if (sigaction(SIGQUIT, &quit, NULL) == -1)
+	if (sigaction(SIGQUIT, &sigparent_quit, NULL) == -1)
 		perror("SIGQUIT: ");
+}
+
+// void	reset_signals(void)
+// {
+// 	struct sigaction sigparent_int;
+// 	struct sigaction sigparent_quit;
+//
+// 	sigparent_int.sa_handler = SIG_DFL;
+// 	sigparent_quit.sa_handler = SIG_DFL;
+// }
+
+void	catch_signals_child(void)
+{
+	struct sigaction sigchild;
+
+	sigchild.sa_handler = &handle_child_signals;
+	if (sigaction(SIGINT, &sigchild, NULL) == -1)
+		perror("SIGINT: ");
+	if (sigaction(SIGQUIT, &sigchild, NULL) == -1)
+		perror("SIGINT: ");
 }

@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <signal.h>
 
+int g_exit_status;
 //Global array - used to print out the enum strings. Must be deleted before handing in the project.
 static const char *g_enum[] = {
 [PIPE_READ] = "PIPE_READ", //0
@@ -66,7 +67,7 @@ void	display_prompt(t_minishell *shell)
 	remove_ctl_echo();
 	while (!terminate)
 	{
-		if (shell->status == 0)	
+		if (g_exit_status == 0)	
 			line = readline("\033[0;37m \033[1m MINIHELL_\033[0m> ");
 		else
 			line = readline("\033[0;31m \033[1m Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚_\033[0m> ");
@@ -89,7 +90,7 @@ void	display_prompt(t_minishell *shell)
 			if (!shell->cmd_lst->next && is_builtin(shell) != -1)
 				execute_builtin(shell);
 			else
-				shell->status = execute_cmds(shell->cmd_lst, shell->env_cpy);
+				g_exit_status = execute_cmds(shell->cmd_lst, shell->env_cpy);
 			free_ll(&shell->cmd_lst);
 		}
 		else
@@ -130,7 +131,7 @@ int	main(int argc, char *argv[], char *envp[])
 	
 	// atexit(f);
 	shell = init_minishell(argc, argv, envp);
-	catch_signals();
+	catch_signals_parent();
 	display_prompt(&shell);
 	free_double_array(shell.env_cpy);
 	return (0);

@@ -5,6 +5,10 @@
 //DATA_STRUCTURES
 //###############################################################
 
+//Global variable - is equal to the most recent exit status of the shell.
+
+extern int g_exit_status;
+
 //Token enumerator - defines the possible types of tokens;
 typedef enum e_token{
 	PIPE_READ, //0
@@ -201,9 +205,9 @@ char	**replace_str_in_array(char **src, char *str, int index);
 char	**remove_str_from_array(char **src, int index);
 
 //		execution_builtin_operations.c
-void	execute_echo(char **raw_input, int *exit_status, char *envp[]);
+void	execute_echo(char **raw_input, char *envp[]);
 void	execute_cd(t_minishell *shell);
-void	execute_pwd(int *exit_status);
+void	execute_pwd();
 void	execute_env(char *envp[]);
 void	execute_export(t_minishell *shell);
 void	execute_unset(t_minishell *shell);
@@ -222,7 +226,8 @@ void	clean_tmp_files(char *envp[]);
 
 
 //		signal_handling.c
-void	catch_signals(void);
+void	catch_signals_parent(void);
+void	catch_signals_child(void);
 
 //		memory_management.c		
 void	clean_up(t_minishell *shell);

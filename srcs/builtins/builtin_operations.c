@@ -46,15 +46,15 @@ static void	expand_and_print_input(char **input, char *envp[])
 	ft_printf("\n");
 }
 
-void	execute_echo(char **raw_input, int *exit_status, char *envp[])
+void	execute_echo(char **raw_input, char *envp[])
 {
 	if (!raw_input[1])
 		ft_printf("\n");
 	else if (ft_strncmp(raw_input[1], "$?", ft_strlen(raw_input[1])) == 0)
-		ft_printf("%d\n", *exit_status);
+		ft_printf("%d\n", g_exit_status);
 	else
 		expand_and_print_input(&raw_input[1], envp);
-	*exit_status = 0;
+	g_exit_status = 0;
 }
 
 void	update_pwd(t_minishell *shell)
@@ -104,6 +104,7 @@ void	update_old_pwd(t_minishell *shell)
 void	execute_cd(t_minishell *shell)
 {
 	int	arg_len;
+	char *value;
 
 	update_old_pwd(shell);	
 	if (shell->cmd_lst->content[1])
@@ -112,16 +113,25 @@ void	execute_cd(t_minishell *shell)
 		chdir(getenv("HOME"));
 	else if (ft_strncmp(shell->cmd_lst->content[1], "..", arg_len) == 0 || ft_strncmp(shell->cmd_lst->content[1], "../", arg_len) == 0)
 		chdir("../");
+	else if (ft_strncmp(shell->cmd_lst->content[1], "~", arg_len) == 0)
+	{
+		value = ft_getenv("HOME", shell->env_cpy);
+		if (chdir(value) == -1)
+		{
+			g_exit_status = 1;
+			return (perror("~"));
+		}
+	}
 	else if (chdir(shell->cmd_lst->content[1]) == -1)
 	{
-		shell->status = 1;
+		g_exit_status = 1;
 		return (perror("cd"));
 	}
 	update_pwd(shell);
-	shell->status = 0;
+	g_exit_status = 0;
 }
 		
-void	execute_pwd(int *exit_status)
+void	execute_pwd()
 {
 	char	cwd[256];
 	int	cd_len;
@@ -130,7 +140,7 @@ void	execute_pwd(int *exit_status)
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{
 		perror("getcwd()");
-		*exit_status = 1;
+		g_exit_status = 1;
 		return ;
 	}
 	else
@@ -141,7 +151,7 @@ void	execute_pwd(int *exit_status)
 		write(1, "\033[0;31m", 8);
 		write(1, ft_strrchr(cwd, '/'), ft_strlen(ft_strrchr(cwd, '/')));
 		write(1, "\033[0m\n", 6);
-		*exit_status = 0;
+		g_exit_status = 0;
 		return ;
 	}
 }
@@ -164,7 +174,7 @@ void	execute_export(t_minishell *shell)
 	replace_index = var_exists(shell->env_cpy, var, eq_index);
 	if (ft_strchr(shell->cmd_lst->content[1], '=') == NULL && ft_strisalpha(shell->cmd_lst->content[1]) == 0)
 	{
-		shell->status = -1;
+		g_exit_status = -1;
 		return (error_export_invalid_identifier(shell->cmd_lst->content[1]));
 	}
 	else if (replace_index >= 0)
@@ -180,7 +190,7 @@ void	execute_unset(t_minishell *shell)
 	var_index = 0;
 	if (shell->cmd_lst->content[1] == NULL)
 	{
-		shell->status = -1;
+		g_exit_status = -1;
 		return (error_unset_too_few_args());
 	}
 	var_index = var_exists(shell->env_cpy, shell->cmd_lst->content[1], ft_strlen(shell->cmd_lst->content[1]));
