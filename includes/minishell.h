@@ -7,7 +7,7 @@
 
 //Global variable - is equal to the most recent exit status of the shell.
 
-int g_exit_status;
+extern int g_exit_status;
 
 //Token enumerator - defines the possible types of tokens;
 typedef enum e_token{
