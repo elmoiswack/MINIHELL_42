@@ -48,7 +48,7 @@ t_lexer	*rm_quotes_grep(t_lexer *info_list)
 	}
 	temp = ft_calloc(ft_strlen(info_list->content[1]) + 1, sizeof(char));
 	if (!temp)
-		return (NULL);
+		return (set_error_lex(info_list, 3, "parsing_grep.c/L49"), NULL);
 	temp = rm_guotes_loop(info_list, temp);
 	free(info_list->content[1]);
 	info_list->content[1] = temp;
@@ -78,7 +78,7 @@ t_lexer	*add_flag_grep(t_lexer *info_list, char **splitted_line)
 	info_list->content[1] = ft_calloc(ft_strlen(splitted_line[index]) + 1, \
 		sizeof(char));
 	if (!info_list->content[1])
-		return (NULL);
+		return (set_error_lex(info_list, 3, "parsing_grep.c/L78"), NULL);
 	ft_strcpy(info_list->content[1], splitted_line[index]);
 	return (head);
 }
@@ -94,18 +94,18 @@ t_lexer	*grep_parser(t_lexer *info_list, char **splitted_line)
 			break ;
 		info_list = info_list->next;
 	}
+	if (!info_list->content[1])
+	{
+		info_list = add_flag_grep(info_list, splitted_line);
+		if (!info_list)
+			return (NULL);
+	}
 	if (info_list->content[1] && info_list->content[1][0] == 39)
 	{
 		info_list = rm_quotes_grep(info_list);
 		if (!info_list)
 			return (NULL);
 		return (head);
-	}
-	if (!info_list->content[1])
-	{
-		info_list = add_flag_grep(info_list, splitted_line);
-		if (!info_list)
-			return (NULL);
 	}
 	return (head);
 }

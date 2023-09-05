@@ -7,6 +7,8 @@ int	get_max_array(char **array)
 	int	index;
 
 	index = 0;
+	if (!array)
+		return (-1);
 	while (array[index])
 		index++;
 	return (index);
@@ -57,12 +59,10 @@ int	check_for_quotes(char *line)
 	{
 		if (line[index] == '"')
 		{
-			if (line[index - 1] == ' ')
 				return (1);
 		}
 		if (line[index] == 39)
 		{
-			if (line[index - 1] == ' ')
 				return (1);
 		}
 		index++;

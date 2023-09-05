@@ -6,18 +6,24 @@ SRCS		:= 	main.c \
 				memory_management.c \
 				lexing/lexer.c \
 				lexing/lexer_utils.c \
-				lexing/lexer_dataorg_utils.c \
-				lexing/lexer_get_path.c \
-				lexing/lexer_eddit_line.c \
-				lexing/lexer_split_quotes.c \
-				lexing/lexer_data_org.c \
+				lexing/enum_arrayfts.c \
+				lexing/get_path.c \
+				lexing/eddit_line.c \
+				lexing/split_quotes.c \
+				lexing/split_quotes_utils.c \
+				lexing/data_org.c \
+				lexing/dataorg_utils.c \
 				lexing/data_org_special.c \
-				lexing/lexer_data_envvar.c \
-				lexing/lexer_into_list.c \
+				lexing/into_list.c \
 				lexing/parsing_grep.c \
 				lexing/parser_cat.c \
-				lexing/lexer_variable_expander.c \
+				lexing/parsing_echo.c \
+				lexing/variable_expander.c \
+				lexing/varexp_utils.c \
+				lexing/varexp_mult.c \
+				lexing/varexp_checks.c \
 				error/error.c \
+				error/free.c \
 				execution/execution_processes.c \
 				execution/execution_utilities.c \
 				execution/execution_heredoc.c \

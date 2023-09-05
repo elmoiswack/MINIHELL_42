@@ -8,21 +8,22 @@ t_lexer	*create_new_node(t_lexer *info_lexer)
 {
 	info_lexer->next = ft_calloc(1, sizeof(t_lexer));
 	if (!info_lexer->next)
-		return (NULL);
+		return (set_error_lex(info_lexer, 3, "dataorg_utis.c/L9"), NULL);
 	info_lexer = info_lexer->next;
+	info_lexer->next = NULL;
 	return (info_lexer);
 }
 
-char	**allocate_2d_arr(int size)
+char	**allocate_2d_arr(int size, t_lexer *info_list)
 {
 	char	**arr;
 
 	arr = ft_calloc(4, sizeof(char *));
 	if (!arr)
-		return (NULL);
+		return (set_error_lex(info_list, 3, "dataorg_utis.c/L21"), NULL);
 	arr[0] = ft_calloc(size, sizeof(char));
 	if (!arr[0])
-		return (NULL);
+		return (set_error_lex(info_list, 3, "dataorg_utis.c/L24"), NULL);
 	arr[1] = NULL;
 	arr[2] = NULL;
 	arr[3] = NULL;
