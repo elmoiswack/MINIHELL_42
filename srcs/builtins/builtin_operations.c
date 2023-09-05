@@ -107,15 +107,36 @@ void	execute_cd(t_minishell *shell)
 	char *value;
 
 	update_old_pwd(shell);	
-	if (shell->cmd_lst->content[1])
-		arg_len = ft_strlen(shell->cmd_lst->content[1]);
 	if (!shell->cmd_lst->content[1])
+	{
 		chdir(getenv("HOME"));
-	else if (ft_strncmp(shell->cmd_lst->content[1], "..", arg_len) == 0 || ft_strncmp(shell->cmd_lst->content[1], "../", arg_len) == 0)
+		update_pwd(shell);
+		return ;
+	}
+	arg_len = ft_strlen(shell->cmd_lst->content[1]);
+	if (ft_strncmp(shell->cmd_lst->content[1], "..", arg_len) == 0 || ft_strncmp(shell->cmd_lst->content[1], "../", arg_len) == 0)
 		chdir("../");
+	else if (ft_strncmp(shell->cmd_lst->content[1], "-", arg_len) == 0)
+	{
+		value = getenv("OLDPWD");
+		if (chdir(value) == -1)
+		{
+			g_exit_status = 1;
+			return (perror("OLDPWD"));
+		}
+	}
 	else if (ft_strncmp(shell->cmd_lst->content[1], "~", arg_len) == 0)
 	{
-		value = ft_getenv("HOME", shell->env_cpy);
+		value = getenv("HOME");
+		if (chdir(value) == -1)
+		{
+			g_exit_status = 1;
+			return (perror("~"));
+		}
+	}
+	else if (shell->cmd_lst->content[1][0] == '~' && shell->cmd_lst->content[1][1] == '/')
+	{
+		value = ft_strjoin(getenv("HOME"), ft_strchr(shell->cmd_lst->content[1], '/'));
 		if (chdir(value) == -1)
 		{
 			g_exit_status = 1;
@@ -161,6 +182,21 @@ void	execute_env(char *envp[])
 	print_double_array(envp);
 }
 
+char	*expand_value(char *content, char *var, char *env_cpy[])
+{
+	int		eq_index;
+	char	*value;
+	char	*expand;
+
+	eq_index = ft_strchr_index(content, '=');
+	value = ft_substr(content, eq_index + 1, ft_strlen(content + eq_index));
+	if (var_exists(env_cpy, value, ft_strlen(value)) == -1)
+		return (content);
+	var = ft_substr(content, 0, eq_index + 1);
+	expand = ft_strjoin(var, ft_getenv(value, env_cpy));
+	return (expand);
+}
+
 void	execute_export(t_minishell *shell)
 {
 	char	*var;
@@ -172,6 +208,7 @@ void	execute_export(t_minishell *shell)
 	eq_index = ft_strchr_index(shell->cmd_lst->content[1], '=');
 	var = ft_substr(shell->cmd_lst->content[1], 0, eq_index);
 	replace_index = var_exists(shell->env_cpy, var, eq_index);
+	shell->cmd_lst->content[1] = expand_value(shell->cmd_lst->content[1], var, shell->env_cpy);
 	if (ft_strchr(shell->cmd_lst->content[1], '=') == NULL && ft_strisalpha(shell->cmd_lst->content[1]) == 0)
 	{
 		g_exit_status = -1;
