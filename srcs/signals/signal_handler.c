@@ -7,7 +7,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-
 static void	handle_parent_signals(int signum)
 {	
 	if (signum == SIGINT)
@@ -16,6 +15,7 @@ static void	handle_parent_signals(int signum)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
+		g_exit_status = 130;
 	}
 }
 
@@ -48,15 +48,6 @@ void	catch_signals_parent(void)
 	if (sigaction(SIGQUIT, &sigparent_quit, NULL) == -1)
 		perror("SIGQUIT: ");
 }
-
-// void	reset_signals(void)
-// {
-// 	struct sigaction sigparent_int;
-// 	struct sigaction sigparent_quit;
-//
-// 	sigparent_int.sa_handler = SIG_DFL;
-// 	sigparent_quit.sa_handler = SIG_DFL;
-// }
 
 void	catch_signals_child(void)
 {

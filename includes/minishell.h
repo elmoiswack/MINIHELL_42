@@ -221,9 +221,8 @@ int		execute_builtin(t_minishell *shell);
 int		is_builtin(t_minishell *data);
 
 //		execution_heredoc.c
-void	create_heredoc_tmp(char *delim);
+void	create_heredoc_tmp(char *delim, char *envp[]);
 void	clean_tmp_files(char *envp[]);
-
 
 //		signal_handling.c
 void	catch_signals_parent(void);

@@ -24,7 +24,57 @@ void	change_permission_heredoc_tmp()
 	}
 }
 
-void	create_heredoc_tmp(char *delim)
+//Create a function that scans through a line and expands environmental variables.
+// 1. Iterate through each letter of the string, find $VAR
+// 2. Save $VAR in temp;
+// 3. Check if $VAR exists, if exists, save string_before_$ and save string_after_$, else, return;
+// 4. If $VAR exists, strjoin string_before_$ + $VALUE and strjoin (string_before_$ + $VALUE) + string_after_$;
+
+char	*expand_heredoc_var(char *heredoc_line, int var_index, char *env_cpy[])
+{
+	char	*temp;
+	char	*string_before_var;
+	char	*string_after_var;
+	int		start;
+
+	start = var_index;
+	while (heredoc_line[var_index] && heredoc_line[var_index] != ' ')
+		var_index++;
+	temp = ft_substr(heredoc_line, start, var_index - start);
+	ft_printf("temp: %s.\n", temp);
+	if (!var_exists(env_cpy, temp, ft_strlen(temp)))
+		return (heredoc_line);
+	else 
+	{
+		string_before_var = ft_substr(heredoc_line, 0, start);
+		ft_printf("str before var: %s\n", string_before_var);
+		string_after_var = ft_substr(heredoc_line, var_index, ft_strlen(heredoc_line + var_index));
+		ft_printf("str after var: %s\n", string_after_var);
+		temp = ft_getenv(temp + 1, env_cpy);	
+		ft_printf("temp (getenv): %s\n", temp);
+		heredoc_line = ft_strjoin(string_before_var, temp);
+		heredoc_line = ft_strjoin(heredoc_line, string_after_var);
+		return (heredoc_line);
+	}
+}
+
+char	*expand_heredoc_line(char *heredoc_line, char *env_cpy[])
+{
+	int	 i;
+	
+	i = 0;
+	if (!heredoc_line)
+		return (heredoc_line);
+	while (heredoc_line[i])
+	{
+		if (heredoc_line[i] == '$' && heredoc_line[i + 1] != '\0' && ft_isalpha(heredoc_line[i + 1]) == 1)
+			heredoc_line = expand_heredoc_var(heredoc_line, i, env_cpy);
+		i++;
+	}
+	return (heredoc_line);
+}
+
+void	create_heredoc_tmp(char *delim, char *env_cpy[])
 {
 	char	*heredoc_line;
 	int		heredoc_tmp;
@@ -34,9 +84,10 @@ void	create_heredoc_tmp(char *delim)
 	if (heredoc_tmp < 0)
 		return (perror("heredoc_tmp"));
 	heredoc_line = readline("> ");
-	while (heredoc_line != NULL && !(ft_strncmp(heredoc_line, delim, ft_strlen(delim)) == 0))
+	while (heredoc_line != NULL && !(ft_strncmp(heredoc_line, delim, (ft_strlen(delim) + ft_strlen(heredoc_line))) == 0))
 	{
-		
+		// ft_printf("heredocline: %s\n", heredoc_line);
+		heredoc_line = expand_heredoc_line(heredoc_line, env_cpy);
 		write(heredoc_tmp, heredoc_line, ft_strlen(heredoc_line));
 		write(heredoc_tmp, "\n", 1);
 		if (heredoc_line)
