@@ -24,12 +24,6 @@ void	change_permission_heredoc_tmp()
 	}
 }
 
-//Create a function that scans through a line and expands environmental variables.
-// 1. Iterate through each letter of the string, find $VAR
-// 2. Save $VAR in temp;
-// 3. Check if $VAR exists, if exists, save string_before_$ and save string_after_$, else, return;
-// 4. If $VAR exists, strjoin string_before_$ + $VALUE and strjoin (string_before_$ + $VALUE) + string_after_$;
-
 char	*expand_heredoc_var(char *heredoc_line, int var_index, char *env_cpy[])
 {
 	char	*temp;
@@ -38,7 +32,8 @@ char	*expand_heredoc_var(char *heredoc_line, int var_index, char *env_cpy[])
 	int		start;
 
 	start = var_index;
-	while (heredoc_line[var_index] && heredoc_line[var_index] != ' ')
+	var_index++;
+	while (heredoc_line[var_index] && heredoc_line[var_index] != ' ' && heredoc_line[var_index] != '$')
 		var_index++;
 	temp = ft_substr(heredoc_line, start, var_index - start);
 	ft_printf("temp: %s.\n", temp);
@@ -86,7 +81,6 @@ void	create_heredoc_tmp(char *delim, char *env_cpy[])
 	heredoc_line = readline("> ");
 	while (heredoc_line != NULL && !(ft_strncmp(heredoc_line, delim, (ft_strlen(delim) + ft_strlen(heredoc_line))) == 0))
 	{
-		// ft_printf("heredocline: %s\n", heredoc_line);
 		heredoc_line = expand_heredoc_line(heredoc_line, env_cpy);
 		write(heredoc_tmp, heredoc_line, ft_strlen(heredoc_line));
 		write(heredoc_tmp, "\n", 1);

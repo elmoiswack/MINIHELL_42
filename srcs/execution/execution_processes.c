@@ -25,6 +25,7 @@ static const char *g_enum[] = {
 [APPEND] = "APPEND", //13
 [STDIN_IN] = "STDIN", //14
 [STDOUT_OUT] = "STDOUT", //15
+[HEREDOC] = "HEREDOC", //16
 };
 
 static void	route_input(int in, t_lexer *node)
@@ -132,7 +133,7 @@ int	execute_cmds(t_lexer *head, char *envp[])
 		int i = 0;
 		while (current->delim[i])
 		{
-			create_heredoc_tmp(current->delim[i]);
+			create_heredoc_tmp(current->delim[i], envp);
 			i++;
 		}
 	}
