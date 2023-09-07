@@ -37,7 +37,7 @@ char	**fill_2d_array_env(char **splitted_line, int index, char **temp)
 	return (temp);
 }
 
-char	**one_line_multenv(char **splitted_line, int index)
+char	**one_line_multenv(char **splitted_line, int index, char **env_cpy)
 {
 	char	**temp;
 	char	*temp_line;
@@ -55,7 +55,7 @@ char	**one_line_multenv(char **splitted_line, int index)
 		return (NULL);
 	while (temp[index_te])
 	{
-		temp = one_case(temp, index_te);
+		temp = one_case(temp, index_te, env_cpy);
 		if (!temp)
 			return (NULL);
 		temp_line = ft_strjoin_and_free(temp_line, temp[index_te]);
@@ -69,7 +69,7 @@ char	**one_line_multenv(char **splitted_line, int index)
 	return (splitted_line);
 }
 
-char	*fill_temp_line(char **splitted_line, int index, char **temp, char *temp_line)
+char	*fill_temp_line(char **splitted_line, int index, char **temp, char *temp_line, char **env_cpy)
 {
 	int	index_tmp;
 	int	len;
@@ -83,7 +83,7 @@ char	*fill_temp_line(char **splitted_line, int index, char **temp, char *temp_li
 			len++;
 		if (temp[index_tmp][0] == '$')
 		{
-			temp = one_case(temp, index_tmp);
+			temp = one_case(temp, index_tmp, env_cpy);
 			if (!temp)
 				return (NULL);
 		}
@@ -97,7 +97,7 @@ char	*fill_temp_line(char **splitted_line, int index, char **temp, char *temp_li
 	return (temp_line);
 }
 
-char	**mult_line_multenv(char **splitted_line, int index)
+char	**mult_line_multenv(char **splitted_line, int index, char **env_cpy)
 {
 	char	**temp;
 	int		index_tmp;
@@ -110,13 +110,13 @@ char	**mult_line_multenv(char **splitted_line, int index)
 	while (temp[index_tmp])
 	{
 		if (check_multiple_env(temp, index_tmp) == 1)
-			temp = one_line_multenv(temp, index_tmp);
+			temp = one_line_multenv(temp, index_tmp, env_cpy);
 		index_tmp++;
 	}
 	temp_line = ft_calloc(1, sizeof(char));
 	if (!temp_line)
 		return (NULL);
-	temp_line = fill_temp_line(splitted_line, index, temp, temp_line);
+	temp_line = fill_temp_line(splitted_line, index, temp, temp_line, env_cpy);
 	if (!temp_line)
 		return (NULL);
 	free_double_array(temp);

@@ -10,10 +10,18 @@ int	check_env_in_string(char **splitted_line, int index)
 	index_x = 0;
 	while (splitted_line[index][index_x])
 	{
-		if (splitted_line[index][index_x] == '$' \
-			&& ft_isalpha(splitted_line[index][index_x + 1]) == 1)
-			return (1);
-		index_x++;
+		if (splitted_line[index][index_x] == '"')
+		{
+			while (splitted_line[index][index_x] != '"')
+			{
+				if (splitted_line[index][index_x] == '$' \
+					&& ft_isalpha(splitted_line[index][index_x + 1]) == 1)
+					return (1);
+				index_x++;
+			}
+		}
+		if (splitted_line[index][index_x] != '\0')
+			index_x++;
 	}
 	return (-1);
 }

@@ -27,7 +27,7 @@ void	error_lexing_message(t_lexer *list)
 	if (list->error_code == 1)
 		printf("%s\n", list->error_str);
 	if (list->error_code == 2)
-		printf("Syntax error at %s\n", list->error_str);
+		printf("Syntax error, %s\n", list->error_str);
 	if (list->error_code == 3)
 		printf("Allocation error at %s\n", list->error_str);
 }

@@ -8,6 +8,13 @@ t_lexer	*parsing_array(t_lexer *info_list, \
 {
 	int		ammount_words;
 
+	ammount_words = get_number_delim(enum_array);
+	if (ammount_words > 0)
+	{
+		info_list->delim = ft_calloc(ammount_words + 1, sizeof(char *));
+		if (!info_list->delim)
+			return (NULL);
+	}
 	ammount_words = get_max_array(splitted_line);
 	if (ammount_words == 1 || ammount_words == 2)
 		info_list->check_free = 1;
@@ -35,9 +42,9 @@ t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array)
 {
 	enum_array = into_enum_array(splitted_line, enum_array, 0);         
 	if (check_var_expander(splitted_line) == 1)
-		splitted_line = replace_var_expander(splitted_line);
+		splitted_line = replace_var_expander(info_list, splitted_line, info_list->env_copy);
 	if (!splitted_line)
-		return (set_error_lex(info_list, 3, "lexer.c/70"), NULL);
+		return (NULL);
 	if (check_special_cases(splitted_line) == 1)
 		return (which_special_case(info_list, splitted_line, enum_array));
 	info_list = parsing_array(info_list, splitted_line, enum_array);
@@ -63,10 +70,11 @@ t_lexer *set_nonalloc_vars(t_lexer *info_list)
 	info_list->input = STDIN_IN;
 	info_list->output = STDOUT_OUT;
 	info_list->error_code = -1;
+	info_list->index_delim = 0;
 	return (info_list);
 }
 
-t_lexer	*lexing(char *line)
+t_lexer	*lexing(char *line, char **env_cpy)
 {
 	char	**splitted_line;
 	int		*enum_array;
@@ -76,6 +84,7 @@ t_lexer	*lexing(char *line)
 	info_list = ft_calloc(1, sizeof(t_lexer));
 	if (!info_list)
 		return (NULL);
+	info_list->env_copy = env_cpy;
 	info_list = set_nonalloc_vars(info_list);
 	line = put_spaces_in_line(line, info_list);
 	if (!line)

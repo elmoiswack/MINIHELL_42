@@ -26,6 +26,7 @@ static const char *g_enum[] = {
 [APPEND] = "APPEND", //13
 [STDIN_IN] = "STDIN", //14
 [STDOUT_OUT] = "STDOUT", //15
+[HEREDOC] = "HEREDOC", //16
 };
 
 void	printing_lexer(t_lexer *info_lexer)
@@ -48,7 +49,15 @@ void	printing_lexer(t_lexer *info_lexer)
 		fprintf(stderr, "file name = %s\n", info_lexer->file);
 		fprintf(stderr, "input = %s\n", g_enum[info_lexer->input]);
 		fprintf(stderr, "output = %s\n", g_enum[info_lexer->output]);
-		fprintf(stderr, "delim = %s\n", info_lexer->delim);
+		int i = 0;
+		if (info_lexer->delim)
+		{
+			while (info_lexer->delim[i])
+			{
+				fprintf(stderr, "delim[%i] = %s\n", i, info_lexer->delim[i]);
+				i++;
+			}
+		}
 		fprintf(stderr, "---------------------------");
 		fprintf(stderr, "\n");
 		info_lexer = info_lexer->next;
@@ -79,7 +88,7 @@ void	display_prompt(t_minishell *shell)
 		else if (line[0] != '\0')
 		{
 			add_history(line);
-			shell->cmd_lst = lexing(line);
+			shell->cmd_lst = lexing(line, shell->env_cpy);
 			if (!shell->cmd_lst)
 			{
 				printf("fuck\n");
