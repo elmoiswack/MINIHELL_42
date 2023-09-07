@@ -77,9 +77,9 @@ void	display_prompt(t_minishell *shell)
 	while (!terminate)
 	{
 		if (g_exit_status == 0)	
-			line = readline("\033[0;37m \033[1m MINIHELL_\033[0m> ");
+			line = readline("\033[0;37m \033[1m MINIHELL_>\033[0m ");
 		else
-			line = readline("\033[0;31m \033[1m Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚_\033[0m> ");
+			line = readline("\033[0;31m \033[1m Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚_ >\033[0m ");
 		if (line == NULL)
 		{
 			free(line);
@@ -141,6 +141,7 @@ int	main(int argc, char *argv[], char *envp[])
 	// atexit(f);
 	shell = init_minishell(argc, argv, envp);
 	catch_signals_parent();
+	// catch_signals_child();
 	display_prompt(&shell);
 	free_double_array(shell.env_cpy);
 	return (0);

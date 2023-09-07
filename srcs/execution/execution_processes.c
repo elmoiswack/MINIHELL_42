@@ -128,7 +128,14 @@ int	execute_cmds(t_lexer *head, char *envp[])
 	if (!current->path && !current->delim)
 		return (error_command_not_found(current->content[0]), 127);
 	if (current->delim)
-		create_heredoc_tmp(current->delim);
+	{
+		int i = 0;
+		while (current->delim[i])
+		{
+			create_heredoc_tmp(current->delim[i]);
+			i++;
+		}
+	}
 	print_cmd_lst(head);
 	while (current)
 	{
