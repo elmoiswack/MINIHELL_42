@@ -51,8 +51,7 @@ t_lexer	*data_org_delim(t_lexer *info_list, char **splitted_line, \
 	if (splitted_line[index + 1])
 		info_list = into_linklist(info_list, splitted_line[index + 1], \
 			enum_array[index]);
-	if (!info_list)
-		return (NULL);
+	info_list->input = HEREDOC;
 	return (info_list);
 }
 

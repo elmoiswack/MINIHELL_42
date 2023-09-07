@@ -27,6 +27,7 @@ typedef enum e_token{
 	APPEND, //13
 	STDIN_IN, //14
 	STDOUT_OUT, //15
+	HEREDOC, //16
 } t_token;
 
 //Builtin enumerator - defines the different types of possible builtins;
@@ -48,15 +49,17 @@ typedef struct lexerinfo {
 	char				*file;			//IF THERE IS AN INFILE OR OUTFILE, ELSE NULL;
 	int					input;			//ENUM_IO:PIPE_READ/FILE/STDIN/NONE
 	int					output;			//ENUM_IO:PIPE_WRITE/FILE/STDOUT/NONE
-	char				*delim;
+	char				**delim;
+	int					index_delim;
 	int					check_free;
 	int					error_code;
+	char				**env_copy;
 	const char			*error_str;
 	struct lexerinfo	*next;
 }	t_lexer;
 
 //ERROR CODES:
-//1 = 
+//1 = COSTUM MESSAGE
 //2 = SYNTAX_ERROR
 //3 = MALLOC_ERROR
 
@@ -73,11 +76,11 @@ typedef struct s_minishell {
 //###############################################################
 
 		//lexer.c
-t_lexer	*lexing(char *line);
+t_lexer	*lexing(char *line, char **env_cpy);
 t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array);
 t_lexer	*parsing_array(t_lexer *info_list, char **splitted_line, int *enum_array);
 
-		//enum_arrayfts.cw
+		//enum_arrayfts.c
 int		*into_enum_array(char **splitted_line, int *enum_array, int index);
 int		which_enum(char **splitted_line, int index);
 
@@ -147,13 +150,13 @@ t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, int index);
 t_lexer	*echo_with_meta(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
 
 		//variable_expander.c
-char	**replace_var_expander(char **splitted_line);
-char	**which_case_env(char **splitted_line, int index);
-char	**one_case(char **splitted_line, int index);
+char	**replace_var_expander(t_lexer *info_list, char **splitted_line, char **env_cpy);
+char	**which_case_env(char **splitted_line, int index, char **env_cpy);
+char	**one_case(char **splitted_line, int index, char **env_cpy);
 
 		//varexp_mult.c
-char	**one_line_multenv(char **splitted_line, int index);
-char	**mult_line_multenv(char **splitted_line, int index);
+char	**one_line_multenv(char **splitted_line, int index, char **env_cpy);
+char	**mult_line_multenv(char **splitted_line, int index, char **env_cpy);
 char	**fill_2d_array_env(char **splitted_line, int index, char **temp);
 
 		//varexp_utils.c
@@ -164,8 +167,11 @@ char	*remove_quotes_string(char **splitted_line, int index);
 int		check_env_in_string(char **splitted_line, int index);
 int		check_multiple_env(char **splitted_line, int index);
 int		check_var_expander(char **splitted_line);
-int	are_there_spaces(char **splitted_line, int index);
+int		are_there_spaces(char **splitted_line, int index);
 int		how_many_env(char **splitted_line, int index);
+
+		//delimiter_func.c
+int		get_number_delim(int *enum_array);
 
 //###############################################################
 //		ERROR AND FREE FUNCTIONS

@@ -22,6 +22,7 @@ SRCS		:= 	main.c \
 				lexing/varexp_utils.c \
 				lexing/varexp_mult.c \
 				lexing/varexp_checks.c \
+				lexing/delimiter_func.c \
 				error/error.c \
 				error/free.c \
 				execution/execution_processes.c \
