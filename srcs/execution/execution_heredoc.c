@@ -69,6 +69,23 @@ char	*expand_heredoc_line(char *heredoc_line, char *env_cpy[])
 	return (heredoc_line);
 }
 
+void	create_heredoc_loop(t_lexer *head, char *env_cpy[])
+{
+	t_lexer *current;
+	int i;
+
+	i = 0;
+	current = head;
+	if (current->delim)
+	{
+		while (current->delim[i])
+		{
+			create_heredoc_tmp(current->delim[i], env_cpy);
+			i++;
+		}
+	}
+}
+
 void	create_heredoc_tmp(char *delim, char *env_cpy[])
 {
 	char	*heredoc_line;
@@ -91,16 +108,19 @@ void	create_heredoc_tmp(char *delim, char *env_cpy[])
 	close(heredoc_tmp);
 }
 
-void	clean_tmp_files(char *envp[])
+void	clean_tmp_files(t_lexer *head, char *envp[])
 {
 	char	*args[] = {"rm", "./data/heredoc.tmp", NULL};
 	pid_t	pid;
 	
-	pid = fork();
-	if (pid == 0 && execve(get_path("rm"), args, envp) < 0)
+	if (head->delim)
 	{
-		perror("error cleanup tmp");
-		exit(-1);
+		pid = fork();
+		if (pid == 0 && execve(get_path("rm"), args, envp) < 0)
+		{
+			perror("error cleanup tmp");
+			exit(-1);
+		}
 	}
 }
 

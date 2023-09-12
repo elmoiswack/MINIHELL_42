@@ -1,5 +1,5 @@
 NAME		:=	minishell
-FLAGS		:= 	-Wall -Wextra #-Werror
+FLAGS		:= 	-Wall -Wextra -Werror
 LIBS		:= 	./libft/libft.a -lreadline -I /Users/$(USER)/.brew/opt/readline/include -L/Users/$(USER)/.brew/opt/readline/lib
 HEADERS		:= 	-I libft -I includes -I /Users/$(USER)/.brew/opt/readline/include 
 SRCS		:= 	main.c \
@@ -28,10 +28,17 @@ SRCS		:= 	main.c \
 				execution/execution_processes.c \
 				execution/execution_utilities.c \
 				execution/execution_heredoc.c \
-				builtins/builtin_operations.c \
+				execution/execution_routing.c \
 				builtins/builtin_execution.c \
+				builtins/builtin_cd.c \
+				builtins/builtin_echo.c \
+				builtins/builtin_env.c \
+				builtins/builtin_export.c \
+				builtins/builtin_pwd.c \
+				builtins/builtin_unset.c \
 				interface/interface_frontend.c \
 				utilities/utilities_double_arrays.c \
+				utilities/utilities_debugging.c \
 				signals/signal_handler.c \
 
 SRCDIR 		:= 	./srcs
