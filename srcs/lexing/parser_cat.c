@@ -5,6 +5,8 @@
 
 int	check_for_cat(t_lexer *info_list)
 {
+	if (!info_list->content)
+		return (-1);
 	while (info_list)
 	{
 		if (ft_strncmp(info_list->content[0], "cat", ft_strlen("cat")) == 0)

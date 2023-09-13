@@ -8,13 +8,6 @@ t_lexer	*parsing_array(t_lexer *info_list, \
 {
 	int		ammount_words;
 
-	ammount_words = get_number_delim(enum_array);
-	if (ammount_words > 0)
-	{
-		info_list->delim = ft_calloc(ammount_words + 1, sizeof(char *));
-		if (!info_list->delim)
-			return (NULL);
-	}
 	ammount_words = get_max_array(splitted_line);
 	if (ammount_words == 1 || ammount_words == 2)
 		info_list->check_free = 1;

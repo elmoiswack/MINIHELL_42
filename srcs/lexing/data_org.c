@@ -48,6 +48,18 @@ t_lexer	*data_org_file(t_lexer *info_list, char **splitted_line, \
 t_lexer	*data_org_delim(t_lexer *info_list, char **splitted_line, \
 	int *enum_array, int index)
 {
+	int	ammount_words;
+
+	if (!info_list->delim)
+	{
+		ammount_words = get_number_delim(enum_array);
+		if (ammount_words > 0)
+		{
+			info_list->delim = ft_calloc(ammount_words + 1, sizeof(char *));
+			if (!info_list->delim)
+				return (NULL);
+		}
+	}
 	if (splitted_line[index + 1])
 		info_list = into_linklist(info_list, splitted_line[index + 1], \
 			enum_array[index]);
