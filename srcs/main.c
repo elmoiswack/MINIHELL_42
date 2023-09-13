@@ -40,10 +40,13 @@ void	printing_lexer(t_lexer *info_lexer)
 	{
 		fprintf(stderr, "\n");
 		index = 0;
-		while (info_lexer->content[index])
+		if (info_lexer->content)
 		{
-			fprintf(stderr, "content[%d] = %s\n", index, info_lexer->content[index]);
-			index++;
+			while (info_lexer->content[index])
+			{
+				fprintf(stderr, "content[%d] = %s\n", index, info_lexer->content[index]);
+				index++;
+			}
 		}
 		fprintf(stderr, "path = %s\n", info_lexer->path);
 		fprintf(stderr, "file name = %s\n", info_lexer->file);

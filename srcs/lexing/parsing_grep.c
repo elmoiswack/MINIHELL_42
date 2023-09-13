@@ -5,6 +5,8 @@
 
 int	check_for_grep(t_lexer *info_list)
 {
+	if (!info_list->content)
+		return (-1);
 	while (info_list)
 	{
 		if (ft_strncmp(info_list->content[0], "grep", ft_strlen("grep")) == 0)
