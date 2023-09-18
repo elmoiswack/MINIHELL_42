@@ -34,7 +34,6 @@ void	error_lexing_message(t_lexer *list)
 
 void	set_error_lex(t_lexer *info_list, int error_code, const char *str)
 {
-	free_lexing_content_struct(info_list);
 	info_list->error_code = error_code;
 	info_list->error_str = str;
 	error_lexing_message(info_list);

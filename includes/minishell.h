@@ -80,6 +80,9 @@ t_lexer	*lexing(char *line, char **env_cpy);
 t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array);
 t_lexer	*parsing_array(t_lexer *info_list, char **splitted_line, int *enum_array);
 
+		//line_checker.c
+int		input_line_check(char *line, t_lexer *info_list);
+
 		//enum_arrayfts.c
 int		*into_enum_array(char **splitted_line, int *enum_array, int index);
 int		which_enum(char **splitted_line, int index);
@@ -87,7 +90,6 @@ int		which_enum(char **splitted_line, int index);
 		//lexer_utils.c
 int		skip_spaces(char *line, int index);
 int		ammount_of_words(char *line);
-int 	get_env_end(char *line, int index);
 int		get_max_array(char **array);
 int		check_for_quotes(char *line);
 
@@ -151,24 +153,26 @@ t_lexer	*echo_with_meta(t_lexer *info_list, char **splitted_line, int *enum_arra
 
 		//variable_expander.c
 char	**replace_var_expander(t_lexer *info_list, char **splitted_line, char **env_cpy);
-char	**which_case_env(char **splitted_line, int index, char **env_cpy);
-char	**one_case(char **splitted_line, int index, char **env_cpy);
+char	*get_env_var(char *line, char **env_cpy, int ammount_env);
+char	*replace_variables(char *line, char **env_temp);
 
-		//varexp_mult.c
-char	**one_line_multenv(char **splitted_line, int index, char **env_cpy);
-char	**mult_line_multenv(char **splitted_line, int index, char **env_cpy);
-char	**fill_2d_array_env(char **splitted_line, int index, char **temp);
+		//varexp_arrayft.c
+char	**expand_env_variables(char **env_temp, char **env_cpy);
+char	*expand_variable(char *line, char **env_cpy);
+char	**fill_array_env(char *line, int ammount_env, char **env_temp);
+char	**check_quotes_env(char **splitted_line);
+
+		//varexp_lineft.c
+char	*get_variable(char *line, int begin, int end);
+char	*remove_quotes_string(char **splitted_line, int index);
+char	*remove_dollar_sign(char *line);
+char	*put_env_in_line(char *new_line, int index_l, char **env_temp, int index_env);
 
 		//varexp_utils.c
-char	*remove_dollar(char **splitted_line, int index);
-char	*remove_quotes_string(char **splitted_line, int index);
-
-		//varexp_checks.c
-int		check_env_in_string(char **splitted_line, int index);
-int		check_multiple_env(char **splitted_line, int index);
-int		check_var_expander(char **splitted_line);
-int		are_there_spaces(char **splitted_line, int index);
-int		how_many_env(char **splitted_line, int index);
+int		how_many_env_var(char *line);
+int		get_env_end(char *line, int index);
+int		get_size_strings(char *line, char **env_temp);
+int		check_for_envvar(char **splitted_line);
 
 		//delimiter_func.c
 int		get_number_delim(int *enum_array);

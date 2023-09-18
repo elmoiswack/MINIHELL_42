@@ -35,7 +35,7 @@ char	*remove_spaces_quotes_line(char *line)
 		index_n++;
 		index_l++;
 	}
-	//free(line);
+//	free(line);
 	return (new_line);
 }
 
@@ -105,7 +105,7 @@ char	**split_with_quotes(char *line, t_lexer *info_list)
 		return (set_error_lex(info_list, 3, "split_quotes.c/L97"), NULL);
 	temp_quotes = store_all_quote_data(line, temp_quotes);
 	if (!temp_quotes)
-		return (set_error_lex(info_list, 2, "split_quotes.c/L54"), NULL);
+		return (set_error_lex(info_list, 2, "unclosed quotes!"), NULL);
 	line = remove_spaces_quotes_line(line);
 	if (!line)
 		return (set_error_lex(info_list, 3, "split_quotes.c/L14"), NULL);

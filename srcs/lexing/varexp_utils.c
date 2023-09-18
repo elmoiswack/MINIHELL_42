@@ -3,49 +3,75 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char	*remove_dollar(char **splitted_line, int index)
+int	how_many_env_var(char *line)
 {
-	int		index_te;
-	int		index_sp;
-	char	*temp;
+	int	index;
+	int	count;
 
-	index_te = 0;
-	index_sp = 0;
-	temp = ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
-	if (!temp)
-		return (NULL);
-	while (splitted_line[index][index_sp])
+	index = 0;
+	count = 0;
+	while (line[index])
 	{
-		if (splitted_line[index][index_sp] != '$')
+		if (line[index] == '$')
 		{
-			temp[index_te] = splitted_line[index][index_sp];
-			index_te++;
+			if (line[index + 1] != '\0' && line[index + 1] != '?')
+				count++;
 		}
-		index_sp++;
+		index++;
 	}
-	return (temp);
+	return (count);
 }
 
-char	*remove_quotes_string(char **splitted_line, int index)
+int	get_env_end(char *line, int index)
 {
-	char	*temp;
-	int		index_tp;
-	int		index_sp;
-
-	index_tp = 0;
-	index_sp = 0;
-	temp = ft_calloc(ft_strlen(splitted_line[index]), sizeof(char));
-	if (!temp)
-		return (NULL);
-	while (splitted_line[index][index_sp])
+	while (line[index])
 	{
-		if (splitted_line[index][index_sp] != '"' && splitted_line[index][index_sp] != 39)
-		{
-			temp[index_tp] = splitted_line[index][index_sp];
-			index_tp++;
-		}
-		index_sp++;
+		if (ft_isalpha(line[index]) != 1)
+			return (index);
+		index++;
 	}
-	free(splitted_line[index]);
-	return (temp);
+	return (index);
+}
+
+
+int	get_size_strings(char *line, char **env_temp)
+{
+	int size;
+	int	index;
+
+	index = 0;
+	size = ft_strlen(line);
+	while (env_temp[index])
+	{
+		size += ft_strlen(env_temp[index]);
+		index++;
+	}
+	return (size);
+}
+
+
+int	check_for_envvar(char **splitted_line)
+{
+	int	index;
+	int	index_x;
+
+	index = 0;
+	while (splitted_line[index])
+	{
+		index_x = 0;
+		while (splitted_line[index][index_x])
+		{
+			if (splitted_line[index][index_x] == '$')
+			{
+				index_x++;
+				if (splitted_line[index][index_x] == '\0')
+					break ;
+				if (ft_isalpha(splitted_line[index][index_x]) == 1)
+					return (1);
+			}
+			index_x++;
+		}
+		index++;
+	}
+	return (-1);
 }

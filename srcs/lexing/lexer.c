@@ -34,7 +34,7 @@ int	info_list_checker(t_lexer *info_list, char **splitted_line, int *enum_array)
 t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array)
 {
 	enum_array = into_enum_array(splitted_line, enum_array, 0);         
-	if (check_var_expander(splitted_line) == 1)
+	if (check_for_envvar(splitted_line) == 1)
 		splitted_line = replace_var_expander(info_list, splitted_line, info_list->env_copy);
 	if (!splitted_line)
 		return (NULL);
@@ -76,6 +76,8 @@ t_lexer	*lexing(char *line, char **env_cpy)
 
 	info_list = ft_calloc(1, sizeof(t_lexer));
 	if (!info_list)
+		return (NULL);
+	if (input_line_check(line, info_list) == -1)
 		return (NULL);
 	info_list->env_copy = env_cpy;
 	info_list = set_nonalloc_vars(info_list);

@@ -31,17 +31,6 @@ int	ammount_of_words(char *line)
 	return (count);
 }
 
-int	get_env_end(char *line, int index)
-{
-	while (line[index])
-	{
-		if (line[index] == ';')
-			return (index);
-		index++;
-	}
-	return (-1);
-}
-
 int	skip_spaces(char *line, int index)
 {
 	while (line[index] && ((line[index] == ' ') \

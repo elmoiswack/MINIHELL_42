@@ -39,7 +39,7 @@ void	free_lexing_content_struct(t_lexer *list)
 		if (list->file)
 			free(list->file);
 		if (list->delim)
-			free(list->delim);
+			free_double_array(list->delim);
 		list = list->next;
 	}
 }
