@@ -35,6 +35,7 @@ char	*remove_spaces_quotes_line(char *line)
 		index_n++;
 		index_l++;
 	}
+	free(line);
 	return (new_line);
 }
 
@@ -118,5 +119,6 @@ char	**split_with_quotes(char *line, t_lexer *info_list)
 	if (!split_array)
 		return (set_error_lex(info_list, 3, "split_quotes.c/L104"), NULL);
 	split_array = replace_quotes_array(split_array, temp_quotes);
+	free_double_array(temp_quotes);
 	return (split_array);
 }
