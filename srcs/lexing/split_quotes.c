@@ -35,7 +35,6 @@ char	*remove_spaces_quotes_line(char *line)
 		index_n++;
 		index_l++;
 	}
-//	free(line);
 	return (new_line);
 }
 
@@ -76,6 +75,7 @@ char	**store_all_quote_data(char *line, char **temp)
 char	**replace_quotes_array(char **split_array, char	**temp_quotes)
 {
 	int	index;
+	int	index_x;
 	int	index_tmp;
 
 	index = 0;
@@ -84,8 +84,13 @@ char	**replace_quotes_array(char **split_array, char	**temp_quotes)
 	{
 		if (split_array[index][0] == '"' || split_array[index][0] == '\'')
 		{
-			free(split_array[index]);
-			split_array[index] = temp_quotes[index_tmp];
+			index_x = 1;
+			while (temp_quotes[index_tmp][index_x] \
+				&& (temp_quotes[index_tmp][index_x] != '"' && temp_quotes[index_tmp][index_x] != '\''))
+			{
+				split_array[index][index_x] = temp_quotes[index_tmp][index_x];
+				index_x++;
+			}
 			index_tmp++;
 		}
 		index++;

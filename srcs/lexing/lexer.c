@@ -33,7 +33,7 @@ int	info_list_checker(t_lexer *info_list, char **splitted_line, int *enum_array)
 
 t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array)
 {
-	enum_array = into_enum_array(splitted_line, enum_array, 0);         
+	enum_array = into_enum_array(splitted_line, enum_array, 0);   
 	if (check_for_envvar(splitted_line) == 1)
 		splitted_line = replace_var_expander(info_list, splitted_line, info_list->env_copy);
 	if (!splitted_line)
@@ -71,7 +71,6 @@ t_lexer	*lexing(char *line, char **env_cpy)
 {
 	char	**splitted_line;
 	int		*enum_array;
-	int		index;
 	t_lexer	*info_list;
 
 	info_list = ft_calloc(1, sizeof(t_lexer));
@@ -84,14 +83,13 @@ t_lexer	*lexing(char *line, char **env_cpy)
 	line = put_spaces_in_line(line, info_list);
 	if (!line)
 		return (set_error_lex(info_list, 3, "lexer.c/L96"), NULL);
-	if (check_for_quotes(line) == 1)
+	if (check_for_quotes(line) == 1 && check_spaces_in_quotes(line) == 1)
 		splitted_line = split_with_quotes(line, info_list);
 	else
 		splitted_line = ft_split(line, ' ');
 	if (!splitted_line)
 		return (NULL);
-	index = get_max_array(splitted_line);
-	enum_array = ft_calloc(index + 1, sizeof(int));
+	enum_array = ft_calloc(get_max_array(splitted_line) + 1, sizeof(int));
 	if (!enum_array)
 		return (set_error_lex(info_list, 3, "lexer.c/106"), NULL);
 	info_list = which_case(info_list, splitted_line, enum_array);

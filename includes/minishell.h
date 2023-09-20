@@ -92,6 +92,7 @@ int		skip_spaces(char *line, int index);
 int		ammount_of_words(char *line);
 int		get_max_array(char **array);
 int		check_for_quotes(char *line);
+int		check_spaces_in_quotes(char *line);
 
 		//eddit_line.c
 char	*put_spaces_in_line(char *line, t_lexer *info_list);

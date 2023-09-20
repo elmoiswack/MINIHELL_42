@@ -58,3 +58,28 @@ int	check_for_quotes(char *line)
 	}
 	return (-1);
 }
+
+int	check_spaces_in_quotes(char *line)
+{
+	int	index;
+
+	index = 0;
+	while (line[index])
+	{
+		if (line[index] == '"' || line[index] == '\'')
+		{
+			index++;
+			while (line[index] && (line[index] != '"' && line[index] != '\''))
+			{
+				if (line[index] == ' ')
+					return (1);
+				index++;
+			}
+			if (line[index] == '\0')
+				return (-1);
+		}
+		if (line[index] != '\0')
+			index++;
+	}
+	return (-1);
+}
