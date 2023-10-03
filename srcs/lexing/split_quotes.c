@@ -51,7 +51,10 @@ char	**store_all_quote_data(char *line, char **temp)
 	{
 		if (line[index_l] == '"' || line[index_l] == '\'')
 		{
-			index_end = get_end_quote(line, index_l);
+			if (line[index_l] == '"')
+				index_end = get_end_quote(line, index_l, 1);
+			else
+				index_end = get_end_quote(line, index_l, 0);
 			if (index_end == -1)
 			{
 				free_double_array(temp);
@@ -76,7 +79,6 @@ char	**store_all_quote_data(char *line, char **temp)
 char	**replace_quotes_array(char **split_array, char	**temp_quotes)
 {
 	int	index;
-	int	index_x;
 	int	index_tmp;
 
 	index = 0;
@@ -85,13 +87,14 @@ char	**replace_quotes_array(char **split_array, char	**temp_quotes)
 	{
 		if (split_array[index][0] == '"' || split_array[index][0] == '\'')
 		{
-			index_x = 1;
-			while (temp_quotes[index_tmp][index_x] \
-				&& (temp_quotes[index_tmp][index_x] != '"' && temp_quotes[index_tmp][index_x] != '\''))
+			free(split_array[index]);
+			split_array[index] = ft_calloc(ft_strlen(temp_quotes[index_tmp]) + 1, sizeof(char));
+			if (!split_array[index])
 			{
-				split_array[index][index_x] = temp_quotes[index_tmp][index_x];
-				index_x++;
+				free_double_array(split_array);
+				return (NULL);
 			}
+			ft_strcpy(split_array[index], temp_quotes[index_tmp]);
 			index_tmp++;
 		}
 		index++;
@@ -103,6 +106,7 @@ char	**split_with_quotes(char *line, t_lexer *info_list)
 {
 	char	**split_array;
 	char	**temp_quotes;
+	char	*temp_line;
 	int		ammount_quotes;
 
 	ammount_quotes = how_many_quotes(line);
@@ -112,12 +116,19 @@ char	**split_with_quotes(char *line, t_lexer *info_list)
 	temp_quotes = store_all_quote_data(line, temp_quotes);
 	if (!temp_quotes)
 		return (set_error_lex(info_list, 2, "unclosed quotes!"), NULL);
-	line = remove_spaces_quotes_line(line);
-	if (!line)
+	temp_line = remove_spaces_quotes_line(line);
+	if (!temp_line)
+	{
+		free_double_array(temp_quotes);
 		return (set_error_lex(info_list, 3, "split_quotes.c/L14"), NULL);
-	split_array = ft_split(line, ' ');
+	}
+	split_array = ft_split(temp_line, ' ');
+	free(temp_line);
 	if (!split_array)
+	{
+		free_double_array(temp_quotes);
 		return (set_error_lex(info_list, 3, "split_quotes.c/L104"), NULL);
+	}
 	split_array = replace_quotes_array(split_array, temp_quotes);
 	free_double_array(temp_quotes);
 	return (split_array);

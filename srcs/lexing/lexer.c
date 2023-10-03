@@ -37,7 +37,10 @@ t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array)
 	if (check_for_envvar(splitted_line) == 1)
 		splitted_line = replace_var_expander(info_list, splitted_line, info_list->env_copy);
 	if (!splitted_line)
+	{
+		free(enum_array);
 		return (NULL);
+	}
 	if (check_special_cases(splitted_line) == 1)
 		return (which_special_case(info_list, splitted_line, enum_array));
 	info_list = parsing_array(info_list, splitted_line, enum_array);
@@ -91,7 +94,10 @@ t_lexer	*lexing(char *line, char **env_cpy)
 		return (NULL);
 	enum_array = ft_calloc(get_max_array(splitted_line) + 1, sizeof(int));
 	if (!enum_array)
+	{
+		free_double_array(splitted_line);
 		return (set_error_lex(info_list, 3, "lexer.c/106"), NULL);
+	}
 	info_list = which_case(info_list, splitted_line, enum_array);
 	return (info_list);
 }

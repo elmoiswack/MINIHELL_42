@@ -23,7 +23,7 @@ char	*get_variable(char *line, int begin, int end)
 
 char	*remove_quotes_string(char **splitted_line, int index)
 {
-	char *new_line;
+	char	*new_line;
 	int		index_l;
 	int		index_x;
 
@@ -31,7 +31,10 @@ char	*remove_quotes_string(char **splitted_line, int index)
 	index_x = 0;
 	new_line = ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
 	if (!new_line)
+	{
+		free_double_array(splitted_line);
 		return (NULL);
+	}
 	while (splitted_line[index][index_x])
 	{
 		if (splitted_line[index][index_x] != '\'' && splitted_line[index][index_x] != '"')

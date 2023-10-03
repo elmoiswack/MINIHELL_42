@@ -57,7 +57,6 @@ t_lexer	*special_case_files(t_lexer *info_list, char **splitted_line)
 	return (info_list);
 }
 
-
 t_lexer	*which_special_case(t_lexer *info_list, char **splitted_line, \
 	int *enum_array)
 {

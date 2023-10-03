@@ -107,7 +107,7 @@ char	*remove_spaces_quotes_line(char *line);
 
 		//split_quotes_utils.c
 int		how_many_quotes(char *line);
-int		get_end_quote(char *line, int end);
+int		get_end_quote(char *line, int end, int which);
 char	*my_random_strcpy(char *line, int begin, int end);
 
 		//get_path.c

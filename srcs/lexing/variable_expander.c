@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 char	*replace_variables(char *line, char **env_temp)
 {
 	char	*new_line;
@@ -26,16 +25,16 @@ char	*replace_variables(char *line, char **env_temp)
 			new_line = put_env_in_line(new_line, index_new, env_temp, index_env);
 			index_new += ft_strlen(env_temp[index_env]);
 			index_env++;
-			index = end - 1;
+			index = end;
 		}
-		else
+		if (line[index] != '$')
 		{
 			new_line[index_new] = line[index];
 			index_new++;
+			if (line[index] == '\0')
+				break ;
+			index++;
 		}
-		if (line[index] == '\0')
-			break ;
-		index++;
 	}
 	free(line);
 	return (new_line);
@@ -53,8 +52,15 @@ char	*get_env_var(char *line, char **env_cpy, int ammount_env)
 	if (!env_temp)
 		return (NULL);
 	env_temp = fill_array_env(line, ammount_env, env_temp);
+	if (!env_temp)
+		return (NULL);
 	env_temp = expand_env_variables(env_temp, env_cpy);
+	if (!env_temp)
+		return (NULL);
 	line = replace_variables(line, env_temp);
+	if (!line)
+		return (NULL);
+	free_double_array(env_temp);
 	return (line);
 }
 
@@ -81,8 +87,9 @@ char	**replace_var_expander(t_lexer *info_list, char **splitted_line, char **env
 			}
 			index_x++;
 		}
-		if (!splitted_line)
+		if (!splitted_line[index])
 		{
+			free_double_array(splitted_line);
 			set_error_lex(info_list, 1, "");
 			return (NULL);
 		}

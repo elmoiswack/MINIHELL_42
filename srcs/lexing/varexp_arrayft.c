@@ -19,7 +19,10 @@ char	**fill_array_env(char *line, int ammount_env, char **env_temp)
 			end = get_env_end(line, index + 1);
 			env_temp[index_temp] = get_variable(line, index, end);
 			if (!env_temp[index_temp])
+			{
+				free_double_array(env_temp);
 				return (NULL);
+			}
 			ammount_env--;
 			index += (end - index) - 1;
 			index_temp++;
@@ -45,6 +48,7 @@ char	*expand_variable(char *line, char **env_cpy)
 	if (!temp)
 		return (NULL);
 	ft_strcpy(temp, env_temp);
+	free(env_temp);
 	return (temp);
 }
 
@@ -57,10 +61,37 @@ char	**expand_env_variables(char **env_temp, char **env_cpy)
 	{
 		env_temp[index] = expand_variable(env_temp[index], env_cpy);
 		if (!env_temp[index])
+		{
+			free_double_array(env_temp);
 			return (NULL);
+		}
 		index++;
 	}
 	return (env_temp);
+}
+
+char	*remove_quotes_string_env(char **splitted_line, int index)
+{
+	char *new_line;
+	int		index_l;
+	int		index_x;
+
+	index_l = 0;
+	index_x = 0;
+	new_line = ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
+	if (!new_line)
+		return (NULL);
+	while (splitted_line[index][index_x])
+	{
+		if (splitted_line[index][index_x] != '"')
+		{
+			new_line[index_l] = splitted_line[index][index_x];
+			index_l++;
+		}
+		index_x++;
+	}
+	free(splitted_line[index]);
+	return (new_line);
 }
 
 char	**check_quotes_env(char **splitted_line)
@@ -76,7 +107,7 @@ char	**check_quotes_env(char **splitted_line)
 		{
 			if (splitted_line[index][index_x] == '"')
 			{
-				splitted_line[index] = remove_quotes_string(splitted_line, index);
+				splitted_line[index] = remove_quotes_string_env(splitted_line, index);
 				break ;
 			}
 			index_x++;
