@@ -1,11 +1,10 @@
 [
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
    "-I",
    "libft",
    "-I",
@@ -20,12 +19,30 @@
   "file": "srcs/main.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
+   "-c",
+   "srcs/memory_management.c",
+   "-o",
+   "objs/memory_management.o"
+  ],
+  "file": "srcs/memory_management.c"
+ },
+ {
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
    "-I",
    "libft",
    "-I",
@@ -40,12 +57,11 @@
   "file": "srcs/lexing/lexer.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
    "-I",
    "libft",
    "-I",
@@ -60,12 +76,11 @@
   "file": "srcs/lexing/lexer_utils.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
    "-I",
    "libft",
    "-I",
@@ -73,19 +88,18 @@
    "-I",
    "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/lexing/lexer_dataorg_utils.c",
+   "srcs/lexing/enum_arrayfts.c",
    "-o",
-   "objs/lexing/lexer_dataorg_utils.o"
+   "objs/lexing/enum_arrayfts.o"
   ],
-  "file": "srcs/lexing/lexer_dataorg_utils.c"
+  "file": "srcs/lexing/enum_arrayfts.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
    "-I",
    "libft",
    "-I",
@@ -93,19 +107,18 @@
    "-I",
    "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/lexing/lexer_get_path.c",
+   "srcs/lexing/get_path.c",
    "-o",
-   "objs/lexing/lexer_get_path.o"
+   "objs/lexing/get_path.o"
   ],
-  "file": "srcs/lexing/lexer_get_path.c"
+  "file": "srcs/lexing/get_path.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
    "-I",
    "libft",
    "-I",
@@ -113,19 +126,18 @@
    "-I",
    "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/lexing/lexer_eddit_line.c",
+   "srcs/lexing/eddit_line.c",
    "-o",
-   "objs/lexing/lexer_eddit_line.o"
+   "objs/lexing/eddit_line.o"
   ],
-  "file": "srcs/lexing/lexer_eddit_line.c"
+  "file": "srcs/lexing/eddit_line.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
    "-I",
    "libft",
    "-I",
@@ -133,19 +145,18 @@
    "-I",
    "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/lexing/lexer_split_quotes.c",
+   "srcs/lexing/split_quotes.c",
    "-o",
-   "objs/lexing/lexer_split_quotes.o"
+   "objs/lexing/split_quotes.o"
   ],
-  "file": "srcs/lexing/lexer_split_quotes.c"
+  "file": "srcs/lexing/split_quotes.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
    "-I",
    "libft",
    "-I",
@@ -153,19 +164,18 @@
    "-I",
    "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/lexing/lexer_data_org.c",
+   "srcs/lexing/split_quotes_utils.c",
    "-o",
-   "objs/lexing/lexer_data_org.o"
+   "objs/lexing/split_quotes_utils.o"
   ],
-  "file": "srcs/lexing/lexer_data_org.c"
+  "file": "srcs/lexing/split_quotes_utils.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
    "-I",
    "libft",
    "-I",
@@ -173,19 +183,18 @@
    "-I",
    "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/lexing/lexer_data_envvar.c",
+   "srcs/lexing/data_org.c",
    "-o",
-   "objs/lexing/lexer_data_envvar.o"
+   "objs/lexing/data_org.o"
   ],
-  "file": "srcs/lexing/lexer_data_envvar.c"
+  "file": "srcs/lexing/data_org.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
    "-I",
    "libft",
    "-I",
@@ -193,19 +202,208 @@
    "-I",
    "/Users/fvan-wij/.brew/opt/readline/include",
    "-c",
-   "srcs/lexing/lexer_into_list.c",
+   "srcs/lexing/dataorg_utils.c",
    "-o",
-   "objs/lexing/lexer_into_list.o"
+   "objs/lexing/dataorg_utils.o"
   ],
-  "file": "srcs/lexing/lexer_into_list.c"
+  "file": "srcs/lexing/dataorg_utils.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
+   "-c",
+   "srcs/lexing/data_org_special.c",
+   "-o",
+   "objs/lexing/data_org_special.o"
+  ],
+  "file": "srcs/lexing/data_org_special.c"
+ },
+ {
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
+   "-c",
+   "srcs/lexing/into_list.c",
+   "-o",
+   "objs/lexing/into_list.o"
+  ],
+  "file": "srcs/lexing/into_list.c"
+ },
+ {
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
+   "-c",
+   "srcs/lexing/parsing_grep.c",
+   "-o",
+   "objs/lexing/parsing_grep.o"
+  ],
+  "file": "srcs/lexing/parsing_grep.c"
+ },
+ {
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
+   "-c",
+   "srcs/lexing/parser_cat.c",
+   "-o",
+   "objs/lexing/parser_cat.o"
+  ],
+  "file": "srcs/lexing/parser_cat.c"
+ },
+ {
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
+   "-c",
+   "srcs/lexing/parsing_echo.c",
+   "-o",
+   "objs/lexing/parsing_echo.o"
+  ],
+  "file": "srcs/lexing/parsing_echo.c"
+ },
+ {
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
+   "-c",
+   "srcs/lexing/variable_expander.c",
+   "-o",
+   "objs/lexing/variable_expander.o"
+  ],
+  "file": "srcs/lexing/variable_expander.c"
+ },
+ {
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
+   "-c",
+   "srcs/lexing/varexp_utils.c",
+   "-o",
+   "objs/lexing/varexp_utils.o"
+  ],
+  "file": "srcs/lexing/varexp_utils.c"
+ },
+ {
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
+   "-c",
+   "srcs/lexing/varexp_mult.c",
+   "-o",
+   "objs/lexing/varexp_mult.o"
+  ],
+  "file": "srcs/lexing/varexp_mult.c"
+ },
+ {
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
+   "-c",
+   "srcs/lexing/varexp_checks.c",
+   "-o",
+   "objs/lexing/varexp_checks.o"
+  ],
+  "file": "srcs/lexing/varexp_checks.c"
+ },
+ {
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
+   "-c",
+   "srcs/lexing/delimiter_func.c",
+   "-o",
+   "objs/lexing/delimiter_func.o"
+  ],
+  "file": "srcs/lexing/delimiter_func.c"
+ },
+ {
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
    "-I",
    "libft",
    "-I",
@@ -220,12 +418,30 @@
   "file": "srcs/error/error.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
+   "-I",
+   "libft",
+   "-I",
+   "includes",
+   "-I",
+   "/Users/fvan-wij/.brew/opt/readline/include",
+   "-c",
+   "srcs/error/free.c",
+   "-o",
+   "objs/error/free.o"
+  ],
+  "file": "srcs/error/free.c"
+ },
+ {
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
    "-I",
    "libft",
    "-I",
@@ -240,12 +456,11 @@
   "file": "srcs/execution/execution_processes.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
    "-I",
    "libft",
    "-I",
@@ -260,12 +475,11 @@
   "file": "srcs/execution/execution_utilities.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
    "-I",
    "libft",
    "-I",
@@ -280,12 +494,11 @@
   "file": "srcs/execution/execution_heredoc.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
    "-I",
    "libft",
    "-I",
@@ -300,12 +513,11 @@
   "file": "srcs/builtins/builtin_operations.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
    "-I",
    "libft",
    "-I",
@@ -320,12 +532,11 @@
   "file": "srcs/builtins/builtin_execution.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
    "-I",
    "libft",
    "-I",
@@ -340,12 +551,11 @@
   "file": "srcs/interface/interface_frontend.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
    "-I",
    "libft",
    "-I",
@@ -360,12 +570,11 @@
   "file": "srcs/utilities/utilities_double_arrays.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
-   "-Werror",
    "-I",
    "libft",
    "-I",
@@ -380,7 +589,7 @@
   "file": "srcs/signals/signal_handler.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -394,7 +603,7 @@
   "file": "ft_atoi.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -408,7 +617,7 @@
   "file": "ft_bzero.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -422,7 +631,7 @@
   "file": "ft_calloc.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -436,7 +645,7 @@
   "file": "ft_isalnum.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -450,7 +659,7 @@
   "file": "ft_isalpha.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -464,7 +673,7 @@
   "file": "ft_isascii.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -478,7 +687,7 @@
   "file": "ft_isdigit.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -492,7 +701,7 @@
   "file": "ft_isprint.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -506,7 +715,7 @@
   "file": "ft_memchr.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -520,7 +729,7 @@
   "file": "ft_memcmp.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -534,7 +743,7 @@
   "file": "ft_memcpy.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -548,7 +757,7 @@
   "file": "ft_memmove.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -562,7 +771,7 @@
   "file": "ft_memset.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -576,7 +785,7 @@
   "file": "ft_strchr.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -590,7 +799,7 @@
   "file": "ft_strdup.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -604,7 +813,7 @@
   "file": "ft_strcpy.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -618,7 +827,7 @@
   "file": "ft_strlcat.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -632,7 +841,7 @@
   "file": "ft_strlcpy.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -646,7 +855,7 @@
   "file": "ft_strlen.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -660,7 +869,7 @@
   "file": "ft_strncmp.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -674,7 +883,7 @@
   "file": "ft_strnstr.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -688,7 +897,7 @@
   "file": "ft_strrchr.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -702,7 +911,7 @@
   "file": "ft_tolower.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -716,7 +925,7 @@
   "file": "ft_toupper.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -730,7 +939,7 @@
   "file": "ft_putchar_fd.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -744,7 +953,7 @@
   "file": "ft_putendl_fd.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -758,7 +967,7 @@
   "file": "ft_putnbr_fd.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -772,7 +981,7 @@
   "file": "ft_putstr_fd.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -786,7 +995,7 @@
   "file": "ft_itoa.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -800,7 +1009,7 @@
   "file": "ft_strtrim.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -814,7 +1023,7 @@
   "file": "ft_substr.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -828,7 +1037,7 @@
   "file": "ft_strjoin.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -842,7 +1051,7 @@
   "file": "ft_split.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -856,7 +1065,7 @@
   "file": "ft_striteri.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -870,7 +1079,7 @@
   "file": "ft_strmapi.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -884,7 +1093,7 @@
   "file": "ft_lstnew_bonus.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -898,7 +1107,7 @@
   "file": "ft_lstadd_front_bonus.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -912,7 +1121,7 @@
   "file": "ft_lstsize_bonus.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -926,7 +1135,7 @@
   "file": "ft_lstlast_bonus.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -940,7 +1149,7 @@
   "file": "ft_lstadd_back_bonus.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -954,7 +1163,7 @@
   "file": "ft_lstdelone_bonus.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -968,7 +1177,7 @@
   "file": "ft_lstclear_bonus.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -982,7 +1191,7 @@
   "file": "ft_lstiter_bonus.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -996,7 +1205,7 @@
   "file": "ft_lstmap_bonus.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -1010,7 +1219,7 @@
   "file": "get_next_line.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -1024,7 +1233,7 @@
   "file": "ft_printf.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -1038,7 +1247,7 @@
   "file": "ft_printspecifier.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -1052,7 +1261,7 @@
   "file": "ft_put_cap_hex.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -1066,7 +1275,7 @@
   "file": "ft_put_ui_nbr.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -1080,7 +1289,7 @@
   "file": "ft_putadr.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -1094,7 +1303,7 @@
   "file": "ft_putchar.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -1108,7 +1317,7 @@
   "file": "ft_puthex.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -1122,7 +1331,7 @@
   "file": "ft_putnbr.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -1136,7 +1345,7 @@
   "file": "ft_putstr.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -1150,7 +1359,7 @@
   "file": "ft_strjoin_and_free.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -1164,7 +1373,7 @@
   "file": "ft_split_nl.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -1178,7 +1387,7 @@
   "file": "ft_atoh.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -1192,7 +1401,7 @@
   "file": "ft_word_counter_quotations.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -1206,7 +1415,7 @@
   "file": "ft_split_quotations.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -1220,7 +1429,7 @@
   "file": "ft_find_envp_path_index.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",
@@ -1234,7 +1443,7 @@
   "file": "ft_del_2d.c"
  },
  {
-  "directory": "/Users/fvan-wij/Documents/MINIHELL_42/libft",
+  "directory": "/home/fvan-wij/Documents/Github_Projects/Minishell/libft",
   "arguments": [
    "gcc",
    "-Wall",

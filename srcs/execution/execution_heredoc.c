@@ -36,17 +36,13 @@ char	*expand_heredoc_var(char *heredoc_line, int var_index, char *env_cpy[])
 	while (heredoc_line[var_index] && heredoc_line[var_index] != ' ' && heredoc_line[var_index] != '$' && heredoc_line[var_index] != '"' && heredoc_line[var_index] != 39)
 		var_index++;
 	temp = ft_substr(heredoc_line, start, var_index - start);
-	ft_printf("temp: %s.\n", temp);
 	if (!var_exists(env_cpy, temp, ft_strlen(temp)))
 		return (heredoc_line);
 	else 
 	{
 		string_before_var = ft_substr(heredoc_line, 0, start);
-		ft_printf("str before var: %s\n", string_before_var);
 		string_after_var = ft_substr(heredoc_line, var_index, ft_strlen(heredoc_line + var_index));
-		ft_printf("str after var: %s\n", string_after_var);
 		temp = ft_getenv(temp + 1, env_cpy);	
-		ft_printf("temp (getenv): %s\n", temp);
 		heredoc_line = ft_strjoin_and_free(string_before_var, temp);
 		heredoc_line = ft_strjoin_and_free(heredoc_line, string_after_var);
 		free(string_after_var);
@@ -69,6 +65,7 @@ char	*expand_heredoc_pid(char *heredoc_line, int pid_token_index)
 		string_before_pid = ft_substr(heredoc_line, 0, pid_token_index);
 		string_after_pid = ft_substr(heredoc_line, pid_token_index + 2, ft_strlen(heredoc_line));
 		string_after_pid = ft_strjoin_and_free(pid_str, string_after_pid);
+		free(heredoc_line);
 		heredoc_line = ft_strjoin_and_free(string_before_pid, string_after_pid);
 		free(string_after_pid);
 		return (heredoc_line);
