@@ -210,12 +210,21 @@ char	**append_to_double_array(char **src, char *str);
 char	**replace_str_in_array(char **src, char *str, int index);
 char	**remove_str_from_array(char **src, int index);
 
-//		execution_builtin_operations.c
-void	execute_echo(char **raw_input, char *envp[]);
+//		utilities_debugging.c
+void	print_cmd_lst(t_lexer *head);
+void	printing_lexer(t_lexer *info_lexer);
+
+//		execution_cd.c
 void	execute_cd(t_minishell *shell);
-void	execute_pwd();
+//		execution_echo.c
+void	execute_echo(char **raw_input, char *envp[]);
+//		execution_env.c
 void	execute_env(char *envp[]);
+//		execution_export.c
 void	execute_export(t_minishell *shell);
+//		execution_pwd.c
+void	execute_pwd();
+//		execution_unset.c
 void	execute_unset(t_minishell *shell);
 
 //		interface_frontend.c
@@ -227,8 +236,14 @@ int		execute_builtin(t_minishell *shell);
 int		is_builtin(t_minishell *data);
 
 //		execution_heredoc.c
+void	create_heredoc_loop(t_lexer *head, char *env_cpy[]);
 void	create_heredoc_tmp(char *delim, char *envp[]);
-void	clean_tmp_files(char *envp[]);
+void	clean_tmp_files(t_lexer *head, char *envp[]);
+
+//		execution_routing.c
+void	route_output(int out, t_lexer *node);
+void	route_input(int in, t_lexer *node);
+void	redirect_from_to(int fd_from, int fd_to);
 
 //		signal_handling.c
 void	catch_signals_parent(void);
