@@ -9,67 +9,6 @@
 
 int g_exit_status;
 
-//Global array - used to print out the enum strings. Must be deleted before handing in the project.
-static const char *g_enum[] = {
-[PIPE_READ] = "PIPE_READ", //0
-[PIPE_WRITE] = "PIPE_WRITE", //1
-[INFILE] = "INFILE", //2
-[OUTFILE] = "OUTFILE", //3
-[COMMAND] = "COMMAND", //4
-[FLAG] = "FLAG", //5
-[PIPE] = "PIPE", //6
-[ENV_VAR] = "ENV_VAR", //7
-[DELIMITER] = "DELIMITER",//8
-[APPENDER] = "APPENDER", //9
-[REDIRECT_IN] = "REDIRECT_IN", //10
-[REDIRECT_OUT] = "REDIRECT_OUT", //11
-[NONE] = "NONE", //12
-[APPEND] = "APPEND", //13
-[STDIN_IN] = "STDIN", //14
-[STDOUT_OUT] = "STDOUT", //15
-[HEREDOC] = "HEREDOC", //16
-};
-
-void	printing_lexer(t_lexer *info_lexer)
-{
-	int	index;
-
-	if (!info_lexer)
-		return ;
-	fprintf(stderr, "\033[0;36m----------PARSER-----------");
-	while(info_lexer)
-	{
-		fprintf(stderr, "\n");
-		index = 0;
-		if (info_lexer->content)
-		{
-			while (info_lexer->content[index])
-			{
-				fprintf(stderr, "content[%d] = %s\n", index, info_lexer->content[index]);
-				index++;
-			}
-		}
-		fprintf(stderr, "path = %s\n", info_lexer->path);
-		fprintf(stderr, "file name = %s\n", info_lexer->file);
-		fprintf(stderr, "input = %s\n", g_enum[info_lexer->input]);
-		fprintf(stderr, "output = %s\n", g_enum[info_lexer->output]);
-		int i = 0;
-		if (info_lexer->delim)
-		{
-			while (info_lexer->delim[i])
-			{
-				fprintf(stderr, "delim[%i] = %s\n", i, info_lexer->delim[i]);
-				i++;
-			}
-		}
-		fprintf(stderr, "---------------------------");
-		fprintf(stderr, "\n");
-		info_lexer = info_lexer->next;
-	}
-	fprintf(stderr, "\033[0m");
-	return ;
-}
-
 void	display_prompt(t_minishell *shell)
 {	
 	char	*line;
