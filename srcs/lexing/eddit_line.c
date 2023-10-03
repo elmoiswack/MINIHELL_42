@@ -64,6 +64,6 @@ char	*put_spaces_in_line(char *line, t_lexer *info_list)
 	if (!temp)
 		return (set_error_lex(info_list, 3, "dataorg_utis.c/L24"), NULL);
 	temp = edit_line(line, temp);
-	//free(line);
+	free(line);
 	return (temp);
 }

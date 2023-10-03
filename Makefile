@@ -5,6 +5,7 @@ HEADERS		:= 	-I libft -I includes -I /Users/$(USER)/.brew/opt/readline/include
 SRCS		:= 	main.c \
 				memory_management.c \
 				lexing/lexer.c \
+				lexing/line_checker.c \
 				lexing/lexer_utils.c \
 				lexing/enum_arrayfts.c \
 				lexing/get_path.c \
@@ -20,8 +21,8 @@ SRCS		:= 	main.c \
 				lexing/parsing_echo.c \
 				lexing/variable_expander.c \
 				lexing/varexp_utils.c \
-				lexing/varexp_mult.c \
-				lexing/varexp_checks.c \
+				lexing/varexp_arrayft.c \
+				lexing/varexp_lineft.c \
 				lexing/delimiter_func.c \
 				error/error.c \
 				error/free.c \

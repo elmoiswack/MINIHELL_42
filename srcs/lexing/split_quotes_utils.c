@@ -26,14 +26,26 @@ int	how_many_quotes(char *line)
 	return (count);
 }
 
-int	get_end_quote(char *line, int end)
+int	get_end_quote(char *line, int end, int which)
 {
 	end++;
-	while (line[end])
+	if (which == 1)
 	{
-		if (line[end] == '"' || line[end] == '\'')
-			return (end);
-		end++;
+		while (line[end])
+		{
+			if (line[end] == '"')
+				return (end);
+			end++;
+		}
+	}
+	else
+	{
+		while (line[end])
+		{
+			if (line[end] == '\'')
+				return (end);
+			end++;
+		}		
 	}
 	return (-1);
 }

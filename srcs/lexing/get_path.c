@@ -66,4 +66,3 @@ char	*get_path_of_command(char *command)
 		return (NULL);
 	return (command_path);
 }
-//kdasdas

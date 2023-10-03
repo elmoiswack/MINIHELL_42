@@ -3,39 +3,65 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char	**one_case(char **double_array, int index, char **env_cpy)
+char	*replace_variables(char *line, char **env_temp)
 {
-	char	*temp;
-	char	*env_temp;
+	char	*new_line;
+	int		index_env;
+	int		index_new;
+	int		index;
+	int		end;
 
-	temp = remove_dollar(double_array, index);
-	env_temp = ft_getenv(temp, env_cpy);
-	free(temp);
-	if (!env_temp)
+	index = 0;
+	index_new = 0;
+	index_env = 0;
+	new_line = ft_calloc(get_size_strings(line, env_temp) + 1, sizeof(char));
+	if (!new_line)
+		return (NULL);
+	while (line[index])
 	{
-		free_double_array(double_array);
-		return (NULL);
+		if (line[index] == '$')
+		{
+			end = get_env_end(line, index + 1);
+			new_line = put_env_in_line(new_line, index_new, env_temp, index_env);
+			index_new += ft_strlen(env_temp[index_env]);
+			index_env++;
+			index = end;
+		}
+		if (line[index] != '$')
+		{
+			new_line[index_new] = line[index];
+			index_new++;
+			if (line[index] == '\0')
+				break ;
+			index++;
+		}
 	}
-	temp = ft_calloc(ft_strlen(env_temp) + 1, sizeof(char));
-	if (!temp)
-		return (NULL);
-	ft_strcpy(temp, env_temp);
-	free(double_array[index]);
-	double_array[index] = temp;
-	return (double_array);
+	free(line);
+	return (new_line);
 }
 
-char	**which_case_env(char **splitted_line, int index, char **env_cpy)
+char	*get_env_var(char *line, char **env_cpy, int ammount_env)
 {
-	if (splitted_line[index][0] == '"')
-		splitted_line[index] = remove_quotes_string(splitted_line, index);
-	if (!splitted_line[index])
+	int		index;
+	char	**env_temp;
+	int		index_tmp;
+
+	index = 0;
+	index_tmp = 0;
+	env_temp = ft_calloc(ammount_env + 1, sizeof(char *));
+	if (!env_temp)
 		return (NULL);
-	if (check_multiple_env(splitted_line, index) == 1 && are_there_spaces(splitted_line, index) != 1)
-		return (one_line_multenv(splitted_line, index, env_cpy));
-	if (check_multiple_env(splitted_line, index) == 1 || check_env_in_string(splitted_line, index) == 1)
-		return (mult_line_multenv(splitted_line, index, env_cpy));
-	return (one_case(splitted_line, index, env_cpy));
+	env_temp = fill_array_env(line, ammount_env, env_temp);
+	if (!env_temp)
+		return (NULL);
+	env_temp = expand_env_variables(env_temp, env_cpy);
+	if (!env_temp)
+		return (NULL);
+	line = replace_variables(line, env_temp);
+	if (!line)
+		return (NULL);
+	free_double_array(env_temp);
+	return (line);
 }
 
 char	**replace_var_expander(t_lexer *info_list, char **splitted_line, char **env_cpy)
@@ -49,24 +75,26 @@ char	**replace_var_expander(t_lexer *info_list, char **splitted_line, char **env
 		index_x = 0;
 		while (splitted_line[index][index_x])
 		{
-			if (splitted_line[index][0] == 39)
+			if (splitted_line[index][0] == '\'')
 			{
 				splitted_line[index] = remove_quotes_string(splitted_line, index);
 				break ;
 			}
-			if (splitted_line[index][index_x] == '$')
+			else if (splitted_line[index][index_x] == '$')
 			{
-				splitted_line = which_case_env(splitted_line, index, env_cpy);
+				splitted_line[index] = get_env_var(splitted_line[index], env_cpy, how_many_env_var(splitted_line[index]));
 				break ;
 			}
 			index_x++;
 		}
-		if (!splitted_line)
+		if (!splitted_line[index])
 		{
-			set_error_lex(info_list, 1, "Enviromental variable doesn't exist!");
+			free_double_array(splitted_line);
+			set_error_lex(info_list, 1, "");
 			return (NULL);
 		}
 		index++;
 	}
+	splitted_line = check_quotes_env(splitted_line);
 	return (splitted_line);
 }

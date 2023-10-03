@@ -59,9 +59,12 @@ t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, \
 	if (!info_list->content)
 		return (set_error_lex(info_list, 3, "parsing_echo.c/L58"), NULL);
 	ft_strcpy(info_list->content[0], splitted_line[0]);
-	info_list->content[1] = ft_calloc(1, sizeof(char));
-	if (!info_list->content[1])
-		return (set_error_lex(info_list, 3, "parsing_echo.c/L62"), NULL);
+	if (splitted_line[index])
+	{
+		info_list->content[1] = ft_calloc(1, sizeof(char));
+		if (!info_list->content[1])
+			return (set_error_lex(info_list, 3, "parsing_echo.c/L62"), NULL);
+	}
 	while (splitted_line[index])
 	{
 		if (splitted_line[index][0] == '"' || splitted_line[index][0] == '\'')
