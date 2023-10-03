@@ -39,10 +39,7 @@ void	display_prompt(t_minishell *shell)
 				continue ;	
 			}
 			printing_lexer(shell->cmd_lst);
-			if (!shell->cmd_lst->next && is_builtin(shell) != -1)
-				execute_builtin(shell);
-			else
-				g_exit_status = execute_cmds(shell->cmd_lst, shell->env_cpy);
+			g_exit_status = execute_cmds(shell, shell->cmd_lst, shell->env_cpy);
 			free_ll(&shell->cmd_lst);
 		}
 		else
@@ -84,7 +81,6 @@ int	main(int argc, char *argv[], char *envp[])
 	// atexit(f);
 	shell = init_minishell(argc, argv, envp);
 	catch_signals_parent();
-	// catch_signals_child();
 	display_prompt(&shell);
 	free_double_array(shell.env_cpy);
 	return (0);

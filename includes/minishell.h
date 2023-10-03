@@ -198,13 +198,13 @@ void	free_lexing_struct(t_lexer *list);
 //###############################################################
 
 //		execution_processes.c
-int		execute_cmds(t_lexer *head, char *envp[]);
+int		execute_cmds(t_minishell *shell, t_lexer *head, char *envp[]);
 
 //		execution_utilities.c
 char	*get_path(char *cmd);
 int		arg_is_env(char *raw_input, char **value, char *envp[]);
 int		check_access(char *cmd);
-int		var_exists(char	**env, char *var, int var_len);
+int		var_exists(char	**env, char *var);
 char	*ft_getenv(char *var_name, char **env);
 
 //		utilities_double_arrays.c
@@ -224,7 +224,7 @@ void	execute_cd(t_minishell *shell);
 //		execution_echo.c
 void	execute_echo(char **raw_input, char *envp[]);
 //		execution_env.c
-void	execute_env(char *envp[]);
+void	execute_env(char *envp[], int out);
 //		execution_export.c
 void	execute_export(t_minishell *shell);
 //		execution_pwd.c
@@ -237,8 +237,8 @@ void	init_ascii_art(void);
 void	remove_ctl_echo();
 
 //		execution_builtin.c
-int		execute_builtin(t_minishell *shell);
-int		is_builtin(t_minishell *data);
+int		execute_builtin(t_minishell *shell, t_builtin builtin, int fd);
+int		is_builtin(t_lexer *cmd_lst);
 
 //		execution_heredoc.c
 void	create_heredoc_loop(t_lexer *head, char *env_cpy[]);

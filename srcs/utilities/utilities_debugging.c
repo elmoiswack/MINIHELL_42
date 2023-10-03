@@ -22,18 +22,31 @@ static const char *g_enum[] = {
 [HEREDOC] = "HEREDOC", //16
 };
 
+static const char *g_builtin[] = {
+	[ECHO] = "ECHO",
+	[CD] = "CD",
+	[PWD] = "PWD",
+	[ENV] = "ENV",
+	[EXIT] = "EXIT",
+	[EXPORT] = "EXPORT",
+	[UNSET] = "UNSET",
+	[NO_BUILTIN] = "NO_BUILTIN",
+};
+
 void	print_cmd_lst(t_lexer *head)
 {
 	t_lexer	*current;
 	int		n;
+	t_builtin builtin;
 
 	current = head;
 	n = 0;
 	fprintf(stderr, "\033[0;36m--------EXECUTIONER--------\n");
-	fprintf(stderr, "PROCESS\tCMD\tINPUT\tOUTPUT\tFILE\n");
+	fprintf(stderr, "PROCESS\tCMD\tINPUT\tOUTPUT\tFILE\tBUILTIN\n");
 	while (current)
 	{
-		fprintf(stderr, "%d\t%s\t%s\t%s\t%s\n", n, current->content[0], g_enum[current->input], g_enum[current->output], current->file);
+		builtin = is_builtin(current);
+		fprintf(stderr, "%d\t%s\t%s\t%s\t%s\t%s\n", n, current->content[0], g_enum[current->input], g_enum[current->output], current->file, g_builtin[builtin]);
 		n++;
 		current = current->next;
 	}
