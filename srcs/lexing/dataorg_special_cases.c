@@ -8,13 +8,13 @@ t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, \
 {
 	info_list->input = NONE;
 	info_list->output = NONE;
-	index = get_max_array(splitted_line);
 	info_list->content = ft_calloc(index + 1, sizeof(char *));
 	if (!info_list->content)
-		return (set_error_lex(info_list, 3, "data_org_special.c/L12"), NULL);
-	info_list->content[0] = ft_calloc(ft_strlen(splitted_line[0] + 1), sizeof(char));
+		return (error_lex(info_list, 3, "data_org_special.c/L12"), NULL);
+	info_list->content[0] = ft_calloc(ft_strlen(splitted_line[0] + 1), \
+		sizeof(char));
 	if (!info_list->content[0])
-		return (set_error_lex(info_list, 3, "data_org_special.c/L15"), NULL);
+		return (error_lex(info_list, 3, "data_org_special.c/L15"), NULL);
 	ft_strcpy(info_list->content[0], splitted_line[0]);
 	info_list->path = get_path_of_command(splitted_line[0]);
 	index = 1;
@@ -23,7 +23,8 @@ t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, \
 		info_list->content[index] = \
 			ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
 		if (!info_list->content[index])
-			return (set_error_lex(info_list, 3, "data_org_special.c/L24"), NULL);
+			return (error_lex(info_list, 3, "data_org_special.c/L24"), \
+				NULL);
 		ft_strcpy(info_list->content[index], splitted_line[index]);
 		index++;
 	}
@@ -39,13 +40,15 @@ t_lexer	*special_case_files(t_lexer *info_list, char **splitted_line)
 	index = get_max_array(splitted_line);
 	info_list->content = ft_calloc(index + 1, sizeof(char *));
 	if (!info_list->content)
-		return (set_error_lex(info_list, 3, "data_org_special.c/L40"), NULL);
+		return (error_lex(info_list, 3, "data_org_special.c/L40"), NULL);
 	index = 0;
 	while (splitted_line[index])
 	{
-		info_list->content[index] = ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
+		info_list->content[index] = \
+			ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
 		if (!info_list->content[index])
-			return (set_error_lex(info_list, 3, "data_org_special.c/L46"), NULL);
+			return (error_lex(info_list, 3, \
+				"data_org_special.c/L46"), NULL);
 		ft_strcpy(info_list->content[index], splitted_line[index]);
 		index++;
 	}
@@ -55,6 +58,30 @@ t_lexer	*special_case_files(t_lexer *info_list, char **splitted_line)
 	info_list->input = NONE;
 	info_list->output = NONE;
 	return (info_list);
+}
+
+t_lexer	*other_special_case(t_lexer	*info_list, char **splitted_line, \
+	int *enum_array)
+{
+	if (ft_strncmp(splitted_line[0], "rm", ft_strlen(splitted_line[0])) == 0)
+	{
+		info_list = special_case_rm(info_list, splitted_line, \
+			get_max_array(splitted_line));
+		free_double_array(splitted_line);
+		free(enum_array);
+		return (info_list);
+	}
+	if ((ft_strncmp(splitted_line[0], "mkdir", \
+		ft_strlen(splitted_line[0])) == 0) \
+		|| (ft_strncmp(splitted_line[0], "touch", \
+			ft_strlen(splitted_line[0])) == 0))
+	{
+		info_list = special_case_files(info_list, splitted_line);
+		free_double_array(splitted_line);
+		free(enum_array);
+		return (info_list);
+	}
+	return (NULL);
 }
 
 t_lexer	*which_special_case(t_lexer *info_list, char **splitted_line, \
@@ -69,34 +96,21 @@ t_lexer	*which_special_case(t_lexer *info_list, char **splitted_line, \
 		{
 			if (is_metacharachter(splitted_line[index][0]) == 1)
 			{
-				info_list = echo_with_meta(info_list, splitted_line, enum_array, 1);
+				info_list = echo_with_meta(info_list, \
+					splitted_line, enum_array);
 				free_double_array(splitted_line);
 				free(enum_array);
-				return (info_list);	
+				return (info_list);
 			}
 			index++;
 		}
-		info_list = special_case_echo(info_list, splitted_line, 0);
+		info_list = special_case_echo(info_list, splitted_line);
 		free_double_array(splitted_line);
 		free(enum_array);
 		return (info_list);
 	}
-	if (ft_strncmp(splitted_line[0], "rm", ft_strlen(splitted_line[0])) == 0)
-	{
-		info_list = special_case_rm(info_list, splitted_line, 0);
-		free_double_array(splitted_line);
-		free(enum_array);
-		return (info_list);
-	}
-	if ((ft_strncmp(splitted_line[0], "mkdir", ft_strlen(splitted_line[0])) == 0) \
-		|| (ft_strncmp(splitted_line[0], "touch", ft_strlen(splitted_line[0])) == 0))
-	{
-		info_list = special_case_files(info_list, splitted_line);
-		free_double_array(splitted_line);
-		free(enum_array);
-		return (info_list);		
-	}
-	return (NULL);
+	info_list = other_special_case(info_list, splitted_line, enum_array);
+	return (info_list);
 }
 
 int	check_special_cases(char **splitted_line)

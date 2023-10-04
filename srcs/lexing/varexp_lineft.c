@@ -37,7 +37,8 @@ char	*remove_quotes_string(char **splitted_line, int index)
 	}
 	while (splitted_line[index][index_x])
 	{
-		if (splitted_line[index][index_x] != '\'' && splitted_line[index][index_x] != '"')
+		if (splitted_line[index][index_x] != '\'' \
+			&& splitted_line[index][index_x] != '"')
 		{
 			new_line[index_l] = splitted_line[index][index_x];
 			index_l++;
@@ -71,7 +72,8 @@ char	*remove_dollar_sign(char *line)
 	return (temp);
 }
 
-char	*put_env_in_line(char *new_line, int index_l, char **env_temp, int index_env)
+char	*put_env_in_line(char *new_line, int index_l, \
+	char **env_temp, int index_env)
 {
 	int	index_x;
 

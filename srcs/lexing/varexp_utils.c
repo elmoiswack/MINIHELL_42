@@ -33,10 +33,9 @@ int	get_env_end(char *line, int index)
 	return (index);
 }
 
-
 int	get_size_strings(char *line, char **env_temp)
 {
-	int size;
+	int	size;
 	int	index;
 
 	index = 0;
@@ -48,7 +47,6 @@ int	get_size_strings(char *line, char **env_temp)
 	}
 	return (size);
 }
-
 
 int	check_for_envvar(char **splitted_line)
 {
