@@ -83,6 +83,12 @@ t_lexer	*parsing_array(t_lexer *info_list, char **splitted_line, int *enum_array
 		//line_checker.c
 int		input_line_check(char *line, t_lexer *info_list);
 
+		//linechecker_checks.c
+int		check_quotes(char *line, int index, t_lexer *info_list);
+int		check_outredirect(char *line, int index, t_lexer *info_list);
+int		check_inredirect(char *line, int index, t_lexer *info_list);
+int		check_pipe(char *line, int index, t_lexer *info_list);
+
 		//enum_arrayfts.c
 int		*into_enum_array(char **splitted_line, int *enum_array, int index);
 int		which_enum(char **splitted_line, int index);
@@ -101,14 +107,17 @@ int		is_metacharachter(char c);
 
 		//split_quotes.c
 char	**split_with_quotes(char *line, t_lexer *info_list);
+char	**split_intoarray(char *line, t_lexer *info_list, char **temp_quotes);
 char	**replace_quotes_array(char **split_array, char	**temp_quotes);
+
+		//splitquo_quotefts.c
+char	*remove_spaces_quotes_line(char *line, char *new_line, int index_n, int index_l);
 char	**store_all_quote_data(char *line, char **temp);
-char	*remove_spaces_quotes_line(char *line);
 
 		//split_quotes_utils.c
 int		how_many_quotes(char *line);
 int		get_end_quote(char *line, int end, int which);
-char	*my_random_strcpy(char *line, int begin, int end);
+char	*strcpy_splitquo(char *line, int begin, int end);
 
 		//get_path.c
 char	*get_path_of_command(char *command);
@@ -117,11 +126,14 @@ char	**put_slash_behind(char **paths);
 
 		//data_org.c
 t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
+
+		//dataorg_cases.c
 t_lexer	*data_org_command(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
 t_lexer	*data_org_pipe(t_lexer *info_list);
 t_lexer	*data_org_file(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
 t_lexer	*data_org_delim(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
-		
+t_lexer *data_org_appender(t_lexer *info_list, char **splitted_line, int index);
+
 		//dataorg_utils.c
 t_lexer *create_new_node(t_lexer *info_lexer);
 char	**allocate_2d_arr(int size, t_lexer *info_list);
@@ -134,8 +146,7 @@ t_lexer *which_special_case(t_lexer *info_list, char **splitted_line, int *enum_
 t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, int index);
 
 		//into_list.c
-t_lexer	*one_word_lexer(t_lexer *info_list, char **splitted_line);
-t_lexer	*two_word_lexer(t_lexer *info_list, char **splitted_line);
+t_lexer	*one_two_word_lexer(t_lexer *info_list, char **splitted_line);
 t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var);
 
 		//parsing_grep.c
@@ -149,8 +160,11 @@ t_lexer *cat_parser(t_lexer *info_list, char **splitted_line);
 t_lexer *check_content(t_lexer *info_list, char **splitted_line, int index);
 
 		//parsing_echo.c
-t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line, int index);
-t_lexer	*echo_with_meta(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
+t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line);
+t_lexer	*spca_echo_intolist(t_lexer *info_list, char **splitted_line, int index);
+t_lexer	*echo_with_meta(t_lexer *info_list, char **splitted_line, int *enum_array);
+t_lexer	*echo_meta_intolist(t_lexer *info_list, char **splitted_line, int index);
+t_lexer	*default_echo_data(t_lexer *info_list, char **splitted_line);
 
 		//variable_expander.c
 char	**replace_var_expander(t_lexer *info_list, char **splitted_line, char **env_cpy);
@@ -160,7 +174,7 @@ char	*replace_variables(char *line, char **env_temp);
 		//varexp_arrayft.c
 char	**expand_env_variables(char **env_temp, char **env_cpy);
 char	*expand_variable(char *line, char **env_cpy);
-char	**fill_array_env(char *line, int ammount_env, char **env_temp);
+char	**fill_array_env(char *line, int ammount_env, char **env_temp, int index);
 char	**check_quotes_env(char **splitted_line);
 
 		//varexp_lineft.c
@@ -187,7 +201,7 @@ void	error_command_not_found(char *cmd);
 void	error_export_invalid_identifier(char *input);
 void	error_unset_too_few_args();
 void	error_lexing_message(t_lexer *list);
-void	set_error_lex(t_lexer *info_list, int error_code, const char *str);
+void	error_lex(t_lexer *info_list, int error_code, const char *str);
 
 		//free.c
 void	free_lexing_content_struct(t_lexer *list);

@@ -5,7 +5,7 @@
 
 void	free_double_array(char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (array[i])
@@ -18,7 +18,7 @@ void	free_double_array(char **array)
 
 void	free_lexing_struct(t_lexer *list)
 {
-	t_lexer *temp;
+	t_lexer	*temp;
 
 	while (list)
 	{

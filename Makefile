@@ -6,15 +6,18 @@ SRCS		:= 	main.c \
 				memory_management.c \
 				lexing/lexer.c \
 				lexing/line_checker.c \
+				lexing/line_checker_checks.c \
 				lexing/lexer_utils.c \
 				lexing/enum_arrayfts.c \
 				lexing/get_path.c \
 				lexing/eddit_line.c \
 				lexing/split_quotes.c \
+				lexing/splitquo_quotefts.c \
 				lexing/split_quotes_utils.c \
 				lexing/data_org.c \
+				lexing/dataorg_cases.c \
 				lexing/dataorg_utils.c \
-				lexing/data_org_special.c \
+				lexing/dataorg_special_cases.c \
 				lexing/into_list.c \
 				lexing/parsing_grep.c \
 				lexing/parser_cat.c \

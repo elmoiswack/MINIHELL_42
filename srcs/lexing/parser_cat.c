@@ -23,7 +23,7 @@ t_lexer	*check_content(t_lexer *info_list, char **splitted_line, int index)
 		info_list->content[1] = ft_calloc(ft_strlen(splitted_line[index]) + 1, \
 			sizeof(char));
 		if (!info_list->content[1])
-			return (set_error_lex(info_list, 3, "parses_cat.c/L21"), NULL);
+			return (error_lex(info_list, 3, "parses_cat.c/L21"), NULL);
 		ft_strcpy(info_list->content[1], splitted_line[index]);
 	}
 	return (info_list);

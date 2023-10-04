@@ -28,7 +28,13 @@ int	*into_enum_array(char **splitted_line, int *enum_array, int index)
 	while (splitted_line[index])
 	{
 		enum_array[index] = which_enum(splitted_line, index);
-		if (enum_array[index] == REDIRECT_IN)
+		if (ft_strncmp(splitted_line[index], "grep", ft_strlen("grep")) == 0)
+		{
+			index++;
+			if (enum_array[index])
+				enum_array[index] = FLAG;
+		}
+		else if (enum_array[index] == REDIRECT_IN)
 		{
 			index++;
 			enum_array[index] = INFILE;
@@ -38,7 +44,8 @@ int	*into_enum_array(char **splitted_line, int *enum_array, int index)
 			index++;
 			enum_array[index] = OUTFILE;
 		}
-		index++;
+		if (splitted_line[index])
+			index++;
 	}
 	enum_array[index] = 0;
 	return (enum_array);

@@ -3,13 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char	**fill_array_env(char *line, int ammount_env, char **env_temp)
+char	**fill_array_env(char *line, int ammount_env, \
+	char **env_temp, int index)
 {
-	int	index;
 	int	index_temp;
 	int	end;
 
-	index = 0;
 	end = 0;
 	index_temp = 0;
 	while (ammount_env > 0)
@@ -55,7 +54,7 @@ char	*expand_variable(char *line, char **env_cpy)
 char	**expand_env_variables(char **env_temp, char **env_cpy)
 {
 	int		index;
-	
+
 	index = 0;
 	while (env_temp[index])
 	{
@@ -72,7 +71,7 @@ char	**expand_env_variables(char **env_temp, char **env_cpy)
 
 char	*remove_quotes_string_env(char **splitted_line, int index)
 {
-	char *new_line;
+	char	*new_line;
 	int		index_l;
 	int		index_x;
 
@@ -107,7 +106,8 @@ char	**check_quotes_env(char **splitted_line)
 		{
 			if (splitted_line[index][index_x] == '"')
 			{
-				splitted_line[index] = remove_quotes_string_env(splitted_line, index);
+				splitted_line[index] = remove_quotes_string_env(splitted_line, \
+					index);
 				break ;
 			}
 			index_x++;

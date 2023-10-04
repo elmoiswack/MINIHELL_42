@@ -17,7 +17,7 @@ void	error_export_invalid_identifier(char *input)
 	ft_putstr_fd(": not a valid identifier\n", STDERR_FILENO);
 }
 
-void	error_unset_too_few_args()
+void	error_unset_too_few_args(void)
 {
 	ft_putstr_fd("unset: not enough arguments\n", STDERR_FILENO);
 }
@@ -32,7 +32,7 @@ void	error_lexing_message(t_lexer *list)
 		printf("Allocation error at %s\n", list->error_str);
 }
 
-void	set_error_lex(t_lexer *info_list, int error_code, const char *str)
+void	error_lex(t_lexer *info_list, int error_code, const char *str)
 {
 	info_list->error_code = error_code;
 	info_list->error_str = str;

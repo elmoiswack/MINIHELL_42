@@ -45,16 +45,16 @@ int	get_end_quote(char *line, int end, int which)
 			if (line[end] == '\'')
 				return (end);
 			end++;
-		}		
+		}
 	}
 	return (-1);
 }
 
-char	*my_random_strcpy(char *line, int begin, int end) //I NEED A BETTER NAME FOR THIS FUNCTION!!!!!
+char	*strcpy_splitquo(char *line, int begin, int end)
 {
 	char	*temp;
 	int		index;
-	
+
 	temp = ft_calloc(end - begin + 2, sizeof(char));
 	if (!temp)
 		return (NULL);
