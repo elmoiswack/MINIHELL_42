@@ -40,8 +40,10 @@ void	catch_signals_parent(void)
 	struct sigaction sigparent_int;
 	struct sigaction sigparent_quit;
 
+	ft_memset(&sigparent_int, 0, sizeof(sigparent_int));
+	ft_memset(&sigparent_quit, 0, sizeof(sigparent_quit));
 	sigparent_int.sa_handler = &handle_parent_signals;
-	sigparent_quit.sa_handler = SIG_DFL;
+	sigparent_quit.sa_handler = SIG_IGN;
 
 	if (sigaction(SIGINT, &sigparent_int, NULL) == -1)
 		perror("SIGINT: ");
@@ -53,6 +55,7 @@ void	catch_signals_child(void)
 {
 	struct sigaction sigchild;
 
+	ft_memset(&sigchild, 0, sizeof(sigchild));
 	sigchild.sa_handler = &handle_child_signals;
 	if (sigaction(SIGINT, &sigchild, NULL) == -1)
 		perror("SIGINT: ");

@@ -29,22 +29,26 @@ int	check_access(char *cmd)
 	int		i;
 	char	**paths;
 	char	*temp;
+	char	*slash_cmd;
 
 	i = 0;
 	paths = ft_split(getenv("PATH"), ':');
+	slash_cmd = ft_strjoin("/", cmd);
 	while (paths[i])
 	{
-		temp = ft_strjoin(paths[i], ft_strjoin("/", cmd));
+		temp = ft_strjoin(paths[i], slash_cmd);
 		if (access(temp, X_OK) == 0)
 		{
 			free_double_array(paths);
-			return (1);
+			free(temp);
+			return (free(slash_cmd), 1);
 		}
 		else
 			free(temp);
 		i++;
 	}
-	return (-1);
+	free_double_array(paths);
+	return (free(slash_cmd), -1);
 }
 
 char *ft_getenv(char *var_name, char **env)

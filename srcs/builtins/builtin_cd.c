@@ -15,13 +15,13 @@ static void	update_pwd(t_minishell *shell)
 		perror("getcwd()");
 		shell->status = 1;
 		return ;
-	} 
+	}
 	index = var_exists(shell->env_cpy, "PWD");
 	if (index == -1)
 		return ;
 	else
 	{
-		new_pwd = ft_strjoin("PWD=", cwd);		
+		new_pwd = ft_strjoin("PWD=", cwd);
 		shell->env_cpy = replace_str_in_array(shell->env_cpy, new_pwd, index);
 	}
 }
@@ -37,42 +37,44 @@ static void	update_old_pwd(t_minishell *shell)
 		perror("getcwd()");
 		shell->status = 1;
 		return ;
-	} 
+	}
 	index = var_exists(shell->env_cpy, "OLDPWD");
 	if (index == -1)
 		return ;
 	else
 	{
-		new_pwd = ft_strjoin("OLDPWD=", cwd);		
+		new_pwd = ft_strjoin("OLDPWD=", cwd);
 		shell->env_cpy = replace_str_in_array(shell->env_cpy, new_pwd, index);
 	}
 }
 
-void	execute_cd(t_minishell *shell)
+static void	chdir_oldpwd(void)
 {
-	int	arg_len;
-	char *value;
+	char	*value;
 
-	update_old_pwd(shell);	
-	if (!shell->cmd_lst->content[1])
+	value = getenv("OLDPWD");
+	if (chdir(value) == -1)
 	{
-		chdir(getenv("HOME"));
-		update_pwd(shell);
-		return ;
+		g_exit_status = 1;
+		return (perror("OLDPWD"));
 	}
-	arg_len = ft_strlen(shell->cmd_lst->content[1]);
-	if (ft_strncmp(shell->cmd_lst->content[1], "..", arg_len) == 0 || ft_strncmp(shell->cmd_lst->content[1], "../", arg_len) == 0)
-		chdir("../");
-	else if (ft_strncmp(shell->cmd_lst->content[1], "-", arg_len) == 0)
+	free(value);
+}
+
+static void	chdir_home(char *content[])
+{
+	char	*value;
+
+	if (content[1][0] == '~' && content[1][1] == '/')
 	{
-		value = getenv("OLDPWD");
+		value = ft_strjoin(getenv("HOME"), ft_strchr(content[1], '/'));
 		if (chdir(value) == -1)
 		{
 			g_exit_status = 1;
-			return (perror("OLDPWD"));
+			return (perror("~"));
 		}
 	}
-	else if (ft_strncmp(shell->cmd_lst->content[1], "~", arg_len) == 0)
+	else
 	{
 		value = getenv("HOME");
 		if (chdir(value) == -1)
@@ -81,15 +83,27 @@ void	execute_cd(t_minishell *shell)
 			return (perror("~"));
 		}
 	}
-	else if (shell->cmd_lst->content[1][0] == '~' && shell->cmd_lst->content[1][1] == '/')
+	free(value);
+}
+
+void	execute_cd(t_minishell *shell)
+{
+	int		arg_len;
+
+	update_old_pwd(shell);
+	if (!shell->cmd_lst->content[1])
 	{
-		value = ft_strjoin(getenv("HOME"), ft_strchr(shell->cmd_lst->content[1], '/'));
-		if (chdir(value) == -1)
-		{
-			g_exit_status = 1;
-			return (perror("~"));
-		}
+		chdir(getenv("HOME"));
+		return (update_pwd(shell));
 	}
+	arg_len = ft_strlen(shell->cmd_lst->content[1]);
+	if (ft_strncmp(shell->cmd_lst->content[1], "..", arg_len) == 0
+		|| ft_strncmp(shell->cmd_lst->content[1], "../", arg_len) == 0)
+		chdir("../");
+	else if (ft_strncmp(shell->cmd_lst->content[1], "-", arg_len) == 0)
+		chdir_oldpwd();
+	else if (ft_strncmp(shell->cmd_lst->content[1], "~", arg_len) == 0)
+		chdir_home(shell->cmd_lst->content);
 	else if (chdir(shell->cmd_lst->content[1]) == -1)
 	{
 		g_exit_status = 1;

@@ -55,8 +55,8 @@ char	*expand_heredoc_pid(char *heredoc_line, int pid_token_index)
 {
 	char	*string_before_pid;
 	char	*string_after_pid;
-	int		pid_int;
 	char	*pid_str;
+	int		pid_int;
 
 	pid_int = (int)getpid();
 	pid_str = ft_itoa(pid_int);
@@ -133,6 +133,7 @@ void	create_heredoc_tmp(char *delim, char *env_cpy[])
 			free(heredoc_line);
 		heredoc_line = readline("> ");
 	}
+	free(heredoc_line);
 	close(heredoc_tmp);
 }
 

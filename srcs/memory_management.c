@@ -5,7 +5,9 @@
 void	free_ll(t_lexer **lst)
 {
 	t_lexer	*current;
+	t_lexer *head;
 
+	head = *lst;
 	current = *lst;
 	while (current != NULL)
 	{

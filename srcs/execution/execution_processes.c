@@ -20,7 +20,10 @@ static void	run_child_process(int in, int out, t_lexer *node, t_minishell *shell
 		exit(0);
 	}
 	if (check_access(node->content[0]) == -1)
-		error_command_not_found(node->content[0]);
+	{
+		clean_up(shell);
+		return (error_command_not_found(node->content[0]));
+	}
 	else if (execve(node->path, node->content, shell->env_cpy) < 0)
 		perror("execve");
 	exit(-1);

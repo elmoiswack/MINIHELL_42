@@ -24,12 +24,14 @@ void	display_prompt(t_minishell *shell)
 			line = readline("\033[0;37m \033[1m MINIHELL_>\033[0m ");
 		else
 			line = readline("\033[0;31m \033[1m Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚_ >\033[0m ");
-		if (line == NULL)
+		if (line == NULL && terminate != 1)
 		{
 			free(line);
+			rl_clear_history();
 			terminate = 1;
+			exit(1);
 		}
-		else if (line[0] != '\0')
+		else if (line[0] != '\0' && terminate != 1)
 		{
 			add_history(line);
 			shell->cmd_lst = lexing(line, shell->env_cpy);
@@ -50,13 +52,15 @@ void	display_prompt(t_minishell *shell)
 		else
 			free(line);
 	}
+	rl_clear_history();
+	if (line)
+		free(line);
 }
 
-t_minishell	init_minishell(int argc, char *argv[], char *envp[])
+t_minishell	init_minishell(int argc, char *envp[])
 {
 	t_minishell shell;
 
-	(void) argv;
 	if (argc != 1)
 	{
 		ft_printf("executable: too many arguments. Executable can only be run as follows: './minishell'\n");
@@ -74,19 +78,15 @@ t_minishell	init_minishell(int argc, char *argv[], char *envp[])
 	return (shell);
 }
 
-// void f()
-// {
-// 	system("leaks minishell");
-// }
-
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_minishell	shell;
-	
-	// atexit(f);
-	shell = init_minishell(argc, argv, envp);
+	(void) argv;
+	shell = init_minishell(argc, envp);
 	catch_signals_parent();
 	display_prompt(&shell);
 	free_double_array(shell.env_cpy);
+	free_lexing_content_struct(shell.cmd_lst);
+	free_lexing_struct(shell.cmd_lst);
 	return (0);
 }
