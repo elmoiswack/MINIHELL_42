@@ -52,7 +52,7 @@ char *ft_getenv(char *var_name, char **env)
 	char	*value;
 	int		var_index;
 	
-	var_index = var_exists(env, var_name, ft_strlen(var_name));
+	var_index = var_exists(env, var_name);
 	if (var_index == -1)
 		return (NULL);
 	else
@@ -76,10 +76,12 @@ int	arg_is_env(char *raw_input, char **value, char *envp[])
 	}
 }
 
-int	var_exists(char	**env, char *var, int var_len)
+int	var_exists(char	**env, char *var)
 {
 	int	i;
+	int var_len;
 
+	var_len = ft_strlen(var);
 	i = 0;
 	while (env[i])
 	{

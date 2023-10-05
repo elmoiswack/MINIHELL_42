@@ -36,7 +36,7 @@ char	*expand_heredoc_var(char *heredoc_line, int var_index, char *env_cpy[])
 	while (heredoc_line[var_index] && heredoc_line[var_index] != ' ' && heredoc_line[var_index] != '$' && heredoc_line[var_index] != '"' && heredoc_line[var_index] != 39)
 		var_index++;
 	temp = ft_substr(heredoc_line, start, var_index - start);
-	if (!var_exists(env_cpy, temp, ft_strlen(temp)))
+	if (!var_exists(env_cpy, temp))
 		return (heredoc_line);
 	else 
 	{

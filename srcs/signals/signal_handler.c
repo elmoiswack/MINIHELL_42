@@ -41,9 +41,7 @@ void	catch_signals_parent(void)
 	struct sigaction sigparent_quit;
 
 	sigparent_int.sa_handler = &handle_parent_signals;
-	sigparent_int.sa_flags = 0;
-	sigparent_quit.sa_handler = SIG_IGN;
-	sigparent_quit.sa_flags = 0;
+	sigparent_quit.sa_handler = SIG_DFL;
 
 	if (sigaction(SIGINT, &sigparent_int, NULL) == -1)
 		perror("SIGINT: ");

@@ -59,5 +59,7 @@ void	route_output(int out, t_lexer *node)
 	}
 	else if (node->output == PIPE_WRITE)
 		redirect_from_to(out, STDOUT_FILENO);
+	// else if (node->output == STDOUT_OUT)
+	// 	redirect_from_to(out, STDOUT_FILENO);
 	close(out);
 }

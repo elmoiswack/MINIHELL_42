@@ -16,7 +16,7 @@ static void	update_pwd(t_minishell *shell)
 		shell->status = 1;
 		return ;
 	} 
-	index = var_exists(shell->env_cpy, "PWD", 3);
+	index = var_exists(shell->env_cpy, "PWD");
 	if (index == -1)
 		return ;
 	else
@@ -38,7 +38,7 @@ static void	update_old_pwd(t_minishell *shell)
 		shell->status = 1;
 		return ;
 	} 
-	index = var_exists(shell->env_cpy, "OLDPWD", 6);
+	index = var_exists(shell->env_cpy, "OLDPWD");
 	if (index == -1)
 		return ;
 	else

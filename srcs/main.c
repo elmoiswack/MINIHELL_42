@@ -13,6 +13,7 @@ void	display_prompt(t_minishell *shell)
 {	
 	char	*line;
 	int		terminate;
+	t_builtin builtin;
 
 	terminate = 0;
 	init_ascii_art();
@@ -39,10 +40,11 @@ void	display_prompt(t_minishell *shell)
 				continue ;	
 			}
 			printing_lexer(shell->cmd_lst);
-			if (!shell->cmd_lst->next && is_builtin(shell) != -1)
-				execute_builtin(shell);
+			builtin = is_builtin(shell->cmd_lst);
+			if (builtin != NO_BUILTIN && !shell->cmd_lst->next)
+				execute_builtin(shell, builtin);
 			else
-				g_exit_status = execute_cmds(shell->cmd_lst, shell->env_cpy);
+				g_exit_status = execute_cmds(shell, shell->cmd_lst, shell->env_cpy);
 			free_ll(&shell->cmd_lst);
 		}
 		else
@@ -54,7 +56,7 @@ t_minishell	init_minishell(int argc, char *argv[], char *envp[])
 {
 	t_minishell shell;
 
-	argv[0] = NULL;
+	(void) argv;
 	if (argc != 1)
 	{
 		ft_printf("executable: too many arguments. Executable can only be run as follows: './minishell'\n");
@@ -84,7 +86,6 @@ int	main(int argc, char *argv[], char *envp[])
 	// atexit(f);
 	shell = init_minishell(argc, argv, envp);
 	catch_signals_parent();
-	// catch_signals_child();
 	display_prompt(&shell);
 	free_double_array(shell.env_cpy);
 	return (0);

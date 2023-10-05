@@ -7,18 +7,26 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-static void	run_child_process(int in, int out, t_lexer *node, char *envp[])
+static void	run_child_process(int in, int out, t_lexer *node, t_minishell *shell)
 {
+	t_builtin builtin;
+
 	route_input(in, node);
 	route_output(out, node);
+	builtin = is_builtin(node);
+	if (builtin != NO_BUILTIN)
+	{
+		execute_builtin(shell, builtin);
+		exit(0);
+	}
 	if (check_access(node->content[0]) == -1)
 		error_command_not_found(node->content[0]);
-	else if (execve(node->path, node->content, envp) < 0)
+	else if (execve(node->path, node->content, shell->env_cpy) < 0)
 		perror("execve");
 	exit(-1);
 }
 
-static pid_t	run_and_route_processes(pid_t pid, t_lexer *head, t_lexer *current, char *env_cpy[])
+static pid_t	run_and_route_processes(pid_t pid, t_lexer *head, t_lexer *current, t_minishell *shell)
 {
 	int		pipe_fd[2];
 	int		prev_pipe;
@@ -33,12 +41,13 @@ static pid_t	run_and_route_processes(pid_t pid, t_lexer *head, t_lexer *current,
 		if (pid == 0)
 		{
 			catch_signals_child();
-			run_child_process(prev_pipe, pipe_fd[PIPE_WRITE], current, env_cpy);
+			run_child_process(prev_pipe, pipe_fd[PIPE_WRITE], current, shell);
 		}
 		close(pipe_fd[PIPE_WRITE]);
 		prev_pipe = pipe_fd[PIPE_READ];
 		current = current->next;
 	}
+	catch_signals_parent();
 	close(prev_pipe);
 	return (pid);
 }
@@ -53,17 +62,15 @@ static int	fetch_exit_status(pid_t pid, t_lexer *head, char *env_cpy[])
 	return (WEXITSTATUS(status));
 }
 
-int	execute_cmds(t_lexer *head, char *envp[])
+int	execute_cmds(t_minishell *shell, t_lexer *head, char *envp[])
 {
 	t_lexer	*current;
 	pid_t	pid;
 
 	pid = 1;
 	current = head;
-	if (!current->path && !current->delim)
-		return (error_command_not_found(current->content[0]), 127);
 	create_heredoc_loop(current, envp);
 	print_cmd_lst(head);
-	pid = run_and_route_processes(pid, head, current, envp);
+	pid = run_and_route_processes(pid, head, current, shell);
 	return (fetch_exit_status(pid, head, envp));
 }
