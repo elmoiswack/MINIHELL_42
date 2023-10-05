@@ -224,7 +224,7 @@ void	execute_cd(t_minishell *shell);
 //		execution_echo.c
 void	execute_echo(char **raw_input, char *envp[]);
 //		execution_env.c
-void	execute_env(char *envp[], int out);
+void	execute_env(char *envp[]);
 //		execution_export.c
 void	execute_export(t_minishell *shell);
 //		execution_pwd.c
@@ -237,7 +237,7 @@ void	init_ascii_art(void);
 void	remove_ctl_echo();
 
 //		execution_builtin.c
-int		execute_builtin(t_minishell *shell, t_builtin builtin, int fd);
+int		execute_builtin(t_minishell *shell, t_builtin builtin);
 int		is_builtin(t_lexer *cmd_lst);
 
 //		execution_heredoc.c

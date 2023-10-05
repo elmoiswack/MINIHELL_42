@@ -16,8 +16,7 @@ static void	run_child_process(int in, int out, t_lexer *node, t_minishell *shell
 	builtin = is_builtin(node);
 	if (builtin != NO_BUILTIN)
 	{
-		printf("EXECUTING BUILTIN\n");
-		execute_builtin(shell, builtin, out);
+		execute_builtin(shell, builtin);
 		exit(0);
 	}
 	if (check_access(node->content[0]) == -1)

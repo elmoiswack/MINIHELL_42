@@ -1,5 +1,6 @@
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
+#include <unistd.h>
 
 static char	*expand_value(char *content, char *var, char *env_cpy[])
 {

@@ -22,7 +22,7 @@ int	is_builtin(t_lexer *node)
 		return (NO_BUILTIN);
 }
 
-int	execute_builtin(t_minishell *shell, t_builtin builtin, int fd)
+int	execute_builtin(t_minishell *shell, t_builtin builtin)
 {
 	if (builtin == ECHO)
 		return(execute_echo(shell->cmd_lst->content, shell->env_cpy), 0);
@@ -31,7 +31,7 @@ int	execute_builtin(t_minishell *shell, t_builtin builtin, int fd)
 	else if (builtin == PWD)
 		return (execute_pwd(), 0);
 	else if (builtin == ENV)
-		return (execute_env(shell->env_cpy, fd), 0);
+		return (execute_env(shell->env_cpy), 0);
 	else if (builtin == EXPORT)
 		return (execute_export(shell), 0);
 	else if (builtin == UNSET)
