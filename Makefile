@@ -1,5 +1,5 @@
 NAME		:=	minishell
-FLAGS		:= 	-Wall -Wextra -Werror
+FLAGS		:= 	-Wall -Wextra #-Werror
 LIBS		:= 	./libft/libft.a -lreadline -I /Users/$(USER)/.brew/opt/readline/include -L/Users/$(USER)/.brew/opt/readline/lib
 HEADERS		:= 	-I libft -I includes -I /Users/$(USER)/.brew/opt/readline/include 
 SRCS		:= 	main.c \
