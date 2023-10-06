@@ -46,8 +46,7 @@ void	display_prompt(t_minishell *shell)
 		if (g_exit_status == 0)
 			line = readline("\033[0;37m \033[1m MINIHELL_>\033[0m ");
 		else
-			line = readline("\033[0;31m \033[1m \
-				Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚_ >\033[0m ");
+			line = readline(CURSED);
 		if (line == NULL && terminate != 1)
 			main_input_error(&terminate);
 		else if (line[0] != '\0' && terminate != 1)

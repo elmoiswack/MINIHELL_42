@@ -7,28 +7,33 @@
 
 //Global variable - is equal to the most recent exit status of the shell.
 
-extern int g_exit_status;
+extern int	g_exit_status;
+
+# define CURSED "\033[0;31m\
+ \033[1m \
+ Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚_ >\
+ \033[0m "
 
 //Token enumerator - defines the possible types of tokens;
 typedef enum e_token{
-	PIPE_READ, //0
-	PIPE_WRITE, //1 
-	INFILE, //2
-	OUTFILE, //3
-	COMMAND, //4
-	FLAG, //5
-	PIPE, //6
-	ENV_VAR, //7
-	DELIMITER, //8
-	APPENDER, //9
-	REDIRECT_IN, //10
-	REDIRECT_OUT, //11
-	NONE, //12
-	APPEND, //13
-	STDIN_IN, //14
-	STDOUT_OUT, //15
-	HEREDOC, //16
-} t_token;
+	PIPE_READ,
+	PIPE_WRITE,
+	INFILE,
+	OUTFILE,
+	COMMAND,
+	FLAG,
+	PIPE,
+	ENV_VAR,
+	DELIMITER,
+	APPENDER,
+	REDIRECT_IN,
+	REDIRECT_OUT,
+	NONE,
+	APPEND,
+	STDIN_IN,
+	STDOUT_OUT,
+	HEREDOC,
+}	t_token;
 
 //Builtin enumerator - defines the different types of possible builtins;
 typedef enum e_builtin {
@@ -40,15 +45,16 @@ typedef enum e_builtin {
 	EXPORT,
 	UNSET,
 	NO_BUILTIN,
-} t_builtin;
+}	t_builtin;
 
-//Linked list node - each command is parsed into a t_lexer node for the executioner to be handled accordingly;
+//Linked list node - each command is parsed into a t_lexer node 
+//	for the executioner to be handled accordingly;
 typedef struct lexerinfo {
-	char				**content; 		//INFILE/OUTFILE/CMD + OPTIONAL FLAGS (file could also be absolute/relative path);
-	char				*path;			//IF NULL -> NO PATH, ELSE -> PATH TO CMD;
-	char				*file;			//IF THERE IS AN INFILE OR OUTFILE, ELSE NULL;
-	int					input;			//ENUM_IO:PIPE_READ/FILE/STDIN/NONE
-	int					output;			//ENUM_IO:PIPE_WRITE/FILE/STDOUT/NONE
+	char				**content;
+	char				*path;
+	char				*file;
+	int					input;
+	int					output;
 	char				**delim;
 	int					index_delim;
 	int					check_free;
@@ -63,7 +69,9 @@ typedef struct lexerinfo {
 //2 = SYNTAX_ERROR
 //3 = MALLOC_ERROR
 
-//Main struct - contains all the meta data about minishell such as environmental variables, access to the t_lexer list, status, builtin token and more.
+//Main struct - contains all the meta data about minishell such as 
+//environmental variables, 
+//access to the t_lexer list, status, builtin token and more.
 typedef struct s_minishell {
 	t_lexer				*cmd_lst;
 	char				**env_cpy;
@@ -77,12 +85,18 @@ typedef struct s_minishell {
 
 		//lexer.c
 t_lexer	*lexing(char *line, char **env_cpy);
+t_lexer	*set_variables(t_lexer *info_list, char *line);
 t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array);
-t_lexer	*parsing_array(t_lexer *info_list, char **splitted_line, int *enum_array);
+int		info_list_checker(t_lexer *info_list, \
+	char **splitted_line, int *enum_array);
+t_lexer	*parsing_array(t_lexer *info_list, \
+	char **splitted_line, int *enum_array);
 
 		//line_checker.c
 int		input_line_check(char *line, t_lexer *info_list);
-int		check_quotes(char *line, int index, t_lexer *info_list);
+int		inputline_other_checks(char *line, t_lexer *info_list, int index);
+int		input_line_singlequote(char *line, t_lexer *info_list, int index);
+int		input_line_doublequote(char *line, t_lexer *info_list, int index);
 
 		//linechecker_checks.c
 int		check_outredirect(char *line, int index, t_lexer *info_list);
@@ -111,8 +125,11 @@ char	**split_intoarray(char *line, t_lexer *info_list, char **temp_quotes);
 char	**replace_quotes_array(char **split_array, char	**temp_quotes);
 
 		//splitquo_quotefts.c
-char	*remove_spaces_quotes_line(char *line, char *new_line, int index_n, int index_l);
+char	*remove_spaces_quotes_line(char *line, \
+	char *new_line, int index_n, int index_l);
 char	**store_all_quote_data(char *line, char **temp);
+char	*quote_data_inarray(char *line, char **temp, \
+	int index_temp, int index_l);
 
 		//split_quotes_utils.c
 int		how_many_quotes(char *line);
@@ -125,66 +142,95 @@ char	*find_path_loop(char **paths, char *command);
 char	**put_slash_behind(char **paths);
 
 		//data_org.c
-t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
+t_lexer	*organizing_data(t_lexer *info_list, \
+	char **splitted_line, int *enum_array, int index);
+t_lexer	*organizing_data_checks(t_lexer *info_list, char **splitted_line, \
+	int *enum_array, int index);
 
 		//dataorg_cases.c
-t_lexer	*data_org_command(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
+t_lexer	*data_org_command(t_lexer *info_list, char **splitted_line, \
+	int *enum_array, int index);
 t_lexer	*data_org_pipe(t_lexer *info_list);
-t_lexer	*data_org_file(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
-t_lexer	*data_org_delim(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
-t_lexer *data_org_appender(t_lexer *info_list, char **splitted_line, int index);
+t_lexer	*data_org_file(t_lexer *info_list, char **splitted_line, \
+	int *enum_array, int index);
+t_lexer	*data_org_delim(t_lexer *info_list, char **splitted_line, \
+	int *enum_array, int index);
+t_lexer	*data_org_appender(t_lexer *info_list, \
+	char **splitted_line, int index);
 
 		//dataorg_utils.c
-t_lexer *create_new_node(t_lexer *info_lexer);
+t_lexer	*create_new_node(t_lexer *info_lexer);
 char	**allocate_2d_arr(int size, t_lexer *info_list);
 int		check_for_flags(char **splitted_line, int *enum_arr, int index);
 int		check_for_outfile(char **splitted_line, int *enum_array, int index);
 
-		//data_org_special.c
+		//dataorg_special_cases.c
 int		check_special_cases(char **splitted_line, int *enum_array);
-t_lexer *which_special_case(t_lexer *info_list, char **splitted_line, int *enum_array);
-t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, int index);
+t_lexer	*which_special_case(t_lexer *info_list, \
+	char **splitted_line, int *enum_array);
+t_lexer	*other_special_case(t_lexer	*info_list, char **splitted_line, \
+	int *enum_array, int index);
+t_lexer	*special_case_files(t_lexer *info_list, char **splitted_line);
+t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, \
+	int index);
 
 		//into_list.c
 t_lexer	*one_two_word_lexer(t_lexer *info_list, char **splitted_line);
 t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var);
+t_lexer	*into_linklist_delim(t_lexer *info_list, char *word_var);
+t_lexer	*into_linklist_command(t_lexer *info_list, char *word_var);
+t_lexer	*into_linklist_flag(t_lexer *info_list, char *word_var);
 
 		//intolist_special.c
-t_lexer *intolist_commands(t_lexer *info_list, char **splitted_line, int *enum_array);
+t_lexer	*intolist_commands(t_lexer *info_list, \
+	char **splitted_line, int *enum_array);
 
 		//parsing_grep.c
 int		check_for_grep(t_lexer *info_list);
-t_lexer *grep_parser(t_lexer *info_list, char **splitted_line);
+t_lexer	*grep_parser(t_lexer *info_list, char **splitted_line);
+t_lexer	*add_flag_grep(t_lexer *info_list, char **splitted_line);
 t_lexer	*rm_quotes_grep(t_lexer *info_list);
+char	*rm_guotes_loop(t_lexer *info_list, char *temp);
 
 		//parser_cat.c 
 int		check_for_cat(t_lexer *info_list);
-t_lexer *cat_parser(t_lexer *info_list, char **splitted_line);
-t_lexer *check_content(t_lexer *info_list, char **splitted_line, int index);
+t_lexer	*cat_parser(t_lexer *info_list, char **splitted_line);
+t_lexer	*check_content(t_lexer *info_list, char **splitted_line, int index);
 
 		//parsing_echo.c
 t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line);
-t_lexer	*spca_echo_intolist(t_lexer *info_list, char **splitted_line, int index);
-t_lexer	*echo_with_meta(t_lexer *info_list, char **splitted_line, int *enum_array);
-t_lexer	*echo_meta_intolist(t_lexer *info_list, char **splitted_line, int index);
+t_lexer	*spca_echo_intolist(t_lexer *info_list, \
+	char **splitted_line, int index);
+t_lexer	*echo_with_meta(t_lexer *info_list, \
+	char **splitted_line, int *enum_array);
+t_lexer	*echo_meta_intolist(t_lexer *info_list, \
+	char **splitted_line, int index);
 t_lexer	*default_echo_data(t_lexer *info_list, char **splitted_line);
 
 		//variable_expander.c
-char	**replace_var_expander(t_lexer *info_list, char **splitted_line, char **env_cpy);
+char	**replace_var_expander(t_lexer *info_list, \
+	char **splitted_line, char **env_cpy);
+char	*env_expander_loop(char **splitted_line, int index, char **env_cpy);
 char	*get_env_var(char *line, char **env_cpy, int ammount_env);
 char	*replace_variables(char *line, char **env_temp);
+char	*replace_vars_loop(char *line, char *new_line, \
+	char **env_temp, int index);
 
 		//varexp_arrayft.c
 char	**expand_env_variables(char **env_temp, char **env_cpy);
 char	*expand_variable(char *line, char **env_cpy);
-char	**fill_array_env(char *line, int ammount_env, char **env_temp, int index);
+char	**fill_array_env(char *line, int ammount_env, \
+	char **env_temp, int index);
 char	**check_quotes_env(char **splitted_line);
+char	*remove_quotes_string_env(char **splitted_line, int index);
 
 		//varexp_lineft.c
 char	*get_variable(char *line, int begin, int end);
 char	*remove_quotes_string(char **splitted_line, int index);
+char	*rm_quote_string_loop(char **splitted_line, int index, char *new_line);
 char	*remove_dollar_sign(char *line);
-char	*put_env_in_line(char *new_line, int index_l, char **env_temp, int index_env);
+char	*put_env_in_line(char *new_line, int index_l, \
+	char **env_temp, int index_env);
 
 		//varexp_utils.c
 int		how_many_env_var(char *line);
@@ -202,7 +248,7 @@ int		get_number_delim(int *enum_array);
 		//error.c
 void	error_command_not_found(char *cmd);
 void	error_export_invalid_identifier(char *input);
-void	error_unset_too_few_args();
+void	error_unset_too_few_args(void);
 void	error_lexing_message(t_lexer *list);
 void	error_lex(t_lexer *info_list, int error_code, const char *str);
 
@@ -245,13 +291,13 @@ void	execute_env(char *envp[]);
 //		execution_export.c
 void	execute_export(t_minishell *shell);
 //		execution_pwd.c
-void	execute_pwd();
+void	execute_pwd(void);
 //		execution_unset.c
 void	execute_unset(t_minishell *shell);
 
 //		interface_frontend.c
 void	init_ascii_art(void);
-void	remove_ctl_echo();
+void	remove_ctl_echo(void);
 
 //		execution_builtin.c
 int		execute_builtin(t_minishell *shell, t_builtin builtin);
@@ -279,6 +325,4 @@ void	clean_up(t_minishell *shell);
 void	free_ll(t_lexer **lst);
 
 //###############################################################
-
-
 #endif

@@ -53,5 +53,3 @@ int	check_for_flags(char **splitted_line, int *enum_arr, int index)
 	}
 	return (-1);
 }
-
-//kdasdas
