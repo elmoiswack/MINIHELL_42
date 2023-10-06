@@ -43,25 +43,19 @@ char	**append_to_double_array(char **src, char *str)
 {
 	char	**new;
 	int		n_of_arr;
-	int		len;
 	int		i;
 
 	n_of_arr = 0;
-	len = 0;
 	i = 0;
 	while (src[n_of_arr])
 		n_of_arr++;
 	new = ft_calloc(sizeof(char *), n_of_arr + 2);
 	while (i < n_of_arr)
 	{
-		len = ft_strlen(src[i]) + 1;
-		new[i] = malloc(sizeof(char) * len + 1);
-		ft_strlcpy(new[i], src[i], len);
+		new[i] = ft_strdup(src[i]);
 		i++;
 	}
-	len = ft_strlen(str) + 1;
-	new[i] = malloc(sizeof(char) * len + 1);
-	ft_strlcpy(new[i], str, len);
+	new[i] = ft_strdup(str);
 	free_double_array(src);
 	return (new);
 }
@@ -70,11 +64,9 @@ char	**replace_str_in_array(char **src, char *str, int index)
 {
 	char	**new;
 	int		n_of_arr;
-	int		len;
 	int		i;
 
 	n_of_arr = 0;
-	len = 0;
 	i = 0;
 	while (src[n_of_arr])
 		n_of_arr++;
@@ -82,33 +74,22 @@ char	**replace_str_in_array(char **src, char *str, int index)
 	while (i < n_of_arr)
 	{
 		if (i == index)
-		{
-			len = ft_strlen(str) + 1;
-			new[i] = ft_calloc(sizeof(char), len + 1);
-			ft_strlcpy(new[i], str, len);
-		}
+			new[i] = ft_strdup(str);
 		else
-		{
-			len = ft_strlen(src[i]) + 1;
-			new[i] = ft_calloc(sizeof(char), len + 1);
-			ft_strlcpy(new[i], src[i], len);
-		}
+			new[i] = ft_strdup(src[i]);
 		i++;
 	}
-	free_double_array(src);
-	return (new);
+	return (free_double_array(src), new);
 }
 
 char	**remove_str_from_array(char **src, int index)
 {
 	char	**new;
 	int		n_of_arr;
-	int		len;
 	int		i;
 	int		j;
 
 	n_of_arr = 0;
-	len = 0;
 	i = 0;
 	j = 0;
 	while (src[n_of_arr])
@@ -118,15 +99,12 @@ char	**remove_str_from_array(char **src, int index)
 	{
 		if (j == index)
 			j++;
-		len = ft_strlen(src[j]) + 1;
-		new[i] = malloc(sizeof(char) * len + 1);
 		if (j > n_of_arr)
-			ft_strlcpy(new[i], src[n_of_arr], len);
+			new[i] = ft_strdup(src[n_of_arr]);
 		else
-			ft_strlcpy(new[i], src[j], len);
+			new[i] = ft_strdup(src[j]);
 		i++;
 		j++;
 	}
-	free_double_array(src);
-	return (new);
+	return (free_double_array(src), new);
 }

@@ -7,7 +7,7 @@
 void	free_ll(t_lexer **lst)
 {
 	t_lexer	*current;
-	t_lexer *head;
+	t_lexer	*head;
 
 	head = *lst;
 	current = *lst;
@@ -28,11 +28,8 @@ void	free_ll(t_lexer **lst)
 	}
 }
 
-void clean_up(t_minishell *shell)
+void	clean_up(t_minishell *shell)
 {
-	// free env_cpy
-	free_double_array(shell->env_cpy);	
-
-	// free lexer
+	free_double_array(shell->env_cpy);
 	free_ll(&shell->cmd_lst);
 }

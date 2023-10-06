@@ -15,19 +15,21 @@ void	redirect_from_to(int fd_from, int fd_to)
 
 void	route_input(int in, t_lexer *node)
 {
-	int infile;
-	int hd_fd;
+	int	infile;
+	int	hd_fd;
 
 	if (node->delim)
 	{
-		if ((hd_fd = open("./data/heredoc.tmp", O_RDONLY)) < 0)
+		hd_fd = open("./data/heredoc.tmp", O_RDONLY);
+		if (hd_fd < 0)
 			perror("Cannot create temporary heredoc.tmp");
 		redirect_from_to(hd_fd, STDIN_FILENO);
 		close(hd_fd);
 	}
 	if (node->input == INFILE)
 	{
-		if ((infile = open(node->file, O_RDONLY)) < 0)
+		infile = open(node->file, O_RDONLY);
+		if (infile < 0)
 		{
 			perror("infile");
 			exit(1);
@@ -41,25 +43,25 @@ void	route_input(int in, t_lexer *node)
 
 void	route_output(int out, t_lexer *node)
 {
-	int outfile;
+	int	outfile;
 
 	if (node->output == OUTFILE)
 	{
-		if ((outfile = open(node->file, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
+		outfile = open(node->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (outfile < 0)
 			perror("outfile");
 		redirect_from_to(outfile, STDOUT_FILENO);
 		close(outfile);
 	}
 	else if (node->output == APPEND)
 	{
-		if ((outfile = open(node->file, O_WRONLY | O_CREAT | O_APPEND, 0644)) < 0)
+		outfile = open(node->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		if (outfile < 0)
 			perror("outfile");
 		redirect_from_to(outfile, STDOUT_FILENO);
 		close(outfile);
 	}
 	else if (node->output == PIPE_WRITE)
 		redirect_from_to(out, STDOUT_FILENO);
-	// else if (node->output == STDOUT_OUT)
-	// 	redirect_from_to(out, STDOUT_FILENO);
 	close(out);
 }

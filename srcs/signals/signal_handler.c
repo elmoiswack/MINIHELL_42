@@ -8,7 +8,7 @@
 #include <readline/history.h>
 
 static void	handle_parent_signals(int signum)
-{	
+{
 	if (signum == SIGINT)
 	{
 		write(STDOUT_FILENO, "\n", 1);
@@ -20,7 +20,7 @@ static void	handle_parent_signals(int signum)
 }
 
 static void	handle_child_signals(int signum)
-{	
+{
 	if (signum == SIGINT)
 	{
 		write(STDERR_FILENO, "YEET\n", 4);
@@ -37,14 +37,13 @@ static void	handle_child_signals(int signum)
 
 void	catch_signals_parent(void)
 {
-	struct sigaction sigparent_int;
-	struct sigaction sigparent_quit;
+	struct sigaction	sigparent_int;
+	struct sigaction	sigparent_quit;
 
 	ft_memset(&sigparent_int, 0, sizeof(sigparent_int));
 	ft_memset(&sigparent_quit, 0, sizeof(sigparent_quit));
 	sigparent_int.sa_handler = &handle_parent_signals;
 	sigparent_quit.sa_handler = SIG_IGN;
-
 	if (sigaction(SIGINT, &sigparent_int, NULL) == -1)
 		perror("SIGINT: ");
 	if (sigaction(SIGQUIT, &sigparent_quit, NULL) == -1)
@@ -53,7 +52,7 @@ void	catch_signals_parent(void)
 
 void	catch_signals_child(void)
 {
-	struct sigaction sigchild;
+	struct sigaction	sigchild;
 
 	ft_memset(&sigchild, 0, sizeof(sigchild));
 	sigchild.sa_handler = &handle_child_signals;

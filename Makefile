@@ -32,6 +32,7 @@ SRCS		:= 	main.c \
 				execution/execution_processes.c \
 				execution/execution_utilities.c \
 				execution/execution_heredoc.c \
+				execution/execution_heredoc_expansion.c \
 				execution/execution_routing.c \
 				builtins/builtin_execution.c \
 				builtins/builtin_cd.c \

@@ -256,8 +256,11 @@ int		is_builtin(t_lexer *cmd_lst);
 
 //		execution_heredoc.c
 void	create_heredoc_loop(t_lexer *head, char *env_cpy[]);
-void	create_heredoc_tmp(char *delim, char *envp[]);
 void	clean_tmp_files(t_lexer *head, char *envp[]);
+
+//		execution_heredoc_expansion.c
+char	*expand_heredoc_var(char *heredoc_line, int var_index, char *env_cpy[]);
+char	*expand_heredoc_pid(char *heredoc_line, int pid_token_index);
 
 //		execution_routing.c
 void	route_output(int out, t_lexer *node);
