@@ -17,7 +17,7 @@ t_lexer	*into_linklist_flag(t_lexer *info_list, char *word_var)
 	info_list->content[1] = ft_calloc(ft_strlen(word_var) + 1, \
 		sizeof(char));
 	if (!info_list->content[1])
-		return (error_lex(info_list, 3, "dataorg_utis.c/L41"), NULL);
+		return (error_lex(info_list, 3, "into_list.c/L71"), NULL);
 	ft_strcpy(info_list->content[1], word_var);
 	return (info_list);
 }
@@ -27,7 +27,7 @@ t_lexer	*into_linklist_command(t_lexer *info_list, char *word_var)
 	info_list->content = allocate_2d_arr(ft_strlen(word_var) + 1, \
 		info_list);
 	if (!info_list->content)
-		return (error_lex(info_list, 3, "dataorg_utis.c/L31"), NULL);
+		return (error_lex(info_list, 3, "into_list.c/L27"), NULL);
 	ft_strcpy(info_list->content[0], word_var);
 	info_list->path = get_path_of_command(info_list->content[0]);
 	return (info_list);
@@ -41,7 +41,7 @@ t_lexer	*into_linklist_delim(t_lexer *info_list, char *word_var)
 	info_list->delim[in_delim] = ft_calloc(ft_strlen(word_var) + 1, \
 		sizeof(char));
 	if (!info_list->delim[in_delim])
-		return (error_lex(info_list, 3, "dataorg_utis.c/L57"), NULL);
+		return (error_lex(info_list, 3, "into_list.c/L41"), NULL);
 	ft_strcpy(info_list->delim[in_delim], word_var);
 	info_list->index_delim += 1;
 	return (info_list);
@@ -65,7 +65,7 @@ t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var)
 	{
 		info_list->file = ft_calloc(ft_strlen(word_var) + 1, sizeof(char));
 		if (!info_list->file)
-			return (error_lex(info_list, 3, "dataorg_utis.c/L49"), NULL);
+			return (error_lex(info_list, 3, "into_list.c/L66"), NULL);
 		ft_strcpy(info_list->file, word_var);
 	}
 	if (enum_var == DELIMITER)

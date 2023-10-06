@@ -68,18 +68,18 @@ t_lexer	*spca_echo_intolist(t_lexer *info_list, char **splitted_line, int index)
 			if (!splitted_line[index])
 			{
 				free_double_array(splitted_line);
-				return (error_lex(info_list, 3, "parsing_echo.c/L69"), NULL);
+				return (error_lex(info_list, 3, "parsing_echo.c/L67"), NULL);
 			}
 		}
 		info_list->content[1] = ft_strjoin_and_free(info_list->content[1], \
 			splitted_line[index]);
 		if (!info_list->content[1])
-			return (error_lex(info_list, 3, "parsing_echo.c/L73"), NULL);
+			return (error_lex(info_list, 3, "parsing_echo.c/L74"), NULL);
 		if (splitted_line[index + 1] != NULL)
 			info_list->content[1] = ft_strjoin_and_free(info_list->content[1], \
 				" ");
 		if (!info_list->content[1])
-			return (error_lex(info_list, 3, "parsing_echo.c/L78"), NULL);
+			return (error_lex(info_list, 3, "parsing_echo.c/L79"), NULL);
 		index++;
 	}
 	return (info_list);
@@ -93,13 +93,13 @@ t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line)
 	info_list->content = allocate_2d_arr(ft_strlen(splitted_line[0]) + 1, \
 		info_list);
 	if (!info_list->content)
-		return (error_lex(info_list, 3, "parsing_echo.c/L58"), NULL);
+		return (error_lex(info_list, 3, "parsing_echo.c/L93"), NULL);
 	ft_strcpy(info_list->content[0], splitted_line[0]);
 	if (splitted_line[index])
 	{
 		info_list->content[1] = ft_calloc(1, sizeof(char));
 		if (!info_list->content[1])
-			return (error_lex(info_list, 3, "parsing_echo.c/L62"), NULL);
+			return (error_lex(info_list, 3, "parsing_echo.c/L100"), NULL);
 	}
 	info_list = spca_echo_intolist(info_list, splitted_line, index);
 	info_list = default_echo_data(info_list, splitted_line);

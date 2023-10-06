@@ -74,7 +74,7 @@ t_lexer	*data_org_appender(t_lexer *info_list, char **splitted_line, int index)
 		info_list->file = ft_calloc(ft_strlen(splitted_line[index]) + 1, \
 			sizeof(char));
 		if (!info_list->file)
-			return (error_lex(info_list, 3, "data_org.c/L89"), NULL);
+			return (error_lex(info_list, 3, "dataorg_cases.c/L89"), NULL);
 		ft_strcpy(info_list->file, splitted_line[index]);
 		info_list->output = APPEND;
 	}

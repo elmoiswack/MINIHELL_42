@@ -42,14 +42,14 @@ char	**split_intoarray(char *line, t_lexer *info_list, char **temp_quotes)
 	if (!temp_line)
 	{
 		free_double_array(temp_quotes);
-		return (error_lex(info_list, 3, "split_quotes.c/L14"), NULL);
+		return (error_lex(info_list, 3, "split_quotes.c/L41"), NULL);
 	}
 	split_array = ft_split(temp_line, ' ');
 	free(temp_line);
 	if (!split_array)
 	{
 		free_double_array(temp_quotes);
-		return (error_lex(info_list, 3, "split_quotes.c/L104"), NULL);
+		return (error_lex(info_list, 3, "split_quotes.c/L47"), NULL);
 	}
 	split_array = replace_quotes_array(split_array, temp_quotes);
 	return (split_array);
@@ -64,7 +64,7 @@ char	**split_with_quotes(char *line, t_lexer *info_list)
 	ammount_quotes = how_many_quotes(line);
 	temp_quotes = ft_calloc(ammount_quotes + 1, sizeof(char *));
 	if (!temp_quotes)
-		return (error_lex(info_list, 3, "split_quotes.c/L97"), NULL);
+		return (error_lex(info_list, 3, "split_quotes.c/L65"), NULL);
 	temp_quotes = store_all_quote_data(line, temp_quotes);
 	if (!temp_quotes)
 		return (error_lex(info_list, 2, "unclosed quotes!"), NULL);
