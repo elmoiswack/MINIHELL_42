@@ -85,7 +85,7 @@ static void	expand_and_print_input(char **input, char *envp[])
 
 void	execute_echo(char **raw_input, char *envp[])
 {
-	if (!raw_input[1])
+	if (!raw_input[1] || raw_input[1][0] == '\0')
 		ft_printf("\n");
 	else if (ft_strncmp(raw_input[1], "$?", ft_strlen(raw_input[1])) == 0)
 		ft_printf("%d\n", g_exit_status);
