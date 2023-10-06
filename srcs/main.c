@@ -34,8 +34,11 @@ void	display_prompt(t_minishell *shell)
 			shell->cmd_lst = lexing(line, shell->env_cpy);
 			if (!shell->cmd_lst)
 			{
-				printf("fuck\n");
-				free(line);
+				if (line)
+				{
+					//printf("wat dfe fuck\n");
+					//free(line);
+				}
 				continue ;	
 			}
 			printing_lexer(shell->cmd_lst);

@@ -74,15 +74,3 @@ int	check_outredirect(char *line, int index, t_lexer *info_list)
 		return (error_lex(info_list, 2, "incorrect use of refirect out!"), -1);
 	return (1);
 }
-
-int	check_quotes(char *line, int index, t_lexer *info_list)
-{
-	index++;
-	while (line[index])
-	{
-		if (line[index] == '"' || line[index] == '\'')
-			return (1);
-		index++;
-	}
-	return (error_lex(info_list, 2, "unclosed quotes!"), -1);
-}

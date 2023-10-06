@@ -21,6 +21,25 @@ char	*get_variable(char *line, int begin, int end)
 	return (temp);
 }
 
+char	*rm_quote_string_loop(char **splitted_line, int index, char *new_line)
+{
+	int	index_x;
+	int	index_l;
+
+	index_x = 0;
+	index_l = 0;
+	while (splitted_line[index][index_x])
+	{
+		if (splitted_line[index][index_x] != '"')
+		{
+			new_line[index_l] = splitted_line[index][index_x];
+			index_l++;
+		}
+		index_x++;
+	}
+	return (new_line);
+}
+
 char	*remove_quotes_string(char **splitted_line, int index)
 {
 	char	*new_line;
@@ -31,19 +50,20 @@ char	*remove_quotes_string(char **splitted_line, int index)
 	index_x = 0;
 	new_line = ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
 	if (!new_line)
-	{
-		free_double_array(splitted_line);
 		return (NULL);
-	}
-	while (splitted_line[index][index_x])
+	if (splitted_line[index][0] == '"')
+		new_line = rm_quote_string_loop(splitted_line, index, new_line);
+	else
 	{
-		if (splitted_line[index][index_x] != '\'' \
-			&& splitted_line[index][index_x] != '"')
+		while (splitted_line[index][index_x])
 		{
-			new_line[index_l] = splitted_line[index][index_x];
-			index_l++;
+			if (splitted_line[index][index_x] != '\'')
+			{
+				new_line[index_l] = splitted_line[index][index_x];
+				index_l++;
+			}
+			index_x++;
 		}
-		index_x++;
 	}
 	free(splitted_line[index]);
 	return (new_line);

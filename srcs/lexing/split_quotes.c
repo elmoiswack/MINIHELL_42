@@ -34,12 +34,11 @@ char	**split_intoarray(char *line, t_lexer *info_list, char **temp_quotes)
 {
 	char	**split_array;
 	char	*temp_line;
-	char	*new_line;
 
-	new_line = ft_calloc(ft_strlen(line), sizeof(char));
-	if (!new_line)
+	temp_line = ft_calloc(ft_strlen(line), sizeof(char));
+	if (!temp_line)
 		return (NULL);
-	temp_line = remove_spaces_quotes_line(line, new_line, 0, 0);
+	temp_line = remove_spaces_quotes_line(line, temp_line, 0, 0);
 	if (!temp_line)
 	{
 		free_double_array(temp_quotes);
@@ -71,5 +70,6 @@ char	**split_with_quotes(char *line, t_lexer *info_list)
 		return (error_lex(info_list, 2, "unclosed quotes!"), NULL);
 	split_array = split_intoarray(line, info_list, temp_quotes);
 	free_double_array(temp_quotes);
+	free(line);
 	return (split_array);
 }

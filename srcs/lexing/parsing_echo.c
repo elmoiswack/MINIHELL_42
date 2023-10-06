@@ -66,7 +66,10 @@ t_lexer	*spca_echo_intolist(t_lexer *info_list, char **splitted_line, int index)
 		{
 			splitted_line[index] = remove_quotes_string(splitted_line, index);
 			if (!splitted_line[index])
+			{
+				free_double_array(splitted_line);
 				return (error_lex(info_list, 3, "parsing_echo.c/L69"), NULL);
+			}
 		}
 		info_list->content[1] = ft_strjoin_and_free(info_list->content[1], \
 			splitted_line[index]);

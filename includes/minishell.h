@@ -82,9 +82,9 @@ t_lexer	*parsing_array(t_lexer *info_list, char **splitted_line, int *enum_array
 
 		//line_checker.c
 int		input_line_check(char *line, t_lexer *info_list);
+int		check_quotes(char *line, int index, t_lexer *info_list);
 
 		//linechecker_checks.c
-int		check_quotes(char *line, int index, t_lexer *info_list);
 int		check_outredirect(char *line, int index, t_lexer *info_list);
 int		check_inredirect(char *line, int index, t_lexer *info_list);
 int		check_pipe(char *line, int index, t_lexer *info_list);
@@ -141,13 +141,16 @@ int		check_for_flags(char **splitted_line, int *enum_arr, int index);
 int		check_for_outfile(char **splitted_line, int *enum_array, int index);
 
 		//data_org_special.c
-int		check_special_cases(char **splitted_line);
+int		check_special_cases(char **splitted_line, int *enum_array);
 t_lexer *which_special_case(t_lexer *info_list, char **splitted_line, int *enum_array);
 t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, int index);
 
 		//into_list.c
 t_lexer	*one_two_word_lexer(t_lexer *info_list, char **splitted_line);
 t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var);
+
+		//intolist_special.c
+t_lexer *intolist_commands(t_lexer *info_list, char **splitted_line, int *enum_array);
 
 		//parsing_grep.c
 int		check_for_grep(t_lexer *info_list);

@@ -40,7 +40,7 @@ t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array)
 		free(enum_array);
 		return (NULL);
 	}
-	if (check_special_cases(splitted_line) == 1)
+	if (check_special_cases(splitted_line, enum_array) == 1)
 		return (which_special_case(info_list, splitted_line, enum_array));
 	info_list = parsing_array(info_list, splitted_line, enum_array);
 	if (info_list_checker(info_list, splitted_line, enum_array) == -1)
@@ -100,5 +100,7 @@ t_lexer	*lexing(char *line, char **env_cpy)
 	if (!line)
 		return (error_lex(info_list, 3, "lexer.c/L96"), NULL);
 	info_list = set_variables(info_list, line);
+	error_lex(info_list, 1, "");
+	exit(0);
 	return (info_list);
 }

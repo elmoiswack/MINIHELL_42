@@ -64,6 +64,7 @@ char	*put_spaces_in_line(char *line, t_lexer *info_list)
 	if (!temp)
 		return (error_lex(info_list, 3, "dataorg_utis.c/L24"), NULL);
 	temp = edit_line(line, temp);
+	printf("nani da fuq\n");
 	free(line);
 	return (temp);
 }
