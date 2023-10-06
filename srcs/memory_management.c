@@ -1,6 +1,8 @@
 #include "../includes/minishell.h"
 #include "../libft/libft.h"
 #include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
 
 void	free_ll(t_lexer **lst)
 {

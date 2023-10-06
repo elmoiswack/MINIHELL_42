@@ -78,7 +78,7 @@ char	*expand_heredoc_pid(char *heredoc_line, int pid_token_index)
 char	*expand_heredoc_line(char *heredoc_line, char *env_cpy[])
 {
 	int	 i;
-	
+
 	i = 0;
 	if (!heredoc_line)
 		return (heredoc_line);
@@ -141,7 +141,7 @@ void	clean_tmp_files(t_lexer *head, char *envp[])
 {
 	char	*args[] = {"rm", "./data/heredoc.tmp", NULL};
 	pid_t	pid;
-	
+
 	if (head->delim)
 	{
 		pid = fork();
@@ -152,4 +152,3 @@ void	clean_tmp_files(t_lexer *head, char *envp[])
 		}
 	}
 }
-

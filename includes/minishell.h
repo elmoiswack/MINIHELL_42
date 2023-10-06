@@ -215,7 +215,7 @@ void	free_lexing_struct(t_lexer *list);
 int		execute_cmds(t_minishell *shell, t_lexer *head, char *envp[]);
 
 //		execution_utilities.c
-char	*get_path(char *cmd);
+char	*get_path(const char *cmd);
 int		arg_is_env(char *raw_input, char **value, char *envp[]);
 int		check_access(char *cmd);
 int		var_exists(char	**env, char *var);

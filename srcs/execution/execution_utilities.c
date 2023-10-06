@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char	*get_path(char *cmd)
+char	*get_path(const char *cmd)
 {
 	int		i;
 	char	**paths;
@@ -70,6 +70,7 @@ int	arg_is_env(char *raw_input, char **value, char *envp[])
 
 	temp = ft_strdup(raw_input + 1);
 	*value = ft_getenv(temp, envp);
+	// free(temp);
 	if (raw_input[0] == '$' && *value)
 		return (1);
 	else
