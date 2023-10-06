@@ -70,6 +70,5 @@ char	**split_with_quotes(char *line, t_lexer *info_list)
 		return (error_lex(info_list, 2, "unclosed quotes!"), NULL);
 	split_array = split_intoarray(line, info_list, temp_quotes);
 	free_double_array(temp_quotes);
-	free(line);
 	return (split_array);
 }

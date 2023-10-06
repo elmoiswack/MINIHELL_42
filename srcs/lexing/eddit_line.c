@@ -58,13 +58,14 @@ char	*put_spaces_in_line(char *line, t_lexer *info_list)
 			space_to_add += 2;
 		index++;
 	}
-	if (space_to_add == 0)
-		return (line);
 	temp = ft_calloc(index + space_to_add + 2, sizeof(char));
 	if (!temp)
 		return (error_lex(info_list, 3, "eddit_line.c/L63"), NULL);
+	if (space_to_add == 0)
+	{
+		ft_strcpy(temp, line);
+		return (temp);
+	}
 	temp = edit_line(line, temp);
-	printf("nani da fuq\n");
-	free(line);
 	return (temp);
 }

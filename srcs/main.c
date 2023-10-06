@@ -7,51 +7,51 @@
 #include <unistd.h>
 #include <signal.h>
 
-int g_exit_status;
+int	g_exit_status;
+
+void	main_execute_input(t_minishell *shell, char *line)
+{
+	t_builtin	builtin;
+
+	add_history(line);
+	shell->cmd_lst = lexing(line, shell->env_cpy);
+	if (!shell->cmd_lst)
+		return ;
+	printing_lexer(shell->cmd_lst);
+	builtin = is_builtin(shell->cmd_lst);
+	if (builtin != NO_BUILTIN && !shell->cmd_lst->next)
+		execute_builtin(shell, builtin);
+	else
+		g_exit_status = execute_cmds(shell, shell->cmd_lst, shell->env_cpy);
+	free_ll(&shell->cmd_lst);
+}
+
+void	main_input_error(int *terminate)
+{
+	rl_clear_history();
+	*terminate = 1;
+	exit(1);
+}
 
 void	display_prompt(t_minishell *shell)
-{	
+{
 	char	*line;
 	int		terminate;
-	t_builtin builtin;
 
 	terminate = 0;
 	init_ascii_art();
 	remove_ctl_echo();
 	while (!terminate)
 	{
-		if (g_exit_status == 0)	
+		if (g_exit_status == 0)
 			line = readline("\033[0;37m \033[1m MINIHELL_>\033[0m ");
 		else
-			line = readline("\033[0;31m \033[1m Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚_ >\033[0m ");
+			line = readline("\033[0;31m \033[1m \
+				Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚_ >\033[0m ");
 		if (line == NULL && terminate != 1)
-		{
-			free(line);
-			rl_clear_history();
-			terminate = 1;
-			exit(1);
-		}
+			main_input_error(&terminate);
 		else if (line[0] != '\0' && terminate != 1)
-		{
-			add_history(line);
-			shell->cmd_lst = lexing(line, shell->env_cpy);
-			if (!shell->cmd_lst)
-			{
-				if (line)
-				{
-					//printf("wat dfe fuck\n");
-					//free(line);
-				}
-				continue ;	
-			}
-			printing_lexer(shell->cmd_lst);
-			builtin = is_builtin(shell->cmd_lst);
-			if (builtin != NO_BUILTIN && !shell->cmd_lst->next)
-				execute_builtin(shell, builtin);
-			else
-				g_exit_status = execute_cmds(shell, shell->cmd_lst, shell->env_cpy);
-			free_ll(&shell->cmd_lst);
-		}
+			main_execute_input(shell, line);
 		else
 			free(line);
 	}
@@ -62,11 +62,12 @@ void	display_prompt(t_minishell *shell)
 
 t_minishell	init_minishell(int argc, char *envp[])
 {
-	t_minishell shell;
+	t_minishell	shell;
 
 	if (argc != 1)
 	{
-		ft_printf("executable: too many arguments. Executable can only be run as follows: './minishell'\n");
+		ft_printf("executable: too many arguments. \
+			Executable can only be run as follows: './minishell'\n");
 		exit(1);
 	}
 	shell.cmd_lst = malloc(sizeof(t_lexer));
@@ -84,6 +85,7 @@ t_minishell	init_minishell(int argc, char *envp[])
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_minishell	shell;
+
 	(void) argv;
 	shell = init_minishell(argc, envp);
 	catch_signals_parent();

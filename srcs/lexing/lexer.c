@@ -73,6 +73,7 @@ t_lexer	*set_variables(t_lexer *info_list, char *line)
 		splitted_line = split_with_quotes(line, info_list);
 	else
 		splitted_line = ft_split(line, ' ');
+	free(line);
 	if (!splitted_line)
 		return (NULL);
 	enum_array = ft_calloc(get_max_array(splitted_line) + 1, sizeof(int));
@@ -89,16 +90,21 @@ t_lexer	*set_variables(t_lexer *info_list, char *line)
 t_lexer	*lexing(char *line, char **env_cpy)
 {
 	t_lexer	*info_list;
+	char	*new_line;
 
 	info_list = ft_calloc(1, sizeof(t_lexer));
 	if (!info_list)
 		return (NULL);
 	if (input_line_check(line, info_list) == -1)
+	{
+		free(line);
 		return (NULL);
+	}
 	info_list->env_copy = env_cpy;
-	line = put_spaces_in_line(line, info_list);
-	if (!line)
+	new_line = put_spaces_in_line(line, info_list);
+	free(line);
+	if (!new_line)
 		return (error_lex(info_list, 3, "lexer.c/L99"), NULL);
-	info_list = set_variables(info_list, line);
+	info_list = set_variables(info_list, new_line);
 	return (info_list);
 }
