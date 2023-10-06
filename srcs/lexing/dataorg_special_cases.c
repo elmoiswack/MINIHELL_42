@@ -61,7 +61,7 @@ t_lexer	*special_case_files(t_lexer *info_list, char **splitted_line)
 }
 
 t_lexer	*other_special_case(t_lexer	*info_list, char **splitted_line, \
-	int *enum_array)
+	int *enum_array, int index)
 {
 	if (ft_strncmp(splitted_line[0], "rm", ft_strlen(splitted_line[0])) == 0)
 	{
@@ -81,6 +81,10 @@ t_lexer	*other_special_case(t_lexer	*info_list, char **splitted_line, \
 		free(enum_array);
 		return (info_list);
 	}
+	while (enum_array[index] == COMMAND)
+		index++;
+	if (enum_array[index] == 0)
+		return (intolist_commands(info_list, splitted_line, enum_array));
 	return (NULL);
 }
 
@@ -109,12 +113,17 @@ t_lexer	*which_special_case(t_lexer *info_list, char **splitted_line, \
 		free(enum_array);
 		return (info_list);
 	}
-	info_list = other_special_case(info_list, splitted_line, enum_array);
+	info_list = other_special_case(info_list, splitted_line, enum_array, 0);
 	return (info_list);
 }
 
-int	check_special_cases(char **splitted_line)
+int	check_special_cases(char **splitted_line, int *enum_array)
 {
+	int	index;
+	int	count;
+
+	index = 0;
+	count = 0;
 	if (ft_strncmp(splitted_line[0], "echo", ft_strlen(splitted_line[0])) == 0)
 		return (1);
 	if (ft_strncmp(splitted_line[0], "rm", ft_strlen(splitted_line[0])) == 0)
@@ -122,6 +131,14 @@ int	check_special_cases(char **splitted_line)
 	if (ft_strncmp(splitted_line[0], "mkdir", ft_strlen(splitted_line[0])) == 0)
 		return (1);
 	if (ft_strncmp(splitted_line[0], "touch", ft_strlen(splitted_line[0])) == 0)
+		return (1);
+	while (splitted_line[index])
+	{
+		if (enum_array[index] == COMMAND)
+			count++;
+		index++;
+	}
+	if (count == index)
 		return (1);
 	return (-1);
 }

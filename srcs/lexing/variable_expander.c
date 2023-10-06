@@ -63,7 +63,10 @@ char	*get_env_var(char *line, char **env_cpy, int ammount_env)
 		return (NULL);
 	env_temp = expand_env_variables(env_temp, env_cpy);
 	if (!env_temp)
+	{
+		free(line);
 		return (NULL);
+	}
 	line = replace_variables(line, env_temp);
 	if (!line)
 		return (NULL);

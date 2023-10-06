@@ -3,6 +3,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int	input_line_doublequote(char *line, t_lexer *info_list, int index)
+{
+	index++;
+	while (line[index])
+	{
+		if (line[index] == '"')
+			return (1);
+		index++;
+	}
+	return (error_lex(info_list, 2, "unclosed quotes!"), -1);
+}
+
+int	input_line_singlequote(char *line, t_lexer *info_list, int index)
+{
+	index++;
+	while (line[index])
+	{
+		if (line[index] == '\'')
+			return (1);
+		if (line[index] == '"')
+			return (1);
+		index++;
+	}
+	return (error_lex(info_list, 2, "unclosed quotes!"), -1);
+}
+
 int	inputline_other_checks(char *line, t_lexer *info_list, int index)
 {
 	if (line[index] == '<')
@@ -20,6 +46,11 @@ int	inputline_other_checks(char *line, t_lexer *info_list, int index)
 		if (check_pipe(line, index, info_list) == -1)
 			return (-1);
 	}
+	if (line[index] == '\'')
+	{
+		if (input_line_singlequote(line, info_list, index) == -1)
+			return (-1);
+	}
 	return (1);
 }
 
@@ -32,15 +63,15 @@ int	input_line_check(char *line, t_lexer *info_list)
 	index = 0;
 	while (line[index])
 	{
-		if (line[index] == '"' || line[index] == '\'')
+		if (line[index] == '"')
 		{
 			if (quote_check == 1)
 				quote_check = -1;
-			else
+			else if (quote_check == -1)
 			{
-				quote_check = 1;
-				if (check_quotes(line, index, info_list) == -1)
+				if (input_line_doublequote(line, info_list, index) == -1)
 					return (-1);
+				quote_check = 1;
 			}
 		}
 		if (inputline_other_checks(line, info_list, index) == -1)

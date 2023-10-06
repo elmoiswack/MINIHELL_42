@@ -28,7 +28,6 @@ char	*remove_spaces_quotes_line(char *line, char *new_line, \
 		index_n++;
 		index_l++;
 	}
-	free(line);
 	return (new_line);
 }
 

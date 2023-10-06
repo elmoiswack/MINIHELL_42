@@ -10,7 +10,6 @@ t_lexer	*organizing_data_checks(t_lexer *info_list, char **splitted_line, \
 	{
 		info_list = data_org_command(info_list, splitted_line, \
 			enum_array, index);
-		index++;
 	}
 	else if (enum_array[index] == PIPE)
 		info_list = data_org_pipe(info_list);
@@ -25,7 +24,6 @@ t_lexer	*organizing_data_checks(t_lexer *info_list, char **splitted_line, \
 	}
 	else if (enum_array[index] == APPENDER)
 	{
-		index++;
 		info_list = data_org_appender(info_list, splitted_line, index);
 	}
 	return (info_list);
@@ -43,6 +41,8 @@ t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, \
 			enum_array, index);
 		if (!info_list)
 			return (NULL);
+		if ((enum_array[index] == DELIMITER) || (enum_array[index] == APPENDER))
+			index++;
 		if (splitted_line[index] != NULL)
 			index++;
 	}

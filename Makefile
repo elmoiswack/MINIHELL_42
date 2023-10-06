@@ -19,6 +19,7 @@ SRCS		:= 	main.c \
 				lexing/dataorg_utils.c \
 				lexing/dataorg_special_cases.c \
 				lexing/into_list.c \
+				lexing/intolist_special.c \
 				lexing/parsing_grep.c \
 				lexing/parser_cat.c \
 				lexing/parsing_echo.c \

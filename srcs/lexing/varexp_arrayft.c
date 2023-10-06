@@ -61,8 +61,10 @@ char	**expand_env_variables(char **env_temp, char **env_cpy)
 		env_temp[index] = expand_variable(env_temp[index], env_cpy);
 		if (!env_temp[index])
 		{
-			free_double_array(env_temp);
-			return (NULL);
+			free(env_temp[index]);
+			env_temp[index] = ft_calloc(2, sizeof(char));
+			if (!env_temp[index])
+				return (free_double_array(env_temp), NULL);
 		}
 		index++;
 	}
