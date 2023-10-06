@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void	execute_pwd()
+void	execute_pwd(void)
 {
 	char	cwd[256];
-	int	cd_len;
-	int	total_len;
+	int		cd_len;
+	int		total_len;
 
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{
@@ -27,4 +27,3 @@ void	execute_pwd()
 		return ;
 	}
 }
-

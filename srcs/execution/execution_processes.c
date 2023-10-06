@@ -7,9 +7,10 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-static void	run_child_process(int in, int out, t_lexer *node, t_minishell *shell)
+static void	run_child_process(int in, int out, t_lexer *node,
+		t_minishell *shell)
 {
-	t_builtin builtin;
+	t_builtin	builtin;
 
 	route_input(in, node);
 	route_output(out, node);
@@ -20,13 +21,17 @@ static void	run_child_process(int in, int out, t_lexer *node, t_minishell *shell
 		exit(0);
 	}
 	if (check_access(node->content[0]) == -1)
-		error_command_not_found(node->content[0]);
+	{
+		clean_up(shell);
+		return (error_command_not_found(node->content[0]));
+	}
 	else if (execve(node->path, node->content, shell->env_cpy) < 0)
 		perror("execve");
 	exit(-1);
 }
 
-static pid_t	run_and_route_processes(pid_t pid, t_lexer *head, t_lexer *current, t_minishell *shell)
+static pid_t	run_and_route_processes(pid_t pid, t_lexer *head,
+		t_lexer *current, t_minishell *shell)
 {
 	int		pipe_fd[2];
 	int		prev_pipe;
@@ -57,7 +62,8 @@ static int	fetch_exit_status(pid_t pid, t_lexer *head, char *env_cpy[])
 	int		status;
 
 	waitpid(pid, &status, 0);
-	while (wait(NULL) != -1);
+	while (wait(NULL) != -1)
+		;
 	clean_tmp_files(head, env_cpy);
 	return (WEXITSTATUS(status));
 }

@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
-		
+
 void	execute_unset(t_minishell *shell)
 {
 	int	var_index;

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char	*get_path(char *cmd)
+char	*get_path(const char *cmd)
 {
 	int		i;
 	char	**paths;
@@ -18,7 +18,7 @@ char	*get_path(char *cmd)
 		if (access(temp, X_OK) == 0)
 			return (temp);
 		else
-		 free(temp);
+			free(temp);
 		i++;
 	}
 	return (NULL);
@@ -29,29 +29,33 @@ int	check_access(char *cmd)
 	int		i;
 	char	**paths;
 	char	*temp;
+	char	*slash_cmd;
 
 	i = 0;
 	paths = ft_split(getenv("PATH"), ':');
+	slash_cmd = ft_strjoin("/", cmd);
 	while (paths[i])
 	{
-		temp = ft_strjoin(paths[i], ft_strjoin("/", cmd));
+		temp = ft_strjoin(paths[i], slash_cmd);
 		if (access(temp, X_OK) == 0)
 		{
 			free_double_array(paths);
-			return (1);
+			free(temp);
+			return (free(slash_cmd), 1);
 		}
 		else
 			free(temp);
 		i++;
 	}
-	return (-1);
+	free_double_array(paths);
+	return (free(slash_cmd), -1);
 }
 
-char *ft_getenv(char *var_name, char **env)
+char	*ft_getenv(char *var_name, char **env)
 {
 	char	*value;
 	int		var_index;
-	
+
 	var_index = var_exists(env, var_name);
 	if (var_index == -1)
 		return (NULL);
@@ -66,11 +70,11 @@ int	arg_is_env(char *raw_input, char **value, char *envp[])
 
 	temp = ft_strdup(raw_input + 1);
 	*value = ft_getenv(temp, envp);
+	free(temp);
 	if (raw_input[0] == '$' && *value)
 		return (1);
 	else
 	{
-		free(temp);
 		*value = NULL;
 		return (0);
 	}
@@ -79,7 +83,7 @@ int	arg_is_env(char *raw_input, char **value, char *envp[])
 int	var_exists(char	**env, char *var)
 {
 	int	i;
-	int var_len;
+	int	var_len;
 
 	var_len = ft_strlen(var);
 	i = 0;
@@ -91,4 +95,3 @@ int	var_exists(char	**env, char *var)
 	}
 	return (-1);
 }
-

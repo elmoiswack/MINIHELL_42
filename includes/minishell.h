@@ -218,7 +218,7 @@ void	free_lexing_struct(t_lexer *list);
 int		execute_cmds(t_minishell *shell, t_lexer *head, char *envp[]);
 
 //		execution_utilities.c
-char	*get_path(char *cmd);
+char	*get_path(const char *cmd);
 int		arg_is_env(char *raw_input, char **value, char *envp[]);
 int		check_access(char *cmd);
 int		var_exists(char	**env, char *var);
@@ -259,8 +259,11 @@ int		is_builtin(t_lexer *cmd_lst);
 
 //		execution_heredoc.c
 void	create_heredoc_loop(t_lexer *head, char *env_cpy[]);
-void	create_heredoc_tmp(char *delim, char *envp[]);
 void	clean_tmp_files(t_lexer *head, char *envp[]);
+
+//		execution_heredoc_expansion.c
+char	*expand_heredoc_var(char *heredoc_line, int var_index, char *env_cpy[]);
+char	*expand_heredoc_pid(char *heredoc_line, int pid_token_index);
 
 //		execution_routing.c
 void	route_output(int out, t_lexer *node);

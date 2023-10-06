@@ -5,7 +5,7 @@
 #include <termios.h>
 #include <unistd.h>
 
-void	init_ascii_art()
+void	init_ascii_art(void)
 {
 	char	*sc_line;
 	int		sc_fd;
@@ -25,9 +25,9 @@ void	init_ascii_art()
 	}
 }
 
-void	remove_ctl_echo()
+void	remove_ctl_echo(void)
 {
-	struct termios term_attr;
+	struct termios	term_attr;
 
 	tcgetattr(STDIN_FILENO, &term_attr);
 	term_attr.c_lflag &= ~ECHOCTL;

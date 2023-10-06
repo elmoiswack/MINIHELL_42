@@ -89,4 +89,3 @@ void	printing_lexer(t_lexer *info_lexer)
 	fprintf(stderr, "\033[0m");
 	return ;
 }
-
