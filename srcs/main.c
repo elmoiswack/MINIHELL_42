@@ -16,7 +16,10 @@ void	main_execute_input(t_minishell *shell, char *line)
 	add_history(line);
 	shell->cmd_lst = lexing(line, shell->env_cpy);
 	if (!shell->cmd_lst)
+	{
+		g_exit_status = -1;
 		return ;
+	}
 	printing_lexer(shell->cmd_lst);
 	builtin = is_builtin(shell->cmd_lst);
 	if (builtin != NO_BUILTIN && !shell->cmd_lst->next)
@@ -55,6 +58,7 @@ void	display_prompt(t_minishell *shell)
 			free(line);
 	}
 	rl_clear_history();
+	clear_history();
 	if (line)
 		free(line);
 }

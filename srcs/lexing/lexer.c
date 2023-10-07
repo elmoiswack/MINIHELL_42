@@ -80,7 +80,7 @@ t_lexer	*set_variables(t_lexer *info_list, char *line)
 	if (!enum_array)
 	{
 		free_double_array(splitted_line);
-		return (error_lex(info_list, 3, "lexer.c/78"), NULL);
+		return (error_lex(info_list, 3, "lexer.c/79"), NULL);
 	}
 	enum_array = into_enum_array(splitted_line, enum_array, 0);
 	info_list = which_case(info_list, splitted_line, enum_array);
@@ -104,7 +104,7 @@ t_lexer	*lexing(char *line, char **env_cpy)
 	new_line = put_spaces_in_line(line, info_list);
 	free(line);
 	if (!new_line)
-		return (error_lex(info_list, 3, "lexer.c/L99"), NULL);
+		return (error_lex(info_list, 3, "lexer.c/L104"), NULL);
 	info_list = set_variables(info_list, new_line);
 	return (info_list);
 }
