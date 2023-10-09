@@ -5,4 +5,5 @@
 void	execute_env(char *envp[])
 {
 	print_double_array(envp);
+	g_exit_status = 0;
 }

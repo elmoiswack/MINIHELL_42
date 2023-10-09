@@ -13,5 +13,9 @@ void	execute_unset(t_minishell *shell)
 	}
 	var_index = var_exists(shell->env_cpy, shell->cmd_lst->content[1]);
 	if (var_index >= 0)
+	{
 		shell->env_cpy = remove_str_from_array(shell->env_cpy, var_index);
+		if (shell->env_cpy)
+			g_exit_status = 0;
+	}
 }
