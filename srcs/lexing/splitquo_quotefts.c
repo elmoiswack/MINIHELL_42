@@ -3,6 +3,45 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+char	*remove_spaces_single_quote(char *line, char *new_line, int index_n, int index_l)
+{
+	index_n++;
+	index_l++;
+	while (line[index_l] && line[index_l] != '\'')
+	{
+		if (line[index_l] != ' ')
+		{
+			new_line[index_n] = line[index_l];
+			index_n++;
+		}
+		index_l++;
+	}
+	new_line[index_n] = line[index_l];
+	return (new_line);		
+}	
+
+char	*remove_spaces_which_quote(char *line, char *new_line, int index_n, int index_l)
+{
+	if (line[index_l] == '"')
+	{
+		index_n++;
+		index_l++;
+		while (line[index_l] && line[index_l] != '"')
+		{
+			if (line[index_l] != ' ')
+			{
+				new_line[index_n] = line[index_l];
+				index_n++;
+			}
+			index_l++;
+		}
+		new_line[index_n] = line[index_l];
+	}
+	else
+		new_line = remove_spaces_single_quote(line, new_line, index_n, index_l);
+	return (new_line);
+}
+
 char	*remove_spaces_quotes_line(char *line, char *new_line, \
 	int index_n, int index_l)
 {
@@ -11,19 +50,13 @@ char	*remove_spaces_quotes_line(char *line, char *new_line, \
 		new_line[index_n] = line[index_l];
 		if (line[index_l] == '"' || line[index_l] == '\'')
 		{
-			index_n++;
-			index_l++;
-			while (line[index_l] && \
-				(line[index_l] != '"' && line[index_l] != '\''))
-			{
-				if (line[index_l] != ' ')
-				{
-					new_line[index_n] = line[index_l];
-					index_n++;
-				}
-				index_l++;
-			}
-			new_line[index_n] = line[index_l];
+			new_line = remove_spaces_which_quote(line, new_line, index_n, index_l);
+			index_n = how_many_spaces_quotes(line, index_l);
+			if (line[index_l] == '"')
+				index_l = get_end_quote(line, index_l, 1);
+			else
+				index_l = get_end_quote(line, index_l, 0);
+			index_n = ft_strlen(new_line) - 1;	
 		}
 		index_n++;
 		index_l++;

@@ -68,3 +68,31 @@ char	*strcpy_splitquo(char *line, int begin, int end)
 	temp[index] = '\0';
 	return (temp);
 }
+
+int	how_many_spaces_quotes(char *line, int index_l)
+{
+	int	count;
+
+	count = 0;
+	if (line[index_l] == '"')
+	{
+		index_l++;
+		while (line[index_l] && line[index_l] != '"')
+		{
+			if (line[index_l] == ' ')
+				count++;
+			index_l++;
+		}
+	}
+	else
+	{
+		index_l++;
+		while (line[index_l] && line[index_l] != '\'')
+		{
+			if (line[index_l] == ' ')
+				count++;
+			index_l++;
+		}		
+	}
+	return (count);
+}

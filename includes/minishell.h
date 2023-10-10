@@ -135,6 +135,7 @@ char	*quote_data_inarray(char *line, char **temp, \
 int		how_many_quotes(char *line);
 int		get_end_quote(char *line, int end, int which);
 char	*strcpy_splitquo(char *line, int begin, int end);
+int		how_many_spaces_quotes(char *line, int index_l);
 
 		//get_path.c
 char	*get_path_of_command(char *command);
@@ -204,7 +205,7 @@ t_lexer	*spca_echo_intolist(t_lexer *info_list, \
 t_lexer	*echo_with_meta(t_lexer *info_list, \
 	char **splitted_line, int *enum_array);
 t_lexer	*echo_meta_intolist(t_lexer *info_list, \
-	char **splitted_line, int index);
+	char **splitted_line, int *enum_array, int index);
 t_lexer	*default_echo_data(t_lexer *info_list, char **splitted_line);
 
 		//variable_expander.c

@@ -11,6 +11,7 @@ t_lexer	*intolist_commands(t_lexer *info_list, \
 	info_list->input = STDIN_IN;
 	info_list->output = STDOUT_OUT;
 	info_list->next = NULL;
+	info_list->check_free = 1;
 	free(enum_array);
 	return (info_list);
 }

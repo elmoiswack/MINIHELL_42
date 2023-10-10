@@ -4,6 +4,8 @@
 
 int	is_builtin(t_lexer *node)
 {
+	if (!node->content)			//added this check to prevent segfaults!!
+		return (NO_BUILTIN);
 	if (ft_strncmp(node->content[0], "echo", 5) == 0
 		&& node->output == STDOUT_OUT)
 		return (ECHO);

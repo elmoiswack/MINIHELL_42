@@ -58,7 +58,6 @@ void	display_prompt(t_minishell *shell)
 			free(line);
 	}
 	rl_clear_history();
-	clear_history();
 	if (line)
 		free(line);
 }
