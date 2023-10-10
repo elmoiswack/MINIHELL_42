@@ -48,4 +48,5 @@ void	execute_export(t_minishell *shell)
 	else
 		shell->env_cpy = append_to_double_array(shell->env_cpy,
 				shell->cmd_lst->content[1]);
+	g_exit_status = 0;
 }

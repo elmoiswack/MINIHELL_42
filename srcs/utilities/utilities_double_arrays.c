@@ -95,6 +95,8 @@ char	**remove_str_from_array(char **src, int index)
 	while (src[n_of_arr])
 		n_of_arr++;
 	new = ft_calloc(sizeof(char *), n_of_arr + 1);
+	if (!new)
+		return (NULL);
 	while (i < (n_of_arr - 1) && src[j])
 	{
 		if (j == index)
