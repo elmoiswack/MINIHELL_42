@@ -60,7 +60,7 @@ char	*put_spaces_in_line(char *line, t_lexer *info_list)
 	}
 	temp = ft_calloc(index + space_to_add + 2, sizeof(char));
 	if (!temp)
-		return (error_lex(info_list, 3, "eddit_line.c/L63"), NULL);
+		return (error_lex(info_list, 3, "eddit_line.c/L61"), NULL);
 	if (space_to_add == 0)
 	{
 		ft_strcpy(temp, line);

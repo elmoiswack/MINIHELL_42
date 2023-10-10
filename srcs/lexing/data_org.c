@@ -24,6 +24,7 @@ t_lexer	*organizing_data_checks(t_lexer *info_list, char **splitted_line, \
 	}
 	else if (enum_array[index] == APPENDER)
 	{
+		index++;
 		info_list = data_org_appender(info_list, splitted_line, index);
 	}
 	return (info_list);

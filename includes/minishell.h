@@ -204,7 +204,7 @@ t_lexer	*spca_echo_intolist(t_lexer *info_list, \
 t_lexer	*echo_with_meta(t_lexer *info_list, \
 	char **splitted_line, int *enum_array);
 t_lexer	*echo_meta_intolist(t_lexer *info_list, \
-	char **splitted_line, int index);
+	char **splitted_line, int *enum_array, int index);
 t_lexer	*default_echo_data(t_lexer *info_list, char **splitted_line);
 
 		//variable_expander.c

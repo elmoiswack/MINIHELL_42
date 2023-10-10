@@ -16,7 +16,9 @@ void	free_ll(t_lexer **lst)
 		current = *lst;
 		if (current->path)
 			free(current->path);
-		if (current->input == INFILE || current->output == OUTFILE)
+		// if (current->input == INFILE || current->output == OUTFILE) if an appender was found, it didnt free the file
+		// 	free(current->file);
+		if (current->file)
 			free(current->file);
 		if (current->delim)
 			free(current->delim);
