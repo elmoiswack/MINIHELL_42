@@ -21,7 +21,7 @@ t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, \
 		index++;
 	}
 	info_list->content[index] = NULL;
-	info_list->path = get_path_of_command(splitted_line[0]);
+	info_list->path = get_path_of_command(splitted_line[0], info_list->env_copy);
 	info_list->input = NONE;
 	info_list->output = NONE;
 	info_list->next = NULL;
@@ -48,7 +48,7 @@ t_lexer	*special_case_files(t_lexer *info_list, char **splitted_line)
 		index++;
 	}
 	info_list->content[index] = NULL;
-	info_list->path = get_path_of_command(info_list->content[0]);
+	info_list->path = get_path_of_command(info_list->content[0], info_list->env_copy);
 	info_list->next = NULL;
 	info_list->input = NONE;
 	info_list->output = NONE;

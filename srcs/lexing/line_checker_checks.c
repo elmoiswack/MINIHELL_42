@@ -74,3 +74,43 @@ int	check_outredirect(char *line, int index, t_lexer *info_list)
 		return (error_lex(info_list, 2, "incorrect use of refirect out!"), -1);
 	return (1);
 }
+
+int	check_quotes_loop(char *line, int index, int count, char c)
+{
+	index++;
+	count++;
+	while (line[index] && line[index] != c)
+		index++;
+	if (line[index] == c)
+		count++;
+	return (count);	
+}
+
+int	check_the_quotes(char *line)
+{
+	int	index;
+	int	count;
+
+	index = 0;
+	count = 0;
+	while (line[index])
+	{
+		if (line[index] == '"')
+		{
+			count = check_quotes_loop(line, index, count, '"');
+			index = get_end_quote(line, index, 1);
+		}
+		if (line[index] == '\'')
+		{
+			count = check_quotes_loop(line, index, count, '\'');
+			index = get_end_quote(line, index, 0);
+		}
+		if (index == -1)
+			return (-1);
+		if (line[index] != '\0')
+			index++;
+	}
+	if (count % 2 == 0)
+		return (1);
+	return (-1);
+}

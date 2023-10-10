@@ -7,7 +7,7 @@ t_lexer	*default_echo_data(t_lexer *info_list, char **splitted_line)
 {
 	info_list->input = STDIN_IN;
 	info_list->output = STDOUT_OUT;
-	info_list->path = get_path_of_command(splitted_line[0]);
+	info_list->path = get_path_of_command(splitted_line[0], info_list->env_copy);
 	return (info_list);
 }
 

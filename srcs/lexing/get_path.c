@@ -48,16 +48,17 @@ char	*find_path_loop(char **paths, char *command)
 	return (NULL);
 }
 
-char	*get_path_of_command(char *command)
+char	*get_path_of_command(char *command, char **env_cpy)
 {
 	char	*get_path;
 	char	**paths;
 	char	*command_path;
 
-	get_path = getenv("PATH");
+	get_path = ft_getenv("PATH", env_cpy);
 	if (!get_path)
 		return (NULL);
 	paths = ft_split(get_path, ':');
+	free(get_path);
 	if (!paths)
 		return (NULL);
 	command_path = find_path_loop(paths, command);
