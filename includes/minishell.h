@@ -95,13 +95,13 @@ t_lexer	*parsing_array(t_lexer *info_list, \
 		//line_checker.c
 int		input_line_check(char *line, t_lexer *info_list);
 int		inputline_other_checks(char *line, t_lexer *info_list, int index);
-int		input_line_singlequote(char *line, t_lexer *info_list, int index);
-int		input_line_doublequote(char *line, t_lexer *info_list, int index);
+int		inputline_other_checks(char *line, t_lexer *info_list, int index);
 
 		//linechecker_checks.c
 int		check_outredirect(char *line, int index, t_lexer *info_list);
 int		check_inredirect(char *line, int index, t_lexer *info_list);
 int		check_pipe(char *line, int index, t_lexer *info_list);
+int		check_the_quotes(char *line);
 
 		//enum_arrayfts.c
 int		*into_enum_array(char **splitted_line, int *enum_array, int index);
@@ -138,7 +138,7 @@ char	*strcpy_splitquo(char *line, int begin, int end);
 int		how_many_spaces_quotes(char *line, int index_l);
 
 		//get_path.c
-char	*get_path_of_command(char *command);
+char	*get_path_of_command(char *command, char **env_cpy);
 char	*find_path_loop(char **paths, char *command);
 char	**put_slash_behind(char **paths);
 

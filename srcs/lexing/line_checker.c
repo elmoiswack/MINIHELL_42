@@ -23,41 +23,6 @@ int	inputline_other_checks(char *line, t_lexer *info_list, int index)
 	return (1);
 }
 
-int	check_the_quotes(char *line)
-{
-	int	index;
-	int	count;
-
-	index = 0;
-	count = 0;
-	while (line[index])
-	{
-		if (line[index] == '"')
-		{
-			index++;
-			count++;
-			while (line[index] && line[index] != '"')
-				index++;
-			if (line[index] == '"')
-				count++;
-		}
-		if (line[index] == '\'')
-		{
-			index++;
-			count++;
-			while (line[index] && line[index] != '\'')
-				index++;
-			if (line[index] == '\'')
-				count++;
-		}
-		if (line[index] != '\0')
-			index++;
-	}
-	if (count % 2 == 0)
-		return (1);
-	return (-1);
-}
-
 int	check_whitespaces(char *line)
 {
 	int	index;

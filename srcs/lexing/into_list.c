@@ -5,7 +5,7 @@
 t_lexer	*one_two_word_lexer(t_lexer *info_list, char **splitted_line)
 {
 	info_list->content = splitted_line;
-	info_list->path = get_path_of_command(info_list->content[0]);
+	info_list->path = get_path_of_command(info_list->content[0], info_list->env_copy);
 	info_list->input = STDIN_IN;
 	info_list->output = STDOUT_OUT;
 	info_list->next = NULL;
@@ -29,7 +29,7 @@ t_lexer	*into_linklist_command(t_lexer *info_list, char *word_var)
 	if (!info_list->content)
 		return (error_lex(info_list, 3, "into_list.c/L27"), NULL);
 	ft_strcpy(info_list->content[0], word_var);
-	info_list->path = get_path_of_command(info_list->content[0]);
+	info_list->path = get_path_of_command(info_list->content[0], info_list->env_copy);
 	return (info_list);
 }
 
