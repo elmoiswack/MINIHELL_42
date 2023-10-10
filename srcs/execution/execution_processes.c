@@ -15,10 +15,12 @@ static void	run_child_process(int in, int out, t_lexer *node,
 	route_input(in, node);
 	route_output(out, node);
 	builtin = is_builtin(node);
+	if (is_absolute_path(node))
+		parse_node_absolute_path(node);
 	if (builtin != NO_BUILTIN)
 		exit(execute_builtin(shell, builtin));
-	else if (check_access(node->content[0]) == -1)
-		error_command_not_found(node->content[0]);
+	else if (check_access(node->content[0], shell->env_cpy) == -1)
+		exit(error_command_not_found(node->content[0]));
 	else if (execve(node->path, node->content, shell->env_cpy) < 0)
 		perror("execve");
 	clean_up(shell);

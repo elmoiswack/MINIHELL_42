@@ -247,7 +247,7 @@ int		get_number_delim(int *enum_array);
 //###############################################################
 
 		//error.c
-void	error_command_not_found(char *cmd);
+int		error_command_not_found(char *cmd);
 void	error_export_invalid_identifier(char *input);
 void	error_unset_too_few_args(void);
 void	error_lexing_message(t_lexer *list);
@@ -261,13 +261,17 @@ void	free_lexing_struct(t_lexer *list);
 //		EXECUTION FUNCTIONS
 //###############################################################
 
+//		execution_absolute_path.c
+int		is_absolute_path(t_lexer *node);
+int		check_access(char *cmd, char *env_cpy[]);
+void	parse_node_absolute_path(t_lexer *node);
+
 //		execution_processes.c
 int		execute_cmds(t_minishell *shell, t_lexer *head, char *envp[]);
 
 //		execution_utilities.c
 char	*get_path(const char *cmd);
 int		arg_is_env(char *raw_input, char **value, char *envp[]);
-int		check_access(char *cmd);
 int		var_exists(char	**env, char *var);
 char	*ft_getenv(char *var_name, char **env);
 

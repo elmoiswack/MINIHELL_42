@@ -35,6 +35,7 @@ SRCS		:= 	main.c \
 				execution/execution_heredoc.c \
 				execution/execution_heredoc_expansion.c \
 				execution/execution_routing.c \
+				execution/execution_absolute_path.c \
 				builtins/builtin_execution.c \
 				builtins/builtin_cd.c \
 				builtins/builtin_echo.c \

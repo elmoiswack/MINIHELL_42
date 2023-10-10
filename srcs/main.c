@@ -22,7 +22,7 @@ void	main_execute_input(t_minishell *shell, char *line)
 	}
 	printing_lexer(shell->cmd_lst);
 	builtin = is_builtin(shell->cmd_lst);
-	if (builtin != NO_BUILTIN && !shell->cmd_lst->next)
+	if (builtin != NO_BUILTIN && !shell->cmd_lst->next && !shell->cmd_lst->file)
 		execute_builtin(shell, builtin);
 	else
 		g_exit_status = execute_cmds(shell, shell->cmd_lst, shell->env_cpy);
@@ -47,7 +47,7 @@ void	display_prompt(t_minishell *shell)
 	while (!terminate)
 	{
 		if (g_exit_status == 0)
-			line = readline("\033[0;37m \033[1m MINIHELL_>\033[0m ");
+			line = readline("\033[0;37m \033[1m ZALGOSHELL_>\033[0m ");
 		else
 			line = readline(CURSED);
 		if (line == NULL && terminate != 1)

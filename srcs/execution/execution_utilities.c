@@ -24,33 +24,6 @@ char	*get_path(const char *cmd)
 	return (NULL);
 }
 
-int	check_access(char *cmd)
-{
-	int		i;
-	char	**paths;
-	char	*temp;
-	char	*slash_cmd;
-
-	i = 0;
-	paths = ft_split(getenv("PATH"), ':');
-	slash_cmd = ft_strjoin("/", cmd);
-	while (paths[i])
-	{
-		temp = ft_strjoin(paths[i], slash_cmd);
-		if (access(temp, X_OK) == 0)
-		{
-			free_double_array(paths);
-			free(temp);
-			return (free(slash_cmd), 1);
-		}
-		else
-			free(temp);
-		i++;
-	}
-	free_double_array(paths);
-	return (free(slash_cmd), -1);
-}
-
 char	*ft_getenv(char *var_name, char **env)
 {
 	char	*value;
@@ -85,6 +58,8 @@ int	var_exists(char	**env, char *var)
 	int	i;
 	int	var_len;
 
+	// if (!var || !env)
+	// 	return (-1);
 	var_len = ft_strlen(var);
 	i = 0;
 	while (env[i])
