@@ -11,8 +11,6 @@ int	g_exit_status;
 
 void	main_execute_input(t_minishell *shell, char *line)
 {
-	t_builtin	builtin;
-
 	add_history(line);
 	shell->cmd_lst = lexing(line, shell->env_cpy);
 	if (!shell->cmd_lst)
@@ -21,11 +19,7 @@ void	main_execute_input(t_minishell *shell, char *line)
 		return ;
 	}
 	printing_lexer(shell->cmd_lst);
-	builtin = is_builtin(shell->cmd_lst);
-	if (builtin != NO_BUILTIN && !shell->cmd_lst->next && !shell->cmd_lst->file)
-		execute_builtin(shell, builtin);
-	else
-		g_exit_status = execute_cmds(shell, shell->cmd_lst, shell->env_cpy);
+	g_exit_status = execute_cmds(shell, shell->cmd_lst, shell->env_cpy);
 	free_ll(&shell->cmd_lst);
 }
 

@@ -2,8 +2,9 @@
 #include "../../libft/libft.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdbool.h>
 
-int	check_access(char *cmd, char *env_cpy[])
+bool	cmd_exists(char *cmd, char *env_cpy[])
 {
 	int		i;
 	char	**paths;
@@ -14,7 +15,7 @@ int	check_access(char *cmd, char *env_cpy[])
 	i = -1;
 	env = ft_getenv("PATH", env_cpy);
 	if (!env)
-		return (-1);
+		return (false);
 	paths = ft_split(env, ':');
 	free(env);
 	slash_cmd = ft_strjoin("/", cmd);
@@ -25,21 +26,21 @@ int	check_access(char *cmd, char *env_cpy[])
 		{
 			free_double_array(paths);
 			free(temp);
-			return (free(slash_cmd), 1);
+			return (free(slash_cmd), true);
 		}
 		else
 			free(temp);
 	}
 	free_double_array(paths);
-	return (free(slash_cmd), -1);
+	return (free(slash_cmd), false);
 }
 
-int	is_absolute_path(t_lexer *node)
+bool	is_absolute_path(t_lexer *node)
 {
 	if (access(node->content[0], X_OK) == 0 && !node->path)
-		return (1);
+		return (true);
 	else
-	 	return (-1);
+		return (false);
 }
 
 void	parse_node_absolute_path(t_lexer *node)

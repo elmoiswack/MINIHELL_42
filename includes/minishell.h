@@ -1,5 +1,6 @@
 #ifndef MINISHELL_H 
 # define MINISHELL_H 
+# include <stdbool.h>
 
 //###############################################################
 //DATA_STRUCTURES
@@ -262,8 +263,8 @@ void	free_lexing_struct(t_lexer *list);
 //###############################################################
 
 //		execution_absolute_path.c
-int		is_absolute_path(t_lexer *node);
-int		check_access(char *cmd, char *env_cpy[]);
+bool	is_absolute_path(t_lexer *node);
+bool	cmd_exists(char *cmd, char *env_cpy[]);
 void	parse_node_absolute_path(t_lexer *node);
 
 //		execution_processes.c
