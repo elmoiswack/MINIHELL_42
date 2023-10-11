@@ -23,7 +23,7 @@ static void	handle_hd_signals(int signum)
 {
 	if (signum == SIGINT)
 	{
-		g_exit_status = 130;
+		g_exit_status = 131;
 		kill(getpid(), SIGINT);
 		exit(130);
 	}
