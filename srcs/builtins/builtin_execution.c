@@ -6,6 +6,9 @@ int	is_builtin(t_lexer *node)
 {
 	if (!node->content)
 		return (NO_BUILTIN);
+	else if (ft_strncmp(node->content[0], "exit", ft_strlen(node->content[0])) == 0
+			&& !node->next)
+		return (EXIT);
 	else if (ft_strncmp(node->content[0], "echo", ft_strlen(node->content[0])) == 0
 		&& node->output == STDOUT_OUT)
 		return (ECHO);
@@ -21,9 +24,6 @@ int	is_builtin(t_lexer *node)
 		return (EXPORT);
 	else if (ft_strncmp(node->content[0], "unset", ft_strlen(node->content[0])) == 0)
 		return (UNSET);
-	else if (ft_strncmp(node->content[0], "exit", ft_strlen(node->content[0])) == 0
-		&& node->content[1] == NULL)
-		return (EXIT);
 	else
 		return (NO_BUILTIN);
 }

@@ -19,6 +19,11 @@ void	main_execute_input(t_minishell *shell, char *line)
 		return ;
 	}
 	printing_lexer(shell->cmd_lst);
+	if (is_builtin(shell->cmd_lst) == EXIT)
+	{
+		ft_putstr_fd("exit\n", STDIN_FILENO);
+		exit(0);
+	}
 	g_exit_status = execute_cmds(shell, shell->cmd_lst, shell->env_cpy);
 	free_ll(&shell->cmd_lst);
 }
@@ -75,6 +80,8 @@ t_minishell	init_minishell(int argc, char *envp[])
 	shell.env_cpy = copy_double_array(envp);
 	shell.status = 0;
 	shell.builtin = NO_BUILTIN;
+	shell.profile = PARENT;
+	change_signal_profile(PARENT);
 	return (shell);
 }
 
@@ -84,7 +91,6 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void) argv;
 	shell = init_minishell(argc, envp);
-	catch_signals_parent();
 	display_prompt(&shell);
 	free_double_array(shell.env_cpy);
 	free_lexing_content_struct(shell.cmd_lst);

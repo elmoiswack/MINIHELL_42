@@ -44,14 +44,14 @@ static pid_t	run_and_route_processes(pid_t pid, t_lexer *head,
 		pid = fork();
 		if (pid == 0)
 		{
-			catch_signals_child();
+			change_signal_profile(CHILD);
 			run_child_process(prev_pipe, pipe_fd[PIPE_WRITE], current, shell);
 		}
 		close(pipe_fd[PIPE_WRITE]);
 		prev_pipe = pipe_fd[PIPE_READ];
 		current = current->next;
 	}
-	catch_signals_parent();
+	change_signal_profile(PARENT);
 	close(prev_pipe);
 	return (pid);
 }
@@ -74,7 +74,9 @@ int	execute_cmds(t_minishell *shell, t_lexer *head, char *envp[])
 
 	pid = 1;
 	current = head;
-	create_heredoc_loop(current, envp);
+	if (create_heredoc_loop(current, envp) == 130)
+		return (130);
+	change_signal_profile(PARENT);
 	print_cmd_lst(head);
 	pid = run_and_route_processes(pid, head, current, shell);
 	return (fetch_exit_status(pid, head, envp));

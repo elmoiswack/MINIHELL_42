@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-char	*expand_heredoc_var(char *heredoc_line, int var_index, char *env_cpy[])
+static char	*expand_heredoc_var(char *heredoc_line, int var_index, char *env_cpy[])
 {
 	char	*temp;
 	char	*string_before_var;
@@ -32,7 +32,7 @@ char	*expand_heredoc_var(char *heredoc_line, int var_index, char *env_cpy[])
 	}
 }
 
-char	*expand_heredoc_pid(char *heredoc_line, int pid_token_index)
+static char	*expand_heredoc_pid(char *heredoc_line, int pid_token_index)
 {
 	char	*string_before_pid;
 	char	*string_after_pid;
@@ -55,5 +55,29 @@ char	*expand_heredoc_pid(char *heredoc_line, int pid_token_index)
 	else
 		heredoc_line = ft_strjoin_and_free(pid_str,
 				heredoc_line + pid_token_index + 2);
+	return (heredoc_line);
+}
+
+char	*expand_heredoc_line(char *heredoc_line, char *env_cpy[])
+{
+	int	i;
+
+	i = 0;
+	if (!heredoc_line)
+		return (heredoc_line);
+	while (heredoc_line[i])
+	{
+		if (heredoc_line[i] == '$' && heredoc_line[i + 1] != '\0'
+				&& heredoc_line[i + 1] == '$')
+		{
+			heredoc_line = expand_heredoc_pid(heredoc_line, i);
+			if (heredoc_line[i + 1])
+				i++;
+		}
+		else if (heredoc_line[i] == '$' && heredoc_line[i + 1] != '\0'
+				&& ft_isalpha(heredoc_line[i + 1]) == 1)
+			heredoc_line = expand_heredoc_var(heredoc_line, i, env_cpy);
+		i++;
+	}
 	return (heredoc_line);
 }

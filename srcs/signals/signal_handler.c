@@ -19,45 +19,60 @@ static void	handle_parent_signals(int signum)
 	}
 }
 
-static void	handle_child_signals(int signum)
+static void	handle_hd_signals(int signum)
 {
 	if (signum == SIGINT)
 	{
-		write(STDERR_FILENO, "YEET\n", 4);
 		g_exit_status = 130;
 		kill(getpid(), SIGINT);
+		exit(130);
 	}
-	else if (signum == SIGQUIT)
+}
+
+static void	handle_child_int(int signum)
+{
+	if (signum == SIGINT)
 	{
-		write(STDERR_FILENO, "YEET\n", 4);
-		g_exit_status = 131;
-		kill(getpid(), SIGQUIT);
+		g_exit_status = 130;
+		kill(getpid(), SIGINT);
+		exit(130);
 	}
 }
 
-void	catch_signals_parent(void)
+static void	handle_child_quit(int signum)
 {
-	struct sigaction	sigparent_int;
-	struct sigaction	sigparent_quit;
-
-	ft_memset(&sigparent_int, 0, sizeof(sigparent_int));
-	ft_memset(&sigparent_quit, 0, sizeof(sigparent_quit));
-	sigparent_int.sa_handler = &handle_parent_signals;
-	sigparent_quit.sa_handler = SIG_IGN;
-	if (sigaction(SIGINT, &sigparent_int, NULL) == -1)
-		perror("SIGINT: ");
-	if (sigaction(SIGQUIT, &sigparent_quit, NULL) == -1)
-		perror("SIGQUIT: ");
+	if (signum == SIGQUIT)
+	{
+		g_exit_status = 0;
+		kill(getpid(), SIGQUIT);
+		exit(0);
+	}
 }
 
-void	catch_signals_child(void)
+void	change_signal_profile(t_sig_profile profile)
 {
-	struct sigaction	sigchild;
+	struct sigaction	s_int;
+	struct sigaction	s_quit;
 
-	ft_memset(&sigchild, 0, sizeof(sigchild));
-	sigchild.sa_handler = &handle_child_signals;
-	if (sigaction(SIGINT, &sigchild, NULL) == -1)
+	ft_memset(&s_int, 0, sizeof(s_int));
+	ft_memset(&s_quit, 0, sizeof(s_quit));
+	if (profile == CHILD)
+	{
+		s_int.sa_handler = &handle_child_int;
+		s_quit.sa_handler = &handle_child_quit;
+	}
+	else if (profile == PARENT)
+	{
+		s_int.sa_handler = &handle_parent_signals;
+		s_quit.sa_handler = SIG_IGN;
+	}
+	else if (profile == HD)
+	{
+		s_int.sa_handler = &handle_hd_signals;
+		s_quit.sa_handler = SIG_IGN;
+	}
+	if (sigaction(SIGINT, &s_int, NULL) == -1)
 		perror("SIGINT: ");
-	if (sigaction(SIGQUIT, &sigchild, NULL) == -1)
+	if (sigaction(SIGQUIT, &s_quit, NULL) == -1)
 		perror("SIGINT: ");
 }

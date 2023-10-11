@@ -1,6 +1,7 @@
 #ifndef MINISHELL_H 
 # define MINISHELL_H 
 # include <stdbool.h>
+# include <unistd.h>
 
 //###############################################################
 //DATA_STRUCTURES
@@ -48,6 +49,12 @@ typedef enum e_builtin {
 	NO_BUILTIN,
 }	t_builtin;
 
+typedef enum e_sig_profile {
+	PARENT,
+	CHILD,
+	HD,
+}	t_sig_profile;
+
 //Linked list node - each command is parsed into a t_lexer node 
 //	for the executioner to be handled accordingly;
 typedef struct lexerinfo {
@@ -78,6 +85,7 @@ typedef struct s_minishell {
 	char				**env_cpy;
 	int					status;
 	int					builtin;
+	t_sig_profile		profile;
 }	t_minishell;
 
 //###############################################################
@@ -310,12 +318,11 @@ int		execute_builtin(t_minishell *shell, t_builtin builtin);
 int		is_builtin(t_lexer *cmd_lst);
 
 //		execution_heredoc.c
-void	create_heredoc_loop(t_lexer *head, char *env_cpy[]);
+int		create_heredoc_loop(t_lexer *head, char *env_cpy[]);
 void	clean_tmp_files(t_lexer *head, char *envp[]);
 
 //		execution_heredoc_expansion.c
-char	*expand_heredoc_var(char *heredoc_line, int var_index, char *env_cpy[]);
-char	*expand_heredoc_pid(char *heredoc_line, int pid_token_index);
+char	*expand_heredoc_line(char *heredoc_line, char *env_cpy[]);
 
 //		execution_routing.c
 void	route_output(int out, t_lexer *node);
@@ -323,8 +330,9 @@ void	route_input(int in, t_lexer *node);
 void	redirect_from_to(int fd_from, int fd_to);
 
 //		signal_handling.c
-void	catch_signals_parent(void);
-void	catch_signals_child(void);
+// void	catch_signals_parent(void);
+// void	catch_signals_child(void);
+void	change_signal_profile(t_sig_profile profile);	
 
 //		memory_management.c		
 void	clean_up(t_minishell *shell);
