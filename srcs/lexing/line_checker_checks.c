@@ -83,7 +83,7 @@ int	check_quotes_loop(char *line, int index, int count, char c)
 		index++;
 	if (line[index] == c)
 		count++;
-	return (count);	
+	return (count);
 }
 
 int	check_the_quotes(char *line)

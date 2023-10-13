@@ -21,7 +21,8 @@ t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, \
 		index++;
 	}
 	info_list->content[index] = NULL;
-	info_list->path = get_path_of_command(splitted_line[0], info_list->env_copy);
+	info_list->path = get_path_of_command(splitted_line[0], \
+		info_list->env_copy);
 	info_list->input = NONE;
 	info_list->output = NONE;
 	info_list->next = NULL;
@@ -35,7 +36,7 @@ t_lexer	*special_case_files(t_lexer *info_list, char **splitted_line)
 	index = get_max_array(splitted_line);
 	info_list->content = ft_calloc(index + 1, sizeof(char *));
 	if (!info_list->content)
-		return (error_lex(info_list, 3, "dataorg_special_cases.c/L36"), NULL);
+		return (error_lex(info_list, 3, "dataorg_special_cases.c/L37"), NULL);
 	index = 0;
 	while (splitted_line[index])
 	{
@@ -43,12 +44,13 @@ t_lexer	*special_case_files(t_lexer *info_list, char **splitted_line)
 			ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
 		if (!info_list->content[index])
 			return (error_lex(info_list, 3, \
-				"dataorg_special_cases.c/L43"), NULL);
+				"dataorg_special_cases.c/L44"), NULL);
 		ft_strcpy(info_list->content[index], splitted_line[index]);
 		index++;
 	}
 	info_list->content[index] = NULL;
-	info_list->path = get_path_of_command(info_list->content[0], info_list->env_copy);
+	info_list->path = get_path_of_command(info_list->content[0], \
+		info_list->env_copy);
 	info_list->next = NULL;
 	info_list->input = NONE;
 	info_list->output = NONE;
