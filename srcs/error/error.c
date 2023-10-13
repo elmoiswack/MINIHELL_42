@@ -4,10 +4,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void	error_command_not_found(char *cmd)
+int	error_command_not_found(char *cmd)
 {
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	ft_putstr_fd(": command not found\n", STDERR_FILENO);
+	return (127);
 }
 
 void	error_export_invalid_identifier(char *input)

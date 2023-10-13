@@ -11,18 +11,22 @@ static void	run_child_process(int in, int out, t_lexer *node,
 		t_minishell *shell)
 {
 	t_builtin	builtin;
+	int			err;
 
+	err = -1;
+	builtin = is_builtin(node);
 	route_input(in, node);
 	route_output(out, node);
-	builtin = is_builtin(node);
+	if (is_absolute_path(node))
+		parse_node_absolute_path(node);
 	if (builtin != NO_BUILTIN)
-		exit(execute_builtin(shell, builtin));
-	else if (check_access(node->content[0]) == -1)
-		error_command_not_found(node->content[0]);
+		err = execute_builtin(shell, builtin);
+	else if (!cmd_exists(node->content[0], shell->env_cpy))
+		err = error_command_not_found(node->content[0]);
 	else if (execve(node->path, node->content, shell->env_cpy) < 0)
 		perror("execve");
 	clean_up(shell);
-	exit(-1);
+	exit(err);
 }
 
 static pid_t	run_and_route_processes(pid_t pid, t_lexer *head,
@@ -40,14 +44,14 @@ static pid_t	run_and_route_processes(pid_t pid, t_lexer *head,
 		pid = fork();
 		if (pid == 0)
 		{
-			catch_signals_child();
+			change_signal_profile(CHILD);
 			run_child_process(prev_pipe, pipe_fd[PIPE_WRITE], current, shell);
 		}
 		close(pipe_fd[PIPE_WRITE]);
 		prev_pipe = pipe_fd[PIPE_READ];
 		current = current->next;
 	}
-	catch_signals_parent();
+	change_signal_profile(PARENT);
 	close(prev_pipe);
 	return (pid);
 }
@@ -70,7 +74,9 @@ int	execute_cmds(t_minishell *shell, t_lexer *head, char *envp[])
 
 	pid = 1;
 	current = head;
-	create_heredoc_loop(current, envp);
+	if (create_heredoc_loop(current, envp) == 130)
+		return (130);
+	change_signal_profile(PARENT);
 	print_cmd_lst(head);
 	pid = run_and_route_processes(pid, head, current, shell);
 	return (fetch_exit_status(pid, head, envp));

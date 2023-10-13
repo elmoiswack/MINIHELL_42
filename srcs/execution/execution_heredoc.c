@@ -28,53 +28,46 @@ static void	change_permission_heredoc_tmp(void)
 	}
 }
 
-static char	*expand_heredoc_line(char *heredoc_line, char *env_cpy[])
-{
-	int	i;
-
-	i = 0;
-	if (!heredoc_line)
-		return (heredoc_line);
-	while (heredoc_line[i])
-	{
-		if (heredoc_line[i] == '$' && heredoc_line[i + 1] != '\0'
-			&& heredoc_line[i + 1] == '$')
-		{
-			heredoc_line = expand_heredoc_pid(heredoc_line, i);
-			if (heredoc_line[i + 1])
-				i++;
-		}
-		else if (heredoc_line[i] == '$' && heredoc_line[i + 1] != '\0'
-			&& ft_isalpha(heredoc_line[i + 1]) == 1)
-			heredoc_line = expand_heredoc_var(heredoc_line, i, env_cpy);
-		i++;
-	}
-	return (heredoc_line);
-}
-
 static void	create_heredoc_tmp(char *delim, char *env_cpy[])
 {
 	char	*heredoc_line;
 	int		heredoc_tmp;
+	bool	terminate;
 
+	terminate = false;
 	change_permission_heredoc_tmp();
 	heredoc_tmp = open("./data/heredoc.tmp",
 			O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (heredoc_tmp < 0)
 		return (perror("heredoc_tmp"));
-	heredoc_line = readline("> ");
-	while (heredoc_line != NULL && !(ft_strncmp(heredoc_line, delim,
-				(ft_strlen(delim) + ft_strlen(heredoc_line))) == 0))
+	while (!terminate)
 	{
+		heredoc_line = readline("> ");
+		if (heredoc_line == NULL || (ft_strncmp(heredoc_line, delim,
+				(ft_strlen(delim) + ft_strlen(heredoc_line))) == 0))
+			terminate = true;
 		heredoc_line = expand_heredoc_line(heredoc_line, env_cpy);
 		write(heredoc_tmp, heredoc_line, ft_strlen(heredoc_line));
 		write(heredoc_tmp, "\n", 1);
 		if (heredoc_line)
 			free(heredoc_line);
-		heredoc_line = readline("> ");
 	}
-	free(heredoc_line);
 	close(heredoc_tmp);
+	exit (0);
+}
+
+static int fetch_exit_status(pid_t pid, t_lexer *head, char *env_cpy[])
+{
+	int		status;
+
+	status = 1;
+	waitpid(pid, &status, 0);
+	while (wait(NULL) != -1)
+		;
+	if (status == 1)
+		return (clean_tmp_files(head, env_cpy), 130);
+	else
+		return (0);
 }
 
 void	clean_tmp_files(t_lexer *head, char *envp[])
@@ -96,19 +89,29 @@ void	clean_tmp_files(t_lexer *head, char *envp[])
 	}
 }
 
-void	create_heredoc_loop(t_lexer *head, char *env_cpy[])
+int	create_heredoc_loop(t_lexer *head, char *env_cpy[])
 {
 	t_lexer	*current;
 	int		i;
+	int 	pid;
 
 	i = 0;
+	pid = 1;
 	current = head;
-	if (current->delim)
+	if (!current->delim)
+		return (0);
+	else
 	{
-		while (current->delim[i])
+		pid = fork();
+		if (pid == 0)
 		{
-			create_heredoc_tmp(current->delim[i], env_cpy);
-			i++;
+			change_signal_profile(HD);
+			while (current->delim[i])
+			{
+				create_heredoc_tmp(current->delim[i], env_cpy);
+				i++;
+			}
 		}
 	}
+	return (fetch_exit_status(pid, head, env_cpy));
 }

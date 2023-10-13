@@ -11,8 +11,6 @@ int	g_exit_status;
 
 void	main_execute_input(t_minishell *shell, char *line)
 {
-	t_builtin	builtin;
-
 	add_history(line);
 	shell->cmd_lst = lexing(line, shell->env_cpy);
 	if (!shell->cmd_lst)
@@ -21,11 +19,12 @@ void	main_execute_input(t_minishell *shell, char *line)
 		return ;
 	}
 	printing_lexer(shell->cmd_lst);
-	builtin = is_builtin(shell->cmd_lst);
-	if (builtin != NO_BUILTIN && !shell->cmd_lst->next)
-		execute_builtin(shell, builtin);
-	else
-		g_exit_status = execute_cmds(shell, shell->cmd_lst, shell->env_cpy);
+	if (is_builtin(shell->cmd_lst) == EXIT)
+	{
+		ft_putstr_fd("exit\n", STDIN_FILENO);
+		exit(0);
+	}
+	g_exit_status = execute_cmds(shell, shell->cmd_lst, shell->env_cpy);
 	free_ll(&shell->cmd_lst);
 }
 
@@ -47,7 +46,7 @@ void	display_prompt(t_minishell *shell)
 	while (!terminate)
 	{
 		if (g_exit_status == 0)
-			line = readline("\033[0;37m \033[1m MINIHELL_>\033[0m ");
+			line = readline("\033[0;37m \033[1m ZALGOSHELL_>\033[0m ");
 		else
 			line = readline(CURSED);
 		if (line == NULL && terminate != 1)
@@ -81,6 +80,8 @@ t_minishell	init_minishell(int argc, char *envp[])
 	shell.env_cpy = copy_double_array(envp);
 	shell.status = 0;
 	shell.builtin = NO_BUILTIN;
+	shell.profile = PARENT;
+	change_signal_profile(PARENT);
 	return (shell);
 }
 
@@ -90,7 +91,6 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void) argv;
 	shell = init_minishell(argc, envp);
-	catch_signals_parent();
 	display_prompt(&shell);
 	free_double_array(shell.env_cpy);
 	free_lexing_content_struct(shell.cmd_lst);

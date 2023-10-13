@@ -1,5 +1,5 @@
-#include "../includes/minishell.h"
-#include "../libft/libft.h"
+#include "../../includes/minishell.h"
+#include "../../libft/libft.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -7,17 +7,13 @@
 void	free_ll(t_lexer **lst)
 {
 	t_lexer	*current;
-	t_lexer	*head;
 
-	head = *lst;
 	current = *lst;
 	while (current != NULL)
 	{
 		current = *lst;
 		if (current->path)
 			free(current->path);
-		// if (current->input == INFILE || current->output == OUTFILE) if an appender was found, it didnt free the file
-		// 	free(current->file);
 		if (current->file)
 			free(current->file);
 		if (current->delim)
@@ -28,6 +24,7 @@ void	free_ll(t_lexer **lst)
 		free(*lst);
 		*lst = current;
 	}
+	free(*lst);
 }
 
 void	clean_up(t_minishell *shell)

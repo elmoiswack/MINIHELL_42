@@ -11,8 +11,14 @@ void	print_double_array(char **arr)
 	i = 0;
 	while (arr[i++])
 	{
+		// if (arr[i])
+		// 	ft_printf("%s\n", arr[i]);
 		if (arr[i])
-			ft_printf("%s\n", arr[i]);
+		{
+			ft_putstr_fd(arr[i], STDOUT_FILENO);
+			ft_putstr_fd("\n", STDOUT_FILENO);
+		}
+
 	}
 }
 
@@ -31,9 +37,7 @@ char	**copy_double_array(char **array)
 	copy = ft_calloc(sizeof(char *), n_of_arr + 1);
 	while (i < n_of_arr)
 	{
-		len = ft_strlen(array[i]) + 1;
-		copy[i] = malloc(sizeof(char) * len + 1);
-		ft_strlcpy(copy[i], array[i], len);
+		copy[i] = ft_strdup(array[i]);
 		i++;
 	}
 	return (copy);
