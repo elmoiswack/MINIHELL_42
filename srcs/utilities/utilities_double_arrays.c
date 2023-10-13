@@ -11,8 +11,6 @@ void	print_double_array(char **arr)
 	i = 0;
 	while (arr[i++])
 	{
-		// if (arr[i])
-		// 	ft_printf("%s\n", arr[i]);
 		if (arr[i])
 		{
 			ft_putstr_fd(arr[i], STDOUT_FILENO);
@@ -26,11 +24,9 @@ char	**copy_double_array(char **array)
 {
 	char	**copy;
 	int		n_of_arr;
-	int		len;
 	int		i;
 
 	n_of_arr = 0;
-	len = 0;
 	i = 0;
 	while (array[n_of_arr])
 		n_of_arr++;
