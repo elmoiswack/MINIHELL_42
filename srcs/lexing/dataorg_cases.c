@@ -22,10 +22,14 @@ t_lexer	*data_org_command(t_lexer *info_list, char **splitted_line, \
 
 t_lexer	*data_org_pipe(t_lexer *info_list)
 {
+	char	**temp_env;
+
+	temp_env = info_list->env_copy;
 	if (info_list->input != INFILE && info_list->input != PIPE_READ)
 		info_list->input = STDIN_IN;
 	info_list->output = PIPE_WRITE;
 	info_list = create_new_node(info_list);
+	info_list->env_copy = temp_env;
 	info_list->input = PIPE_READ;
 	info_list->output = STDOUT_OUT;
 	return (info_list);
