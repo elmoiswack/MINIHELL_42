@@ -49,12 +49,12 @@ char	*replace_variables(char *line, char **env_temp)
 
 char	*get_env_var(char *line, char **env_cpy, int ammount_env)
 {
-	int		index;
+	// int		index;
 	char	**env_temp;
-	int		index_tmp;
+	// int		index_tmp;
 
-	index = 0;
-	index_tmp = 0;
+	// index = 0;
+	// index_tmp = 0;
 	env_temp = ft_calloc(ammount_env + 1, sizeof(char *));
 	if (!env_temp)
 		return (NULL);

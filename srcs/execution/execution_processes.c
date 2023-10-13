@@ -29,6 +29,17 @@ static void	run_child_process(int in, int out, t_lexer *node,
 	exit(err);
 }
 
+static int	fetch_exit_status(pid_t pid, t_lexer *head, char *env_cpy[])
+{
+	int		status;
+
+	waitpid(pid, &status, 0);
+	while (wait(NULL) != -1)
+		;
+	clean_tmp_files(head, env_cpy);
+	return (WEXITSTATUS(status));
+}
+
 static pid_t	run_and_route_processes(pid_t pid, t_lexer *head,
 		t_lexer *current, t_minishell *shell)
 {
@@ -51,20 +62,9 @@ static pid_t	run_and_route_processes(pid_t pid, t_lexer *head,
 		prev_pipe = pipe_fd[PIPE_READ];
 		current = current->next;
 	}
-	change_signal_profile(PARENT);
 	close(prev_pipe);
+	change_signal_profile(PARENT);
 	return (pid);
-}
-
-static int	fetch_exit_status(pid_t pid, t_lexer *head, char *env_cpy[])
-{
-	int		status;
-
-	waitpid(pid, &status, 0);
-	while (wait(NULL) != -1)
-		;
-	clean_tmp_files(head, env_cpy);
-	return (WEXITSTATUS(status));
 }
 
 int	execute_cmds(t_minishell *shell, t_lexer *head, char *envp[])
@@ -74,7 +74,7 @@ int	execute_cmds(t_minishell *shell, t_lexer *head, char *envp[])
 
 	pid = 1;
 	current = head;
-	if (create_heredoc_loop(current, envp) == 130)
+	if (create_heredoc_loop(current, envp) != 0)
 		return (130);
 	change_signal_profile(PARENT);
 	print_cmd_lst(head);
