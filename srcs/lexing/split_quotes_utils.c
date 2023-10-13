@@ -92,7 +92,7 @@ int	how_many_spaces_quotes(char *line, int index_l)
 			if (line[index_l] == ' ')
 				count++;
 			index_l++;
-		}		
+		}
 	}
 	return (count);
 }
