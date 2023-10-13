@@ -58,8 +58,8 @@ typedef struct lexerinfo {
 	char				**delim;
 	int					index_delim;
 	int					check_free;
-	int					error_code;
 	char				**env_copy;
+	int					error_code;
 	const char			*error_str;
 	struct lexerinfo	*next;
 }	t_lexer;
