@@ -308,6 +308,8 @@ void	execute_export(t_minishell *shell);
 void	execute_pwd(void);
 //		execution_unset.c
 void	execute_unset(t_minishell *shell);
+//		execution_exit.c
+int		execute_exit(t_lexer *node);
 
 //		interface_frontend.c
 void	init_ascii_art(void);
