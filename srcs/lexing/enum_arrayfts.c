@@ -23,17 +23,32 @@ int	which_enum(char **splitted_line, int index)
 	return (COMMAND);
 }
 
+int	into_enum_cases(char **splitted_line, int *enum_array, int index)
+{
+	if (ft_strncmp(splitted_line[index], "grep", ft_strlen("grep")) == 0)
+	{
+		index++;
+		if (enum_array[index])
+			enum_array[index] = FLAG;
+		return (1);
+	}
+	else if (ft_strncmp(splitted_line[index], "exit", ft_strlen("exit")) == 0)
+	{
+		index++;
+		if (splitted_line[index] && ft_isdigit(splitted_line[index][0]) == 1)
+			enum_array[index] = FLAG;
+		return (1);
+	}
+	return (0);	
+}
+
 int	*into_enum_array(char **splitted_line, int *enum_array, int index)
 {
 	while (splitted_line[index])
 	{
 		enum_array[index] = which_enum(splitted_line, index);
-		if (ft_strncmp(splitted_line[index], "grep", ft_strlen("grep")) == 0)
-		{
+		if (into_enum_cases(splitted_line, enum_array, index) == 1)
 			index++;
-			if (enum_array[index])
-				enum_array[index] = FLAG;
-		}
 		else if (enum_array[index] == REDIRECT_IN)
 		{
 			index++;
