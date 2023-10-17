@@ -19,12 +19,10 @@ void	main_execute_input(t_minishell *shell, char *line)
 		return ;
 	}
 	printing_lexer(shell->cmd_lst);
-	if (is_builtin(shell->cmd_lst) == EXIT)
-	{
-		ft_putstr_fd("exit\n", STDIN_FILENO);
-		exit(0);
-	}
-	g_exit_status = execute_cmds(shell, shell->cmd_lst, shell->env_cpy);
+	if (is_builtin(shell->cmd_lst) == EXIT && !shell->cmd_lst->next)
+		g_exit_status = execute_exit(shell->cmd_lst);
+	else
+		g_exit_status = execute_cmds(shell, shell->cmd_lst, shell->env_cpy);
 	free_ll(&shell->cmd_lst);
 }
 

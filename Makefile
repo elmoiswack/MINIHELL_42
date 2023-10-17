@@ -43,6 +43,7 @@ SRCS		:= 	main.c \
 				builtins/builtin_export.c \
 				builtins/builtin_pwd.c \
 				builtins/builtin_unset.c \
+				builtins/builtin_exit.c \
 				interface/interface_frontend.c \
 				utilities/utilities_double_arrays.c \
 				utilities/utilities_debugging.c \

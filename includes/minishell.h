@@ -259,12 +259,13 @@ int		get_number_delim(int *enum_array);
 int		error_command_not_found(char *cmd);
 void	error_export_invalid_identifier(char *input);
 void	error_unset_too_few_args(void);
-void	error_lexing_message(t_lexer *list);
 void	error_lex(t_lexer *info_list, int error_code, const char *str);
+int		error_exit(char *msg);
 
 		//free.c
 void	free_lexing_content_struct(t_lexer *list);
 void	free_lexing_struct(t_lexer *list);
+void	error_lexing_message(t_lexer *list);
 
 //###############################################################
 //		EXECUTION FUNCTIONS
@@ -308,6 +309,8 @@ void	execute_export(t_minishell *shell);
 void	execute_pwd(void);
 //		execution_unset.c
 void	execute_unset(t_minishell *shell);
+//		execution_exit.c
+int		execute_exit(t_lexer *node);
 
 //		interface_frontend.c
 void	init_ascii_art(void);

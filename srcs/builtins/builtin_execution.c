@@ -6,8 +6,7 @@ int	is_builtin(t_lexer *node)
 {
 	if (!node->content)
 		return (NO_BUILTIN);
-	else if (ft_strncmp(node->content[0], "exit", ft_strlen(node->content[0])) == 0
-			&& !node->next)
+	else if (ft_strncmp(node->content[0], "exit", ft_strlen(node->content[0])) == 0)
 		return (EXIT);
 	else if (ft_strncmp(node->content[0], "echo", ft_strlen(node->content[0])) == 0
 		&& node->output == STDOUT_OUT)
@@ -43,6 +42,6 @@ int	execute_builtin(t_minishell *shell, t_builtin builtin)
 	else if (builtin == UNSET)
 		return (execute_unset(shell), 0);
 	else if (builtin == EXIT)
-		return (0);
+		return (execute_exit(shell->cmd_lst));
 	return (g_exit_status = 1, 1);
 }
