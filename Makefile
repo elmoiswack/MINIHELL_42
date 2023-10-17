@@ -2,6 +2,7 @@ NAME		:=	minishell
 FLAGS		:= 	-Wall -Wextra -Werror
 LIBS		:= 	./libft/libft.a -lreadline -I /Users/$(USER)/.brew/opt/readline/include -L/Users/$(USER)/.brew/opt/readline/lib
 HEADERS		:= 	-I libft -I includes -I /Users/$(USER)/.brew/opt/readline/include 
+CC			:=	cc
 SRCS		:= 	main.c \
 				lexing/lexer.c \
 				lexing/line_checker.c \
@@ -68,7 +69,7 @@ Bold		= "\033[1m"			# Text Style Bold
 ######################################################
 
 ifdef DEBUG
-	CC += -g -fsanitize=address
+	CC += -g3 -fsanitize=address
 endif
 
 all: $(NAME)

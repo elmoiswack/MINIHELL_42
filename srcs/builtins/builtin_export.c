@@ -22,31 +22,39 @@ static char	*expand_value(char *content, char *var, char *env_cpy[])
 	return (free(content), expand);
 }
 
-void	execute_export(t_minishell *shell)
+static int export_content(char *content, t_minishell *shell)
 {
 	char	*var;
 	int		eq_index;
 	int		replace_index;
 
-	if (!shell->cmd_lst->content[1])
-		return (execute_env(shell->env_cpy));
-	eq_index = ft_strchr_index(shell->cmd_lst->content[1], '=');
-	var = ft_substr(shell->cmd_lst->content[1], 0, eq_index);
+	eq_index = ft_strchr_index(content, '=');
+	var = ft_substr(content, 0, eq_index);
 	replace_index = var_exists(shell->env_cpy, var);
-	shell->cmd_lst->content[1] = expand_value(shell->cmd_lst->content[1],
-			var, shell->env_cpy);
+	content = expand_value(content,	var, shell->env_cpy);
 	free(var);
-	if (ft_strchr(shell->cmd_lst->content[1], '=') == NULL
-		&& ft_strisalpha(shell->cmd_lst->content[1]) == 0)
+	if (ft_strchr(content, '=') == NULL	&& ft_strisalpha(content) == 0)
 	{
 		g_exit_status = -1;
-		return (error_export_invalid_identifier(shell->cmd_lst->content[1]));
+		return (error_export_invalid_identifier(content), 1);
 	}
 	else if (replace_index >= 0)
-		shell->env_cpy = replace_str_in_array(shell->env_cpy,
-				shell->cmd_lst->content[1], replace_index);
+		shell->env_cpy = replace_str_in_array(shell->env_cpy, content, replace_index);
 	else
-		shell->env_cpy = append_to_double_array(shell->env_cpy,
-				shell->cmd_lst->content[1]);
-	g_exit_status = 0;
+		shell->env_cpy = append_to_double_array(shell->env_cpy, content);
+	return (0);
+}
+
+void	execute_export(t_minishell *shell)
+{
+	int i;
+
+	i = 1;
+	if (!shell->cmd_lst->content[i])
+		return (execute_env(shell->env_cpy));
+	while (shell->cmd_lst->content[i] && g_exit_status != 1)
+	{
+		g_exit_status = export_content(shell->cmd_lst->content[i], shell);
+		i++;
+	}
 }
