@@ -17,16 +17,10 @@ static bool	ft_strisdigit(char *str)
 	return (true);
 }
 
-static int	convert_exit_code(int exit_code)
-{
-	while (exit_code > 255)
-		exit_code -= 256;
-	return (exit_code);
-}
-
 int execute_exit(t_lexer *node)
 {
 	int exit_code;
+
 	if (!node->content[1])
 	{
 		if (!node->next)
@@ -38,23 +32,14 @@ int execute_exit(t_lexer *node)
 			exit(1);
 	}
 	else if (node->content[2])
-	{
-		ft_putstr_fd("exit: ", STDERR_FILENO);
-		ft_putstr_fd(": too many arguments\n", STDERR_FILENO);
-	}
+		return (error_exit("exit: too many arguments\n"));
 	else if (node->content[1][0] == '-' && ft_isdigit(node->content[1][1]) == 0)
-		ft_putstr_fd("exit: numeric argument required\n", STDERR_FILENO);
+		return(error_exit("exit: numeric argument required\n"));
 	else if (ft_strisdigit(node->content[1]) || (node->content[1][0] == '-' && ft_strisdigit(&node->content[1][1])))
 	{
-		if (node->content[1][0] == '-')
-			exit_code = ft_atoi(&node->content[1][1]);
-		else
-			exit_code = ft_atoi(node->content[1]);
-		if (exit_code > 255 || exit_code < 0)
-			exit_code = convert_exit_code(exit_code);
+		exit_code = ft_atoi(node->content[1]);
 		ft_putstr_fd("exit\n", STDIN_FILENO);
 		exit(exit_code);
 	}
-	ft_putstr_fd("exit: numeric argument required\n", STDERR_FILENO);
-	return (1);
+	return (error_exit("exit: numeric argument required\n"));
 }
