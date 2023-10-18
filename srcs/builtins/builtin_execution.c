@@ -34,7 +34,7 @@ int	execute_builtin(t_minishell *shell, t_builtin builtin)
 	else if (builtin == CD)
 		return (execute_cd(shell), 0);
 	else if (builtin == PWD)
-		return (execute_pwd(), 0);
+		return (execute_pwd(shell->env_cpy), 0);
 	else if (builtin == ENV)
 		return (execute_env(shell->env_cpy), 0);
 	else if (builtin == EXPORT)

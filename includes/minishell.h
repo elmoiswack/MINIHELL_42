@@ -306,7 +306,7 @@ void	execute_env(char *envp[]);
 //		execution_export.c
 void	execute_export(t_minishell *shell);
 //		execution_pwd.c
-void	execute_pwd(void);
+void	execute_pwd(char *env_cpy[]);
 //		execution_unset.c
 void	execute_unset(t_minishell *shell);
 //		execution_exit.c
