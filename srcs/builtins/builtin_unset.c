@@ -4,18 +4,26 @@
 void	execute_unset(t_minishell *shell)
 {
 	int	var_index;
+	int	i;
 
 	var_index = 0;
+	i = 1;
 	if (shell->cmd_lst->content[1] == NULL)
 	{
 		g_exit_status = -1;
 		return (error_unset_too_few_args());
 	}
-	var_index = var_exists(shell->env_cpy, shell->cmd_lst->content[1]);
-	if (var_index >= 0)
+	while (shell->cmd_lst->content[i] && g_exit_status != 1)
 	{
-		shell->env_cpy = remove_str_from_array(shell->env_cpy, var_index);
-		if (shell->env_cpy)
-			g_exit_status = 0;
+		var_index = var_exists(shell->env_cpy, shell->cmd_lst->content[i]);
+		if (var_index >= 0)
+		{
+			shell->env_cpy = remove_str_from_array(shell->env_cpy, var_index);
+			if (shell->env_cpy)
+				g_exit_status = 0;
+			else
+			 	g_exit_status = 1;
+		}
+		i++;
 	}
 }

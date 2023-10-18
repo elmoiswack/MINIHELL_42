@@ -58,8 +58,6 @@ int	var_exists(char	**env, char *var)
 	int	i;
 	int	var_len;
 
-	// if (!var || !env)
-	// 	return (-1);
 	var_len = ft_strlen(var);
 	i = 0;
 	while (env[i])

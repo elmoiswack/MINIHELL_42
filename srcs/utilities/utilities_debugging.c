@@ -46,7 +46,8 @@ void	print_cmd_lst(t_lexer *head)
 	while (current)
 	{
 		builtin = is_builtin(current);
-		fprintf(stderr, "%d\t%s\t%s\t%s\t%s\t%s\n", n, current->content[0], g_enum[current->input], g_enum[current->output], current->file, g_builtin[builtin]);
+		if (current->content != NULL)
+			fprintf(stderr, "%d\t%s\t%s\t%s\t%s\t%s\n", n, current->content[0], g_enum[current->input], g_enum[current->output], current->file, g_builtin[builtin]);
 		n++;
 		current = current->next;
 	}

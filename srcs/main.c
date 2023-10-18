@@ -11,6 +11,8 @@ int	g_exit_status;
 
 void	main_execute_input(t_minishell *shell, char *line)
 {
+	t_builtin builtin;
+
 	add_history(line);
 	shell->cmd_lst = lexing(line, shell->env_cpy);
 	if (!shell->cmd_lst)
@@ -19,8 +21,9 @@ void	main_execute_input(t_minishell *shell, char *line)
 		return ;
 	}
 	printing_lexer(shell->cmd_lst);
-	if (is_builtin(shell->cmd_lst) == EXIT && !shell->cmd_lst->next)
-		g_exit_status = execute_exit(shell->cmd_lst);
+	builtin = is_builtin(shell->cmd_lst);
+	if (builtin != NO_BUILTIN && !shell->cmd_lst->next)
+		g_exit_status = execute_builtin(shell, builtin);
 	else
 		g_exit_status = execute_cmds(shell, shell->cmd_lst, shell->env_cpy);
 	free_ll(&shell->cmd_lst);
@@ -30,7 +33,8 @@ void	main_input_error(int *terminate)
 {
 	rl_clear_history();
 	*terminate = 1;
-	exit(1);
+	ft_putstr_fd("exit\n", STDERR_FILENO);
+	exit(0);
 }
 
 void	display_prompt(t_minishell *shell)
@@ -47,7 +51,7 @@ void	display_prompt(t_minishell *shell)
 			line = readline("\033[0;37m \033[1m ZALGOSHELL_>\033[0m ");
 		else
 			line = readline(CURSED);
-		if (line == NULL && terminate != 1)
+		if (line == NULL)
 			main_input_error(&terminate);
 		else if (line[0] != '\0' && terminate != 1)
 			main_execute_input(shell, line);

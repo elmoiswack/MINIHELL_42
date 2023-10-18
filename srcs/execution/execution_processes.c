@@ -7,6 +7,12 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+static void	run_cmd(char *path, char *content[], char *env_cpy[])
+{
+	if (execve(path, content, env_cpy) < 0)
+		perror("execve");
+}
+
 static void	run_child_process(int in, int out, t_lexer *node,
 		t_minishell *shell)
 {
@@ -18,13 +24,13 @@ static void	run_child_process(int in, int out, t_lexer *node,
 	route_input(in, node);
 	route_output(out, node);
 	if (is_absolute_path(node))
-		parse_node_absolute_path(node);
+		run_cmd(node->path, node->content, shell->env_cpy);
 	if (builtin != NO_BUILTIN)
 		err = execute_builtin(shell, builtin);
 	else if (!cmd_exists(node->content[0], shell->env_cpy))
 		err = error_command_not_found(node->content[0]);
-	else if (execve(node->path, node->content, shell->env_cpy) < 0)
-		perror("execve");
+	else
+		run_cmd(node->path, node->content, shell->env_cpy);
 	clean_up(shell);
 	exit(err);
 }
@@ -76,7 +82,6 @@ int	execute_cmds(t_minishell *shell, t_lexer *head, char *envp[])
 	current = head;
 	if (create_heredoc_loop(current, envp) != 0)
 		return (130);
-	change_signal_profile(PARENT);
 	print_cmd_lst(head);
 	pid = run_and_route_processes(pid, head, current, shell);
 	return (fetch_exit_status(pid, head, envp));

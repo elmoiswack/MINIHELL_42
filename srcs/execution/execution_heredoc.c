@@ -11,8 +11,7 @@
 
 static void	change_permission_heredoc_tmp(void)
 {
-	// int		status;
-	pid_t	pid;
+	pid_t		pid;
 	char *const chmod_args[] = {"chmod", "777", "./data/heredoc.tmp", NULL};
 
 	if (access(chmod_args[2], F_OK) == 0)
@@ -20,7 +19,6 @@ static void	change_permission_heredoc_tmp(void)
 		pid = fork();
 		if (pid == 0 && execve(get_path(chmod_args[0]), chmod_args, NULL) < 0)
 			exit(-1);
-		// waitpid(pid, &status, 0);
 	}
 }
 
@@ -71,7 +69,7 @@ static int fetch_exit_status(pid_t pid, t_lexer *head, char *env_cpy[])
 void	clean_tmp_files(t_lexer *head, char *envp[])
 {
 	char *const rm_args[] = {"rm", "./data/heredoc.tmp", NULL};
-	pid_t	pid;
+	pid_t		pid;
 
 	if (head->delim)
 	{
