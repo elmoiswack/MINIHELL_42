@@ -29,6 +29,7 @@ SRCS		:= 	main.c \
 				lexing/varexp_arrayft.c \
 				lexing/varexp_lineft.c \
 				lexing/delimiter_func.c \
+				lexing/list_checks.c \
 				error/error.c \
 				error/free.c \
 				error/memory_management.c \
