@@ -16,9 +16,13 @@ int	which_enum(char **splitted_line, int index)
 		return (PIPE);
 	if (splitted_line[index][0] == '$' && ft_isalpha(splitted_line[index][1]))
 		return (ENV_VAR);
+	if (splitted_line[index][0] == '$' && splitted_line[index][1] == '?')
+		return (FLAG);
 	if (splitted_line[index][0] == '-' && ft_isalpha(splitted_line[index][1]))
 		return (FLAG);
 	if (splitted_line[index][0] == '\'' && ft_isalpha(splitted_line[index][1]))
+		return (FLAG);
+	if (ft_isdigit(splitted_line[index][0]) == 1)
 		return (FLAG);
 	return (COMMAND);
 }
@@ -29,13 +33,6 @@ int	into_enum_cases(char **splitted_line, int *enum_array, int index)
 	{
 		index++;
 		if (enum_array[index])
-			enum_array[index] = FLAG;
-		return (1);
-	}
-	else if (ft_strncmp(splitted_line[index], "exit", ft_strlen("exit")) == 0)
-	{
-		index++;
-		if (splitted_line[index] && ft_isdigit(splitted_line[index][0]) == 1)
 			enum_array[index] = FLAG;
 		return (1);
 	}
