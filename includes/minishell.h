@@ -219,7 +219,7 @@ t_lexer	*default_echo_data(t_lexer *info_list, char **splitted_line);
 
 		//variable_expander.c
 char	**replace_var_expander(t_lexer *info_list, \
-	char **splitted_line, char **env_cpy);
+	char **splitted_line, char **env_cpy, int *enum_array);
 char	*env_expander_loop(char **splitted_line, int index, char **env_cpy);
 char	*get_env_var(char *line, char **env_cpy, int ammount_env);
 char	*replace_variables(char *line, char **env_temp);

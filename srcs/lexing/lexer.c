@@ -34,7 +34,7 @@ t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array)
 {
 	if (check_for_envvar(splitted_line) == 1)
 		splitted_line = replace_var_expander(info_list, splitted_line, \
-			info_list->env_copy);
+			info_list->env_copy, enum_array);
 	if (!splitted_line)
 	{
 		free(enum_array);

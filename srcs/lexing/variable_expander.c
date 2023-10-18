@@ -98,13 +98,21 @@ char	*env_expander_loop(char **splitted_line, int index, char **env_cpy)
 }
 
 char	**replace_var_expander(t_lexer *info_list, char **splitted_line, \
-	char **env_cpy)
+	char **env_cpy, int *enum_array)
 {
 	int	index;
 
 	index = 0;
 	while (splitted_line[index])
 	{
+		if (enum_array[index] == DELIMITER)
+		{
+			index++;
+			if (splitted_line[index])
+				index++;
+			if (!splitted_line[index])
+				return (splitted_line);
+		}
 		splitted_line[index] = env_expander_loop(splitted_line, index, env_cpy);
 		if (!splitted_line[index])
 		{
