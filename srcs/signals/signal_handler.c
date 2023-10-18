@@ -15,7 +15,6 @@ static void	handle_parent_signals(int signum)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
-		g_exit_status = 130;
 	}
 }
 
@@ -28,7 +27,7 @@ static void	handle_hd_signals(int signum)
 static void	handle_child_int(int signum)
 {
 	if (signum == SIGINT)
-		g_exit_status = 130;
+		exit (130);
 }
 
 void	change_signal_profile(t_sig_profile profile)
@@ -40,17 +39,17 @@ void	change_signal_profile(t_sig_profile profile)
 	ft_memset(&s_quit, 0, sizeof(s_quit));
 	if (profile == CHILD)
 	{
-		s_int.sa_handler = handle_child_int;
+		s_int.sa_handler = &handle_child_int;
 		s_quit.sa_handler = SIG_DFL;
 	}
 	else if (profile == PARENT)
 	{
-		s_int.sa_handler = handle_parent_signals;
-		s_quit.sa_handler = handle_parent_signals;
+		s_int.sa_handler = &handle_parent_signals;
+		s_quit.sa_handler = SIG_IGN;
 	}
 	else if (profile == HD)
 	{
-		s_int.sa_handler = handle_hd_signals;
+		s_int.sa_handler = &handle_hd_signals;
 		s_quit.sa_handler = SIG_IGN;
 	}
 	if (sigaction(SIGINT, &s_int, NULL) == -1)

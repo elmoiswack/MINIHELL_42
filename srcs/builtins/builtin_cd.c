@@ -1,5 +1,6 @@
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -92,6 +93,24 @@ static void	chdir_home(char *content[], char *env_cpy[], t_minishell *shell)
 	free(value);
 }
 
+static bool	is_relative_path(char *content)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (content[i] && content[j])
+	{
+		if (ft_strncmp(&content[i], "../", 3) == 0)
+			i+=3;
+		else
+			return (false);
+		j++;
+	}
+	return (true);
+}
+
 void	execute_cd(t_minishell *shell)
 {
 	int		arg_len;
@@ -99,11 +118,10 @@ void	execute_cd(t_minishell *shell)
 	if (!shell->cmd_lst->content[1])
 		return (chdir(getenv("HOME")), update_pwd(shell));
 	arg_len = ft_strlen(shell->cmd_lst->content[1]);
-	if (ft_strncmp(shell->cmd_lst->content[1], "..", 2) == 0
-		|| ft_strncmp(shell->cmd_lst->content[1], "../", 3) == 0)
+	if (is_relative_path(shell->cmd_lst->content[1]))
 	{
 		update_old_pwd(shell);
-		chdir("../");
+		chdir(shell->cmd_lst->content[1]);
 	}
 	else if (ft_strncmp(shell->cmd_lst->content[1], "-", arg_len) == 0)
 		chdir_oldpwd(shell->env_cpy, shell);

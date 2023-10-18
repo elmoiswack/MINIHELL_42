@@ -48,7 +48,7 @@ void	display_prompt(t_minishell *shell)
 	while (!terminate)
 	{
 		if (g_exit_status == 0)
-			line = readline("\033[0;37m \033[1m ZALGOSHELL_>\033[0m ");
+			line = readline(NON_CURSED);
 		else
 			line = readline(CURSED);
 		if (line == NULL)

@@ -16,6 +16,8 @@ extern int	g_exit_status;
  Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚_ >\
  \033[0m "
 
+# define NON_CURSED "\033[0;37m \033[1m ZALGOSHELL_>\033[0m "
+
 //Token enumerator - defines the possible types of tokens;
 typedef enum e_token{
 	PIPE_READ,
@@ -306,7 +308,7 @@ void	execute_env(char *envp[]);
 //		execution_export.c
 void	execute_export(t_minishell *shell);
 //		execution_pwd.c
-void	execute_pwd(void);
+void	execute_pwd(char *env_cpy[]);
 //		execution_unset.c
 void	execute_unset(t_minishell *shell);
 //		execution_exit.c

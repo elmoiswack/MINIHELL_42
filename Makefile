@@ -70,7 +70,7 @@ Bold		= "\033[1m"			# Text Style Bold
 ######################################################
 
 ifdef DEBUG
-	CC += -g3 -fsanitize=address
+	CC += -g3
 endif
 
 all: $(NAME)
