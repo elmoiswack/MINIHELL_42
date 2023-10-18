@@ -16,6 +16,8 @@ extern int	g_exit_status;
  Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚_ >\
  \033[0m "
 
+# define NON_CURSED "\033[0;37m \033[1m ZALGOSHELL_>\033[0m "
+
 //Token enumerator - defines the possible types of tokens;
 typedef enum e_token{
 	PIPE_READ,

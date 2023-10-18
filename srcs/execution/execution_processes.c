@@ -6,6 +6,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <errno.h>
 
 static void	run_cmd(char *path, char *content[], char *env_cpy[])
 {
@@ -35,11 +36,13 @@ static void	run_child_process(int in, int out, t_lexer *node,
 	exit(err);
 }
 
-static int	fetch_exit_status(pid_t pid, t_lexer *head, char *env_cpy[])
+static int	fetch_exit_status(pid_t pid, t_lexer *head, char *env_cpy[]) // To do: add exit for 130!
 {
 	int		status;
 
 	waitpid(pid, &status, 0);
+	if (status == ENOTRECOVERABLE)
+		return (131);
 	while (wait(NULL) != -1)
 		;
 	clean_tmp_files(head, env_cpy);
@@ -69,7 +72,6 @@ static pid_t	run_and_route_processes(pid_t pid, t_lexer *head,
 		current = current->next;
 	}
 	close(prev_pipe);
-	change_signal_profile(PARENT);
 	return (pid);
 }
 

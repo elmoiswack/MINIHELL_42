@@ -103,18 +103,11 @@ static bool	is_relative_path(char *content)
 	while (content[i] && content[j])
 	{
 		if (ft_strncmp(&content[i], "../", 3) == 0)
-		{
 			i+=3;
-			continue;
-		}
 		else
-		{
-			ft_printf("False\n");
 			return (false);
-		}
 		j++;
 	}
-	ft_printf("True\n");
 	return (true);
 }
 
