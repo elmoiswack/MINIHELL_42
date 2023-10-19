@@ -1,5 +1,6 @@
 // Global array - used to print out the enum strings. Must be deleted before handing in the project.
 #include "../../includes/minishell.h"
+#include "../../libft/libft.h"
 #include <stdio.h>
 
 static const char *g_enum[] = {
@@ -30,7 +31,7 @@ static const char *g_builtin[] = {
 	[EXIT] = "EXIT",
 	[EXPORT] = "EXPORT",
 	[UNSET] = "UNSET",
-	[NO_BUILTIN] = "NO_BUILTIN",
+	[NO_BUILTIN] = "NO",
 };
 
 void	print_cmd_lst(t_lexer *head)
@@ -38,16 +39,47 @@ void	print_cmd_lst(t_lexer *head)
 	t_lexer	*current;
 	int		n;
 	t_builtin builtin;
+	int i = 0;
 
 	current = head;
 	n = 0;
-	fprintf(stderr, "\033[0;36m--------EXECUTIONER--------\n");
-	fprintf(stderr, "PROCESS\tCMD\tINPUT\tOUTPUT\tFILE\tBUILTIN\n");
+	fprintf(stderr, "\n\033[0;36m--------EXECUTIONER--------\n");
+	fprintf(stderr, "# CMD\tIN\tOUT\tINFILE\tOUTFILE\n");
 	while (current)
 	{
 		builtin = is_builtin(current);
-		if (current->content != NULL)
-			fprintf(stderr, "%d\t%s\t%s\t%s\t%s\t%s\n", n, current->content[0], g_enum[current->input], g_enum[current->output], current->file, g_builtin[builtin]);
+		fprintf(stderr, "%d", n);
+		if (builtin == NO_BUILTIN && current->content)
+			fprintf(stderr, " %s", current->content[0]);
+		else
+			fprintf(stderr, " %s", g_builtin[builtin]);
+		fprintf(stderr, "\t%s", g_enum[current->input]);
+		fprintf(stderr, "\t%s", g_enum[current->output]);
+		if (current->infile)
+		{
+			i = 0;
+			while (current->infile[i])
+			{
+				fprintf(stderr, "\t[%d]%s", i, current->infile[i]);
+				i++;
+			}
+		}
+		else {
+				fprintf(stderr, "\tNO");
+		}
+		if (current->outfile)
+		{
+			i = 0;
+			while (current->outfile[i])
+			{
+				fprintf(stderr, "\t[%d]%s", i, current->outfile[i]);
+				i++;
+			}
+		}
+		else {
+				fprintf(stderr, "\tNO");
+		}
+		fprintf(stderr, "\n");
 		n++;
 		current = current->next;
 	}
@@ -60,10 +92,9 @@ void	printing_lexer(t_lexer *info_lexer)
 
 	if (!info_lexer)
 		return ;
-	fprintf(stderr, "\033[0;36m----------PARSER-----------");
+	fprintf(stderr, "\033[0;36m----------PARSER-----------\n");
 	while(info_lexer)
 	{
-		fprintf(stderr, "\n");
 		index = 0;
 		if (info_lexer->content)
 		{
@@ -74,10 +105,26 @@ void	printing_lexer(t_lexer *info_lexer)
 			}
 		}
 		fprintf(stderr, "path = %s\n", info_lexer->path);
-		fprintf(stderr, "file name = %s\n", info_lexer->file);
+		int i = 0;
+		if (info_lexer->infile)
+		{
+			while (info_lexer->infile[i])
+			{
+				fprintf(stderr, "infile[%i] = %s\n", i, info_lexer->infile[i]);
+				i++;
+			}
+		}
+		i = 0;
+		if (info_lexer->outfile)
+		{
+			while (info_lexer->outfile[i])
+			{
+				fprintf(stderr, "outfile[%i] = %s", i, info_lexer->outfile[i]);
+				i++;
+			}
+		}
 		fprintf(stderr, "input = %s\n", g_enum[info_lexer->input]);
 		fprintf(stderr, "output = %s\n", g_enum[info_lexer->output]);
-		int i = 0;
 		if (info_lexer->delim)
 		{
 			while (info_lexer->delim[i])
@@ -86,8 +133,7 @@ void	printing_lexer(t_lexer *info_lexer)
 				i++;
 			}
 		}
-		fprintf(stderr, "---------------------------");
-		fprintf(stderr, "\n");
+		fprintf(stderr, "---------------------------\n");
 		info_lexer = info_lexer->next;
 	}
 	fprintf(stderr, "\033[0m");
@@ -106,7 +152,6 @@ void	print_double_array(char **arr)
 			ft_putstr_fd(arr[i], STDOUT_FILENO);
 			ft_putstr_fd("\n", STDOUT_FILENO);
 		}
-
 	}
 }
 

@@ -16,8 +16,7 @@ int	is_builtin(t_lexer *node)
 	else if (ft_strncmp(node->content[0], "pwd", ft_strlen(node->content[0])) == 0
 		&& node->content[1] == NULL)
 		return (PWD);
-	else if (ft_strncmp(node->content[0], "env", ft_strlen(node->content[0])) == 0
-		&& node->content[1] == NULL)
+	else if (ft_strncmp(node->content[0], "env", ft_strlen(node->content[0])) == 0)
 		return (ENV);
 	else if (ft_strncmp(node->content[0], "export", ft_strlen(node->content[0])) == 0)
 		return (EXPORT);

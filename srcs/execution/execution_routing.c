@@ -28,14 +28,21 @@ void	route_input(int in, t_lexer *node)
 	}
 	if (node->input == INFILE)
 	{
-		infile = open(node->file, O_RDONLY);
-		if (infile < 0)
+		int i;
+
+		i = 0;
+		while (node->infile[i])
 		{
-			perror("infile");
-			exit(1);
+			infile = open(node->infile[i], O_RDONLY);
+			if (infile < 0)
+			{
+				perror("infile");
+				exit(1);
+			}
+			redirect_from_to(infile, STDIN_FILENO);
+			close(infile);
+			i++;
 		}
-		redirect_from_to(infile, STDIN_FILENO);
-		close(infile);
 	}
 	else if (node->input == PIPE_READ)
 		redirect_from_to(in, STDIN_FILENO);
@@ -47,19 +54,33 @@ void	route_output(int out, t_lexer *node)
 
 	if (node->output == OUTFILE)
 	{
-		outfile = open(node->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (outfile < 0)
-			perror("outfile");
-		redirect_from_to(outfile, STDOUT_FILENO);
-		close(outfile);
+		int i;
+
+		i = 0;
+		while (node->outfile[i])
+		{
+			outfile = open(node->outfile[i], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			if (outfile < 0)
+				perror("outfile");
+			redirect_from_to(outfile, STDOUT_FILENO);
+			close(outfile);
+			i++;
+		}
 	}
 	else if (node->output == APPEND)
 	{
-		outfile = open(node->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (outfile < 0)
-			perror("outfile");
-		redirect_from_to(outfile, STDOUT_FILENO);
-		close(outfile);
+		int i;
+
+		i = 0;
+		while (node->outfile[i])
+		{
+			outfile = open(node->outfile[i], O_WRONLY | O_CREAT | O_APPEND, 0644);
+			if (outfile < 0)
+				perror("outfile");
+			redirect_from_to(outfile, STDOUT_FILENO);
+			close(outfile);
+			i++;
+		}
 	}
 	else if (node->output == PIPE_WRITE)
 		redirect_from_to(out, STDOUT_FILENO);

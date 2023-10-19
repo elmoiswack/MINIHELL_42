@@ -18,3 +18,89 @@ env | grep PWD
 pwd
 ls
 ok
+cat > out > out
+ls > out > out2
+ls > out > out2
+ls > out1 > out2
+ls > out1 > out2
+ls > out > out1
+ls
+ls > out > out1
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+ls > out > out1
+
+env
+echo jo
+env | grep PWD
+env | grep PWD
+
+env | grep PWD
+env | grep PWD
+
+env | grep PWD
+env | grep PWD
+env | grep PWD
+env | grep PWD
+env | grep PWD
+env | grep PWD
+env | grep PWD
+env | grep PWD
+env | grep PWD
+env | grep PWD
+env | grep PWD
+ls
+< out1 > out2 > out3
+env | grep PWD
+env | grep PWD
+< out1 > out2 > out3
+< out1 > out2 > out3
+< out1 > out2 > out3
