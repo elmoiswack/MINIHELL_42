@@ -41,16 +41,17 @@ static int	fetch_exit_status(pid_t pid, t_lexer *head, char *env_cpy[]) // To do
 {
 	int		status;
 
+	status = 0;
 	waitpid(pid, &status, 0);
-	change_signal_profile(PARENT);
-	if (status == ENOTRECOVERABLE)
-		return (131);
-	else if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
-		return (130);
+	ft_printf("WTERMSIG(status): %d\n WIFISIGNALED(status): %d\nWTERMSIG(status): %d\n", WTERMSIG(status), WIFSIGNALED(status), WTERMSIG(status));
+	if (WIFSIGNALED(status) && WTERMSIG(status) == 3)
+		return (change_signal_profile(PARENT), 131);
+	else if (WIFSIGNALED(status) && WTERMSIG(status) >= 7)
+		return (change_signal_profile(PARENT), 130);
 	while (wait(NULL) != -1)
 		;
 	clean_tmp_files(head, env_cpy);
-	return (WEXITSTATUS(status));
+	return (change_signal_profile(PARENT), WEXITSTATUS(status));
 }
 
 static pid_t	run_and_route_processes(pid_t pid, t_lexer *head,
