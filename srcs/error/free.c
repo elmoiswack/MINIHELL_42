@@ -36,8 +36,10 @@ void	free_lexing_content_struct(t_lexer *list)
 			free_double_array(list->content);
 		if (list->path)
 			free(list->path);
-		if (list->file)
-			free(list->file);
+		if (list->infile)
+			free_double_array(list->infile);
+		if (list->outfile)
+			free_double_array(list->outfile);
 		if (list->delim)
 			free_double_array(list->delim);
 		list = list->next;

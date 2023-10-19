@@ -29,6 +29,8 @@ t_lexer	*data_org_pipe(t_lexer *info_list)
 		info_list->input = STDIN_IN;
 	info_list->output = PIPE_WRITE;
 	info_list = create_new_node(info_list);
+	info_list->index_inf = 0;
+	info_list->index_outf = 0;
 	info_list->env_copy = temp_env;
 	info_list->input = PIPE_READ;
 	info_list->output = STDOUT_OUT;
@@ -75,11 +77,11 @@ t_lexer	*data_org_appender(t_lexer *info_list, char **splitted_line, int index)
 {
 	if (splitted_line[index])
 	{
-		info_list->file = ft_calloc(ft_strlen(splitted_line[index]) + 1, \
+		info_list->outfile[info_list->index_outf] = ft_calloc(ft_strlen(splitted_line[index]) + 1, \
 			sizeof(char));
-		if (!info_list->file)
+		if (!info_list->outfile[info_list->index_outf])
 			return (error_lex(info_list, 3, "dataorg_cases.c/L74"), NULL);
-		ft_strcpy(info_list->file, splitted_line[index]);
+		ft_strcpy(info_list->outfile[info_list->index_outf], splitted_line[index]);
 		info_list->output = APPEND;
 	}
 	return (info_list);

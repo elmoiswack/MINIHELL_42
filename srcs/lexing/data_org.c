@@ -12,7 +12,11 @@ t_lexer	*organizing_data_checks(t_lexer *info_list, char **splitted_line, \
 			enum_array, index);
 	}
 	else if (enum_array[index] == PIPE)
+	{
 		info_list = data_org_pipe(info_list);
+		if (info_list)
+			info_list = allocate_files(info_list, enum_array);
+	}
 	else if (enum_array[index] == INFILE || enum_array[index] == OUTFILE)
 		info_list = data_org_file(info_list, splitted_line, \
 			enum_array, index);
@@ -35,6 +39,9 @@ t_lexer	*organizing_data(t_lexer *info_list, char **splitted_line, \
 	t_lexer	*head;
 
 	head = info_list;
+	info_list = allocate_files(info_list, enum_array);
+	if (!info_list)
+		return (NULL);
 	while (splitted_line[index])
 	{
 		info_list = organizing_data_checks(info_list, splitted_line, \
