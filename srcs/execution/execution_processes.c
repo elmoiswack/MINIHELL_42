@@ -24,7 +24,7 @@ static void	run_child_process(int in, int out, t_lexer *node,
 	builtin = is_builtin(node);
 	route_input(in, node);
 	route_output(out, node);
-	node->content = inject_str_in_array(node->content, "--color=auto", 1);
+	node->content = colorize_cmd(node->content);
 	if (is_absolute_path(node))
 		run_cmd(node->path, node->content, shell->env_cpy);
 	if (builtin != NO_BUILTIN)
@@ -42,8 +42,11 @@ static int	fetch_exit_status(pid_t pid, t_lexer *head, char *env_cpy[]) // To do
 	int		status;
 
 	waitpid(pid, &status, 0);
+	change_signal_profile(PARENT);
 	if (status == ENOTRECOVERABLE)
 		return (131);
+	else if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+		return (130);
 	while (wait(NULL) != -1)
 		;
 	clean_tmp_files(head, env_cpy);
@@ -63,6 +66,7 @@ static pid_t	run_and_route_processes(pid_t pid, t_lexer *head,
 		if (pipe(pipe_fd) < 0)
 			perror("pipe");
 		pid = fork();
+		change_signal_profile(WAITING);
 		if (pid == 0)
 		{
 			change_signal_profile(CHILD);

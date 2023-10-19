@@ -104,3 +104,132 @@ env | grep PWD
 < out1 > out2 > out3
 < out1 > out2 > out3
 < out1 > out2 > out3
+< out1 > out2 > out3
+ls
+ls
+ls
+ls
+ls
+ok
+ls
+ok
+hmm
+werkt dit?
+ls
+ok
+werkt dit?
+ok
+werkt dit?
+ok
+werkt dit?
+ok
+werkt dit?
+ls
+ok
+haha
+env | grep PWD
+lol
+ls
+cat << wat << ok
+cat << wat << ok
+ok
+cat << a << b << c
+echo $?
+cat << a | cat << b
+echo $?
+cat << a | cat << b
+cat << ok | cat << nee
+wtf
+echo $?
+ls
+cat << a << b << c
+env | grep PWD
+ls
+ls
+ls
+ls
+ls
+ls -la
+make
+env | grep PWD
+ls
+ls
+ls
+env | grep PWD
+ls
+env | grep PWD
+env | grep PWD
+ls
+env
+env | grep LS
+unset LS_COLORS
+ls
+unset LSCOLORS
+env | grep LS
+ls
+ls
+ls
+ls -la
+pwd
+ls
+< Makefile wc
+< Makefile wc
+< Makefile wc
+< Makefile wc
+< Makefile wc
+< Makefile wc > out
+< Makefile wc > out > out2
+< Makefile wc > out > out2
+< Makefile echo > out > out2
+env
+env | grep PWD
+echo jo
+env
+env | grep PWD
+pwd | wc
+<< a
+cat << a
+cat << a
+echo $?
+cat << a
+echo $?
+echo $?
+cat << a
+cat
+echo $?
+cat 
+echo $?
+cat
+echo $?
+cat
+echo $?
+cat
+echo $?
+cat
+cat
+cat
+cat
+cat
+cat
+ok
+ls
+wc
+cat | cat | cat | ls
+cat
+echo $?
+cat
+cat
+echo $?
+ls
+wc
+echo $?
+wc
+wc
+echo $?
+wc
+cat
+cat
+echo $?
+cat
+echo $?
+cat

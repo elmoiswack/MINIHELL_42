@@ -95,6 +95,9 @@ CFLAGS		:= -Wall -Werror -Wextra
 
 RMV			:= rm -f
 
+ifdef DEBUG
+	COMPILER += -g
+endif
 
 $(NAME): 	$(OBJ)
 			@ar -rcs $(NAME) $(OBJ)

@@ -8,13 +8,11 @@ int	is_builtin(t_lexer *node)
 		return (NO_BUILTIN);
 	else if (ft_strncmp(node->content[0], "exit", ft_strlen(node->content[0])) == 0)
 		return (EXIT);
-	else if (ft_strncmp(node->content[0], "echo", ft_strlen(node->content[0])) == 0
-		&& node->output == STDOUT_OUT)
+	else if (ft_strncmp(node->content[0], "echo", ft_strlen(node->content[0])) == 0)
 		return (ECHO);
 	else if (ft_strncmp(node->content[0], "cd", ft_strlen(node->content[0])) == 0)
 		return (CD);
-	else if (ft_strncmp(node->content[0], "pwd", ft_strlen(node->content[0])) == 0
-		&& node->content[1] == NULL)
+	else if (ft_strncmp(node->content[0], "pwd", ft_strlen(node->content[0])) == 0)
 		return (PWD);
 	else if (ft_strncmp(node->content[0], "env", ft_strlen(node->content[0])) == 0)
 		return (ENV);

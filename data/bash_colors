@@ -1,0 +1,3 @@
+LS_COLORS=$LS_COLORS:'di=0;35:' ; export LS_COLORS --> Directories become red
+LS_COLORS=$LS_COLORS:'ex=1;37:' ; export LS_COLORS --> Executables become white bold
+
