@@ -4,22 +4,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void	print_double_array(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i++])
-	{
-		if (arr[i])
-		{
-			ft_putstr_fd(arr[i], STDOUT_FILENO);
-			ft_putstr_fd("\n", STDOUT_FILENO);
-		}
-
-	}
-}
-
 char	**copy_double_array(char **array)
 {
 	char	**copy;
@@ -109,4 +93,40 @@ char	**remove_str_from_array(char **src, int index)
 		j++;
 	}
 	return (free_double_array(src), new);
+}
+
+char	**inject_str_in_array(char **src, char *str, int index)
+{
+	char **new;
+	int i;
+	int	j;
+	int size;
+
+	size = 0;
+	i = 0;
+	j = 0;
+	if (ft_strncmp(src[0], "grep", 4) == 0)
+	{
+		while (src[size])
+			size++;
+		new = ft_calloc(size + 2, sizeof(char *));
+		if (!new)
+			return (src);
+		while (j < size)
+		{
+			if (i == index)
+			{
+				new[i] = ft_strdup(str);
+				j--;
+			}
+			else
+				new[i] = ft_strdup(src[j]);
+			i++;
+			j++;
+		}
+		free_double_array(src);
+		return (new);
+	}
+	else
+		return (src);
 }

@@ -17,6 +17,7 @@ SRC			:=	ft_atoi.c \
 			ft_memmove.c \
 			ft_memset.c \
 			ft_strchr.c \
+			ft_strchr_index.c \
 			ft_strdup.c \
 			ft_strcpy.c \
 			ft_strlcat.c \
@@ -88,7 +89,7 @@ Text_Off	= "\033[0m"			# Text Style
 
 OBJ 		:= $(SRC:.c=.o)
 
-CC			:= gcc
+COMPILER	:= cc
 
 CFLAGS		:= -Wall -Werror -Wextra
 
@@ -102,7 +103,7 @@ all: 		$(NAME)
 
 %.o: 		%.c
 			@echo $(Cyan) Building... [$<] $(Text_Off)
-			@$(CC) $(CFLAGS) -c -o $@ $^
+			@$(COMPILER) $(CFLAGS) -c -o $@ $^
 
 clean: 		
 			@$(RMV) $(OBJ)

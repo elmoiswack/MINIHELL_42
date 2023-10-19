@@ -1,5 +1,5 @@
 NAME		:=	minishell
-CC			:=	cc
+COMPILER	:=	cc
 FLAGS		:= 	-Wall -Wextra #-Werror
 LIBS		:= 	./libft/libft.a -lreadline -I /Users/$(USER)/.brew/opt/readline/include -L/Users/$(USER)/.brew/opt/readline/lib
 HEADERS		:= 	-I libft -I includes -I /Users/$(USER)/.brew/opt/readline/include 
@@ -77,13 +77,13 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(MAKE) -C libft
-	@$(CC) $^ $(LIBS) -o $(NAME)
+	@$(COMPILER) $^ $(LIBS) -o $(NAME)
 	@echo $(Green) $(Bold) Minishell compiled succesfully ✅ $(Text_Off)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	@mkdir -p $(@D) 
 	@echo $(Cyan) Building... [$<] $(Text_Off)
-	@$(CC) $(FLAGS) $(HEADERS) -c $< -o $@
+	@$(COMPILER) $(FLAGS) $(HEADERS) -c $< -o $@
 
 $(OBJDIR):
 	@mkdir $@

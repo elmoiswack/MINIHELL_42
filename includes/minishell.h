@@ -11,12 +11,23 @@
 
 extern int	g_exit_status;
 
-# define CURSED "\033[0;31m\
- \033[1m \
- Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚_ >\
- \033[0m "
+// Black		= "\001\033[0;30m\002"		# Black
+// Red			= "\001\033[0;31m\002"		# Red
+// Green		= "\001\033[0;32m\002"		# Green
+// Yellow		= "\001\033[0;33m\002"		# Yellow
+// Blue			= "\001\033[0;34m\002"		# Blue
+// Purple		= "\001\033[0;35m\002"		# Purple
+// Cyan			= "\001\033[0;36m\002"		# Cyan
+// White		= "\001\033[0;37m\002"		# White
+// Text_Off		= "\001\033[0m\002"			# Text Style Off
+// Bold			= "\001\033[1m\002"			# Text Style Bold
 
-# define NON_CURSED "\033[0;37m \033[1m ZALGOSHELL_>\033[0m "
+# define CURSED "\001\033[0;31m\002 \
+\001\033[1m\002 Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚_ > \
+\001\033[0m\002"
+
+# define NON_CURSED "\001\033[1m\002 \
+Z_SHELL_ > \001\033[0m\002"
 
 //Token enumerator - defines the possible types of tokens;
 typedef enum e_token{
@@ -267,6 +278,7 @@ int		error_exit(char *msg);
 		//free.c
 void	free_lexing_content_struct(t_lexer *list);
 void	free_lexing_struct(t_lexer *list);
+void	free_double_array(char **array);
 void	error_lexing_message(t_lexer *list);
 
 //###############################################################
@@ -289,15 +301,15 @@ char	*ft_getenv(char *var_name, char **env);
 
 //		utilities_double_arrays.c
 char	**copy_double_array(char **array);
-void	print_double_array(char **arr);
-void	free_double_array(char **array);
 char	**append_to_double_array(char **src, char *str);
 char	**replace_str_in_array(char **src, char *str, int index);
 char	**remove_str_from_array(char **src, int index);
+char	**inject_str_in_array(char **src, char *str, int index);
 
 //		utilities_debugging.c
 void	print_cmd_lst(t_lexer *head);
 void	printing_lexer(t_lexer *info_lexer);
+void	print_double_array(char **arr);
 
 //		execution_cd.c
 void	execute_cd(t_minishell *shell);
@@ -317,6 +329,8 @@ int		execute_exit(t_lexer *node);
 //		interface_frontend.c
 void	init_ascii_art(void);
 void	remove_ctl_echo(void);
+void	init_history(void);
+void	add_to_history_file(char *line);
 
 //		execution_builtin.c
 int		execute_builtin(t_minishell *shell, t_builtin builtin);

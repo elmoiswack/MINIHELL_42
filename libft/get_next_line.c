@@ -6,7 +6,7 @@
 /*   By: fvan-wij <fvan-wij@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:43:21 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/06/22 15:35:07 by flip          ########   odam.nl         */
+/*   Updated: 2023/10/19 13:24:32 by flip          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int	ft_strchr_index(const char *s, int c)
+static char	*ft_strjoin_clean(char *s1, char *s2)
 {
-	int		i;
+	int		len;
+	char	*strjoin;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] && s[i] != (char)c)
-		i++;
-	return (i);
+	len = (ft_strlen(s1) + ft_strlen(s2)) + 1;
+	strjoin = malloc(len * sizeof(char));
+	if (!strjoin)
+		return (free(s1), NULL);
+	ft_strcpy(strjoin, s1);
+	ft_strcpy(strjoin + ft_strlen(s1), s2);
+	free(s1);
+	return (strjoin);
 }
 
 char	*read_buffer(int fd, char *btnl)
@@ -41,7 +44,7 @@ char	*read_buffer(int fd, char *btnl)
 		if (bytes < 0)
 			return (free(temp), free(btnl), NULL);
 		temp[bytes] = '\0';
-		btnl = ft_strjoin_and_free(btnl, temp);
+		btnl = ft_strjoin_clean(btnl, temp);
 	}
 	free(temp);
 	return (btnl);

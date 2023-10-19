@@ -93,3 +93,20 @@ void	printing_lexer(t_lexer *info_lexer)
 	fprintf(stderr, "\033[0m");
 	return ;
 }
+
+void	print_double_array(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i++])
+	{
+		if (arr[i])
+		{
+			ft_putstr_fd(arr[i], STDOUT_FILENO);
+			ft_putstr_fd("\n", STDOUT_FILENO);
+		}
+
+	}
+}
+

@@ -14,6 +14,7 @@ void	main_execute_input(t_minishell *shell, char *line)
 	t_builtin builtin;
 
 	add_history(line);
+	add_to_history_file(line);
 	shell->cmd_lst = lexing(line, shell->env_cpy);
 	if (!shell->cmd_lst)
 	{
@@ -44,6 +45,7 @@ void	display_prompt(t_minishell *shell)
 
 	terminate = 0;
 	init_ascii_art();
+	init_history();
 	remove_ctl_echo();
 	while (!terminate)
 	{
