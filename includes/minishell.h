@@ -62,7 +62,10 @@ typedef enum e_sig_profile {
 typedef struct lexerinfo {
 	char				**content;
 	char				*path;
-	char				*file;
+	char				**infile;
+	int					index_inf;
+	char				**outfile;
+	int					index_outf;
 	int					input;
 	int					output;
 	char				**delim;
@@ -179,7 +182,7 @@ int		check_for_outfile(char **splitted_line, int *enum_array, int index);
 		//dataorg_special_cases.c
 int		check_special_cases(char **splitted_line, int *enum_array);
 t_lexer	*which_special_case(t_lexer *info_list, \
-	char **splitted_line, int *enum_array);
+	char **splitted_line, int *enum_array, int index);
 t_lexer	*other_special_case(t_lexer	*info_list, char **splitted_line, \
 	int *enum_array, int index);
 t_lexer	*special_case_files(t_lexer *info_list, char **splitted_line);
@@ -250,8 +253,12 @@ int		get_env_end(char *line, int index);
 int		get_size_strings(char *line, char **env_temp);
 int		check_for_envvar(char **splitted_line);
 
-		//delimiter_func.c
+		//file_delim_func.c
 int		get_number_delim(int *enum_array);
+t_lexer	*allocate_files(t_lexer *info_list, int *enum_array);
+
+		//list_check.s
+t_lexer	*check_quotes_list(t_lexer *info_list);
 
 //###############################################################
 //		ERROR AND FREE FUNCTIONS

@@ -20,7 +20,7 @@ SRCS		:= 	main.c \
 				lexing/dataorg_utils.c \
 				lexing/dataorg_special_cases.c \
 				lexing/into_list.c \
-				lexing/intolist_special.c \
+				lexing/intolist_other.c \
 				lexing/parsing_grep.c \
 				lexing/parser_cat.c \
 				lexing/parsing_echo.c \
@@ -28,7 +28,8 @@ SRCS		:= 	main.c \
 				lexing/varexp_utils.c \
 				lexing/varexp_arrayft.c \
 				lexing/varexp_lineft.c \
-				lexing/delimiter_func.c \
+				lexing/file_delim_func.c \
+				lexing/list_checks.c \
 				error/error.c \
 				error/free.c \
 				error/memory_management.c \

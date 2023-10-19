@@ -41,7 +41,7 @@ t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array)
 		return (NULL);
 	}
 	if (check_special_cases(splitted_line, enum_array) == 1)
-		return (which_special_case(info_list, splitted_line, enum_array));
+		return (which_special_case(info_list, splitted_line, enum_array, 0));
 	info_list = parsing_array(info_list, splitted_line, enum_array);
 	if (info_list_checker(info_list, splitted_line, enum_array) == -1)
 		return (NULL);
@@ -106,5 +106,6 @@ t_lexer	*lexing(char *line, char **env_cpy)
 	if (!new_line)
 		return (error_lex(info_list, 3, "lexer.c/L104"), NULL);
 	info_list = set_variables(info_list, new_line);
+	info_list = check_quotes_list(info_list);
 	return (info_list);
 }

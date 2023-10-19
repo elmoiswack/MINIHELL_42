@@ -102,5 +102,6 @@ t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line)
 	info_list = spca_echo_intolist(info_list, splitted_line, index);
 	info_list = default_echo_data(info_list, splitted_line);
 	info_list->next = NULL;
+	free_double_array(splitted_line);
 	return (info_list);
 }

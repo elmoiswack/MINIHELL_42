@@ -86,11 +86,8 @@ t_lexer	*other_special_case(t_lexer	*info_list, char **splitted_line, \
 }
 
 t_lexer	*which_special_case(t_lexer *info_list, char **splitted_line, \
-	int *enum_array)
+	int *enum_array, int index)
 {
-	int	index;
-
-	index = 0;
 	if (ft_strncmp(splitted_line[0], "echo", ft_strlen(splitted_line[0])) == 0)
 	{
 		while (splitted_line[index])
@@ -106,11 +103,13 @@ t_lexer	*which_special_case(t_lexer *info_list, char **splitted_line, \
 			index++;
 		}
 		info_list = special_case_echo(info_list, splitted_line);
-		free_double_array(splitted_line);
 		free(enum_array);
 		return (info_list);
 	}
 	info_list = other_special_case(info_list, splitted_line, enum_array, 0);
+	if (!info_list)
+		return (NULL);
+	info_list = check_quotes_list(info_list);
 	return (info_list);
 }
 
