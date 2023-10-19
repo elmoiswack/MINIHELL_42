@@ -6,7 +6,7 @@
 /*   By: fvan-wij <fvan-wij@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:46:37 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/10/06 11:10:43 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/19 13:24:09 by flip          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void			*ft_memcpy(void *dst, const void *src, size_t n);
 void			*ft_memmove(void *dst, const void *src, size_t len);
 void			*ft_memset(void *b, int c, size_t len);
 char			*ft_strchr(const char *s, int c);
+int				ft_strchr_index(const char *s, int c);
 char			*ft_strdup(const char *s1);
 size_t			ft_strcpy(char *dst, const char *src);
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
@@ -76,7 +77,6 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 
 // GET_NEXT_LINE
 char			*get_next_line(int fd);
-int				ft_strchr_index(const char *s, int c);
 
 // PRINTF
 int				ft_printf(const char *s, ...);

@@ -1,0 +1,20 @@
+ls
+cat Makefile 
+env
+env | grep PWD
+export grep='grep --color=auto'
+env
+export grep=grep --color=auto
+export grep="grep --color=auto"
+env
+env | grep PWD
+grep ok
+grep --color=auto jo
+grep ok
+env | grep PWD
+env | grep PWD
+env | grep PWD
+env | grep PWD
+pwd
+ls
+ok

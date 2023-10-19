@@ -24,6 +24,7 @@ static void	run_child_process(int in, int out, t_lexer *node,
 	builtin = is_builtin(node);
 	route_input(in, node);
 	route_output(out, node);
+	node->content = inject_str_in_array(node->content, "--color=auto", 1);
 	if (is_absolute_path(node))
 		run_cmd(node->path, node->content, shell->env_cpy);
 	if (builtin != NO_BUILTIN)
