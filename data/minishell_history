@@ -122,3 +122,368 @@ rm out out1 out2
 ls
 pwd
 exit
+=======
+< out1 > out2 > out3
+ls
+ls
+ls
+ls
+ls
+ok
+ls
+ok
+hmm
+werkt dit?
+ls
+ok
+werkt dit?
+ok
+werkt dit?
+ok
+werkt dit?
+ok
+werkt dit?
+ls
+ok
+haha
+env | grep PWD
+lol
+ls
+cat << wat << ok
+cat << wat << ok
+ok
+cat << a << b << c
+echo $?
+cat << a | cat << b
+echo $?
+cat << a | cat << b
+cat << ok | cat << nee
+wtf
+echo $?
+ls
+cat << a << b << c
+env | grep PWD
+ls
+ls
+ls
+ls
+ls
+ls -la
+make
+env | grep PWD
+ls
+ls
+ls
+env | grep PWD
+ls
+env | grep PWD
+env | grep PWD
+ls
+env
+env | grep LS
+unset LS_COLORS
+ls
+unset LSCOLORS
+env | grep LS
+ls
+ls
+ls
+ls -la
+pwd
+ls
+< Makefile wc
+< Makefile wc
+< Makefile wc
+< Makefile wc
+< Makefile wc
+< Makefile wc > out
+< Makefile wc > out > out2
+< Makefile wc > out > out2
+< Makefile echo > out > out2
+env
+env | grep PWD
+echo jo
+env
+env | grep PWD
+pwd | wc
+<< a
+cat << a
+cat << a
+echo $?
+cat << a
+echo $?
+echo $?
+cat << a
+cat
+echo $?
+cat 
+echo $?
+cat
+echo $?
+cat
+echo $?
+cat
+echo $?
+cat
+cat
+cat
+cat
+cat
+cat
+ok
+ls
+wc
+cat | cat | cat | ls
+cat
+echo $?
+cat
+cat
+echo $?
+ls
+wc
+echo $?
+wc
+wc
+echo $?
+wc
+cat
+cat
+echo $?
+cat
+echo $?
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+echo $?
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+echo $?
+cat
+echo $?
+cat
+echo $?
+cat
+echo $?
+cat
+echo $?
+cat
+cat
+echo $?
+cat
+echo $?
+cat
+echo $?
+cat
+echo $?
+cat
+echo $?
+cat
+echo $?
+cat
+echo $?
+cat | cat | cat | ls
+cat | cat | cat | ls
+cat | cat | cat | ls
+cat | cat | cat | ls
+cat | cat | cat | ls
+cat
+cat
+wc
+cat
+cat
+cat | cat
+cat | cat | cat
+cat | cat | cat | ls
+cat | cat | cat | ls
+cat | cat | cat | ls
+cat | cat | cat | ls
+cat | cat | cat
+echo $?
+cat | cat | cat
+echo $?
+ok
+cat | cat | cat 
+echo $?
+cat 
+echo $?
+cat | cat | cat
+cat | cat | cat | ls
+cat | cat | cat 
+echo $?
+cat | cat | cat
+echo $?
+cat | cat | cat
+cat 
+cat | cat | cat 
+wc
+cat
+cat
+cat 
+cat 
+cat
+cat
+cat
+cat
+cat
+cat
+cat
+cat | cat | cat | ls
+cat | cat | cat | ls
+cat | cat | cat
+cat | cat | cat | ls
+cat | cat | cat | ls
+cat | cat | cat | ls
+cat | cat | cat > out
+ok
+ls
+ls
+ls
+ls
+ls
+cat | cat | cat | ls
+cat | cat | cat
+cat | cat | cat | ls
+cat | cat | cat | ls
+cat | cat | cat | ls
+cat | cat | cat | ls
+ls
+cat
+cat
+cat
+cat << a << b << c 
+echo $?
+echo $?
+cat << a << b << c 
+cat << a << b << c 
+cat << a << b << c 
+cat << a << b << c 
+ls
+ls
+ls
+ls
+cd ~
+ls
+rm -rf Directories 
+ls
+ls
+env | grep PWD
+lel
+cat << a << b << c 
+cat << a << b << c 
+cat 
+cat 
+cat << a << b << c 
+echo $?
+cat | cat | cat 
+cat 
+cat 
+ls
+ls
+env
+unset LS_COLORS
+ls
+env
+ls
+ls 
+ls data/
+ls
+cat
+echo $?
+ls
+cat
+cat
+ls
+cat
+cat
+cat | cat | cat
+cat | cat | cat
+cat | cat | cat
+make fclean
+ls
+zsh
+ls
+ls
+ok
+ls
+ok
+ls
+ls
+ls
+ls
+ls
+ls
+ls | wc
+cat << a << b << c
+ls
+cat << a << b << c
+cat << a << b << c
+cat << a << b << c
+cat << a << b << c
+--track-origin=yes
+cat << a << b << c
+cat << a << b << c
+cat << a << b << c | cat >> a
+ls
+ls
+ls
+ls
+ls
+ok
+wtf
+doe ens gek
+wc
+bash
+ls
+ls
+ok
+ls -la | exit
+ls -la | exit 130
+exit 130
+ls -la | exit
+ls -la |exit
+ls -la |exit
+ls -la | exit
+ls -la | exit 2 2
+ls -la | exit wat jo
+ls -la | exit okk
+ls -la | exit wt
+ls -la | exit wtf
+ls -la | exit 
+exit
+eixt
+exit
+ls -la | exit 
+ls -la | exit 
+ls -la | exit 
+ls -la | exit 
+ls -la | exit
+ls -la | exit
+echo BONJOUR << ja cat
+echo BONJOUR << ja cat
+echo BONJOUR << ja cat
+echo "dasdaf>out"
+>>>>>>> master
