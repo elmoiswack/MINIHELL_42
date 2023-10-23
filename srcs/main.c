@@ -44,7 +44,7 @@ void	display_prompt(t_minishell *shell)
 	int		terminate;
 
 	terminate = 0;
-	init_ascii_art();
+	// init_ascii_art();
 	init_history();
 	remove_ctl_echo();
 	while (!terminate)
@@ -85,6 +85,7 @@ t_minishell	init_minishell(int argc, char *envp[])
 	shell.status = 0;
 	shell.builtin = NO_BUILTIN;
 	shell.profile = PARENT;
+	g_exit_status = 0;
 	change_signal_profile(PARENT);
 	return (shell);
 }

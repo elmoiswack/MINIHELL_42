@@ -14,10 +14,6 @@ void	free_ll(t_lexer **lst)
 		current = *lst;
 		if (current->path)
 			free(current->path);
-		// if (current->file)		//file is nu infile en outfile geworden en delim is een double pointer
-		// 	free(current->file);
-		// if (current->delim)
-		// 	free(current->delim);
 		if (current->infile)
 			free_double_array(current->infile);
 		if (current->outfile)

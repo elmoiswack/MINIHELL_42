@@ -66,6 +66,7 @@ typedef enum e_sig_profile {
 	PARENT,
 	CHILD,
 	HD,
+	WAITING,
 }	t_sig_profile;
 
 //Linked list node - each command is parsed into a t_lexer node 
@@ -338,6 +339,7 @@ void	init_ascii_art(void);
 void	remove_ctl_echo(void);
 void	init_history(void);
 void	add_to_history_file(char *line);
+char	**colorize_cmd(char *content[]);
 
 //		execution_builtin.c
 int		execute_builtin(t_minishell *shell, t_builtin builtin);

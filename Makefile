@@ -1,9 +1,9 @@
 NAME		:=	minishell
 COMPILER	:=	cc
+DEBUG_MODE	:=	
 FLAGS		:= 	-Wall -Wextra #-Werror
 LIBS		:= 	./libft/libft.a -lreadline -I /Users/$(USER)/.brew/opt/readline/include -L/Users/$(USER)/.brew/opt/readline/lib
 HEADERS		:= 	-I libft -I includes -I /Users/$(USER)/.brew/opt/readline/include 
-CC			:=	cc
 SRCS		:= 	main.c \
 				lexing/lexer.c \
 				lexing/line_checker.c \
@@ -71,15 +71,17 @@ Bold		= "\033[1m"			# Text Style Bold
 ######################################################
 
 ifdef DEBUG
-	CC += -g3
+	COMPILER += -g
+	LIBFT_DEBUG += DEBUG=1
+	DEBUG_MODE += "(debug mode)"
 endif
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(MAKE) -C libft
+	@$(MAKE) -C libft $(LIBFT_DEBUG) 
 	@$(COMPILER) $^ $(LIBS) -o $(NAME)
-	@echo $(Green) $(Bold) Minishell compiled succesfully ✅ $(Text_Off)
+	@echo $(Green) $(Bold) $(DEBUG_MODE) Minishell compiled succesfully ✅ $(Text_Off)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	@mkdir -p $(@D) 

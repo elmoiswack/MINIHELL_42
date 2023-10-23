@@ -44,7 +44,7 @@ void	print_cmd_lst(t_lexer *head)
 	current = head;
 	n = 0;
 	fprintf(stderr, "\n\033[0;36m--------EXECUTIONER--------\n");
-	fprintf(stderr, "# CMD\tIN\tOUT\tINFILE\tOUTFILE\n");
+	fprintf(stderr, "# CMD\tIN\tOUT\tINFILE(S)\tOUTFILE(S)\n");
 	while (current)
 	{
 		builtin = is_builtin(current);
@@ -59,25 +59,21 @@ void	print_cmd_lst(t_lexer *head)
 		{
 			i = 0;
 			while (current->infile[i])
-			{
-				fprintf(stderr, "\t[%d]%s", i, current->infile[i]);
 				i++;
-			}
+			fprintf(stderr, "\t%d", i);
 		}
 		else {
-				fprintf(stderr, "\tNO");
+				fprintf(stderr, "\t0");
 		}
 		if (current->outfile)
 		{
 			i = 0;
 			while (current->outfile[i])
-			{
-				fprintf(stderr, "\t[%d]%s", i, current->outfile[i]);
 				i++;
-			}
+			fprintf(stderr, "\t\t%d", i);
 		}
 		else {
-				fprintf(stderr, "\tNO");
+				fprintf(stderr, "\t\t0");
 		}
 		fprintf(stderr, "\n");
 		n++;
@@ -119,7 +115,7 @@ void	printing_lexer(t_lexer *info_lexer)
 		{
 			while (info_lexer->outfile[i])
 			{
-				fprintf(stderr, "outfile[%i] = %s", i, info_lexer->outfile[i]);
+				fprintf(stderr, "outfile[%i] = %s\n", i, info_lexer->outfile[i]);
 				i++;
 			}
 		}

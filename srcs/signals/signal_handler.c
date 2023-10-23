@@ -18,6 +18,12 @@ static void	handle_parent_signals(int signum)
 	}
 }
 
+static void	handle_waiting_signals(int signum)
+{
+	if (signum == SIGINT)
+		return;
+}
+
 static void	handle_hd_signals(int signum)
 {
 	if (signum == SIGINT)
@@ -50,6 +56,11 @@ void	change_signal_profile(t_sig_profile profile)
 	else if (profile == HD)
 	{
 		s_int.sa_handler = &handle_hd_signals;
+		s_quit.sa_handler = SIG_IGN;
+	}
+	else if (profile == WAITING)
+	{
+		s_int.sa_handler = &handle_waiting_signals;
 		s_quit.sa_handler = SIG_IGN;
 	}
 	if (sigaction(SIGINT, &s_int, NULL) == -1)

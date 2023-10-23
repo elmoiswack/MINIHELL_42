@@ -49,6 +49,7 @@ static void	create_heredoc_tmp(char *delim, char *env_cpy[])
 		if (heredoc_line)
 			free(heredoc_line);
 	}
+	ft_printf("warning: here-document delimited by end-of-file (CTRL+D) instead of '%s'\n", delim);
 	close(heredoc_tmp);
 	exit (0);
 }
@@ -57,6 +58,7 @@ static int fetch_exit_status(pid_t pid, t_lexer *head, char *env_cpy[])
 {
 	int		status;
 
+	status = 0;
 	waitpid(pid, &status, 0);
 	while (wait(NULL) != -1)
 		;
