@@ -6,7 +6,7 @@
 /*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 10:51:27 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/10/17 17:44:10 by dantehussai      ###   ########.fr       */
+/*   Updated: 2023/10/19 16:05:14 by dantehussai      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static char	*convert_int_to_array(int n, int j, char *integer_array)
 {
-	int		i;
+	//int		i;
 
-	i = 0;
+	//i = 0;
 	while (n != 0)
 	{
 		integer_array[j - 2] = (n % 10) + '0';
 		n = n / 10;
 		j--;
-		i++;
+		//i++;
 	}
 	return (integer_array);
 }

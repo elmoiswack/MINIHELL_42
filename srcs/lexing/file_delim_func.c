@@ -61,5 +61,7 @@ t_lexer	*allocate_files(t_lexer *info_list, int *enum_array)
 	info_list->outfile = ft_calloc(count + 1, sizeof(char *));
 	if (!info_list->outfile)
 		return (error_lex(info_list, 2, "dataorg_utils.c/L70"), NULL);
+	info_list->index_inf = 0;
+	info_list->index_outf = 0;
 	return (info_list);
 }

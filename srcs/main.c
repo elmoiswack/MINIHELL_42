@@ -32,7 +32,7 @@ void	main_execute_input(t_minishell *shell, char *line)
 
 void	main_input_error(int *terminate)
 {
-	rl_clear_history();
+	//rl_clear_history();
 	*terminate = 1;
 	ft_putstr_fd("exit\n", STDERR_FILENO);
 	exit(0);
@@ -60,7 +60,7 @@ void	display_prompt(t_minishell *shell)
 		else
 			free(line);
 	}
-	rl_clear_history();
+	//rl_clear_history();
 	if (line)
 		free(line);
 }
