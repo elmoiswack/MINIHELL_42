@@ -119,7 +119,7 @@ void	printing_lexer(t_lexer *info_lexer)
 		{
 			while (info_lexer->outfile[i])
 			{
-				fprintf(stderr, "outfile[%i] = %s", i, info_lexer->outfile[i]);
+				fprintf(stderr, "outfile[%i] = %s\n", i, info_lexer->outfile[i]);
 				i++;
 			}
 		}

@@ -69,6 +69,7 @@ t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var)
 		if (!info_list->infile[info_list->index_inf])
 			return (error_lex(info_list, 3, "into_list.c/L68"), NULL);
 		ft_strcpy(info_list->infile[info_list->index_inf], word_var);
+		info_list->index_inf += 1;
 	}
 	if (enum_var == OUTFILE)
 	{
@@ -76,6 +77,7 @@ t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var)
 		if (!info_list->outfile[info_list->index_outf])
 			return (error_lex(info_list, 3, "into_list.c/L68"), NULL);
 		ft_strcpy(info_list->outfile[info_list->index_outf], word_var);
+		info_list->index_outf += 1;
 	}
 	if (enum_var == DELIMITER)
 		info_list = into_linklist_delim(info_list, word_var);

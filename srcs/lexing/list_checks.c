@@ -46,11 +46,9 @@ char	**remove_doubles(char **content)
 
 t_lexer	*check_quotes_list(t_lexer *info_list)
 {
-	int	index;
 	t_lexer *head;
 
 	head = info_list;
-	index = 0;
 	while (info_list)
 	{
 		if (info_list->content)
