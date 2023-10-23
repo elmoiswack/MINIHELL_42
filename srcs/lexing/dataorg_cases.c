@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dataorg_cases.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 15:38:43 by dhussain          #+#    #+#             */
+/*   Updated: 2023/10/23 15:41:03 by dhussain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdio.h>
@@ -77,11 +89,14 @@ t_lexer	*data_org_appender(t_lexer *info_list, char **splitted_line, int index)
 {
 	if (splitted_line[index])
 	{
-		info_list->outfile[info_list->index_outf] = ft_calloc(ft_strlen(splitted_line[index]) + 1, \
+		info_list->outfile[info_list->index_outf] = \
+			ft_calloc(ft_strlen(splitted_line[index]) + 1, \
 			sizeof(char));
 		if (!info_list->outfile[info_list->index_outf])
-			return (error_lex(info_list, 3, "dataorg_cases.c/L74"), NULL);
-		ft_strcpy(info_list->outfile[info_list->index_outf], splitted_line[index]);
+			return (error_lex(info_list, 3, "dataorg_cases.c/L92"), \
+				NULL);
+		ft_strcpy(info_list->outfile[info_list->index_outf], \
+			splitted_line[index]);
 		info_list->output = APPEND;
 	}
 	return (info_list);

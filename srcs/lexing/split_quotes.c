@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split_quotes.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 15:40:28 by dhussain          #+#    #+#             */
+/*   Updated: 2023/10/23 15:47:41 by dhussain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdio.h>
@@ -42,14 +54,14 @@ char	**split_intoarray(char *line, t_lexer *info_list, char **temp_quotes)
 	if (!temp_line)
 	{
 		free_double_array(temp_quotes);
-		return (error_lex(info_list, 3, "split_quotes.c/L41"), NULL);
+		return (error_lex(info_list, 3, "split_quotes.c/L53"), NULL);
 	}
 	split_array = ft_split(temp_line, ' ');
 	free(temp_line);
 	if (!split_array)
 	{
 		free_double_array(temp_quotes);
-		return (error_lex(info_list, 3, "split_quotes.c/L47"), NULL);
+		return (error_lex(info_list, 3, "split_quotes.c/L59"), NULL);
 	}
 	split_array = replace_quotes_array(split_array, temp_quotes);
 	return (split_array);
@@ -64,10 +76,8 @@ char	**split_with_quotes(char *line, t_lexer *info_list)
 	ammount_quotes = how_many_quotes(line);
 	temp_quotes = ft_calloc(ammount_quotes + 1, sizeof(char *));
 	if (!temp_quotes)
-		return (error_lex(info_list, 3, "split_quotes.c/L65"), NULL);
+		return (error_lex(info_list, 3, "split_quotes.c/L77"), NULL);
 	temp_quotes = store_all_quote_data(line, temp_quotes);
-	if (!temp_quotes)
-		return (error_lex(info_list, 2, "unclosed quotes!"), NULL);
 	split_array = split_intoarray(line, info_list, temp_quotes);
 	free_double_array(temp_quotes);
 	return (split_array);

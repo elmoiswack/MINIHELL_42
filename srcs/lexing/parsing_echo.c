@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_echo.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 15:40:04 by dhussain          #+#    #+#             */
+/*   Updated: 2023/10/23 15:46:07 by dhussain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdio.h>
@@ -21,16 +33,16 @@ t_lexer	*echo_meta_intolist(t_lexer *info_list, \
 		if (splitted_line[index][0] == '"' || splitted_line[index][0] == '\'')
 			splitted_line[index] = remove_quotes_string(splitted_line, index);
 		if (!splitted_line[index])
-			return (error_lex(info_list, 3, "parsing_echo.c/L22"), NULL);
+			return (error_lex(info_list, 3, "parsing_echo.c/L34"), NULL);
 		info_list->content[1] = ft_strjoin_and_free(info_list->content[1], \
 			splitted_line[index]);
 		if (!info_list->content[1])
-			return (error_lex(info_list, 3, "parsing_echo.c/L25"), NULL);
+			return (error_lex(info_list, 3, "parsing_echo.c/L37"), NULL);
 		if (splitted_line[index + 1] != NULL)
 			info_list->content[1] = ft_strjoin_and_free(info_list->content[1], \
 				" ");
 		if (!info_list->content[1])
-			return (error_lex(info_list, 3, "parsing_echo.c/L30"), NULL);
+			return (error_lex(info_list, 3, "parsing_echo.c/L42"), NULL);
 		index++;
 	}
 	info_list = organizing_data(info_list, splitted_line, enum_array, index);
@@ -47,11 +59,11 @@ t_lexer	*echo_with_meta(t_lexer *info_list, char **splitted_line, \
 	info_list->content = allocate_2d_arr(ft_strlen(splitted_line[0]) + 1, \
 		info_list);
 	if (!info_list->content)
-		return (error_lex(info_list, 3, "parsing_echo.c/L47"), NULL);
+		return (error_lex(info_list, 3, "parsing_echo.c/L59"), NULL);
 	ft_strcpy(info_list->content[0], splitted_line[0]);
 	info_list->content[1] = ft_calloc(1, sizeof(char));
 	if (!info_list->content[1])
-		return (error_lex(info_list, 3, "parsing_echo.c/L52"), NULL);
+		return (error_lex(info_list, 3, "parsing_echo.c/L64"), NULL);
 	info_list = echo_meta_intolist(info_list, splitted_line, enum_array, index);
 	return (info_list);
 }
@@ -66,18 +78,18 @@ t_lexer	*spca_echo_intolist(t_lexer *info_list, char **splitted_line, int index)
 			if (!splitted_line[index])
 			{
 				free_double_array(splitted_line);
-				return (error_lex(info_list, 3, "parsing_echo.c/L65"), NULL);
+				return (error_lex(info_list, 3, "parsing_echo.c/L77"), NULL);
 			}
 		}
 		info_list->content[1] = ft_strjoin_and_free(info_list->content[1], \
 			splitted_line[index]);
 		if (!info_list->content[1])
-			return (error_lex(info_list, 3, "parsing_echo.c/L72"), NULL);
+			return (error_lex(info_list, 3, "parsing_echo.c/L84"), NULL);
 		if (splitted_line[index + 1] != NULL)
 			info_list->content[1] = ft_strjoin_and_free(info_list->content[1], \
 				" ");
 		if (!info_list->content[1])
-			return (error_lex(info_list, 3, "parsing_echo.c/L77"), NULL);
+			return (error_lex(info_list, 3, "parsing_echo.c/L89"), NULL);
 		index++;
 	}
 	return (info_list);
@@ -91,13 +103,13 @@ t_lexer	*special_case_echo(t_lexer *info_list, char **splitted_line)
 	info_list->content = allocate_2d_arr(ft_strlen(splitted_line[0]) + 1, \
 		info_list);
 	if (!info_list->content)
-		return (error_lex(info_list, 3, "parsing_echo.c/L91"), NULL);
+		return (error_lex(info_list, 3, "parsing_echo.c/L103"), NULL);
 	ft_strcpy(info_list->content[0], splitted_line[0]);
 	if (splitted_line[index])
 	{
 		info_list->content[1] = ft_calloc(1, sizeof(char));
 		if (!info_list->content[1])
-			return (error_lex(info_list, 3, "parsing_echo.c/L98"), NULL);
+			return (error_lex(info_list, 3, "parsing_echo.c/L110"), NULL);
 	}
 	info_list = spca_echo_intolist(info_list, splitted_line, index);
 	info_list = default_echo_data(info_list, splitted_line);

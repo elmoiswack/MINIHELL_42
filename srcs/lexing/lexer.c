@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 15:39:42 by dhussain          #+#    #+#             */
+/*   Updated: 2023/10/23 15:43:33 by dhussain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdio.h>
@@ -80,7 +92,7 @@ t_lexer	*set_variables(t_lexer *info_list, char *line)
 	if (!enum_array)
 	{
 		free_double_array(splitted_line);
-		return (error_lex(info_list, 3, "lexer.c/79"), NULL);
+		return (error_lex(info_list, 3, "lexer.c/91"), NULL);
 	}
 	enum_array = into_enum_array(splitted_line, enum_array, 0);
 	info_list = which_case(info_list, splitted_line, enum_array);
@@ -104,7 +116,7 @@ t_lexer	*lexing(char *line, char **env_cpy)
 	new_line = put_spaces_in_line(line, info_list);
 	free(line);
 	if (!new_line)
-		return (error_lex(info_list, 3, "lexer.c/L104"), NULL);
+		return (error_lex(info_list, 3, "lexer.c/L116"), NULL);
 	info_list = set_variables(info_list, new_line);
 	info_list = check_quotes_list(info_list);
 	return (info_list);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_grep.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 15:40:08 by dhussain          #+#    #+#             */
+/*   Updated: 2023/10/23 15:46:39 by dhussain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdio.h>
@@ -50,7 +62,7 @@ t_lexer	*rm_quotes_grep(t_lexer *info_list)
 	}
 	temp = ft_calloc(ft_strlen(info_list->content[1]) + 1, sizeof(char));
 	if (!temp)
-		return (error_lex(info_list, 3, "parsing_grep.c/L51"), NULL);
+		return (error_lex(info_list, 3, "parsing_grep.c/L63"), NULL);
 	temp = rm_guotes_loop(info_list, temp);
 	free(info_list->content[1]);
 	info_list->content[1] = temp;
@@ -80,7 +92,7 @@ t_lexer	*add_flag_grep(t_lexer *info_list, char **splitted_line)
 	info_list->content[1] = ft_calloc(ft_strlen(splitted_line[index]) + 1, \
 		sizeof(char));
 	if (!info_list->content[1])
-		return (error_lex(info_list, 3, "parsing_grep.c/L80"), NULL);
+		return (error_lex(info_list, 3, "parsing_grep.c/L92"), NULL);
 	ft_strcpy(info_list->content[1], splitted_line[index]);
 	return (head);
 }

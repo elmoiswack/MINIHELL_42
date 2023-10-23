@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   variable_expander.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 15:40:47 by dhussain          #+#    #+#             */
+/*   Updated: 2023/10/23 15:40:48 by dhussain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdio.h>
@@ -49,12 +61,8 @@ char	*replace_variables(char *line, char **env_temp)
 
 char	*get_env_var(char *line, char **env_cpy, int ammount_env)
 {
-	// int		index;
 	char	**env_temp;
-	// int		index_tmp;
 
-	// index = 0;
-	// index_tmp = 0;
 	env_temp = ft_calloc(ammount_env + 1, sizeof(char *));
 	if (!env_temp)
 		return (NULL);

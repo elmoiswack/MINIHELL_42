@@ -204,9 +204,13 @@ t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, \
 		//into_list.c
 t_lexer	*one_two_word_lexer(t_lexer *info_list, char **splitted_line);
 t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var);
+
+		//into_list_cases.c
 t_lexer	*into_linklist_delim(t_lexer *info_list, char *word_var);
 t_lexer	*into_linklist_command(t_lexer *info_list, char *word_var);
 t_lexer	*into_linklist_flag(t_lexer *info_list, char *word_var);
+t_lexer	*into_linklist_infile(t_lexer *info_list, char *word_var);
+t_lexer	*into_linklist_outfile(t_lexer *info_list, char *word_var);
 
 		//intolist_special.c
 t_lexer	*intolist_commands(t_lexer *info_list, \

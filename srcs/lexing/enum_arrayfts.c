@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   enum_arrayfts.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 15:39:12 by dhussain          #+#    #+#             */
+/*   Updated: 2023/10/23 15:39:13 by dhussain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdio.h>
@@ -36,7 +48,7 @@ int	into_enum_cases(char **splitted_line, int *enum_array, int index)
 			enum_array[index] = FLAG;
 		return (1);
 	}
-	return (0);	
+	return (0);
 }
 
 int	*into_enum_array(char **splitted_line, int *enum_array, int index)

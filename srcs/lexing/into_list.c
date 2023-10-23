@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   into_list.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 15:39:31 by dhussain          #+#    #+#             */
+/*   Updated: 2023/10/23 15:39:32 by dhussain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdio.h>
@@ -13,73 +25,17 @@ t_lexer	*one_two_word_lexer(t_lexer *info_list, char **splitted_line)
 	return (info_list);
 }
 
-t_lexer	*into_linklist_flag(t_lexer *info_list, char *word_var)
-{
-	info_list->content[1] = ft_calloc(ft_strlen(word_var) + 1, \
-		sizeof(char));
-	if (!info_list->content[1])
-		return (error_lex(info_list, 3, "into_list.c/L18"), NULL);
-	ft_strcpy(info_list->content[1], word_var);
-	return (info_list);
-}
-
-t_lexer	*into_linklist_command(t_lexer *info_list, char *word_var)
-{
-	info_list->content = allocate_2d_arr(ft_strlen(word_var) + 1, \
-		info_list);
-	if (!info_list->content)
-		return (error_lex(info_list, 3, "into_list.c/L28"), NULL);
-	ft_strcpy(info_list->content[0], word_var);
-	info_list->path = get_path_of_command(info_list->content[0], \
-		info_list->env_copy);
-	return (info_list);
-}
-
-t_lexer	*into_linklist_delim(t_lexer *info_list, char *word_var)
-{
-	int	in_delim;
-
-	in_delim = info_list->index_delim;
-	info_list->delim[in_delim] = ft_calloc(ft_strlen(word_var) + 1, \
-		sizeof(char));
-	if (!info_list->delim[in_delim])
-		return (error_lex(info_list, 3, "into_list.c/L43"), NULL);
-	ft_strcpy(info_list->delim[in_delim], word_var);
-	info_list->index_delim += 1;
-	return (info_list);
-}
-
 t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var)
 {
 	if (enum_var == COMMAND)
-	{
 		info_list = into_linklist_command(info_list, word_var);
-		if (!info_list)
-			return (NULL);
-	}
-	if (enum_var == FLAG)
-	{
+	else if (enum_var == FLAG)
 		info_list = into_linklist_flag(info_list, word_var);
-		if (!info_list)
-			return (NULL);
-	}
-	if (enum_var == INFILE)
-	{
-		info_list->infile[info_list->index_inf] = ft_calloc(ft_strlen(word_var) + 1, sizeof(char));
-		if (!info_list->infile[info_list->index_inf])
-			return (error_lex(info_list, 3, "into_list.c/L68"), NULL);
-		ft_strcpy(info_list->infile[info_list->index_inf], word_var);
-		info_list->index_inf += 1;
-	}
-	if (enum_var == OUTFILE)
-	{
-		info_list->outfile[info_list->index_outf] = ft_calloc(ft_strlen(word_var) + 1, sizeof(char));
-		if (!info_list->outfile[info_list->index_outf])
-			return (error_lex(info_list, 3, "into_list.c/L68"), NULL);
-		ft_strcpy(info_list->outfile[info_list->index_outf], word_var);
-		info_list->index_outf += 1;
-	}
-	if (enum_var == DELIMITER)
+	else if (enum_var == INFILE)
+		info_list = into_linklist_infile(info_list, word_var);
+	else if (enum_var == OUTFILE)
+		info_list = into_linklist_outfile(info_list, word_var);
+	else if (enum_var == DELIMITER)
 		info_list = into_linklist_delim(info_list, word_var);
 	return (info_list);
 }
