@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:13:17 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 15:13:18 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/23 21:44:45 by flip          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,25 +105,25 @@ static void	expand_and_print_input(char *input, char *envp[])
 	}
 }
 
-void	execute_echo(char **raw_input, char *envp[])
+int	execute_echo(char **raw_input, char *envp[])
 {
 	char	*line;
 	int		line_start;
 
 	if (!raw_input[1] || raw_input[1][0] == '\0')
-		return (ft_putstr_fd("\n", STDOUT_FILENO));
+		return (ft_putstr_fd("\n", STDOUT_FILENO), 0);
 	else if (raw_input[1][0] == '-' && raw_input[1][1] == 'n'
 		&& raw_input[1][2] == '\0')
-		return ;
+		return (0);
 	else if (raw_input[1][0] == '-' && raw_input[1][1] == 'n'
 		&& raw_input[1][2] == ' ' && raw_input[1][3] == '\0')
-		return ;
+		return (0);
 	line_start = output_trailing_newline(raw_input[1]);
 	if (line_start == -1)
-		return ;
+		return (0);
 	line = &raw_input[1][line_start];
 	expand_and_print_input(line, envp);
 	if (line_start == 0)
 		ft_printf("\n");
-	g_exit_status = 0;
+	return (0);
 }

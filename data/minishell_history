@@ -38,3 +38,77 @@ ls
 grep | env PWD
 env | grep PWD
 ls
+cat << a << b << c
+nvim
+cat << a << b << c
+cat << a << b << c
+cat << a << b << c
+cat << a << b << c
+cat << a << b << c
+ls
+cat << a << b << c
+cat << a << b << c
+cat << a << b << c
+cat << a << b << c
+echo $?
+cat | cat 
+cat | cat 
+cat | cat | cat
+cat | cat | cat | cat | cat | ls
+cat | cat | cat | cat | cat
+cat | cat | cat | cat | cat\
+cat | cat | cat | cat | cat\
+cat | cat | cat | cat | cat
+cat | cat | cat | cat | cat
+echo $?
+cat | cat | cat 
+cat | cat | cat | ls
+cat | cat | cat 
+cat | cat | cat 
+cat | cat | cat 
+cat | cat | cat 
+echo $?
+cat | cat | cat 
+cat
+cat
+cat
+cat
+cat
+cat
+cat | cat | cat
+cat | cat | cat
+cat | cat | cat
+cat | cat | cat
+cat | cat | cat
+cat | cat | cat
+cat | cat | cat
+cat | cat | cat
+cat | cat | cat
+cat | cat | cat
+cat | cat | cat
+cat | cat | cat
+cat | cat | cat
+cat | cat | cat
+cat | cat | cat\
+cat | cat | cat
+cat | cat | cat
+cat | cat | cat
+echo $?
+echo jo
+echo -nnnn jo
+echo -nnnn johaha
+echo
+echo wtf
+echo -n
+ls
+ls
+cat | cat 
+echo $?
+cat << a << b << c
+ok
+haha
+lls
+cat << a << b << c
+cat << a << b << c
+ls | exit 130
+echo $?

@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:54:55 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 18:16:55 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/23 21:54:38 by flip          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	write_to_heredoc(char *delim, char *env_cpy[], int heredoc_tmp)
 		if (heredoc_line == NULL)
 		{
 			ft_printf("warning: here-document delimited by end-of-file (CTRL+D) \
-					instead of '%s'\n", delim);
+instead of '%s'\n", delim);
 			break ;
 		}
 		else if ((ft_strncmp(heredoc_line, delim, (ft_strlen(delim)

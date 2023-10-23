@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 17:48:36 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 17:49:03 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/23 21:32:45 by flip          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,19 @@ static void	run_child_process(int in, int out, t_lexer *node,
 }
 
 static int	fetch_exit_status(pid_t pid, t_lexer *head,
-		char *env_cpy[]) // To do: add exit for 130!
+		char *env_cpy[])
 {
 	int		status;
 
 	status = 0;
-	waitpid(pid, &status, 0);
-	if (WIFSIGNALED(status) && WTERMSIG(status) == 3)
-		return (change_signal_profile(PARENT), 131);
-	else if (WIFSIGNALED(status) && WTERMSIG(status) >= 7)
-		return (change_signal_profile(PARENT), 130);
 	while (wait(NULL) != -1)
 		;
+	waitpid(pid, &status, 0);
 	clean_tmp_files(head, env_cpy);
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
+		return (change_signal_profile(PARENT), 131);
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+		return (change_signal_profile(PARENT), 130);
 	return (change_signal_profile(PARENT), WEXITSTATUS(status));
 }
 

@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:31:50 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 18:31:51 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/23 21:38:18 by flip          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,17 +332,17 @@ void	printing_lexer(t_lexer *info_lexer);
 void	print_double_array(char **arr);
 
 //		execution_cd.c
-void	execute_cd(t_minishell *shell);
+int		execute_cd(t_minishell *shell);
 //		execution_echo.c
-void	execute_echo(char **raw_input, char *envp[]);
+int		execute_echo(char **raw_input, char *envp[]);
 //		execution_env.c
-void	execute_env(char *envp[]);
+int		execute_env(char *envp[]);
 //		execution_export.c
-void	execute_export(t_minishell *shell);
+int		execute_export(t_minishell *shell);
 //		execution_pwd.c
-void	execute_pwd(char *env_cpy[]);
+int		execute_pwd(char *env_cpy[]);
 //		execution_unset.c
-void	execute_unset(t_minishell *shell);
+int		execute_unset(t_minishell *shell);
 //		execution_exit.c
 int		execute_exit(t_lexer *node);
 //		execution_utilities.c

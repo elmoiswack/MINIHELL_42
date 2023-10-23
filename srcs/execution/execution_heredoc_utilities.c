@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 17:36:32 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 18:19:09 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/23 20:56:41 by flip          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <unistd.h>
 
 void	change_permission_heredoc_tmp(void)
 {
@@ -52,10 +53,9 @@ int	fetch_exit_status_hd(pid_t pid, t_lexer *head, char *env_cpy[])
 	int		status;
 
 	status = 0;
-	waitpid(pid, &status, 0);
-	// ft_printf("WEXITSTATUS(status): %d\n WIFSIGNALED(status): %d\n", WEXITSTATUS(status), WIFSIGNALED(status));
 	while (wait(NULL) != -1)
 		;
+	waitpid(pid, &status, 0);
 	if (WEXITSTATUS(status) != 0)
 		return (clean_tmp_files(head, env_cpy), WEXITSTATUS(status));
 	else
