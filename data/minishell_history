@@ -24,3 +24,17 @@ heredoc
 cat << a << b << c
 cat << a << b << c
 cat << a << b << c
+cat << a << b << c
+cat << a << b << c
+cat << a << b << c
+cat << a << b << c
+cat << a << b << c
+ls
+cat << a << b << c
+cat << a << b << c
+cat << a << b << c
+cat << a << b << c
+ls
+grep | env PWD
+env | grep PWD
+ls

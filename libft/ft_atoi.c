@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_atoi.c                                          :+:    :+:            */
+/*   ft_atoi.c                                         :+:    :+:             */
 /*                                                     +:+                    */
 /*   By: fvan-wij <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 12:57:30 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2022/10/11 13:05:58 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/23 18:33:22 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	skip_whitespace(int i, char *int_str)
 	while (int_str[i] == ' ' || int_str[i] == '\t'
 		|| int_str[i] == '\r' || int_str[i] == '\n'
 		|| int_str[i] == '\v' || int_str[i] == '\f')
-	i++;
+		i++;
 	return (i);
 }
 

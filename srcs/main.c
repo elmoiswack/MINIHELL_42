@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                       ::::::::             */
+/*   main.c                                            :+:    :+:             */
+/*                                                    +:+                     */
+/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
+/*                                                  +#+                       */
+/*   Created: 2023/10/23 18:30:25 by fvan-wij      #+#    #+#                 */
+/*   Updated: 2023/10/23 18:31:23 by fvan-wij      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 #include "../libft/libft.h"
 #include <stdio.h>
@@ -11,7 +23,7 @@ int	g_exit_status;
 
 void	main_execute_input(t_minishell *shell, char *line)
 {
-	t_builtin builtin;
+	t_builtin	builtin;
 
 	add_history(line);
 	add_to_history_file(line);
@@ -32,7 +44,7 @@ void	main_execute_input(t_minishell *shell, char *line)
 
 void	main_input_error(int *terminate)
 {
-	//rl_clear_history();
+	rl_clear_history();
 	*terminate = 1;
 	ft_putstr_fd("exit\n", STDERR_FILENO);
 	exit(0);
@@ -44,7 +56,7 @@ void	display_prompt(t_minishell *shell)
 	int		terminate;
 
 	terminate = 0;
-	// init_ascii_art();
+	init_ascii_art();
 	init_history();
 	remove_ctl_echo();
 	while (!terminate)
@@ -60,7 +72,6 @@ void	display_prompt(t_minishell *shell)
 		else
 			free(line);
 	}
-	//rl_clear_history();
 	if (line)
 		free(line);
 }

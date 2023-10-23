@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 17:36:32 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 17:48:25 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/23 18:19:09 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	fetch_exit_status_hd(pid_t pid, t_lexer *head, char *env_cpy[])
 
 	status = 0;
 	waitpid(pid, &status, 0);
+	// ft_printf("WEXITSTATUS(status): %d\n WIFSIGNALED(status): %d\n", WEXITSTATUS(status), WIFSIGNALED(status));
 	while (wait(NULL) != -1)
 		;
 	if (WEXITSTATUS(status) != 0)
