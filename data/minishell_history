@@ -104,28 +104,6 @@ env | grep PWD
 < out1 > out2 > out3
 < out1 > out2 > out3
 < out1 > out2 > out3
-<<<<<<< files_parser
-ls
-pwd
-<Makefile cat >out >test
-<Makefile cat >out >test
-<Makefile cat >out >test
-<Makefile cat >out >test
-<Makefile >out >test
-<out1 >out2 >out3
-<Makefile <<a cat >out
-cat out 
-<out cat >out
-cat out 
-<Makefile cat >out1 >out2
-ls
-rm out out1 out2
-ls
-pwd
-exit
-=======
-=======
->>>>>>> master
 < out1 > out2 > out3
 ls
 ls
@@ -489,7 +467,3 @@ echo BONJOUR << ja cat
 echo BONJOUR << ja cat
 echo BONJOUR << ja cat
 echo "dasdaf>out"
-<<<<<<< files_parser
->>>>>>> master
-=======
->>>>>>> master
