@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_cat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 15:40:00 by dhussain          #+#    #+#             */
+/*   Updated: 2023/10/23 15:44:12 by dhussain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdio.h>
@@ -23,7 +35,7 @@ t_lexer	*check_content(t_lexer *info_list, char **splitted_line, int index)
 		info_list->content[1] = ft_calloc(ft_strlen(splitted_line[index]) + 1, \
 			sizeof(char));
 		if (!info_list->content[1])
-			return (error_lex(info_list, 3, "parses_cat.c/L23"), NULL);
+			return (error_lex(info_list, 3, "parses_cat.c/L35"), NULL);
 		ft_strcpy(info_list->content[1], splitted_line[index]);
 	}
 	return (info_list);

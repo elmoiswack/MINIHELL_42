@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dataorg_special_cases.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 15:38:57 by dhussain          #+#    #+#             */
+/*   Updated: 2023/10/23 15:41:31 by dhussain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdio.h>
@@ -8,14 +20,14 @@ t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, \
 {
 	info_list->content = ft_calloc(index + 1, sizeof(char *));
 	if (!info_list->content)
-		return (error_lex(info_list, 3, "dataorg_special_cases.c/L9"), NULL);
+		return (error_lex(info_list, 3, "dataorg_special_cases.c/L21"), NULL);
 	index = 0;
 	while (splitted_line[index])
 	{
 		info_list->content[index] = \
 			ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
 		if (!info_list->content[index])
-			return (error_lex(info_list, 3, "dataorg_special_cases.c/L16"), \
+			return (error_lex(info_list, 3, "dataorg_special_cases.c/L27"), \
 				NULL);
 		ft_strcpy(info_list->content[index], splitted_line[index]);
 		index++;
@@ -36,7 +48,7 @@ t_lexer	*special_case_files(t_lexer *info_list, char **splitted_line)
 	index = get_max_array(splitted_line);
 	info_list->content = ft_calloc(index + 1, sizeof(char *));
 	if (!info_list->content)
-		return (error_lex(info_list, 3, "dataorg_special_cases.c/L37"), NULL);
+		return (error_lex(info_list, 3, "dataorg_special_cases.c/L49"), NULL);
 	index = 0;
 	while (splitted_line[index])
 	{
@@ -44,7 +56,7 @@ t_lexer	*special_case_files(t_lexer *info_list, char **splitted_line)
 			ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
 		if (!info_list->content[index])
 			return (error_lex(info_list, 3, \
-				"dataorg_special_cases.c/L44"), NULL);
+				"dataorg_special_cases.c/L55"), NULL);
 		ft_strcpy(info_list->content[index], splitted_line[index]);
 		index++;
 	}

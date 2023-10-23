@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_checks.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 15:39:57 by dhussain          #+#    #+#             */
+/*   Updated: 2023/10/23 15:44:03 by dhussain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdio.h>
@@ -24,8 +36,8 @@ char	*copy_without_doubles(char *cont_line, char *temp)
 
 char	**remove_doubles(char **content)
 {
-	int	index;
-	char *temp;
+	int		index;
+	char	*temp;
 
 	index = 0;
 	while (content[index])
@@ -46,7 +58,7 @@ char	**remove_doubles(char **content)
 
 t_lexer	*check_quotes_list(t_lexer *info_list)
 {
-	t_lexer *head;
+	t_lexer	*head;
 
 	head = info_list;
 	while (info_list)
@@ -55,7 +67,7 @@ t_lexer	*check_quotes_list(t_lexer *info_list)
 		{
 			info_list->content = remove_doubles(info_list->content);
 			if (!info_list->content)
-				return (error_lex(info_list, 3, "list_checks.c/L38"), NULL);
+				return (error_lex(info_list, 3, "list_checks.c/L68"), NULL);
 		}
 		info_list = info_list->next;
 	}

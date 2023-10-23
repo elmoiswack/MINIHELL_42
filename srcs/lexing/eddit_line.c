@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   eddit_line.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 15:39:08 by dhussain          #+#    #+#             */
+/*   Updated: 2023/10/23 15:41:59 by dhussain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdio.h>
@@ -60,7 +72,7 @@ char	*put_spaces_in_line(char *line, t_lexer *info_list)
 	}
 	temp = ft_calloc(index + space_to_add + 2, sizeof(char));
 	if (!temp)
-		return (error_lex(info_list, 3, "eddit_line.c/L61"), NULL);
+		return (error_lex(info_list, 3, "eddit_line.c/L73"), NULL);
 	if (space_to_add == 0)
 	{
 		ft_strcpy(temp, line);
