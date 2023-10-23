@@ -24,7 +24,6 @@ static void	handle_waiting_signals(int signum)
 		return;
 }
 
-
 static void	handle_hd_signals(int signum)
 {
 	if (signum == SIGINT)

@@ -43,7 +43,7 @@ static int	fetch_exit_status(pid_t pid, t_lexer *head, char *env_cpy[]) // To do
 
 	status = 0;
 	waitpid(pid, &status, 0);
-	ft_printf("WTERMSIG(status): %d\n WIFISIGNALED(status): %d\nWTERMSIG(status): %d\n", WTERMSIG(status), WIFSIGNALED(status), WTERMSIG(status));
+	// ft_printf("WTERMSIG(status): %d\n WIFISIGNALED(status): %d\nWTERMSIG(status): %d\n", WTERMSIG(status), WIFSIGNALED(status), WTERMSIG(status));
 	if (WIFSIGNALED(status) && WTERMSIG(status) == 3)
 		return (change_signal_profile(PARENT), 131);
 	else if (WIFSIGNALED(status) && WTERMSIG(status) >= 7)

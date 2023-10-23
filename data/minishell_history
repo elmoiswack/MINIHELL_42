@@ -352,3 +352,89 @@ cat | cat | cat | ls
 cat | cat | cat | ls
 cat | cat | cat | ls
 ls
+cat
+cat
+cat
+cat << a << b << c 
+echo $?
+echo $?
+cat << a << b << c 
+cat << a << b << c 
+cat << a << b << c 
+cat << a << b << c 
+ls
+ls
+ls
+ls
+cd ~
+ls
+rm -rf Directories 
+ls
+ls
+env | grep PWD
+lel
+cat << a << b << c 
+cat << a << b << c 
+cat 
+cat 
+cat << a << b << c 
+echo $?
+cat | cat | cat 
+cat 
+cat 
+ls
+ls
+env
+unset LS_COLORS
+ls
+env
+ls
+ls 
+ls data/
+ls
+cat
+echo $?
+ls
+cat
+cat
+ls
+cat
+cat
+cat | cat | cat
+cat | cat | cat
+cat | cat | cat
+make fclean
+ls
+zsh
+ls
+ls
+ok
+ls
+ok
+ls
+ls
+ls
+ls
+ls
+ls
+ls | wc
+cat << a << b << c
+ls
+cat << a << b << c
+cat << a << b << c
+cat << a << b << c
+cat << a << b << c
+--track-origin=yes
+cat << a << b << c
+cat << a << b << c
+cat << a << b << c | cat >> a
+ls
+ls
+ls
+ls
+ls
+ok
+wtf
+doe ens gek
+wc
+bash
