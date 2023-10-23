@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                       ::::::::             */
+/*   interface_frontend.c                              :+:    :+:             */
+/*                                                    +:+                     */
+/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
+/*                                                  +#+                       */
+/*   Created: 2023/10/23 17:49:26 by fvan-wij      #+#    #+#                 */
+/*   Updated: 2023/10/23 17:50:07 by fvan-wij      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdlib.h>
@@ -52,7 +64,8 @@ void	add_to_history_file(char *line)
 {
 	int	history_fd;
 
-	history_fd = open("./data/minishell_history", O_WRONLY | O_CREAT | O_APPEND, 0644);
+	history_fd = open("./data/minishell_history",
+			O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (history_fd < 0)
 		return (perror("add_history_to_file()"));
 	ft_putstr_fd(line, history_fd);
@@ -83,7 +96,7 @@ char	**colorize_cmd(char *content[])
 		if (n_of_args == 1)
 			content = append_to_double_array(content, "--color=auto");
 		else
-		 	content = inject_str_in_array(content, "--color=auto", 1);
+			content = inject_str_in_array(content, "--color=auto", 1);
 		return (content);
 	}
 	else

@@ -333,6 +333,8 @@ void	execute_pwd(char *env_cpy[]);
 void	execute_unset(t_minishell *shell);
 //		execution_exit.c
 int		execute_exit(t_lexer *node);
+//		execution_utilities.c
+bool	is_relative_path(char *content);
 
 //		interface_frontend.c
 void	init_ascii_art(void);
@@ -347,7 +349,11 @@ int		is_builtin(t_lexer *cmd_lst);
 
 //		execution_heredoc.c
 int		create_heredoc_loop(t_lexer *head, char *env_cpy[]);
+
+//		execution_heredoc_utilities.c
+void	change_permission_heredoc_tmp(void);
 void	clean_tmp_files(t_lexer *head, char *envp[]);
+int		fetch_exit_status_hd(pid_t pid, t_lexer *head, char *env_cpy[]);
 
 //		execution_heredoc_expansion.c
 char	*expand_heredoc_line(char *heredoc_line, char *env_cpy[]);
@@ -355,7 +361,6 @@ char	*expand_heredoc_line(char *heredoc_line, char *env_cpy[]);
 //		execution_routing.c
 void	route_output(int out, t_lexer *node);
 void	route_input(int in, t_lexer *node);
-void	redirect_from_to(int fd_from, int fd_to);
 
 //		signal_handling.c
 // void	catch_signals_parent(void);

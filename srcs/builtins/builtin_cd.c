@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                       ::::::::             */
+/*   builtin_cd.c                                      :+:    :+:             */
+/*                                                    +:+                     */
+/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
+/*                                                  +#+                       */
+/*   Created: 2023/10/23 15:20:27 by fvan-wij      #+#    #+#                 */
+/*   Updated: 2023/10/23 15:22:05 by fvan-wij      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdbool.h>
@@ -72,7 +84,8 @@ static void	chdir_home(char *content[], char *env_cpy[], t_minishell *shell)
 
 	if (content[1][0] == '~' && content[1][1] == '/')
 	{
-		value = ft_strjoin(ft_getenv("HOME", env_cpy), ft_strchr(content[1], '/'));
+		value = ft_strjoin(ft_getenv("HOME", env_cpy),
+				ft_strchr(content[1], '/'));
 		update_old_pwd(shell);
 		if (chdir(value) == -1)
 		{
@@ -91,24 +104,6 @@ static void	chdir_home(char *content[], char *env_cpy[], t_minishell *shell)
 		}
 	}
 	free(value);
-}
-
-static bool	is_relative_path(char *content)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (content[i] && content[j])
-	{
-		if (ft_strncmp(&content[i], "../", 3) == 0)
-			i+=3;
-		else
-			return (false);
-		j++;
-	}
-	return (true);
 }
 
 void	execute_cd(t_minishell *shell)

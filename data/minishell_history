@@ -1,0 +1,26 @@
+ls
+ls -la | exit
+echo BONJOUR << ja cat
+echo bonjour << ja cat
+ls
+ok
+unset PATH
+/usr/bin/ls
+rm out
+echo bonjour > out
+ls
+cat > out
+cat out
+cat << a << b << c
+cat << a << b << c
+ls
+cat out
+< out cat
+< out cat > out2
+cat out2
+ls
+ok
+heredoc
+cat << a << b << c
+cat << a << b << c
+cat << a << b << c

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                       ::::::::             */
+/*   execution_routing.c                               :+:    :+:             */
+/*                                                    +:+                     */
+/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
+/*                                                  +#+                       */
+/*   Created: 2023/10/23 15:54:11 by fvan-wij      #+#    #+#                 */
+/*   Updated: 2023/10/23 15:54:35 by fvan-wij      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdlib.h>
@@ -7,15 +19,51 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-void	redirect_from_to(int fd_from, int fd_to)
+static void	redirect_from_to(int fd_from, int fd_to)
 {
 	if (dup2(fd_from, fd_to) < 0)
 		perror("dup2");
 }
 
-void	route_input(int in, t_lexer *node)
+static void	route_infiles(t_lexer *node)
 {
 	int	infile;
+	int	i;
+
+	i = 0;
+	while (node->infile[i])
+	{
+		infile = open(node->infile[i], O_RDONLY);
+		if (infile < 0)
+		{
+			perror("infile");
+			exit(1);
+		}
+		redirect_from_to(infile, STDIN_FILENO);
+		close(infile);
+		i++;
+	}
+}
+
+static void	route_outfiles(t_lexer *node, int flags, mode_t mode)
+{
+	int	outfile;
+	int	i;
+
+	i = 0;
+	while (node->outfile[i])
+	{
+		outfile = open(node->outfile[i], flags, mode);
+		if (outfile < 0)
+			perror("outfile");
+		redirect_from_to(outfile, STDOUT_FILENO);
+		close(outfile);
+		i++;
+	}
+}
+
+void	route_input(int in, t_lexer *node)
+{
 	int	hd_fd;
 
 	if (node->delim)
@@ -27,61 +75,17 @@ void	route_input(int in, t_lexer *node)
 		close(hd_fd);
 	}
 	if (node->input == INFILE)
-	{
-		int i;
-
-		i = 0;
-		while (node->infile[i])
-		{
-			infile = open(node->infile[i], O_RDONLY);
-			if (infile < 0)
-			{
-				perror("infile");
-				exit(1);
-			}
-			redirect_from_to(infile, STDIN_FILENO);
-			close(infile);
-			i++;
-		}
-	}
+		route_infiles(node);
 	else if (node->input == PIPE_READ)
 		redirect_from_to(in, STDIN_FILENO);
 }
 
 void	route_output(int out, t_lexer *node)
 {
-	int	outfile;
-
 	if (node->output == OUTFILE)
-	{
-		int i;
-
-		i = 0;
-		while (node->outfile[i])
-		{
-			outfile = open(node->outfile[i], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			if (outfile < 0)
-				perror("outfile");
-			redirect_from_to(outfile, STDOUT_FILENO);
-			close(outfile);
-			i++;
-		}
-	}
+		route_outfiles(node, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (node->output == APPEND)
-	{
-		int i;
-
-		i = 0;
-		while (node->outfile[i])
-		{
-			outfile = open(node->outfile[i], O_WRONLY | O_CREAT | O_APPEND, 0644);
-			if (outfile < 0)
-				perror("outfile");
-			redirect_from_to(outfile, STDOUT_FILENO);
-			close(outfile);
-			i++;
-		}
-	}
+		route_outfiles(node, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else if (node->output == PIPE_WRITE)
 		redirect_from_to(out, STDOUT_FILENO);
 	close(out);

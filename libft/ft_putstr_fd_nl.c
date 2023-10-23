@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                       ::::::::             */
-/*   builtin_env.c                                     :+:    :+:             */
+/*   ft_putstr_fd_nl.c                                 :+:    :+:             */
 /*                                                    +:+                     */
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
-/*   Created: 2023/10/23 15:12:23 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 15:12:30 by fvan-wij      ########   odam.nl         */
+/*   Created: 2023/10/23 17:33:02 by fvan-wij      #+#    #+#                 */
+/*   Updated: 2023/10/23 17:51:51 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-#include "../../libft/libft.h"
+#include "libft.h"
 #include <unistd.h>
 
-void	execute_env(char *envp[])
+void	ft_putstr_fd_nl(char *s, int fd)
 {
-	print_double_array(envp);
-	g_exit_status = 0;
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+	write(fd, "\n", 1);
 }
