@@ -24,7 +24,7 @@ void	main_execute_input(t_minishell *shell, char *line)
 	printing_lexer(shell->cmd_lst);
 	builtin = is_builtin(shell->cmd_lst);
 	if (builtin != NO_BUILTIN && !shell->cmd_lst->next)
-		g_exit_status = execute_builtin(shell, builtin);
+		g_exit_status = execute_builtin(shell, builtin, shell->cmd_lst);
 	else
 		g_exit_status = execute_cmds(shell, shell->cmd_lst, shell->env_cpy);
 	free_ll(&shell->cmd_lst);

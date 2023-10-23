@@ -28,7 +28,7 @@ static void	run_child_process(int in, int out, t_lexer *node,
 	if (is_absolute_path(node))
 		run_cmd(node->path, node->content, shell->env_cpy);
 	if (builtin != NO_BUILTIN)
-		err = execute_builtin(shell, builtin);
+		err = execute_builtin(shell, builtin, node);
 	else if (!cmd_exists(node->content[0], shell->env_cpy))
 		err = error_command_not_found(node->content[0]);
 	else

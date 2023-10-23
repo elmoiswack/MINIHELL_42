@@ -24,7 +24,7 @@ int	is_builtin(t_lexer *node)
 		return (NO_BUILTIN);
 }
 
-int	execute_builtin(t_minishell *shell, t_builtin builtin)
+int	execute_builtin(t_minishell *shell, t_builtin builtin, t_lexer *node)
 {
 	if (builtin == ECHO)
 		return (execute_echo(shell->cmd_lst->content, shell->env_cpy), 0);
@@ -39,6 +39,6 @@ int	execute_builtin(t_minishell *shell, t_builtin builtin)
 	else if (builtin == UNSET)
 		return (execute_unset(shell), 0);
 	else if (builtin == EXIT)
-		return (execute_exit(shell->cmd_lst));
+		return (execute_exit(node));
 	return (g_exit_status = 1, 1);
 }

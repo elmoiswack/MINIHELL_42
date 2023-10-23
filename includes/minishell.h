@@ -342,7 +342,7 @@ void	add_to_history_file(char *line);
 char	**colorize_cmd(char *content[]);
 
 //		execution_builtin.c
-int		execute_builtin(t_minishell *shell, t_builtin builtin);
+int		execute_builtin(t_minishell *shell, t_builtin builtin, t_lexer *node);
 int		is_builtin(t_lexer *cmd_lst);
 
 //		execution_heredoc.c

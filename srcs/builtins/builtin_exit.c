@@ -20,7 +20,7 @@ static bool	ft_strisdigit(char *str)
 int execute_exit(t_lexer *node)
 {
 	int exit_code;
-
+	
 	if (!node->content[1])
 	{
 		if (!node->next)
@@ -34,7 +34,10 @@ int execute_exit(t_lexer *node)
 	else if (node->content[2])
 		return (error_exit("exit: too many arguments\n"));
 	else if (node->content[1][0] == '-' && ft_isdigit(node->content[1][1]) == 0)
+	{
+		ft_printf("Is dit het?\n");
 		return(error_exit("exit: numeric argument required\n"));
+	}
 	else if (ft_strisdigit(node->content[1]) || (node->content[1][0] == '-' && ft_strisdigit(&node->content[1][1])))
 	{
 		exit_code = ft_atoi(node->content[1]);

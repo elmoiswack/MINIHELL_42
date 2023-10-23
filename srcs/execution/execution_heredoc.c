@@ -37,6 +37,8 @@ static void	create_heredoc_tmp(char *delim, char *env_cpy[])
 	while (!terminate)
 	{
 		heredoc_line = readline("> ");
+		if (heredoc_line == NULL)
+			ft_printf("warning: here-document delimited by end-of-file (CTRL+D) instead of '%s'\n", delim);
 		if (heredoc_line == NULL || (ft_strncmp(heredoc_line, delim,
 				(ft_strlen(delim) + ft_strlen(heredoc_line))) == 0))
 			terminate = true;
@@ -49,7 +51,6 @@ static void	create_heredoc_tmp(char *delim, char *env_cpy[])
 		if (heredoc_line)
 			free(heredoc_line);
 	}
-	ft_printf("warning: here-document delimited by end-of-file (CTRL+D) instead of '%s'\n", delim);
 	close(heredoc_tmp);
 	exit (0);
 }
