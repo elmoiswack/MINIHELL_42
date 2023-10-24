@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                       ::::::::             */
-/*   interface_frontend.c                              :+:    :+:             */
-/*                                                    +:+                     */
-/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
-/*                                                  +#+                       */
-/*   Created: 2023/10/23 17:49:26 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 17:50:07 by fvan-wij      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   interface_frontend.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 17:49:26 by fvan-wij          #+#    #+#             */
+/*   Updated: 2023/10/24 14:13:31 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	init_history(void)
 
 	history_fd = open("./data/minishell_history", O_RDWR | O_CREAT, 0644);
 	if (history_fd < 0)
-		return (perror("init_history()"));
+		return ;
 	history_line = get_next_line(history_fd);
 	while (history_line)
 	{
@@ -67,7 +67,7 @@ void	add_to_history_file(char *line)
 	history_fd = open("./data/minishell_history",
 			O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (history_fd < 0)
-		return (perror("add_history_to_file()"));
+		return ;
 	ft_putstr_fd(line, history_fd);
 	ft_putstr_fd("\n", history_fd);
 }

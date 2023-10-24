@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:15:31 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 15:17:51 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/24 13:08:54 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*expand_value(char *content, char *var, char *env_cpy[])
 	return (free(content), expand);
 }
 
-static int	export_content(char *content, t_minishell *shell)
+int	export_content(char *content, t_minishell *shell)
 {
 	char	*var;
 	int		eq_index;
@@ -46,10 +46,7 @@ static int	export_content(char *content, t_minishell *shell)
 	content = expand_value(content, var, shell->env_cpy);
 	free(var);
 	if (ft_strchr(content, '=') == NULL && ft_strisalpha(content) == 0)
-	{
-		g_exit_status = -1;
 		return (error_export_invalid_identifier(content), 1);
-	}
 	else if (replace_index >= 0)
 		shell->env_cpy = replace_str_in_array(shell->env_cpy,
 				content, replace_index);
@@ -58,16 +55,19 @@ static int	export_content(char *content, t_minishell *shell)
 	return (0);
 }
 
-void	execute_export(t_minishell *shell)
+int	execute_export(t_minishell *shell)
 {
 	int	i;
+	int	err;
 
 	i = 1;
+	err = 0;
 	if (!shell->cmd_lst->content[i])
 		return (execute_env(shell->env_cpy));
-	while (shell->cmd_lst->content[i] && g_exit_status != 1)
+	while (shell->cmd_lst->content[i] && err != 1)
 	{
-		g_exit_status = export_content(shell->cmd_lst->content[i], shell);
+		err = export_content(shell->cmd_lst->content[i], shell);
 		i++;
 	}
+	return (err);
 }

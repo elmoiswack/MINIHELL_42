@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:30:25 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 18:31:23 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/24 13:43:16 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 #include <unistd.h>
 #include <signal.h>
 
-int	g_exit_status;
-
 void	main_execute_input(t_minishell *shell, char *line)
 {
 	t_builtin	builtin;
@@ -30,15 +28,15 @@ void	main_execute_input(t_minishell *shell, char *line)
 	shell->cmd_lst = lexing(line, shell->env_cpy);
 	if (!shell->cmd_lst)
 	{
-		g_exit_status = -1;
+		shell->status = -1;
 		return ;
 	}
-	printing_lexer(shell->cmd_lst);
 	builtin = is_builtin(shell->cmd_lst);
-	if (builtin != NO_BUILTIN && !shell->cmd_lst->next)
-		g_exit_status = execute_builtin(shell, builtin, shell->cmd_lst);
+	if (builtin != NO_BUILTIN && !shell->cmd_lst->next
+		&& !shell->cmd_lst->infile && !shell->cmd_lst->outfile)
+		shell->status = execute_builtin(shell, builtin, shell->cmd_lst);
 	else
-		g_exit_status = execute_cmds(shell, shell->cmd_lst, shell->env_cpy);
+		shell->status = execute_cmds(shell, shell->cmd_lst, shell->env_cpy);
 	free_ll(&shell->cmd_lst);
 }
 
@@ -61,7 +59,7 @@ void	display_prompt(t_minishell *shell)
 	remove_ctl_echo();
 	while (!terminate)
 	{
-		if (g_exit_status == 0)
+		if (shell->status == 0)
 			line = readline(NON_CURSED);
 		else
 			line = readline(CURSED);
@@ -93,10 +91,11 @@ t_minishell	init_minishell(int argc, char *envp[])
 		exit(1);
 	}
 	shell.env_cpy = copy_double_array(envp);
+	export_content("LS_COLORS=rs=0:di=01;31:ln=01;36:mh=00:pi=40;33:ex=1;37:",
+		&shell);
 	shell.status = 0;
 	shell.builtin = NO_BUILTIN;
 	shell.profile = PARENT;
-	g_exit_status = 0;
 	change_signal_profile(PARENT);
 	return (shell);
 }

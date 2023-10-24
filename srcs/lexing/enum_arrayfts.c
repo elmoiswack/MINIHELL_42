@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:12 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/23 15:39:13 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/24 14:09:55 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ int	into_enum_cases(char **splitted_line, int *enum_array, int index)
 	if (ft_strncmp(splitted_line[index], "grep", ft_strlen("grep")) == 0)
 	{
 		index++;
-		if (enum_array[index])
-			enum_array[index] = FLAG;
+		enum_array[index] = FLAG;
 		return (1);
 	}
 	return (0);

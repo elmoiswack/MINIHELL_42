@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:13:17 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 21:44:45 by flip          ########   odam.nl         */
+/*   Updated: 2023/10/24 13:39:20 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static bool	print_pid(char *input, int *i)
 {
 	if (input[*i] == '$' && input[*i + 1] != '\0' && input[*i + 1] == '$')
 	{
-		ft_printf("%d", (int)getpid());
+		ft_putstr_fd(ft_itoa((int)getpid()), STDOUT_FILENO);
 		*i += 2;
 		return (true);
 	}
@@ -67,14 +67,14 @@ static bool	print_home(char *input, char *envp[], int *i)
 		value = ft_getenv("HOME", envp);
 		if (value && *i == 0)
 		{
-			ft_putstr_fd(value, STDIN_FILENO);
+			ft_putstr_fd(value, STDOUT_FILENO);
 			(*i)++;
 			return (free(value), true);
 		}
 		else if (value && !ft_isalnum(input[(*i) - 1]) && input[(*i)] == '~'
 			&& input[(*i) - 1] != '~')
 		{
-			ft_putstr_fd(value, STDIN_FILENO);
+			ft_putstr_fd(value, STDOUT_FILENO);
 			(*i)++;
 			return (free(value), true);
 		}
@@ -83,7 +83,7 @@ static bool	print_home(char *input, char *envp[], int *i)
 	return (false);
 }
 
-static void	expand_and_print_input(char *input, char *envp[])
+static void	expand_and_print_input(char *input, char *envp[], int status)
 {
 	int		i;
 
@@ -96,16 +96,16 @@ static void	expand_and_print_input(char *input, char *envp[])
 			continue ;
 		else if (ft_strncmp(&input[i], "$?", 2) == 0)
 		{
-			ft_printf("%d", g_exit_status);
+			ft_putstr_fd(ft_itoa(status), STDOUT_FILENO);
 			i++;
 		}
 		else if (input[i] != '\0')
-			write(STDIN_FILENO, &input[i], 1);
+			write(STDOUT_FILENO, &input[i], 1);
 		i++;
 	}
 }
 
-int	execute_echo(char **raw_input, char *envp[])
+int	execute_echo(char **raw_input, char *envp[], int status)
 {
 	char	*line;
 	int		line_start;
@@ -122,8 +122,8 @@ int	execute_echo(char **raw_input, char *envp[])
 	if (line_start == -1)
 		return (0);
 	line = &raw_input[1][line_start];
-	expand_and_print_input(line, envp);
+	expand_and_print_input(line, envp, status);
 	if (line_start == 0)
-		ft_printf("\n");
+		write(STDOUT_FILENO, "\n", 1);
 	return (0);
 }
