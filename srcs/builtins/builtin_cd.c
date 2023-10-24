@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:20:27 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 21:42:52 by flip          ########   odam.nl         */
+/*   Updated: 2023/10/24 12:17:44 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	execute_cd(t_minishell *shell)
 		return (chdir(getenv("HOME")), update_pwd(shell), 0);
 	arg_len = ft_strlen(shell->cmd_lst->content[1]);
 	if (is_relative_path(shell->cmd_lst->content[1]))
-		return(update_old_pwd(shell), chdir(shell->cmd_lst->content[1]));
+		return (update_old_pwd(shell), chdir(shell->cmd_lst->content[1]));
 	else if (ft_strncmp(shell->cmd_lst->content[1], "-", arg_len) == 0)
 		return (chdir_oldpwd(shell->env_cpy, shell));
 	else if (ft_strncmp(shell->cmd_lst->content[1], "~", arg_len) == 0)
