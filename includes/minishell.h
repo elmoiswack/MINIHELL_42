@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:31:50 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/24 12:44:43 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/24 13:09:28 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -339,6 +339,7 @@ int		execute_echo(char **raw_input, char *envp[], int status);
 int		execute_env(char *envp[]);
 //		execution_export.c
 int		execute_export(t_minishell *shell);
+int		export_content(char *content, t_minishell *shell);
 //		execution_pwd.c
 int		execute_pwd(char *env_cpy[]);
 //		execution_unset.c

@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:15:31 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/24 12:45:49 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/24 13:08:54 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*expand_value(char *content, char *var, char *env_cpy[])
 	return (free(content), expand);
 }
 
-static int	export_content(char *content, t_minishell *shell)
+int	export_content(char *content, t_minishell *shell)
 {
 	char	*var;
 	int		eq_index;

@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:30:25 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/24 12:44:36 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/24 13:21:04 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ t_minishell	init_minishell(int argc, char *envp[])
 		exit(1);
 	}
 	shell.env_cpy = copy_double_array(envp);
+	export_content("LS_COLORS=rs=0:di=01;31:ln=01;36:mh=00:pi=40;33:ex=1;37:",
+		&shell);
 	shell.status = 0;
 	shell.builtin = NO_BUILTIN;
 	shell.profile = PARENT;
