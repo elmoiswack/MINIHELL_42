@@ -1,0 +1,27 @@
+<Makefile cat | grep lib >out
+<Makefile cat | grep lib >out
+<Makefile cat | grep lib >out
+<Makefile cat | grep lib >out
+<Makefile cat | grep lib >out
+<Makefile cat | grep lib >out
+<Makefile cat | grep lib >out
+<Makefile cat | grep lib >out
+<Makefile cat | grep lib >out
+<Makefile cat | grep
+<Makefile cat | grep la
+<Makefile cat | grep la
+<Makefile cat | grep lib >out
+cat out 
+<Makefile cat | grep cat >>out
+cat out 
+ls
+pwd
+echo djshjdsa >out
+pwd
+cat out 
+echo djshjdsa >>out
+cat out 
+echo $USER $USER$USER
+echo $USER $USER$USER >>out
+cat out 
+exit
