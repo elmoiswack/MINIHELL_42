@@ -1,7 +1,7 @@
 NAME		:=	minishell
 COMPILER	:=	cc
 DEBUG_MODE	:=	
-FLAGS		:= 	-Wall -Wextra #-Werror
+FLAGS		:= 	-Wall -Wextra -Werror
 LIBS		:= 	./libft/libft.a -lreadline -I /Users/$(USER)/.brew/opt/readline/include -L/Users/$(USER)/.brew/opt/readline/lib
 HEADERS		:= 	-I libft -I includes -I /Users/$(USER)/.brew/opt/readline/include 
 SRCS		:= 	main.c \
@@ -52,7 +52,7 @@ SRCS		:= 	main.c \
 				builtins/builtin_exit.c \
 				interface/interface_frontend.c \
 				utilities/utilities_double_arrays.c \
-				utilities/utilities_debugging.c \
+				utilities/utilities_debuggin.c \
 				signals/signal_handler.c \
 
 SRCDIR 		:= 	./srcs

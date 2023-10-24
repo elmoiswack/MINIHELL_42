@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:25:02 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 15:26:32 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/24 12:45:24 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	is_builtin(t_lexer *node)
 int	execute_builtin(t_minishell *shell, t_builtin builtin, t_lexer *node)
 {
 	if (builtin == ECHO)
-		return (execute_echo(shell->cmd_lst->content, shell->env_cpy), 0);
+		return (execute_echo(shell->cmd_lst->content, shell->env_cpy,
+				shell->status), 0);
 	else if (builtin == CD)
 		return (execute_cd(shell), 0);
 	else if (builtin == PWD)
@@ -55,5 +56,5 @@ int	execute_builtin(t_minishell *shell, t_builtin builtin, t_lexer *node)
 		return (execute_unset(shell), 0);
 	else if (builtin == EXIT)
 		return (execute_exit(node));
-	return (g_exit_status = 1, 1);
+	return (shell->status = 1, 1);
 }

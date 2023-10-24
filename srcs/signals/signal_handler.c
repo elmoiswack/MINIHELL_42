@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:21:41 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 21:24:12 by flip          ########   odam.nl         */
+/*   Updated: 2023/10/24 12:42:59 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static void	handle_child_int(int signum)
 		exit (130);
 	else if (signum == SIGQUIT)
 	{
-		g_exit_status = 131;
 		kill(getpid(), SIGKILL);
 		exit (131);
 	}

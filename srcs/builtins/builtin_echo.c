@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:13:17 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 21:44:45 by flip          ########   odam.nl         */
+/*   Updated: 2023/10/24 12:42:29 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static bool	print_home(char *input, char *envp[], int *i)
 	return (false);
 }
 
-static void	expand_and_print_input(char *input, char *envp[])
+static void	expand_and_print_input(char *input, char *envp[], int status)
 {
 	int		i;
 
@@ -96,7 +96,7 @@ static void	expand_and_print_input(char *input, char *envp[])
 			continue ;
 		else if (ft_strncmp(&input[i], "$?", 2) == 0)
 		{
-			ft_printf("%d", g_exit_status);
+			ft_putstr_fd(ft_itoa(status), STDIN_FILENO);
 			i++;
 		}
 		else if (input[i] != '\0')
@@ -105,7 +105,7 @@ static void	expand_and_print_input(char *input, char *envp[])
 	}
 }
 
-int	execute_echo(char **raw_input, char *envp[])
+int	execute_echo(char **raw_input, char *envp[], int status)
 {
 	char	*line;
 	int		line_start;
@@ -122,7 +122,7 @@ int	execute_echo(char **raw_input, char *envp[])
 	if (line_start == -1)
 		return (0);
 	line = &raw_input[1][line_start];
-	expand_and_print_input(line, envp);
+	expand_and_print_input(line, envp, status);
 	if (line_start == 0)
 		ft_printf("\n");
 	return (0);

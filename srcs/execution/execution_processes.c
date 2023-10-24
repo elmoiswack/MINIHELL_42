@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 17:48:36 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 21:32:45 by flip          ########   odam.nl         */
+/*   Updated: 2023/10/24 12:37:09 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ static int	fetch_exit_status(pid_t pid, t_lexer *head,
 	int		status;
 
 	status = 0;
+	waitpid(pid, &status, 0);
 	while (wait(NULL) != -1)
 		;
-	waitpid(pid, &status, 0);
 	clean_tmp_files(head, env_cpy);
 	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
 		return (change_signal_profile(PARENT), 131);
@@ -102,7 +102,6 @@ int	execute_cmds(t_minishell *shell, t_lexer *head, char *envp[])
 	current = head;
 	if (create_heredoc_loop(current, envp) != 0)
 		return (130);
-	print_cmd_lst(head);
 	pid = run_and_route_processes(pid, head, current, shell);
 	return (fetch_exit_status(pid, head, envp));
 }

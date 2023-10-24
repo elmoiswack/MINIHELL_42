@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:24:07 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 15:24:48 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/24 12:25:35 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,21 @@ static void	pwd(char *cwd)
 	write(1, "\033[0;31m", 8);
 	write(1, ft_strrchr(cwd, '/'), ft_strlen(ft_strrchr(cwd, '/')));
 	write(1, "\033[0m\n", 6);
-	g_exit_status = 0;
 	free(cwd);
 	return ;
 }
 
-void	execute_pwd(char *env_cpy[])
+int	execute_pwd(char *env_cpy[])
 {
 	char	*cwd;
 
 	cwd = ft_getenv("PWD", env_cpy);
 	if (!cwd)
-	{
-		g_exit_status = 1;
-		return (perror("getcwd()"));
-	}
+		return (perror("getcwd()"), 1);
 	else
-		return (pwd(cwd));
+		return (pwd(cwd), 0);
 	if (getcwd(cwd, PWD_SIZE) == NULL)
-	{
-		g_exit_status = 1;
-		return (perror("getcwd()"));
-	}
+		return (perror("getcwd()"), 1);
 	else
-		return (pwd(cwd));
+		return (pwd(cwd), 0);
 }
