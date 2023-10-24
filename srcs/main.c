@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:30:25 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/24 13:21:04 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/24 13:43:16 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	main_execute_input(t_minishell *shell, char *line)
 		return ;
 	}
 	builtin = is_builtin(shell->cmd_lst);
-	if (builtin != NO_BUILTIN && !shell->cmd_lst->next)
+	if (builtin != NO_BUILTIN && !shell->cmd_lst->next
+		&& !shell->cmd_lst->infile && !shell->cmd_lst->outfile)
 		shell->status = execute_builtin(shell, builtin, shell->cmd_lst);
 	else
 		shell->status = execute_cmds(shell, shell->cmd_lst, shell->env_cpy);

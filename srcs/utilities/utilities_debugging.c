@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                       ::::::::             */
-/*   utilities_debuggin.c                              :+:    :+:             */
+/*   utilities_debugging.c                             :+:    :+:             */
 /*                                                    +:+                     */
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/24 12:29:25 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/24 12:47:01 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/24 13:43:54 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 // [STDOUT_OUT] = "STDOUT", //15
 // [HEREDOC] = "HEREDOC", //16
 // };
-//
+
 // static const char *g_builtin[] = {
 // 	[ECHO] = "ECHO",
 // 	[CD] = "CD",
@@ -94,7 +94,7 @@
 // 	}
 // 	fprintf(stderr, "---------------------------\033[0m\n");
 // }
-//
+
 // void	printing_lexer(t_lexer *info_lexer)
 // {
 // 	int	index;
