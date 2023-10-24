@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                       ::::::::             */
+/*   utilities_double_arrays.c                         :+:    :+:             */
+/*                                                    +:+                     */
+/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
+/*                                                  +#+                       */
+/*   Created: 2023/10/23 18:22:52 by fvan-wij      #+#    #+#                 */
+/*   Updated: 2023/10/23 18:29:13 by fvan-wij      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <unistd.h>
@@ -97,16 +109,14 @@ char	**remove_str_from_array(char **src, int index)
 
 char	**inject_str_in_array(char **src, char *str, int index)
 {
-	char **new;
-	int i;
-	int	j;
-	int size;
+	char	**new;
+	int		i;
+	int		j;
+	int		size;
 
-	size = 0;
 	i = 0;
 	j = 0;
-	while (src[size])
-		size++;
+	size = ft_arrlen(src);
 	new = ft_calloc(size + 2, sizeof(char *));
 	if (!new)
 		return (src);

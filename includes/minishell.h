@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                       ::::::::             */
+/*   minishell.h                                       :+:    :+:             */
+/*                                                    +:+                     */
+/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
+/*                                                  +#+                       */
+/*   Created: 2023/10/23 18:31:50 by fvan-wij      #+#    #+#                 */
+/*   Updated: 2023/10/23 21:38:18 by flip          ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H 
 # define MINISHELL_H 
 # include <stdbool.h>
@@ -324,19 +336,21 @@ void	printing_lexer(t_lexer *info_lexer);
 void	print_double_array(char **arr);
 
 //		execution_cd.c
-void	execute_cd(t_minishell *shell);
+int		execute_cd(t_minishell *shell);
 //		execution_echo.c
-void	execute_echo(char **raw_input, char *envp[]);
+int		execute_echo(char **raw_input, char *envp[]);
 //		execution_env.c
-void	execute_env(char *envp[]);
+int		execute_env(char *envp[]);
 //		execution_export.c
-void	execute_export(t_minishell *shell);
+int		execute_export(t_minishell *shell);
 //		execution_pwd.c
-void	execute_pwd(char *env_cpy[]);
+int		execute_pwd(char *env_cpy[]);
 //		execution_unset.c
-void	execute_unset(t_minishell *shell);
+int		execute_unset(t_minishell *shell);
 //		execution_exit.c
 int		execute_exit(t_lexer *node);
+//		execution_utilities.c
+bool	is_relative_path(char *content);
 
 //		interface_frontend.c
 void	init_ascii_art(void);
@@ -351,7 +365,11 @@ int		is_builtin(t_lexer *cmd_lst);
 
 //		execution_heredoc.c
 int		create_heredoc_loop(t_lexer *head, char *env_cpy[]);
+
+//		execution_heredoc_utilities.c
+void	change_permission_heredoc_tmp(void);
 void	clean_tmp_files(t_lexer *head, char *envp[]);
+int		fetch_exit_status_hd(pid_t pid, t_lexer *head, char *env_cpy[]);
 
 //		execution_heredoc_expansion.c
 char	*expand_heredoc_line(char *heredoc_line, char *env_cpy[]);
@@ -359,7 +377,6 @@ char	*expand_heredoc_line(char *heredoc_line, char *env_cpy[]);
 //		execution_routing.c
 void	route_output(int out, t_lexer *node);
 void	route_input(int in, t_lexer *node);
-void	redirect_from_to(int fd_from, int fd_to);
 
 //		signal_handling.c
 // void	catch_signals_parent(void);

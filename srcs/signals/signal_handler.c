@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                       ::::::::             */
+/*   signal_handler.c                                  :+:    :+:             */
+/*                                                    +:+                     */
+/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
+/*                                                  +#+                       */
+/*   Created: 2023/10/23 18:21:41 by fvan-wij      #+#    #+#                 */
+/*   Updated: 2023/10/23 21:24:12 by flip          ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <unistd.h>
@@ -12,7 +24,7 @@ static void	handle_parent_signals(int signum)
 	if (signum == SIGINT)
 	{
 		write(STDOUT_FILENO, "\n", 1);
-		//rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
@@ -21,7 +33,7 @@ static void	handle_parent_signals(int signum)
 static void	handle_waiting_signals(int signum)
 {
 	if (signum == SIGINT)
-		return;
+		return ;
 }
 
 static void	handle_hd_signals(int signum)
@@ -34,6 +46,12 @@ static void	handle_child_int(int signum)
 {
 	if (signum == SIGINT)
 		exit (130);
+	else if (signum == SIGQUIT)
+	{
+		g_exit_status = 131;
+		kill(getpid(), SIGKILL);
+		exit (131);
+	}
 }
 
 void	change_signal_profile(t_sig_profile profile)
@@ -43,28 +61,19 @@ void	change_signal_profile(t_sig_profile profile)
 
 	ft_memset(&s_int, 0, sizeof(s_int));
 	ft_memset(&s_quit, 0, sizeof(s_quit));
+	s_quit.sa_handler = SIG_IGN;
 	if (profile == CHILD)
 	{
 		s_int.sa_handler = &handle_child_int;
-		s_quit.sa_handler = SIG_DFL;
+		s_quit.sa_handler = &handle_child_int;
 	}
 	else if (profile == PARENT)
-	{
 		s_int.sa_handler = &handle_parent_signals;
-		s_quit.sa_handler = SIG_IGN;
-	}
 	else if (profile == HD)
-	{
 		s_int.sa_handler = &handle_hd_signals;
-		s_quit.sa_handler = SIG_IGN;
-	}
 	else if (profile == WAITING)
-	{
 		s_int.sa_handler = &handle_waiting_signals;
-		s_quit.sa_handler = SIG_IGN;
-	}
-	if (sigaction(SIGINT, &s_int, NULL) == -1)
-		perror("SIGINT: ");
-	if (sigaction(SIGQUIT, &s_quit, NULL) == -1)
-		perror("SIGINT: ");
+	if (sigaction(SIGINT, &s_int, NULL) == -1
+		|| sigaction(SIGQUIT, &s_quit, NULL) == -1)
+		perror("SIGACTION: ");
 }

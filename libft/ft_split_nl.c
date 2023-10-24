@@ -6,7 +6,7 @@
 /*   By: flip <flip@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 04:29:16 by flip              #+#    #+#             */
-/*   Updated: 2023/06/22 15:36:37 by flip          ########   odam.nl         */
+/*   Updated: 2023/10/23 18:35:07 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@ static int	word_counter(char const *s, char c)
 	while (s[i] == c && s[i])
 		i++;
 	while (s[i])
-	{	
+	{
 		while (s[i])
 		{
 			if (s[i] == c || s[i] == '\n' || s[i] == ',')
 				break ;
-		i++;
+			i++;
 		}
 		w_count++;
 		while (s[i])
 		{
 			if (s[i] != c && s[i] != '\n' && s[i] != ',')
 				break ;
-		i++;
+			i++;
 		}
 	}
 	return (w_count);

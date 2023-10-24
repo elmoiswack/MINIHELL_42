@@ -6,7 +6,7 @@
 /*   By: fvan-wij <fvan-wij@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:46:37 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/10/19 13:24:09 by flip          ########   odam.nl         */
+/*   Updated: 2023/10/23 18:28:26 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+int				ft_arrlen(char **arr);
 unsigned int	ft_atoh(char *hex_string);
 int				ft_atoi(const char *nptr);
 void			ft_bzero(void *s, size_t n);
@@ -60,6 +61,7 @@ char			**ft_split(char const *s, char c);
 void			ft_putnbr_fd(int n, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putstr_fd(char *s, int fd);
+void			ft_putstr_fd_nl(char *s, int fd);
 void			ft_putstr_fd_2d(char *s[], int fd);
 void			ft_putchar_fd(char c, int fd);
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                       ::::::::             */
+/*   builtin_pwd.c                                     :+:    :+:             */
+/*                                                    +:+                     */
+/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
+/*                                                  +#+                       */
+/*   Created: 2023/10/23 15:24:07 by fvan-wij      #+#    #+#                 */
+/*   Updated: 2023/10/23 15:24:48 by fvan-wij      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdbool.h>
@@ -7,7 +19,7 @@
 
 #define PWD_SIZE 256
 
-static void pwd(char *cwd)
+static void	pwd(char *cwd)
 {
 	int		cd_len;
 	int		total_len;
@@ -22,6 +34,7 @@ static void pwd(char *cwd)
 	free(cwd);
 	return ;
 }
+
 void	execute_pwd(char *env_cpy[])
 {
 	char	*cwd;
@@ -34,7 +47,7 @@ void	execute_pwd(char *env_cpy[])
 	}
 	else
 		return (pwd(cwd));
-	if (getcwd(cwd, 256) == NULL)
+	if (getcwd(cwd, PWD_SIZE) == NULL)
 	{
 		g_exit_status = 1;
 		return (perror("getcwd()"));
@@ -42,5 +55,3 @@ void	execute_pwd(char *env_cpy[])
 	else
 		return (pwd(cwd));
 }
-
-

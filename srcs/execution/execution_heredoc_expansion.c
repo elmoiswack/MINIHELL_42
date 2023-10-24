@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                       ::::::::             */
+/*   execution_heredoc_expansion.c                     :+:    :+:             */
+/*                                                    +:+                     */
+/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
+/*                                                  +#+                       */
+/*   Created: 2023/10/23 15:39:33 by fvan-wij      #+#    #+#                 */
+/*   Updated: 2023/10/23 15:40:17 by fvan-wij      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdlib.h>
 #include <unistd.h>
 
-static char	*expand_heredoc_var(char *heredoc_line, int var_index, char *env_cpy[])
+static char	*expand_heredoc_var(char *heredoc_line,
+		int var_index, char *env_cpy[])
 {
 	char	*temp;
 	char	*string_before_var;
@@ -68,14 +81,14 @@ char	*expand_heredoc_line(char *heredoc_line, char *env_cpy[])
 	while (heredoc_line[i])
 	{
 		if (heredoc_line[i] == '$' && heredoc_line[i + 1] != '\0'
-				&& heredoc_line[i + 1] == '$')
+			&& heredoc_line[i + 1] == '$')
 		{
 			heredoc_line = expand_heredoc_pid(heredoc_line, i);
 			if (heredoc_line[i + 1])
 				i++;
 		}
 		else if (heredoc_line[i] == '$' && heredoc_line[i + 1] != '\0'
-				&& ft_isalpha(heredoc_line[i + 1]) == 1)
+			&& ft_isalpha(heredoc_line[i + 1]) == 1)
 			heredoc_line = expand_heredoc_var(heredoc_line, i, env_cpy);
 		i++;
 	}

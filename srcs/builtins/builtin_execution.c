@@ -1,24 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                       ::::::::             */
+/*   builtin_execution.c                               :+:    :+:             */
+/*                                                    +:+                     */
+/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
+/*                                                  +#+                       */
+/*   Created: 2023/10/23 15:25:02 by fvan-wij      #+#    #+#                 */
+/*   Updated: 2023/10/23 15:26:32 by fvan-wij      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdlib.h>
 
 int	is_builtin(t_lexer *node)
 {
+	int	len;
+
+	len = ft_strlen(node->content[0]);
 	if (!node->content)
 		return (NO_BUILTIN);
-	else if (ft_strncmp(node->content[0], "exit", ft_strlen(node->content[0])) == 0)
+	else if (ft_strncmp(node->content[0], "exit", len) == 0)
 		return (EXIT);
-	else if (ft_strncmp(node->content[0], "echo", ft_strlen(node->content[0])) == 0)
+	else if (ft_strncmp(node->content[0], "echo", len) == 0)
 		return (ECHO);
-	else if (ft_strncmp(node->content[0], "cd", ft_strlen(node->content[0])) == 0)
+	else if (ft_strncmp(node->content[0], "cd", len) == 0)
 		return (CD);
-	else if (ft_strncmp(node->content[0], "pwd", ft_strlen(node->content[0])) == 0)
+	else if (ft_strncmp(node->content[0], "pwd", len) == 0)
 		return (PWD);
-	else if (ft_strncmp(node->content[0], "env", ft_strlen(node->content[0])) == 0)
+	else if (ft_strncmp(node->content[0], "env", len) == 0)
 		return (ENV);
-	else if (ft_strncmp(node->content[0], "export", ft_strlen(node->content[0])) == 0)
+	else if (ft_strncmp(node->content[0], "export", len) == 0)
 		return (EXPORT);
-	else if (ft_strncmp(node->content[0], "unset", ft_strlen(node->content[0])) == 0)
+	else if (ft_strncmp(node->content[0], "unset", len) == 0)
 		return (UNSET);
 	else
 		return (NO_BUILTIN);
