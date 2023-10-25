@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interface_frontend.c                               :+:      :+:    :+:   */
+/*   interface_frontend.c                              :+:    :+:             */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:49:26 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/10/24 14:13:31 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/25 18:54:16 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ char	**colorize_cmd(char *content[])
 		|| ft_strncmp(content[0], "ls", 2) == 0)
 	{
 		if (n_of_args == 1)
-			content = append_to_double_array(content, "--color=auto");
+			content = ft_append_to_double_array(content, "--color=auto");
 		else
-			content = inject_str_in_array(content, "--color=auto", 1);
+			content = ft_inject_str_in_array(content, "--color=auto", 1);
 		return (content);
 	}
 	else

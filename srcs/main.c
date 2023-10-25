@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:30:25 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/24 13:43:16 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/25 20:39:07 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ void	main_execute_input(t_minishell *shell, char *line)
 	shell->cmd_lst = lexing(line, shell->env_cpy);
 	if (!shell->cmd_lst)
 	{
+		err_log(E_ALLOC, NULL);
 		shell->status = -1;
 		return ;
 	}
+	printing_lexer(shell->cmd_lst);
 	builtin = is_builtin(shell->cmd_lst);
 	if (builtin != NO_BUILTIN && !shell->cmd_lst->next
 		&& !shell->cmd_lst->infile && !shell->cmd_lst->outfile)
@@ -80,19 +82,21 @@ t_minishell	init_minishell(int argc, char *envp[])
 
 	if (argc != 1)
 	{
-		ft_printf("executable: too many arguments. \
-			Executable can only be run as follows: './minishell'\n");
+		err_log(E_INPUT, NULL);
 		exit(1);
 	}
 	shell.cmd_lst = malloc(sizeof(t_lexer));
 	if (!shell.cmd_lst)
 	{
-		ft_printf("malloc: could not allocate memory for t_minishell shell\n");
+		err_log(E_ALLOC, NULL);
 		exit(1);
 	}
-	shell.env_cpy = copy_double_array(envp);
-	export_content("LS_COLORS=rs=0:di=01;31:ln=01;36:mh=00:pi=40;33:ex=1;37:",
-		&shell);
+	shell.env_cpy = ft_copy_double_array(envp);
+	if (!shell.env_cpy)
+		err_log(E_ALLOC, NULL);
+	if (export_content("LS_COLORS=rs=0:di=01;31:ln=01;36:mh=00:pi=40;33:ex=1;37:",
+		&shell) != 0)
+		err_log(E_ALLOC, NULL);
 	shell.status = 0;
 	shell.builtin = NO_BUILTIN;
 	shell.profile = PARENT;
@@ -103,6 +107,7 @@ t_minishell	init_minishell(int argc, char *envp[])
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_minishell	shell;
+
 
 	(void) argv;
 	shell = init_minishell(argc, envp);

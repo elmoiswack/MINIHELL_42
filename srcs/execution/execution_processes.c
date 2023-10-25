@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 17:48:36 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/24 13:43:31 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/25 20:38:59 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	fetch_exit_status(pid_t pid, t_lexer *head,
 	int		status;
 
 	status = 0;
-	waitpid(pid, &status, 0);
+	waitpid(pid, &status, 0); // Make a PID array,
 	while (wait(NULL) != -1)
 		;
 	clean_tmp_files(head, env_cpy);
@@ -78,18 +78,21 @@ static pid_t	run_and_route_processes(pid_t pid, t_lexer *head,
 	{
 		if (pipe(pipe_fd) < 0)
 			perror("pipe");
-		pid = fork();
+		pid = fork(); 
+		if (pid < 0)
+			return (ft_putstr_fd("Fork failed", STDERR_FILENO), 1);
 		change_signal_profile(WAITING);
 		if (pid == 0)
 		{
 			change_signal_profile(CHILD);
-			run_child_process(prev_pipe, pipe_fd[PIPE_WRITE], current, shell);
+			run_child_process(prev_pipe, pipe_fd[PIPE_WRITE], current, shell); // Gotta close the read end of the pipe after the 1st command
 		}
 		close(pipe_fd[PIPE_WRITE]);
 		prev_pipe = pipe_fd[PIPE_READ];
 		current = current->next;
 	}
 	close(prev_pipe);
+	close(pipe_fd[PIPE_READ]);
 	return (pid);
 }
 
@@ -100,8 +103,9 @@ int	execute_cmds(t_minishell *shell, t_lexer *head, char *envp[])
 
 	pid = 1;
 	current = head;
+	print_cmd_lst(current);
 	if (create_heredoc_loop(current, envp) != 0)
 		return (130);
-	pid = run_and_route_processes(pid, head, current, shell);
+	pid = run_and_route_processes(pid, head, current, shell); // Remove current
 	return (fetch_exit_status(pid, head, envp));
 }

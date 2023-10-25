@@ -6,12 +6,13 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:15:31 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/24 13:08:54 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/25 18:53:10 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
+#include <stdbool.h>
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -34,6 +35,22 @@ static char	*expand_value(char *content, char *var, char *env_cpy[])
 	return (free(content), expand);
 }
 
+static bool	contains_char(char *content, char c)
+{
+	int i;
+
+	i = 0;
+	if (!content)
+		return (false);
+	while (content[i])
+	{
+		if (content[i] == c)
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 int	export_content(char *content, t_minishell *shell)
 {
 	char	*var;
@@ -48,25 +65,27 @@ int	export_content(char *content, t_minishell *shell)
 	if (ft_strchr(content, '=') == NULL && ft_strisalpha(content) == 0)
 		return (error_export_invalid_identifier(content), 1);
 	else if (replace_index >= 0)
-		shell->env_cpy = replace_str_in_array(shell->env_cpy,
+		shell->env_cpy = ft_replace_str_in_array(shell->env_cpy,
 				content, replace_index);
 	else
-		shell->env_cpy = append_to_double_array(shell->env_cpy, content);
+		shell->env_cpy = ft_append_to_double_array(shell->env_cpy, content);
 	return (0);
 }
 
-int	execute_export(t_minishell *shell)
+int	execute_export(t_minishell *shell, t_lexer *node)
 {
 	int	i;
 	int	err;
 
 	i = 1;
 	err = 0;
-	if (!shell->cmd_lst->content[i])
-		return (execute_env(shell->env_cpy));
-	while (shell->cmd_lst->content[i] && err != 1)
+	if (!node->content[1])
+		return (print_double_array(shell->env_cpy), 0);
+	if (!contains_char(node->content[1], '='))
+		return (err);
+	while (node->content[i] && err != 1)
 	{
-		err = export_content(shell->cmd_lst->content[i], shell);
+		err = export_content(node->content[i], shell);
 		i++;
 	}
 	return (err);

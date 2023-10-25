@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:54:11 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 15:54:35 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/25 19:58:04 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-static void	redirect_from_to(int fd_from, int fd_to)
+static void	redirect_from_to(int fd_from, int fd_to) // To do: close fd when dup2 fails
 {
 	if (dup2(fd_from, fd_to) < 0)
 		perror("dup2");

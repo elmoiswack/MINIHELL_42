@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:31:50 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/24 13:09:28 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/25 20:12:59 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@ typedef enum e_token{
 	HEREDOC,
 }	t_token;
 
+//Error enumerator - defines error mssg;
+typedef enum e_error {
+	E_NONE,
+	E_ALLOC,
+	E_INPUT,
+	E_IDENT,
+	E_CMDNFND,
+	E_FEWARG,
+}	t_error;
+
 //Builtin enumerator - defines the different types of possible builtins;
 typedef enum e_builtin {
 	ECHO,
@@ -95,6 +105,7 @@ typedef struct lexerinfo {
 	int					error_code;
 	const char			*error_str;
 	struct lexerinfo	*next;
+	struct lexerinfo	*prev;
 }	t_lexer;
 
 //ERROR CODES:
@@ -294,6 +305,7 @@ void	error_export_invalid_identifier(char *input);
 void	error_unset_too_few_args(void);
 void	error_lex(t_lexer *info_list, int error_code, const char *str);
 int		error_exit(char *msg);
+int		err_log(t_error err, char *input);
 
 		//free.c
 void	free_lexing_content_struct(t_lexer *list);
@@ -319,13 +331,6 @@ int		arg_is_env(char *raw_input, char **value, char *envp[]);
 int		var_exists(char	**env, char *var);
 char	*ft_getenv(char *var_name, char **env);
 
-//		utilities_double_arrays.c
-char	**copy_double_array(char **array);
-char	**append_to_double_array(char **src, char *str);
-char	**replace_str_in_array(char **src, char *str, int index);
-char	**remove_str_from_array(char **src, int index);
-char	**inject_str_in_array(char **src, char *str, int index);
-
 //		utilities_debugging.c
 void	print_cmd_lst(t_lexer *head);
 void	printing_lexer(t_lexer *info_lexer);
@@ -336,9 +341,9 @@ int		execute_cd(t_minishell *shell);
 //		execution_echo.c
 int		execute_echo(char **raw_input, char *envp[], int status);
 //		execution_env.c
-int		execute_env(char *envp[]);
+int		execute_env(char *envp[], t_lexer *node);
 //		execution_export.c
-int		execute_export(t_minishell *shell);
+int		execute_export(t_minishell *shell, t_lexer *node);
 int		export_content(char *content, t_minishell *shell);
 //		execution_pwd.c
 int		execute_pwd(char *env_cpy[]);
@@ -383,6 +388,7 @@ void	change_signal_profile(t_sig_profile profile);
 //		memory_management.c		
 void	clean_up(t_minishell *shell);
 void	free_ll(t_lexer **lst);
+char	**rev_free_arr(char **strings_array, int i);
 
 //###############################################################
 #endif

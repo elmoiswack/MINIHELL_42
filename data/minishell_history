@@ -25,3 +25,66 @@ echo $USER $USER$USER
 echo $USER $USER$USER >>out
 cat out 
 exit
+e
+exit
+env bonjour
+env bonjour
+env bonjour
+env bonjour
+env bonjour
+env bonjour
+env jo
+env bonjour
+echo $?
+echo bonjour
+env bonjour
+echo $?
+cd
+export ha
+export ha
+echo $?
+env
+rm -rf ha
+ls
+export jo
+env
+export kak
+env
+export kak
+export kak=nee
+export kak
+env
+export kak
+env
+ls
+export yeo
+env
+ls
+export kak
+env
+export kak=joooooooooo
+env
+ls
+ok
+ls
+echo
+e
+cat | ls
+cat | ls
+cat | ls
+cat | ls
+cat | ls
+ok
+ls
+cat | ls 
+cat 
+cat
+echo $?
+cat
+echo $?
+cat
+cat
+cat
+cat
+ls
+env | grep LS
