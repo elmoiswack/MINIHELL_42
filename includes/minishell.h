@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                       ::::::::             */
-/*   minishell.h                                       :+:    :+:             */
-/*                                                    +:+                     */
-/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
-/*                                                  +#+                       */
-/*   Created: 2023/10/23 18:31:50 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/24 13:09:28 by fvan-wij      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 18:31:50 by fvan-wij          #+#    #+#             */
+/*   Updated: 2023/10/25 16:04:49 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,8 +206,6 @@ t_lexer	*which_special_case(t_lexer *info_list, \
 t_lexer	*other_special_case(t_lexer	*info_list, char **splitted_line, \
 	int *enum_array, int index);
 t_lexer	*special_case_files(t_lexer *info_list, char **splitted_line);
-t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, \
-	int index);
 
 		//into_list.c
 t_lexer	*one_two_word_lexer(t_lexer *info_list, char **splitted_line);

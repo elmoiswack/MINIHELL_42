@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:08 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/23 15:46:39 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:02:47 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*rm_guotes_loop(t_lexer *info_list, char *temp)
 	index_te = 0;
 	while (info_list->content[1][index_c])
 	{
-		if (info_list->content[1][index_c] != 39)
+		if (info_list->content[1][index_c] != '\'')
 		{
 			temp[index_te] = info_list->content[1][index_c];
 			index_te++;
@@ -56,7 +56,7 @@ t_lexer	*rm_quotes_grep(t_lexer *info_list)
 	while (info_list)
 	{
 		if (ft_strncmp(info_list->content[0], "grep", ft_strlen("grep")) == 0 \
-			&& info_list->content[1][0] == 39)
+			&& info_list->content[1][0] == '\'')
 			break ;
 		info_list = info_list->next;
 	}
@@ -114,12 +114,11 @@ t_lexer	*grep_parser(t_lexer *info_list, char **splitted_line)
 		if (!info_list)
 			return (NULL);
 	}
-	if (info_list->content[1] && info_list->content[1][0] == 39)
+	if (info_list->content[1] && info_list->content[1][0] == '\'')
 	{
 		info_list = rm_quotes_grep(info_list);
 		if (!info_list)
 			return (NULL);
-		return (head);
 	}
 	return (head);
 }

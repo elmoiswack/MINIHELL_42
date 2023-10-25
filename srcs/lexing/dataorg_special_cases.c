@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:38:57 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/23 15:41:31 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:04:32 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,6 @@
 #include "../../libft/libft.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-t_lexer	*special_case_rm(t_lexer *info_list, char **splitted_line, \
-	int index)
-{
-	info_list->content = ft_calloc(index + 1, sizeof(char *));
-	if (!info_list->content)
-		return (error_lex(info_list, 3, "dataorg_special_cases.c/L21"), NULL);
-	index = 0;
-	while (splitted_line[index])
-	{
-		info_list->content[index] = \
-			ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
-		if (!info_list->content[index])
-			return (error_lex(info_list, 3, "dataorg_special_cases.c/L27"), \
-				NULL);
-		ft_strcpy(info_list->content[index], splitted_line[index]);
-		index++;
-	}
-	info_list->content[index] = NULL;
-	info_list->path = get_path_of_command(splitted_line[0], \
-		info_list->env_copy);
-	info_list->input = NONE;
-	info_list->output = NONE;
-	info_list->next = NULL;
-	return (info_list);
-}
 
 t_lexer	*special_case_files(t_lexer *info_list, char **splitted_line)
 {
@@ -72,18 +46,11 @@ t_lexer	*special_case_files(t_lexer *info_list, char **splitted_line)
 t_lexer	*other_special_case(t_lexer	*info_list, char **splitted_line, \
 	int *enum_array, int index)
 {
-	if (ft_strncmp(splitted_line[0], "rm", ft_strlen(splitted_line[0])) == 0)
-	{
-		info_list = special_case_rm(info_list, splitted_line, \
-			get_max_array(splitted_line));
-		free_double_array(splitted_line);
-		free(enum_array);
-		return (info_list);
-	}
 	if ((ft_strncmp(splitted_line[0], "mkdir", \
 		ft_strlen(splitted_line[0])) == 0) \
 		|| (ft_strncmp(splitted_line[0], "touch", \
-			ft_strlen(splitted_line[0])) == 0))
+			ft_strlen(splitted_line[0])) == 0)
+		|| (ft_strncmp(splitted_line[0], "rm", ft_strlen(splitted_line[0])) == 0))
 	{
 		info_list = special_case_files(info_list, splitted_line);
 		free_double_array(splitted_line);

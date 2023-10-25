@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:42 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/24 14:10:10 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:45:11 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array)
 	if (!splitted_line)
 	{
 		free(enum_array);
-		return (NULL);
+		return (error_lex(info_list, 3, "lexing.c/L48"), NULL);
 	}
 	if (check_special_cases(splitted_line, enum_array) == 1)
 		return (which_special_case(info_list, splitted_line, enum_array, 0));
@@ -119,5 +119,8 @@ t_lexer	*lexing(char *line, char **env_cpy)
 		return (error_lex(info_list, 3, "lexer.c/L116"), NULL);
 	info_list = set_variables(info_list, new_line);
 	info_list = check_quotes_list(info_list);
+	printing_lexer(info_list);
+	// error_lex(info_list, 1, "");
+	// exit(0);
 	return (info_list);
 }

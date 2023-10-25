@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:47 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/23 15:40:48 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:06:07 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ char	*replace_vars_loop(char *line, char *new_line, \
 {
 	int	index_new;
 	int	index_env;
-	int	end;
 
 	index_new = 0;
 	index_env = 0;
@@ -28,12 +27,11 @@ char	*replace_vars_loop(char *line, char *new_line, \
 	{
 		if (line[index] == '$')
 		{
-			end = get_env_end(line, index + 1);
+			index = get_env_end(line, index + 1);
 			new_line = put_env_in_line(new_line, index_new, \
 				env_temp, index_env);
 			index_new += ft_strlen(env_temp[index_env]);
 			index_env++;
-			index = end;
 		}
 		if (line[index] && line[index] != '$')
 		{
