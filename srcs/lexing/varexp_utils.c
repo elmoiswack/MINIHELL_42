@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:43 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/23 15:40:44 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:13:56 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	get_env_end(char *line, int index)
 {
 	while (line[index])
 	{
-		if (ft_isalpha(line[index]) != 1)
+		if (ft_isalpha(line[index]) != 1 && line[index] != '_')
 			return (index);
 		index++;
 	}

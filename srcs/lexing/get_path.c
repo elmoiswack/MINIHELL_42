@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:21 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/23 15:39:22 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:47:06 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,5 @@ char	*get_path_of_command(char *command, char **env_cpy)
 		return (NULL);
 	command_path = find_path_loop(paths, command);
 	free_double_array(paths);
-	if (!command_path)
-		return (NULL);
 	return (command_path);
 }

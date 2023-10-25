@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:28 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/23 15:47:41 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:08:06 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ char	**split_with_quotes(char *line, t_lexer *info_list)
 	if (!temp_quotes)
 		return (error_lex(info_list, 3, "split_quotes.c/L77"), NULL);
 	temp_quotes = store_all_quote_data(line, temp_quotes);
+	if (!temp_quotes)
+		return (error_lex(info_list, 3, "split_quotes.c/L80"), NULL);
 	split_array = split_intoarray(line, info_list, temp_quotes);
 	free_double_array(temp_quotes);
 	return (split_array);

@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:32 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/23 15:40:33 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:11:35 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ char	**store_all_quote_data(char *line, char **temp)
 		{
 			temp[index_temp] = quote_data_inarray(line, temp, \
 				index_temp, index_l);
+			if (!temp[index_temp])
+				return (NULL);
 			if (line[index_l] == '"')
 				index_l = get_end_quote(line, index_l, 1);
 			else
