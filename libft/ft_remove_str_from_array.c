@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/25 18:48:33 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 13:24:31 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 14:56:36 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static char	**remove_str(char **src, int index, int n_of_arr, char **new)
 
 	i = 0;
 	j = 0;
-	new = NULL;
 	while (i < (n_of_arr - 1) && src[j])
 	{
 		if (j == index)
