@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:18:10 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/25 18:54:32 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 12:44:47 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	execute_unset(t_minishell *shell)
 	i = 1;
 	err = 0;
 	if (shell->cmd_lst->content[1] == NULL)
-		return (error_unset_too_few_args(), 1);
+		return (0);
 	while (shell->cmd_lst->content[i])
 	{
 		var_index = var_exists(shell->env_cpy, shell->cmd_lst->content[i]);

@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:31:50 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 11:41:26 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 12:50:25 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ typedef enum e_error {
 	E_INPUT,
 	E_IDENT,
 	E_CMDNFND,
-	E_FEWARG,
+	E_FORK,
+	E_EXIT,
 }	t_error;
 
 //Builtin enumerator - defines the different types of possible builtins;
@@ -300,11 +301,9 @@ t_lexer	*check_quotes_list(t_lexer *info_list);
 //###############################################################
 
 		//error.c
-int		error_command_not_found(char *cmd);
-void	error_export_invalid_identifier(char *input);
-void	error_unset_too_few_args(void);
 void	error_lex(t_lexer *info_list, int error_code, const char *str);
-int		error_exit(char *msg);
+
+//		err_log.c
 int		err_log(t_error err, char *input);
 
 		//free.c

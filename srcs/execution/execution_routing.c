@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:54:11 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 11:11:14 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 12:31:48 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ static void	route_infiles(t_lexer *node)
 	{
 		infile = open(node->infile[i], O_RDONLY);
 		if (infile < 0)
-		{
 			perror("infile");
-			exit(1);
-		}
 		redirect_from_to(infile, STDIN_FILENO);
 		close(infile);
 		i++;
@@ -73,7 +70,7 @@ void	route_input(int in, t_lexer *node)
 	{
 		hd_fd = open("./data/heredoc.tmp", O_RDONLY);
 		if (hd_fd < 0)
-			perror("Cannot create temporary heredoc.tmp");
+			perror("cannot create temporary heredoc.tmp");
 		redirect_from_to(hd_fd, STDIN_FILENO);
 		close(hd_fd);
 	}

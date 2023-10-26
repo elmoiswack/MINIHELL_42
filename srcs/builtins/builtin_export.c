@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:15:31 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/25 18:53:10 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 12:48:44 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	export_content(char *content, t_minishell *shell)
 	content = expand_value(content, var, shell->env_cpy);
 	free(var);
 	if (ft_strchr(content, '=') == NULL && ft_strisalpha(content) == 0)
-		return (error_export_invalid_identifier(content), 1);
+		return (err_log(E_IDENT, content));
 	else if (replace_index >= 0)
 		shell->env_cpy = ft_replace_str_in_array(shell->env_cpy,
 				content, replace_index);
@@ -81,7 +81,9 @@ int	execute_export(t_minishell *shell, t_lexer *node)
 	err = 0;
 	if (!node->content[1])
 		return (print_double_array(shell->env_cpy), 0);
-	if (!contains_char(node->content[1], '='))
+	if (!contains_char(node->content[1], '=') && ft_strisalpha(node->content[1]) == 0)
+		return (err_log(E_IDENT, node->content[1]));
+	else if (!contains_char(node->content[1], '='))
 		return (err);
 	while (node->content[i] && err != 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 17:48:36 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 11:42:37 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 12:12:52 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	run_child_process(int in, int *pipe_fd, t_lexer *node,
 	if (builtin != NO_BUILTIN)
 		err = execute_builtin(shell, builtin, node);
 	else if (!cmd_exists(node->content[0], shell->env_cpy))
-		err = error_command_not_found(node->content[0]);
+		err = err_log(E_CMDNFND, (node->content[0]));
 	else
 		run_cmd(node->path, node->content, shell->env_cpy);
 	clean_up(shell);
@@ -107,10 +107,10 @@ static pid_t	*run_and_route_processes(pid_t *pid, t_lexer *head, t_minishell *sh
 	while (current)
 	{
 		if (pipe(pipe_fd) < 0)
-			perror("pipe");
+			perror("pipe()");
 		pid[i] = fork(); 
 		if (pid[i] < 0)
-			return (ft_putstr_fd("Fork failed", STDERR_FILENO), pid);
+			return (perror("fork()"), pid);
 		change_signal_profile(WAITING);
 		if (pid[i] == 0)
 			run_child_process(prev_pipe, pipe_fd, current, shell);
@@ -145,7 +145,7 @@ int	execute_cmds(t_minishell *shell, t_lexer *head, char *env_cpy[])
 
 	pid = allocate_pid_array(head);
 	if (!pid)
-		err_log(E_ALLOC, "PID");
+		return(err_log(E_ALLOC, "'pid array'"));
 	print_cmd_lst(head);
 	if (create_heredoc_loop(head, env_cpy) != 0)
 		return (130);
