@@ -30,6 +30,8 @@
 // Text_Off		= "\001\033[0m\002"			# Text Style Off
 // Bold			= "\001\033[1m\002"			# Text Style Bold
 
+extern int	g_global_status;
+
 # define CURSED "\001\033[0;31m\002 \
 \001\033[1m\002 Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚_ > \
 \001\033[0m\002"
@@ -343,7 +345,7 @@ void	print_double_array(char **arr);
 //		utilities_misc.c
 void	add_cmd_id(t_lexer *head);
 int		cmd_amount(t_lexer *head);
-pid_t	*allocate_pid_array(t_lexer *head);
+pid_t	*allocate_pid_array(int n);
 int		wait_on_child_processes(t_lexer *head, pid_t *pid, int status);
 pid_t	create_child_process(void);
 

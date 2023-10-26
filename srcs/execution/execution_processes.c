@@ -57,10 +57,10 @@ static int	fetch_exit_status(pid_t *pid, t_lexer *head)
 
 	status = 0;
 	status = wait_on_child_processes(head, pid, status);
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+		return (change_signal_profile(PARENT), 130);
 	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
 		return (change_signal_profile(PARENT), 131);
-	else if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
-		return (change_signal_profile(PARENT), 130);
 	else
 		return (change_signal_profile(PARENT), WEXITSTATUS(status));
 }
@@ -98,7 +98,7 @@ int	execute_cmds(t_minishell *shell, t_lexer *head, char *env_cpy[])
 {
 	pid_t	*pid;
 
-	pid = allocate_pid_array(head);
+	pid = allocate_pid_array(cmd_amount(head));
 	if (!pid)
 		return (err_log(E_ALLOC, "'pid array'"));
 	if (create_heredoc_loop(head, env_cpy) != 0)
