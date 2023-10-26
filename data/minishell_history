@@ -1,0 +1,15 @@
+ls
+ls -l -a
+ls -l -a | wc -l -c
+echo $USER $USER$USER
+<Makefile cat | grep lib >out
+cat out 
+rm out 
+pwd
+cat | cat | cat | ls
+cat
+echo $?
+cat
+echo $?
+exit 1 2
+exit 12
