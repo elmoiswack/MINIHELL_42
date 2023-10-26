@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:28:07 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/25 20:39:05 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 11:43:08 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	error_exit(char *msg)
 }
 
 // printf("[%d]\n", __LINE__); __FILE__ TO PRINT LINE OR FILE
+
+
 
 int	err_log(t_error err, char *input)
 {

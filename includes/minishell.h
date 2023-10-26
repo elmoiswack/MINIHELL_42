@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:31:50 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 10:41:26 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 11:41:26 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,7 +323,7 @@ bool	cmd_exists(char *cmd, char *env_cpy[]);
 void	parse_node_absolute_path(t_lexer *node);
 
 //		execution_processes.c
-int		execute_cmds(t_minishell *shell, t_lexer *head, char *envp[]);
+int		execute_cmds(t_minishell *shell, t_lexer *head, char *env_cpy[]);
 
 //		execution_utilities.c
 char	*get_path(const char *cmd);
