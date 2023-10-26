@@ -18,6 +18,8 @@
 // Text_Off		= "\001\033[0m\002"			# Text Style Off
 // Bold			= "\001\033[1m\002"			# Text Style Bold
 
+extern int	g_global_status;
+
 # define CURSED "\001\033[0;31m\002 \
 \001\033[1m\002 Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚_ > \
 \001\033[0m\002"

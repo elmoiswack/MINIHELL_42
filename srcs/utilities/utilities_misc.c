@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/26 13:13:27 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 13:42:07 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 16:49:08 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../includes/minishell.h"
@@ -64,12 +64,12 @@ pid_t	*allocate_pid_array(t_lexer *head)
 int	wait_on_child_processes(t_lexer *head, pid_t *pid, int status)
 {
 	int		i;
-
 	i = 0;
 	while (i < cmd_amount(head))
 	{
 		status = 0;
 		waitpid(pid[i], &status, 0);
+		// ft_printf("WIFEXITED(%d): %d, WIFSIGNALED(%d): %d, WTERMSIG(%d): %d\n", status, WIFEXITED(status), status, WIFSIGNALED(status), status, WTERMSIG(status));
 		i++;
 	}
 	return (status);

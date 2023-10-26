@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:21:41 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/24 12:42:59 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 16:48:43 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ static void	handle_parent_signals(int signum)
 static void	handle_waiting_signals(int signum)
 {
 	if (signum == SIGINT)
+	{
+		g_global_status = 130;
 		return ;
+	}
 }
 
 static void	handle_hd_signals(int signum)
@@ -42,29 +45,20 @@ static void	handle_hd_signals(int signum)
 		exit(130);
 }
 
-static void	handle_child_int(int signum)
-{
-	if (signum == SIGINT)
-		exit (130);
-	else if (signum == SIGQUIT)
-	{
-		kill(getpid(), SIGKILL);
-		exit (131);
-	}
-}
-
 void	change_signal_profile(t_sig_profile profile)
 {
 	struct sigaction	s_int;
 	struct sigaction	s_quit;
 
-	ft_memset(&s_int, 0, sizeof(s_int));
-	ft_memset(&s_quit, 0, sizeof(s_quit));
+	sigemptyset(&s_int.sa_mask);
+	sigemptyset(&s_quit.sa_mask);
 	s_quit.sa_handler = SIG_IGN;
+	s_int.sa_flags = SA_RESTART;
+	s_quit.sa_flags = SA_RESTART;
 	if (profile == CHILD)
 	{
-		s_int.sa_handler = &handle_child_int;
-		s_quit.sa_handler = &handle_child_int;
+		s_int.sa_handler = SIG_DFL;
+		s_quit.sa_handler = SIG_DFL;
 	}
 	else if (profile == PARENT)
 		s_int.sa_handler = &handle_parent_signals;

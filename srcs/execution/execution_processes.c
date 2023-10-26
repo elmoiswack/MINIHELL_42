@@ -45,10 +45,10 @@ static int	fetch_exit_status(pid_t *pid, t_lexer *head)
 
 	status = 0;
 	status = wait_on_child_processes(head, pid, status);
-	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
-		return (change_signal_profile(PARENT), 131);
-	else if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
 		return (change_signal_profile(PARENT), 130);
+	else if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
+		return (change_signal_profile(PARENT), 131);
 	else
 		return (change_signal_profile(PARENT), WEXITSTATUS(status));
 }
