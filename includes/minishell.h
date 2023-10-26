@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:31:50 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/10/26 13:39:57 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/26 14:56:13 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,8 @@ t_lexer	*data_org_appender(t_lexer *info_list, \
 t_lexer	*data_org_command(t_lexer *info_list, char **splitted_line, \
 	int *enum_array, int index);
 char	*rm_dash_flag(char *word_var);
-t_lexer	*into_linklist_flag(t_lexer *info_list, char **splitted_line, int *enum_array, int index);
+t_lexer	*into_linklist_flag(t_lexer *info_list, \
+	char **splitted_line, int *enum_array, int index);
 
 		//dataorg_utils.c
 t_lexer	*create_new_node(t_lexer *info_lexer);

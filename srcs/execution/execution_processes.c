@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:48:36 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/10/25 17:00:33 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:05:42 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ int	execute_cmds(t_minishell *shell, t_lexer *head, char *envp[])
 
 	pid = 1;
 	current = head;
-	print_cmd_lst(current);
 	if (create_heredoc_loop(current, envp) != 0)
 		return (130);
 	pid = run_and_route_processes(pid, head, current, shell);
