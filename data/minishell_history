@@ -83,3 +83,75 @@ env | grep ka << eof cat
 pwd
 ls
 ./minishell 
+exit 1 2
+exit 1 2
+exit 1 2
+ls -l -a
+ls -la
+exit 1 2
+exit 1 2
+exit 1 2
+ls -a -l
+ls -al
+exit
+<Makefile cat | ls -l -l
+ls -l -a
+ls -l -a
+make
+ls -l -a
+ls -l -a
+ls -la
+ls -l -a | wc -l -c
+exit 1 2
+exit 1 2
+exit 1 2
+ls -l -a
+ls -l -a | wc -lc
+<Makefile cat | grep lib >out
+cat out 
+ls -l -a
+ls -l -a | wc -l -a
+ls -l -a | wc -l -c
+exit 1 2
+exit 12
+ls
+ls -l
+ls -l -a
+ls -l -a
+ls -l -a
+ls -l -a
+ls -l -a
+ls -l -a
+echo $USER $USER$USER
+<Makefile cat | grep lib >out
+<Makefile cat | grep lib >out
+<Makefile cat | grep lib >out
+<Makefile cat | grep lib >out
+make
+<Makefile cat | grep lib >out
+make
+<Makefile cat | grep lib >out
+<Makefile cat | grep lib >out
+<Makefile cat | grep lib >out
+<Makefile cat | grep lib >out
+<Makefile cat | grep lib >out
+exit 1 2
+exit 1 2 3
+ls -l -a
+ls -l -a | wc -l -a
+ls -l -a | wc -l -c
+<Makefile cat | grep 'lib' >out
+cat out 
+echo $USER >>out
+cat out 
+<< b cat
+exit 1 2
+exit 12
+ls -l -a
+ls -l -a | wc -lc
+<Makefile cat | grep 'lib' >out
+cat out 
+rm out 
+exit
+ls -l -a
+ls -l -a | wc -lc

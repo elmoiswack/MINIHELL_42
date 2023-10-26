@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:12 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/25 17:08:30 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/26 14:12:46 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	into_enum_cases(char **splitted_line, int *enum_array, int index)
 	if (ft_strncmp(splitted_line[index], "grep", ft_strlen("grep")) == 0)
 	{
 		index++;
-		if (!is_metacharachter(splitted_line[index][0]))
+		if (is_metacharachter(splitted_line[index][0]) == -1)
 		{
 			enum_array[index] = FLAG;
 			return (1);
@@ -71,7 +71,9 @@ int	*into_enum_array(char **splitted_line, int *enum_array, int index)
 			enum_array[index] = OUTFILE;
 		}
 		if (splitted_line[index])
+		{
 			index++;
+		}
 	}
 	enum_array[index] = 0;
 	return (enum_array);
