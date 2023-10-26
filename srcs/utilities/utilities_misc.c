@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/26 13:13:27 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 16:49:08 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 16:58:01 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../includes/minishell.h"
@@ -47,12 +47,10 @@ int	cmd_amount(t_lexer *head)
 	return (i);
 }
 
-pid_t	*allocate_pid_array(t_lexer *head)
+pid_t	*allocate_pid_array(int n)
 {
 	pid_t	*pid;
-	int		n;
 
-	n = cmd_amount(head);
 	pid = malloc(sizeof(pid_t) * n);
 	if (!pid)
 		return (NULL);

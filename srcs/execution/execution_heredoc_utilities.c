@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 17:36:32 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 16:48:03 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 18:22:25 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ int	fetch_exit_status_hd(pid_t pid, t_lexer *head, char *env_cpy[])
 	int		status;
 
 	status = 0;
-	while (wait(NULL) != -1)
-		;
 	waitpid(pid, &status, 0);
 	if (WEXITSTATUS(status) != 0)
 		return (clean_tmp_files(head, env_cpy), WEXITSTATUS(status));

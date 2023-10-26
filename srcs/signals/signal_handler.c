@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:21:41 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 16:48:43 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 18:25:18 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	handle_waiting_signals(int signum)
 {
 	if (signum == SIGINT)
 	{
-		g_global_status = 130;
+		write(STDOUT_FILENO, "\n", 1);
 		return ;
 	}
 }
@@ -70,3 +70,4 @@ void	change_signal_profile(t_sig_profile profile)
 		|| sigaction(SIGQUIT, &s_quit, NULL) == -1)
 		perror("SIGACTION: ");
 }
+
