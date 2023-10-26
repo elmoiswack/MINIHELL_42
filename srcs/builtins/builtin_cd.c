@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:20:27 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/24 12:17:44 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 13:15:38 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static void	update_pwd(t_minishell *shell)
 	else
 	{
 		new_pwd = ft_strjoin("PWD=", cwd);
-		shell->env_cpy = replace_str_in_array(shell->env_cpy, new_pwd, index);
+		shell->env_cpy = ft_replace_str_in_array(shell->env_cpy,
+				new_pwd, index);
 		free(new_pwd);
 	}
 }
@@ -53,7 +54,8 @@ static void	update_old_pwd(t_minishell *shell)
 	else
 	{
 		new_pwd = ft_strjoin("OLDPWD=", cwd);
-		shell->env_cpy = replace_str_in_array(shell->env_cpy, new_pwd, index);
+		shell->env_cpy = ft_replace_str_in_array(shell->env_cpy,
+				new_pwd, index);
 		free(new_pwd);
 	}
 }
@@ -63,7 +65,6 @@ static int	chdir_oldpwd(char *env_cpy[], t_minishell *shell)
 	char	*value;
 
 	value = ft_getenv("OLDPWD", env_cpy);
-	ft_printf("value: %s\n", value);
 	update_old_pwd(shell);
 	if (chdir(value) == -1)
 	{

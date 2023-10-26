@@ -33,6 +33,7 @@ SRCS		:= 	main.c \
 				lexing/file_delim_func.c \
 				lexing/list_checks.c \
 				error/error.c \
+				error/err_log.c \
 				error/free.c \
 				error/memory_management.c \
 				execution/execution_processes.c \
@@ -52,8 +53,8 @@ SRCS		:= 	main.c \
 				builtins/builtin_unset.c \
 				builtins/builtin_exit.c \
 				interface/interface_frontend.c \
-				utilities/utilities_double_arrays.c \
 				utilities/utilities_debugging.c \
+				utilities/utilities_misc.c \
 				signals/signal_handler.c \
 
 SRCDIR 		:= 	./srcs

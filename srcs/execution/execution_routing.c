@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:54:11 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 15:54:35 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 13:18:34 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@
 static void	redirect_from_to(int fd_from, int fd_to)
 {
 	if (dup2(fd_from, fd_to) < 0)
+	{
 		perror("dup2");
+		close (fd_from);
+	}
 }
 
 static void	route_infiles(t_lexer *node)
@@ -35,10 +38,7 @@ static void	route_infiles(t_lexer *node)
 	{
 		infile = open(node->infile[i], O_RDONLY);
 		if (infile < 0)
-		{
 			perror("infile");
-			exit(1);
-		}
 		redirect_from_to(infile, STDIN_FILENO);
 		close(infile);
 		i++;
@@ -70,7 +70,7 @@ void	route_input(int in, t_lexer *node)
 	{
 		hd_fd = open("./data/heredoc.tmp", O_RDONLY);
 		if (hd_fd < 0)
-			perror("Cannot create temporary heredoc.tmp");
+			perror("cannot create temporary heredoc.tmp");
 		redirect_from_to(hd_fd, STDIN_FILENO);
 		close(hd_fd);
 	}
@@ -78,6 +78,8 @@ void	route_input(int in, t_lexer *node)
 		route_infiles(node);
 	else if (node->input == PIPE_READ)
 		redirect_from_to(in, STDIN_FILENO);
+	if (node->cmd_id >= 1)
+		close(in);
 }
 
 void	route_output(int out, t_lexer *node)

@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:28:16 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 15:28:17 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/25 18:35:48 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,15 @@ void	clean_up(t_minishell *shell)
 {
 	free_double_array(shell->env_cpy);
 	free_ll(&shell->cmd_lst);
+}
+
+char	**rev_free_arr(char **strings_array, int i)
+{
+	while (i >= 0)
+	{
+		free(strings_array[i]);
+		i--;
+	}
+	free(strings_array);
+	return (0);
 }

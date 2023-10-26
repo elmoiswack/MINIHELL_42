@@ -25,6 +25,9 @@
 # define NON_CURSED "\001\033[1m\002 \
 Z_SHELL_ > \001\033[0m\002"
 
+# define Z_THEME "LS_COLORS=rs=0:di=01;31:ln=01;36:\
+mh=00:pi=40;33:ex=1;37:" 
+
 //Token enumerator - defines the possible types of tokens;
 typedef enum e_token{
 	PIPE_READ,
@@ -45,6 +48,17 @@ typedef enum e_token{
 	STDOUT_OUT,
 	HEREDOC,
 }	t_token;
+
+//Error enumerator - defines error mssg;
+typedef enum e_error {
+	E_NONE,
+	E_ALLOC,
+	E_INPUT,
+	E_IDENT,
+	E_CMDNFND,
+	E_FORK,
+	E_EXIT,
+}	t_error;
 
 //Builtin enumerator - defines the different types of possible builtins;
 typedef enum e_builtin {
@@ -68,6 +82,7 @@ typedef enum e_sig_profile {
 //Linked list node - each command is parsed into a t_lexer node 
 //	for the executioner to be handled accordingly;
 typedef struct lexerinfo {
+	int					cmd_id;
 	char				**content;
 	char				*path;
 	char				**infile;
@@ -279,11 +294,10 @@ t_lexer	*check_quotes_list(t_lexer *info_list);
 //###############################################################
 
 		//error.c
-int		error_command_not_found(char *cmd);
-void	error_export_invalid_identifier(char *input);
-void	error_unset_too_few_args(void);
 void	error_lex(t_lexer *info_list, int error_code, const char *str);
-int		error_exit(char *msg);
+
+//		err_log.c
+int		err_log(t_error err, char *input);
 
 		//free.c
 void	free_lexing_content_struct(t_lexer *list);
@@ -301,7 +315,7 @@ bool	cmd_exists(char *cmd, char *env_cpy[]);
 void	parse_node_absolute_path(t_lexer *node);
 
 //		execution_processes.c
-int		execute_cmds(t_minishell *shell, t_lexer *head, char *envp[]);
+int		execute_cmds(t_minishell *shell, t_lexer *head, char *env_cpy[]);
 
 //		execution_utilities.c
 char	*get_path(const char *cmd);
@@ -309,26 +323,26 @@ int		arg_is_env(char *raw_input, char **value, char *envp[]);
 int		var_exists(char	**env, char *var);
 char	*ft_getenv(char *var_name, char **env);
 
-//		utilities_double_arrays.c
-char	**copy_double_array(char **array);
-char	**append_to_double_array(char **src, char *str);
-char	**replace_str_in_array(char **src, char *str, int index);
-char	**remove_str_from_array(char **src, int index);
-char	**inject_str_in_array(char **src, char *str, int index);
-
 //		utilities_debugging.c
 void	print_cmd_lst(t_lexer *head);
 void	printing_lexer(t_lexer *info_lexer);
 void	print_double_array(char **arr);
+
+//		utilities_misc.c
+void	add_cmd_id(t_lexer *head);
+int		cmd_amount(t_lexer *head);
+pid_t	*allocate_pid_array(t_lexer *head);
+int		wait_on_child_processes(t_lexer *head, pid_t *pid, int status);
+pid_t	create_child_process(void);
 
 //		execution_cd.c
 int		execute_cd(t_minishell *shell);
 //		execution_echo.c
 int		execute_echo(char **raw_input, char *envp[], int status);
 //		execution_env.c
-int		execute_env(char *envp[]);
+int		execute_env(char *envp[], t_lexer *node);
 //		execution_export.c
-int		execute_export(t_minishell *shell);
+int		execute_export(t_minishell *shell, t_lexer *node);
 int		export_content(char *content, t_minishell *shell);
 //		execution_pwd.c
 int		execute_pwd(char *env_cpy[]);
@@ -373,6 +387,7 @@ void	change_signal_profile(t_sig_profile profile);
 //		memory_management.c		
 void	clean_up(t_minishell *shell);
 void	free_ll(t_lexer **lst);
+char	**rev_free_arr(char **strings_array, int i);
 
 //###############################################################
 #endif
