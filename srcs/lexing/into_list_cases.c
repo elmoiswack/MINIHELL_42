@@ -6,23 +6,13 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:24 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/23 15:43:11 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:30:24 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdio.h>
-
-t_lexer	*into_linklist_flag(t_lexer *info_list, char *word_var)
-{
-	info_list->content[1] = ft_calloc(ft_strlen(word_var) + 1, \
-		sizeof(char));
-	if (!info_list->content[1])
-		return (error_lex(info_list, 3, "into_list.c/L19"), NULL);
-	ft_strcpy(info_list->content[1], word_var);
-	return (info_list);
-}
 
 t_lexer	*into_linklist_command(t_lexer *info_list, char *word_var)
 {

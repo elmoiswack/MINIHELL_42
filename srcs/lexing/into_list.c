@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:31 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/23 15:39:32 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/26 14:02:02 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var)
 {
 	if (enum_var == COMMAND)
 		info_list = into_linklist_command(info_list, word_var);
-	else if (enum_var == FLAG)
-		info_list = into_linklist_flag(info_list, word_var);
 	else if (enum_var == INFILE)
 		info_list = into_linklist_infile(info_list, word_var);
 	else if (enum_var == OUTFILE)

@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:38:57 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/25 16:04:32 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/26 14:25:55 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ t_lexer	*other_special_case(t_lexer	*info_list, char **splitted_line, \
 		ft_strlen(splitted_line[0])) == 0) \
 		|| (ft_strncmp(splitted_line[0], "touch", \
 			ft_strlen(splitted_line[0])) == 0)
-		|| (ft_strncmp(splitted_line[0], "rm", ft_strlen(splitted_line[0])) == 0))
+		|| (ft_strncmp(splitted_line[0], "rm", \
+			ft_strlen(splitted_line[0])) == 0))
 	{
 		info_list = special_case_files(info_list, splitted_line);
 		free_double_array(splitted_line);

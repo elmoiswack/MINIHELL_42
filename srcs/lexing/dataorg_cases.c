@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:38:43 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/25 16:44:47 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:30:09 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,6 @@
 #include "../../libft/libft.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-t_lexer	*data_org_command(t_lexer *info_list, char **splitted_line, \
-	int *enum_array, int index)
-{
-	int	check;
-	if (info_list->content)
-	{
-		if (!info_list->content[1])
-		{
-			info_list->content[1] = ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
-			if (!info_list->content[1])
-				return (error_lex(info_list, 3, "dataorg_cases.c/L26"), NULL);
-			ft_strcpy(info_list->content[1], splitted_line[index]);
-			return (info_list);
-		}
-		if (info_list->content[1])
-		{
-			info_list->content[1] = ft_strjoin_and_free(info_list->content[1], " ");
-			if (!info_list->content[1])
-				return (error_lex(info_list, 3, "dataorg_cases.c/L34"), NULL);
-			info_list->content[1] = ft_strjoin_and_free(info_list->content[1], splitted_line[index]);
-			if (!info_list->content[1])
-				return (error_lex(info_list, 3, "dataorg_cases.c/L37"), NULL);
-			return (info_list);
-		}
-	}
-	info_list = into_linklist(info_list, splitted_line[index], \
-		enum_array[index]);
-	if (!info_list)
-		return (NULL);
-	index++;
-	check = check_for_flags(splitted_line, enum_array, index);
-	if (check > 0)
-		info_list = into_linklist(info_list, splitted_line[check], \
-			enum_array[check]);
-	return (info_list);
-}
 
 t_lexer	*data_org_pipe(t_lexer *info_list)
 {

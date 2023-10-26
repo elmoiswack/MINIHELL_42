@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:00 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/23 15:41:51 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/26 14:25:23 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,16 @@ int	check_for_outfile(char **splitted_line, int *enum_array, int index)
 
 int	check_for_flags(char **splitted_line, int *enum_arr, int index)
 {
+	int	count;
+
+	count = 0;
 	while (splitted_line[index])
 	{
 		if (enum_arr[index] == COMMAND)
-			return (-1);
+			return (count);
 		if (enum_arr[index] == FLAG)
-			return (index);
+			count++;
 		index++;
 	}
-	return (-1);
+	return (count);
 }
