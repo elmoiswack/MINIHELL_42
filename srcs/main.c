@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:30:25 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 15:40:06 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 18:35:50 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
-
-int g_global_status;
 
 void	main_execute_input(t_minishell *shell, char *line)
 {

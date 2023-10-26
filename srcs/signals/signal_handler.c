@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:21:41 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 18:25:18 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 18:36:12 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,3 @@ void	change_signal_profile(t_sig_profile profile)
 		|| sigaction(SIGQUIT, &s_quit, NULL) == -1)
 		perror("SIGACTION: ");
 }
-
