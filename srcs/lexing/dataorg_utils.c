@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   dataorg_utils.c                                   :+:    :+:             */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/23 15:39:00 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/26 10:44:26 by fvan-wij      ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdio.h>
@@ -55,13 +43,16 @@ int	check_for_outfile(char **splitted_line, int *enum_array, int index)
 
 int	check_for_flags(char **splitted_line, int *enum_arr, int index)
 {
+	int	count;
+
+	count = 0;
 	while (splitted_line[index])
 	{
 		if (enum_arr[index] == COMMAND)
-			return (-1);
+			return (count);
 		if (enum_arr[index] == FLAG)
-			return (index);
+			count++;
 		index++;
 	}
-	return (-1);
+	return (count);
 }

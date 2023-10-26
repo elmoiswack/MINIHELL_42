@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                       ::::::::             */
-/*   utilities_debugging.c                             :+:    :+:             */
-/*                                                    +:+                     */
-/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
-/*                                                  +#+                       */
-/*   Created: 2023/10/24 12:29:25 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 13:16:38 by fvan-wij      ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 // Global array - used to print out the enum strings.
 // Must be deleted before handing in the project.
 #include "../../includes/minishell.h"
