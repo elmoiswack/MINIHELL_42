@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:54:11 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/25 19:58:04 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 11:11:14 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@
 static void	redirect_from_to(int fd_from, int fd_to) // To do: close fd when dup2 fails
 {
 	if (dup2(fd_from, fd_to) < 0)
+	{
 		perror("dup2");
+		close (fd_from);
+	}
 }
 
 static void	route_infiles(t_lexer *node)
@@ -78,6 +81,8 @@ void	route_input(int in, t_lexer *node)
 		route_infiles(node);
 	else if (node->input == PIPE_READ)
 		redirect_from_to(in, STDIN_FILENO);
+	if (node->cmd_id >= 1)
+		close(in);
 }
 
 void	route_output(int out, t_lexer *node)

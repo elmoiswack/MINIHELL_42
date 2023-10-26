@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:00 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/25 20:22:00 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 10:44:26 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_lexer	*create_new_node(t_lexer *info_lexer)
 	info_lexer->next = ft_calloc(1, sizeof(t_lexer));
 	if (!info_lexer->next)
 		return (error_lex(info_lexer, 3, "dataorg_utils.c/L21"), NULL);
-	info_lexer->next->prev = info_lexer;
 	info_lexer = info_lexer->next;
 	info_lexer->next = NULL;
 	return (info_lexer);

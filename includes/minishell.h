@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:31:50 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/25 20:12:59 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 10:41:26 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef enum e_sig_profile {
 //Linked list node - each command is parsed into a t_lexer node 
 //	for the executioner to be handled accordingly;
 typedef struct lexerinfo {
+	int					cmd_id;
 	char				**content;
 	char				*path;
 	char				**infile;
@@ -105,7 +106,6 @@ typedef struct lexerinfo {
 	int					error_code;
 	const char			*error_str;
 	struct lexerinfo	*next;
-	struct lexerinfo	*prev;
 }	t_lexer;
 
 //ERROR CODES:

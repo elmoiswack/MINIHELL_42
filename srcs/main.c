@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:30:25 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/25 20:39:07 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 10:45:19 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,21 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
+
+void	add_cmd_id(t_lexer *head)
+{
+	t_lexer	*current;
+	int		i;
+
+	current = head;
+	i = 0;
+	while (current)
+	{
+		current->cmd_id = i;
+		current = current->next;
+		i++;
+	}
+}
 
 void	main_execute_input(t_minishell *shell, char *line)
 {
@@ -32,6 +47,7 @@ void	main_execute_input(t_minishell *shell, char *line)
 		shell->status = -1;
 		return ;
 	}
+	add_cmd_id(shell->cmd_lst);
 	printing_lexer(shell->cmd_lst);
 	builtin = is_builtin(shell->cmd_lst);
 	if (builtin != NO_BUILTIN && !shell->cmd_lst->next
