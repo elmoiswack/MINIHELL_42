@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:30:25 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 12:09:41 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 13:29:17 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
-
-void	add_cmd_id(t_lexer *head)
-{
-	t_lexer	*current;
-	int		i;
-
-	current = head;
-	i = 0;
-	while (current)
-	{
-		current->cmd_id = i;
-		current = current->next;
-		i++;
-	}
-}
 
 void	main_execute_input(t_minishell *shell, char *line)
 {
@@ -48,7 +33,6 @@ void	main_execute_input(t_minishell *shell, char *line)
 		return ;
 	}
 	add_cmd_id(shell->cmd_lst);
-	printing_lexer(shell->cmd_lst);
 	builtin = is_builtin(shell->cmd_lst);
 	if (builtin != NO_BUILTIN && !shell->cmd_lst->next
 		&& !shell->cmd_lst->infile && !shell->cmd_lst->outfile)
@@ -110,8 +94,7 @@ t_minishell	init_minishell(int argc, char *envp[])
 	shell.env_cpy = ft_copy_double_array(envp);
 	if (!shell.env_cpy)
 		err_log(E_ALLOC, "'env_cpy'");
-	if (export_content("LS_COLORS=rs=0:di=01;31:ln=01;36:mh=00:pi=40;33:ex=1;37:",
-		&shell) != 0)
+	if (export_content(Z_THEME, &shell) != 0)
 		err_log(E_ALLOC, "'LS_COLORS'");
 	shell.status = 0;
 	shell.builtin = NO_BUILTIN;
@@ -123,7 +106,6 @@ t_minishell	init_minishell(int argc, char *envp[])
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_minishell	shell;
-
 
 	(void) argv;
 	shell = init_minishell(argc, envp);

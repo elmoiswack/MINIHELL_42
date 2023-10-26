@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/26 12:38:57 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 12:51:03 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 13:18:13 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ static void	error_allocation(char *input)
 int	err_log(t_error err, char *input)
 {
 	if (err == E_ALLOC)
-		return(error_allocation(input), E_ALLOC);
+		return (error_allocation(input), E_ALLOC);
 	else if (err == E_INPUT)
-		return (ft_putstr_fd("executable can only be run as follows: './minishell'\n", STDERR_FILENO), E_INPUT);
+		return (ft_putstr_fd("executable can only be run as follows:\
+		'./minishell'\n", STDERR_FILENO), E_INPUT);
 	else if (err == E_IDENT)
 		return (error_export_invalid_identifier(input));
 	else if (err == E_CMDNFND)

@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:15:31 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 12:48:44 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 13:17:23 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*expand_value(char *content, char *var, char *env_cpy[])
 
 static bool	contains_char(char *content, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!content)
@@ -81,7 +81,8 @@ int	execute_export(t_minishell *shell, t_lexer *node)
 	err = 0;
 	if (!node->content[1])
 		return (print_double_array(shell->env_cpy), 0);
-	if (!contains_char(node->content[1], '=') && ft_strisalpha(node->content[1]) == 0)
+	if (!contains_char(node->content[1], '=')
+		&& ft_strisalpha(node->content[1]) == 0)
 		return (err_log(E_IDENT, node->content[1]));
 	else if (!contains_char(node->content[1], '='))
 		return (err);

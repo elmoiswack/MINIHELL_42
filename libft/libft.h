@@ -6,7 +6,7 @@
 /*   By: fvan-wij <fvan-wij@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:46:37 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/10/25 18:53:33 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 13:02:20 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,5 @@ char			**ft_append_to_double_array(char **src, char *str);
 char			**ft_replace_str_in_array(char **src, char *str, int index);
 char			**ft_remove_str_from_array(char **src, int index);
 char			**ft_inject_str_in_array(char **src, char *str, int index);
-
 
 #endif

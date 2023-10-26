@@ -53,6 +53,7 @@ SRCS		:= 	main.c \
 				builtins/builtin_exit.c \
 				interface/interface_frontend.c \
 				utilities/utilities_debugging.c \
+				utilities/utilities_misc.c \
 				signals/signal_handler.c \
 
 SRCDIR 		:= 	./srcs

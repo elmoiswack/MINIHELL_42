@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:31:50 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 12:50:25 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 13:41:37 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 
 # define NON_CURSED "\001\033[1m\002 \
 Z_SHELL_ > \001\033[0m\002"
+
+# define Z_THEME "LS_COLORS=rs=0:di=01;31:ln=01;36:\
+mh=00:pi=40;33:ex=1;37:" 
 
 //Token enumerator - defines the possible types of tokens;
 typedef enum e_token{
@@ -334,6 +337,13 @@ char	*ft_getenv(char *var_name, char **env);
 void	print_cmd_lst(t_lexer *head);
 void	printing_lexer(t_lexer *info_lexer);
 void	print_double_array(char **arr);
+
+//		utilities_misc.c
+void	add_cmd_id(t_lexer *head);
+int		cmd_amount(t_lexer *head);
+pid_t	*allocate_pid_array(t_lexer *head);
+int		wait_on_child_processes(t_lexer *head, pid_t *pid, int status);
+pid_t	create_child_process(void);
 
 //		execution_cd.c
 int		execute_cd(t_minishell *shell);

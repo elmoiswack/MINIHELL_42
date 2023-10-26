@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/25 18:49:02 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/25 18:51:02 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/26 13:27:21 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char	**ft_inject_str_in_array(char **src, char *str, int index)
+static char	**inject_str(char **src, char *str, int index, int size)
 {
 	char	**new;
 	int		i;
 	int		j;
-	int		size;
 
 	i = 0;
 	j = 0;
-	size = ft_arrlen(src);
 	new = ft_calloc(size + 2, sizeof(char *));
 	if (!new)
 		return (src);
@@ -39,10 +37,22 @@ char	**ft_inject_str_in_array(char **src, char *str, int index)
 		else
 			new[i] = ft_strdup(src[j]);
 		if (!new[i])
-			rev_free_arr(new, i);
+			return (rev_free_arr(new, i), NULL);
 		i++;
 		j++;
 	}
+	return (new);
+}
+
+char	**ft_inject_str_in_array(char **src, char *str, int index)
+{
+	char	**new;
+	int		size;
+
+	size = ft_arrlen(src);
+	new = inject_str(src, str, index, size);
+	if (!new)
+		return (src);
 	free_double_array(src);
 	return (new);
 }
