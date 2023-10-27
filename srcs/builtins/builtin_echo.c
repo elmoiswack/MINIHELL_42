@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                       ::::::::             */
-/*   builtin_echo.c                                    :+:    :+:             */
-/*                                                    +:+                     */
-/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
-/*                                                  +#+                       */
-/*   Created: 2023/10/23 15:13:17 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/24 13:39:20 by fvan-wij      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   builtin_echo.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 15:13:17 by fvan-wij          #+#    #+#             */
+/*   Updated: 2023/10/27 15:03:27 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,6 @@ static int	output_trailing_newline(char *raw_input)
 	return (j + 1);
 }
 
-static bool	print_pid(char *input, int *i)
-{
-	if (input[*i] == '$' && input[*i + 1] != '\0' && input[*i + 1] == '$')
-	{
-		ft_putstr_fd(ft_itoa((int)getpid()), STDOUT_FILENO);
-		*i += 2;
-		return (true);
-	}
-	return (false);
-}
-
 static bool	print_home(char *input, char *envp[], int *i)
 {
 	char	*value;
@@ -83,20 +72,24 @@ static bool	print_home(char *input, char *envp[], int *i)
 	return (false);
 }
 
-static void	expand_and_print_input(char *input, char *envp[], int status)
+static void	expand_and_print_input(char *input, char *envp[], int status, int i)
 {
-	int		i;
+	char	*temp;
 
-	i = 0;
 	while (input[i])
 	{
-		if (print_pid(input, &i))
-			continue ;
-		else if (print_home(input, envp, &i))
+		if (print_home(input, envp, &i))
 			continue ;
 		else if (ft_strncmp(&input[i], "$?", 2) == 0)
 		{
-			ft_putstr_fd(ft_itoa(status), STDOUT_FILENO);
+			temp = ft_itoa(status);
+			if (!temp)
+			{
+				err_log(E_ALLOC, "ft_itoa()");
+				return ;
+			}
+			ft_putstr_fd(temp, STDOUT_FILENO);
+			free(temp);
 			i++;
 		}
 		else if (input[i] != '\0')
@@ -122,7 +115,7 @@ int	execute_echo(char **raw_input, char *envp[], int status)
 	if (line_start == -1)
 		return (0);
 	line = &raw_input[1][line_start];
-	expand_and_print_input(line, envp, status);
+	expand_and_print_input(line, envp, status, 0);
 	if (line_start == 0)
 		write(STDOUT_FILENO, "\n", 1);
 	return (0);

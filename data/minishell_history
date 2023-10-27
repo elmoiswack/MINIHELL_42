@@ -13,3 +13,146 @@ cat
 echo $?
 exit 1 2
 exit 12
+ls
+pwd
+cat | cat | cat | ls
+cat
+echo $?
+exit 1 2
+<Makefile cat | grep lib >out
+cat out 
+<Makefile cat | grep clean  >>out
+cat out 
+mkdir haha
+cd haha/
+rm -rf haha/
+;s
+;s
+<Makefile cat | grep lib >out
+exit 1 2
+mkdir haha
+cd haha/
+rm -rf haha
+;s
+cat | cat | cat | ls
+ls -l -a
+ls -la
+ls -la \ wc -lc
+ls -la | wc -lc
+ls -la \ wc -lc
+ls -la \ wc -lc
+ls -la | wc -lc
+ls -la | wc -lc
+ls -la | wc -lc
+ls -la \ wc -lc
+ls -la | wc -lc
+echo $USER $USER$USER "$USER" "dsahg $USER dsadsa" "$dsa" '$USER' "dsadsa$USER '$USER' dsa"
+ls
+pwd
+pwd
+ls
+cd /home/dhussain/
+pwd
+<out cat | grep 'clean'
+rm out 
+pwd
+ls
+ls
+pwd
+echo $USER
+echo $$
+echo -nnnnnnn jo
+echo -n hey $USER $$$$$$$$ OK LOL HAHA
+echo -n hey $USER $$ OK LOL HAHA
+echo -n hey $USER $$ OK LOL HAHA
+echo -n hey $USER $$ OK LOL HAHA
+echo $USER
+echo $$
+echo -n hey $USER $$ OK LOL HAHA
+echo hey $USER $$ OK LOL HAHA
+echo hey $USER $$ OK LOL HAHA
+echo hey $USER $$$$$$$$$$$$$$$$$$$$$ OK LOL HAHA
+echo hey $USER $$$$$$$$$$$$$$$$$$$$$i OK LOL HAHA
+echo hey $USER $$$$$$$$$$$$$$$$$$$$$i OK LOL HAHA
+echo hey $USER $$$$$$$$$$$$$$$$$$$$$i OK LOL HAHA
+echo hey $USER $$$$$$$$$$$$$$$$$$$$$i OK LOL HAHA
+echo hey $USER $$$$$$$$$$$$$$$$$$$$$i OK LOL HAHA
+echo hey $USER $$$$$$$$$$$$$$$$$$$$$i OK LOL HAHA
+echo hey $USER $$$$$$$$$$$$$$$$$$$$$i OK LOL HAHA
+echo hey $USER $$$$$$$$$$$$$$$$$$$$$i OK LOL HAHA
+echo $$$i
+echo $USER$USER
+echo $USER$USER
+echo $USER$USER
+echo $USER$USER
+echo $USER$USER
+echo $USER$USER
+echo $USER$USER
+echo $USER$USER
+echo $USER$USER
+echo $USER$USER
+echo $USER$USER
+echo $USER$USER
+echo hey $USER $$$$$$$$$$$$$$$$$$$$$i OK LOL HAHA
+echo hey $USER $$$$$$$$$$$$$$$$$$$$$i OK LOL HAHA
+echo $USER$USER
+echo hey $USER $$$$$$$$$$$$$$$$$$$$$i OK LOL HAHA
+echo hey $USER $$$$$$$$$$$$$$$$$$$$$i OK LOL HAHA
+echo $USER$USER
+env
+echo $USER$USER
+echo $USER$USER
+echo $USER$USER
+echo $$
+echo $USER$USER $$$$$$$$$$$$$$i
+echo $USER$USER
+echo $USER$USER
+echo $USER$USER
+echo $USER$USER
+echo $USER$USER
+echo $USER$USER
+echo $USER$USER
+echo $USER$USER $$$$$$$$$$$$$$i
+echo $USER$USER $$$$$$$$$$$$$$i
+echo $USER$USER $$$$$$$$$$$$$$i$
+echo $USER$USER $$$$$$$$$$$$$$i$
+echo $USER$USER $$$$$$$$$$$$$$i$
+echo $USER$USER $$$$$$$$$$$$$$i$
+echo $USER$USER $$$$$$$$$$$$$$i$
+echo $USER$USER $$$$$$$$$$$$$$i$
+echo $USER$USER $$$$$$$$$$$$$$i$
+echo $USER$USER $$$$$$$$$$$$$$i
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER $$$$$$$$$$$$$$i
+echo $USER$USER $$$$$$$$$$$$$$i$
+echo $USER$USER $$$$$$$$$$$$$$i
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER "dsadsadsa $USER" "da$USER" '$USER' "dsa$USER$USR$$"
+echo $USER$USER $$$$$$$$$$$$$$i
+echo $USER$USER $$$$$$$$$$$$$$i$
+echo $USER $USER$USER "dsa$USER dsa" '$USER' $$$$$i
+echo $USER $USER$USER "dsa$USER dsa" '$USER' $$$$$i$
