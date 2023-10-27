@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:36 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/23 15:40:37 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/27 16:51:38 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**fill_array_env(char *line, int ammount_env, \
 	index_temp = 0;
 	while (ammount_env > 0)
 	{
-		if (line[index] == '$')
+		if (line[index] == '$' && line[index + 1] && line[index + 1] != '$')
 		{
 			end = get_env_end(line, index + 1);
 			env_temp[index_temp] = get_variable(line, index, end);

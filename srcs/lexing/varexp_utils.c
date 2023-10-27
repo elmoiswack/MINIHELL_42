@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:43 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/25 16:13:56 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/27 16:51:53 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	how_many_env_var(char *line)
 	{
 		if (line[index] == '$')
 		{
-			if (line[index + 1] != '\0' && line[index + 1] != '?')
+			if (line[index + 1] != '\0' \
+				&& line[index + 1] != '?' && line[index + 1] != '$')
 				count++;
 		}
 		index++;

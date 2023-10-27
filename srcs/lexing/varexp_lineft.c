@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:40 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/23 15:40:41 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/27 16:17:25 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ char	*put_env_in_line(char *new_line, int index_l, \
 	int	index_x;
 
 	index_x = 0;
+	if (env_temp[index_env] == NULL)
+		return (new_line);
 	while (env_temp[index_env][index_x])
 	{
 		new_line[index_l] = env_temp[index_env][index_x];

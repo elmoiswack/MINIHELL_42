@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                       ::::::::             */
-/*   execution_heredoc_expansion.c                     :+:    :+:             */
-/*                                                    +:+                     */
-/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
-/*                                                  +#+                       */
-/*   Created: 2023/10/23 15:39:33 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 15:40:17 by fvan-wij      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   execution_heredoc_expansion.c                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 15:39:33 by fvan-wij          #+#    #+#             */
+/*   Updated: 2023/10/27 15:04:55 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,32 +45,6 @@ static char	*expand_heredoc_var(char *heredoc_line,
 	}
 }
 
-static char	*expand_heredoc_pid(char *heredoc_line, int pid_token_index)
-{
-	char	*string_before_pid;
-	char	*string_after_pid;
-	char	*pid_str;
-	int		pid_int;
-
-	pid_int = (int)getpid();
-	pid_str = ft_itoa(pid_int);
-	if (pid_token_index > 0)
-	{
-		string_before_pid = ft_substr(heredoc_line, 0, pid_token_index);
-		string_after_pid = ft_substr(heredoc_line, pid_token_index + 2,
-				ft_strlen(heredoc_line));
-		string_after_pid = ft_strjoin_and_free(pid_str, string_after_pid);
-		free(heredoc_line);
-		heredoc_line = ft_strjoin_and_free(string_before_pid, string_after_pid);
-		free(string_after_pid);
-		return (heredoc_line);
-	}
-	else
-		heredoc_line = ft_strjoin_and_free(pid_str,
-				heredoc_line + pid_token_index + 2);
-	return (heredoc_line);
-}
-
 char	*expand_heredoc_line(char *heredoc_line, char *env_cpy[])
 {
 	int	i;
@@ -81,13 +55,6 @@ char	*expand_heredoc_line(char *heredoc_line, char *env_cpy[])
 	while (heredoc_line[i])
 	{
 		if (heredoc_line[i] == '$' && heredoc_line[i + 1] != '\0'
-			&& heredoc_line[i + 1] == '$')
-		{
-			heredoc_line = expand_heredoc_pid(heredoc_line, i);
-			if (heredoc_line[i + 1])
-				i++;
-		}
-		else if (heredoc_line[i] == '$' && heredoc_line[i + 1] != '\0'
 			&& ft_isalpha(heredoc_line[i + 1]) == 1)
 			heredoc_line = expand_heredoc_var(heredoc_line, i, env_cpy);
 		i++;

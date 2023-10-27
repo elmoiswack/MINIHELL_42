@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:48 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/26 15:09:50 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/27 14:58:50 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static int	fetch_exit_status(pid_t *pid, t_lexer *head)
 
 	status = 0;
 	status = wait_on_child_processes(head, pid, status);
+	free(pid);
 	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
 		return (change_signal_profile(PARENT), 130);
 	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)

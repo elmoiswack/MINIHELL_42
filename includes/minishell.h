@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                       :+:    :+:             */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:51 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/26 18:35:59 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/27 16:49:57 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,9 +268,13 @@ char	**replace_var_expander(t_lexer *info_list, \
 	char **splitted_line, char **env_cpy, int *enum_array);
 char	*env_expander_loop(char **splitted_line, int index, char **env_cpy);
 char	*get_env_var(char *line, char **env_cpy, int ammount_env);
+
+		//varexp_teplacevars.c
 char	*replace_variables(char *line, char **env_temp);
 char	*replace_vars_loop(char *line, char *new_line, \
 	char **env_temp, int index);
+void	rplc_vars_loop_cpy(char *line, \
+	char *new_line, int *index_new, int *index);
 
 		//varexp_arrayft.c
 char	**expand_env_variables(char **env_temp, char **env_cpy);

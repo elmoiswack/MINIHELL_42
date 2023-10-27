@@ -27,6 +27,7 @@ SRCS		:= 	main.c \
 				lexing/parser_cat.c \
 				lexing/parsing_echo.c \
 				lexing/variable_expander.c \
+				lexing/varexp_replacevars.c \
 				lexing/varexp_utils.c \
 				lexing/varexp_arrayft.c \
 				lexing/varexp_lineft.c \
