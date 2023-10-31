@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:54:55 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 21:54:38 by flip          ########   odam.nl         */
+/*   Updated: 2023/10/31 15:28:38 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	create_heredoc_tmp(char *delim, char *env_cpy[])
 	int		heredoc_tmp;
 
 	change_permission_heredoc_tmp();
+	unlink("./data/heredoc.tmp");
 	heredoc_tmp = open("./data/heredoc.tmp",
 			O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (heredoc_tmp < 0)
@@ -74,7 +75,7 @@ static int	loop_through_heredocs(t_lexer *head, char *env_cpy[])
 			change_signal_profile(HD);
 			create_heredoc_tmp(current->delim[i], env_cpy);
 		}
-		if (fetch_exit_status_hd(pid, head, env_cpy) != 0)
+		if (fetch_exit_status_hd(pid) != 0)
 			return (1);
 		i++;
 		if (!current->delim[i])
@@ -83,7 +84,7 @@ static int	loop_through_heredocs(t_lexer *head, char *env_cpy[])
 			i = 0;
 		}
 	}
-	return (fetch_exit_status_hd(pid, head, env_cpy));
+	return (fetch_exit_status_hd(pid));
 }
 
 int	create_heredoc_loop(t_lexer *head, char *env_cpy[])

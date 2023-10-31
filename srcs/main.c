@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 18:30:25 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 18:35:50 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/31 18:15:06 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	main_execute_input(t_minishell *shell, char *line)
 	shell->cmd_lst = lexing(line, shell->env_cpy);
 	if (!shell->cmd_lst)
 	{
-		err_log(E_ALLOC, NULL);
 		shell->status = -1;
 		return ;
 	}
 	add_cmd_id(shell->cmd_lst);
+	print_debug_info(shell->cmd_lst);
 	builtin = is_builtin(shell->cmd_lst);
 	if (builtin != NO_BUILTIN && !shell->cmd_lst->next
 		&& !shell->cmd_lst->infile && !shell->cmd_lst->outfile)
@@ -82,7 +82,7 @@ t_minishell	init_minishell(int argc, char *envp[])
 
 	if (argc != 1)
 	{
-		err_log(E_INPUT, NULL);
+		err_log(E_INPUT, "argc");
 		exit(1);
 	}
 	shell.cmd_lst = malloc(sizeof(t_lexer));

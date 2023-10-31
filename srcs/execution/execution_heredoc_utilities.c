@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 17:36:32 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 18:22:25 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/31 15:24:33 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	change_permission_heredoc_tmp(void)
 	pid_t		pid;
 	char *const	chmod_args[] = {"chmod", "777", "./data/heredoc.tmp", NULL};
 
-	if (access(chmod_args[2], F_OK) == 0)
+	if (access(chmod_args[2], F_OK | X_OK) == 0)
 	{
 		pid = fork();
 		if (pid == 0 && execve(get_path(chmod_args[0]), chmod_args, NULL) < 0)
@@ -48,14 +48,14 @@ void	clean_tmp_files(t_lexer *head, char *envp[])
 	}
 }
 
-int	fetch_exit_status_hd(pid_t pid, t_lexer *head, char *env_cpy[])
+int	fetch_exit_status_hd(pid_t pid)
 {
 	int		status;
 
 	status = 0;
 	waitpid(pid, &status, 0);
 	if (WEXITSTATUS(status) != 0)
-		return (clean_tmp_files(head, env_cpy), WEXITSTATUS(status));
+		return (unlink("./data/heredoc.tmp"), WEXITSTATUS(status));
 	else
 		return (0);
 }

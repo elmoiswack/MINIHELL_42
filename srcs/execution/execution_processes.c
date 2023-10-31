@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution_processes.c                              :+:      :+:    :+:   */
+/*   execution_processes.c                             :+:    :+:             */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:48 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/27 14:58:50 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:12:15 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static int	fetch_exit_status(pid_t *pid, t_lexer *head)
 	status = 0;
 	status = wait_on_child_processes(head, pid, status);
 	free(pid);
+	unlink("./data/heredoc.tmp");
 	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
 		return (change_signal_profile(PARENT), 130);
 	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
@@ -103,8 +104,7 @@ int	execute_cmds(t_minishell *shell, t_lexer *head, char *env_cpy[])
 	if (!pid)
 		return (err_log(E_ALLOC, "'pid array'"));
 	if (create_heredoc_loop(head, env_cpy) != 0)
-		return (130);
+		return (free(pid), 130);
 	pid = run_and_route_processes(pid, head, shell);
-	clean_tmp_files(head, env_cpy);
 	return (fetch_exit_status(pid, head));
 }

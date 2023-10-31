@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:54:11 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 13:18:34 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/31 15:04:57 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ static void	route_infiles(t_lexer *node)
 	{
 		infile = open(node->infile[i], O_RDONLY);
 		if (infile < 0)
+		{
 			perror("infile");
+			exit(1);
+		}
 		redirect_from_to(infile, STDIN_FILENO);
 		close(infile);
 		i++;
@@ -55,7 +58,10 @@ static void	route_outfiles(t_lexer *node, int flags, mode_t mode)
 	{
 		outfile = open(node->outfile[i], flags, mode);
 		if (outfile < 0)
+		{
 			perror("outfile");
+			exit(1);
+		}
 		redirect_from_to(outfile, STDOUT_FILENO);
 		close(outfile);
 		i++;

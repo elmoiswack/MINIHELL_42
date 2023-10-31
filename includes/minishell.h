@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   minishell.h                                       :+:    :+:             */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:51 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/27 16:49:57 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:14:54 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ Z_SHELL_ > \001\033[0m\002"
 # define Z_THEME "LS_COLORS=rs=0:di=01;31:ln=01;36:\
 mh=00:pi=40;33:ex=1;37:" 
 
+// # define MOD_PERM_HD char const	chmod_args[4][19] = {"chmod", "777", "./data/heredoc.tmp", NULL};
+// MOD_PERM_HD;
 //Token enumerator - defines the possible types of tokens;
 typedef enum e_token{
 	PIPE_READ,
@@ -343,6 +345,7 @@ char	*ft_getenv(char *var_name, char **env);
 void	print_cmd_lst(t_lexer *head);
 void	printing_lexer(t_lexer *info_lexer);
 void	print_double_array(char **arr);
+void	print_debug_info(t_lexer *head);
 
 //		utilities_misc.c
 void	add_cmd_id(t_lexer *head);
@@ -386,7 +389,7 @@ int		create_heredoc_loop(t_lexer *head, char *env_cpy[]);
 //		execution_heredoc_utilities.c
 void	change_permission_heredoc_tmp(void);
 void	clean_tmp_files(t_lexer *head, char *envp[]);
-int		fetch_exit_status_hd(pid_t pid, t_lexer *head, char *env_cpy[]);
+int		fetch_exit_status_hd(pid_t pid);
 
 //		execution_heredoc_expansion.c
 char	*expand_heredoc_line(char *heredoc_line, char *env_cpy[]);

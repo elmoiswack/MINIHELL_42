@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:12:55 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/26 12:34:42 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/10/31 14:58:31 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	execute_exit(t_lexer *node)
 {
 	int	exit_code;
 
+	exit_code = -1;
 	if (!node->content[1])
 	{
 		if (!node->next)

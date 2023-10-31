@@ -156,3 +156,175 @@ echo $USER$USER $$$$$$$$$$$$$$i
 echo $USER$USER $$$$$$$$$$$$$$i$
 echo $USER $USER$USER "dsa$USER dsa" '$USER' $$$$$i
 echo $USER $USER$USER "dsa$USER dsa" '$USER' $$$$$i$
+               
+               
+" 
+ls
+cat << eof > out
+cat << eof
+cat << eof
+cat << eof
+cat << eof | cat << eof | cat << eof
+cat << eof | cat << eof | cat << eof
+cat << eof | cat << eof | cat << eof
+echo $?
+cat << eof | cat << eof << eof << eof
+cat << oef
+cat << oef
+cat << oef
+cat << oef
+export a=""
+cat <$a
+env
+export USER+=yeet
+env
+export a1=jo
+env
+export a-=jo
+env
+export a-=jo
+export a+=jo
+export ab=jo
+export a]=jo
+export a]=jo
+export a]=jo
+export ab=jo
+export a+=jo
+env
+export =
+env
+export =
+export 
+export a
+env
+env | grep a
+export a+=joo
+echo $?
+export a+=joo
+export a+=joo
+export al=joo
+export a{=joo
+export a{=joo
+export a+=joo
+export a+=joo
+export a=joo
+export a=joo
+export a}=joo
+export ad=joo
+export a
+env
+export joooooooooooooooo
+env
+export joooooooooooooooo
+export a
+export ad=joo
+export a=joo
+export a=joo
+export a+=joo
+export a]=joo
+export a
+export a=
+env
+export a+=joo
+export a+=joo
+export a+=joo
+export a+=joo
+export a+=joo
+export a+=joo
+export a+=joo
+export a+=joo
+export a+=joo
+env
+export a+=joo
+export a+=joo
+export a+=joo
+env
+export a+=joo
+export a+=joo
+export a+=joo
+export a+=joo
+env
+export a+=joo
+env
+export a+=joo
+export a+=joo
+export USER+=jo
+export USER+=jo
+env 
+env | LS
+env | grep LS
+ls
+env | grep LS
+a=jo
+export a=jo
+env
+export a=jo
+env
+export a+=jo
+env
+export a+=jo
+export a+=jo
+export a+=jo
+export a+=jo
+export a+=jo
+export a+=jo
+export a+=jo
+export a+=jo
+export a+=jo
+export a+=jo
+env
+export a+=jo
+env
+export a+=jo
+env
+export a+=jo
+env
+export a+=jo jo
+env
+export a+="jooo"
+env
+export a+="jooo waddup"
+env
+export a+="ok"
+env
+export a+="ok"
+export a+="ok"
+env
+export a+="ok"
+export a+="ok oj"
+env
+env
+export a+="ok oj"
+export a+="ok oj"
+env
+export a+="ok oj"
+export a+='ok jo'
+export a+=ok jo
+export a+="haha ok"
+export a+="haha ok"
+export a+="haha ok"
+env
+export a+="haha ok"
+env
+export a+=" maar nu een nieuwe str"
+env
+env
+export a+=" maar nu een nieuwe str"
+env
+export a+=" maar nu een nieuwe str"
+export a=jo
+env
+export a=jo
+env
+export a+=jo
+env
+export a-=jo
+env
+env | grep PWD
+cd ..
+cd ../../
+cd ../../
+cd ../../
+cd ../../
+cd ../../
+cd ../../
