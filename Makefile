@@ -28,8 +28,7 @@ SRCS		:= 	main.c \
 				lexing/variable_expander.c \
 				lexing/varexp_utils.c \
 				lexing/file_delim_func.c \
-				lexing/list_checks.c \
-				lexing/remove_quotes.c \
+				lexing/list_last_checks.c \
 				error/error.c \
 				error/err_log.c \
 				error/free.c \

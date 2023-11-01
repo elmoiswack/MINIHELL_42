@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:04 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 15:47:31 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/01 20:52:15 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,6 @@ t_lexer	*echo_meta_intolist(t_lexer *info_list, \
 	while (splitted_line[index] && \
 		is_metacharachter(splitted_line[index][0]) != 1)
 	{
-		if (splitted_line[index][0] == '"')
-			splitted_line[index] = remove_double_quotes(splitted_line[index]);
-		else if (splitted_line[index][0] == '\'')
-			splitted_line[index] = remove_single_quotes(splitted_line[index]);
-		if (!splitted_line[index])
-			return (error_lex(info_list, 3, "parsing_echo.c/L34"), NULL);
 		info_list->content[1] = ft_strjoin_and_free(info_list->content[1], \
 			splitted_line[index]);
 		if (!info_list->content[1])
@@ -74,12 +68,6 @@ t_lexer	*spca_echo_intolist(t_lexer *info_list, char **splitted_line, int index)
 {
 	while (splitted_line[index])
 	{
-		if (splitted_line[index][0] == '"')
-			splitted_line[index] = remove_double_quotes(splitted_line[index]);
-		else if (splitted_line[index][0] == '\'')
-			splitted_line[index] = remove_single_quotes(splitted_line[index]);
-		if (!splitted_line[index])
-			return (error_lex(info_list, 3, "parsing_echo.c/L78/80"), NULL);
 		info_list->content[1] = ft_strjoin_and_free(info_list->content[1], \
 			splitted_line[index]);
 		if (!info_list->content[1])

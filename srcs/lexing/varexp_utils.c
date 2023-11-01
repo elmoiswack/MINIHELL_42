@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   varexp_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/01 20:48:02 by dhussain          #+#    #+#             */
+/*   Updated: 2023/11/01 20:52:03 by dhussain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdio.h>
@@ -48,7 +60,7 @@ char	*remove_dollar_sign(char *old)
 	char	*new;
 	int		index_n;
 	int		index_o;
-	
+
 	new = ft_calloc(ft_strlen(old), sizeof(char));
 	if (!new)
 		return (NULL);
@@ -69,8 +81,8 @@ char	*remove_dollar_sign(char *old)
 
 char	*get_expanded_variable(char *exp_var, char **env_cpy)
 {
-	char *expanded;
-	
+	char	*expanded;
+
 	expanded = ft_getenv(exp_var, env_cpy);
 	free(exp_var);
 	return (expanded);
