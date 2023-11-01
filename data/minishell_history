@@ -328,3 +328,120 @@ cd ../../
 cd ../../
 cd ../../
 cd ../../
+exit hello
+exit 42 world
+exit 42 hello
+exit 42 hello
+exit 42 hello
+exit 42
+exit 42
+exit 42
+exit 42 he
+exit 42 he
+exit 42
+exit 42
+exit 42 hey wa
+exit 42 hey wa wtf
+exit 42 hey wa wtf
+exit 42 hey wa wtf
+exit 42 hey wa wtf
+exit 42 hey
+exit 42 hey
+exit 42 hey wa
+exit 42 hey wa
+exit 42 hey wa
+ls -la
+exit 42 hey wa
+exit 42 hey
+exit 42
+exit 42
+exit 42 a
+exit 42 a
+exit 42
+exit 42 abcbdbd
+exit 4a
+exit hello
+echo $?
+exit hello
+echo $?
+pwd
+pwd oi
+export A-
+export HELLO-=123
+export A-
+env
+cd $PWD hi
+cd ha ok
+cd pwd a
+cd pwd a
+cd pwd a
+pwd ha ok
+pwd ha ok
+pwd ok
+pwd
+pwd
+pwd
+exit +100
+exit -100
+exit "100"
+exit "-100"
+exit hello
+exit 42 world
+cd a b
+cd 1234
+echo $?
+cd a b
+pwd
+pwd jo
+pwd jo a
+pwd jo a
+pwd jo a
+pwd jo a
+pwd jo a
+pwd jo a
+echo $?
+pwd 1
+pwd 1
+pwd
+pwd a
+pwd a b
+pwd
+pwd
+pwd a
+pwd a
+pwd a b
+pwd 
+cd a
+cd a b
+cd ../
+cd ../
+pwd jo
+pwd hah ah daok jd f
+pwd ha ok
+pwd oi
+jo
+haha
+pwd oi
+pwd ok
+pwd
+pwd 1
+env
+cd a b
+cd a
+echo $?
+cd a
+echo $?
+cd a
+cd a b
+cd "../"
+ls
+pwd
+make
+pwd
+pwd
+export a
+env
+export a+=hey
+env
+export a+=lol
+env

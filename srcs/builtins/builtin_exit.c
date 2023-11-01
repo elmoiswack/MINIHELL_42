@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:12:55 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/31 14:58:31 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/01 12:46:28 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ int	execute_exit(t_lexer *node)
 		else
 			exit(1);
 	}
-	else if (node->content[2])
+	else if (ft_wordcount(node->content[1], ' ') >= 2 || node->content[2])
 		return (err_log(E_EXIT, "exit: too many arguments\n"));
 	else if (node->content[1][0] == '-' && ft_isdigit(node->content[1][1]) == 0)
-		return (err_log(E_EXIT, "exit: numeric argument required\n"));
+		return (err_log(E_EXIT, "exit: numeric argument required\n"), 2);
 	else if (ft_strisdigit(node->content[1]) || (node->content[1][0] == '-'
 		&& ft_strisdigit(&node->content[1][1])))
 	{
@@ -55,5 +55,5 @@ int	execute_exit(t_lexer *node)
 		ft_putstr_fd("exit\n", STDIN_FILENO);
 		exit(exit_code);
 	}
-	return (err_log(E_EXIT, "exit: numeric argument required\n"));
+	return (err_log(E_EXIT, "exit: numeric argument required\n"), 2);
 }

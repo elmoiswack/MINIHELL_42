@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:20:27 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/31 18:25:27 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/01 13:54:39 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,15 @@ static int	chdir_home(char *content[], char *env_cpy[], t_minishell *shell)
 	return (0);
 }
 
-int	execute_cd(t_minishell *shell)
+int	execute_cd(t_minishell *shell, t_lexer *node, int err)
 {
 	int		arg_len;
-	int		err;
 
 	err = 0;
 	if (!shell->cmd_lst->content[1])
 		return (chdir(getenv("HOME")), update_pwd(shell), 0);
+	if (ft_arrlen(node->content) >= 3)
+		return (err_log(E_ERR, "cd: too many arguments"), 1);
 	arg_len = ft_strlen(shell->cmd_lst->content[1]);
 	if (is_relative_path(shell->cmd_lst->content[1]))
 	{
@@ -127,5 +128,7 @@ int	execute_cd(t_minishell *shell)
 		update_old_pwd(shell);
 		err = chdir(shell->cmd_lst->content[1]);
 	}
+	if (err < 0)
+		perror("cd");
 	return (update_pwd(shell), err);
 }

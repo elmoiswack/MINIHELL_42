@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:51 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/31 18:14:54 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/01 13:54:31 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ Z_SHELL_ > \001\033[0m\002"
 # define Z_THEME "LS_COLORS=rs=0:di=01;31:ln=01;36:\
 mh=00:pi=40;33:ex=1;37:" 
 
-// # define MOD_PERM_HD char const	chmod_args[4][19] = {"chmod", "777", "./data/heredoc.tmp", NULL};
-// MOD_PERM_HD;
 //Token enumerator - defines the possible types of tokens;
 typedef enum e_token{
 	PIPE_READ,
@@ -72,6 +70,7 @@ typedef enum e_error {
 	E_CMDNFND,
 	E_FORK,
 	E_EXIT,
+	E_ERR,
 }	t_error;
 
 //Builtin enumerator - defines the different types of possible builtins;
@@ -355,14 +354,14 @@ int		wait_on_child_processes(t_lexer *head, pid_t *pid, int status);
 pid_t	create_child_process(void);
 
 //		execution_cd.c
-int		execute_cd(t_minishell *shell);
+int		execute_cd(t_minishell *shell, t_lexer *node, int err);
 //		execution_echo.c
 int		execute_echo(char **raw_input, char *envp[], int status);
 //		execution_env.c
 int		execute_env(char *envp[], t_lexer *node);
 //		execution_export.c
 int		execute_export(t_minishell *shell, t_lexer *node);
-int		export_content(char *content, t_minishell *shell);
+int		export_content(char *content, t_minishell *shell, bool append);
 //		execution_pwd.c
 int		execute_pwd(char *env_cpy[]);
 //		execution_unset.c
