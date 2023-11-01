@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:51 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 13:54:31 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/01 16:22:51 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -344,6 +344,7 @@ char	*ft_getenv(char *var_name, char **env);
 void	print_cmd_lst(t_lexer *head);
 void	printing_lexer(t_lexer *info_lexer);
 void	print_double_array(char **arr);
+void	print_double_array_quotes(char **arr);
 void	print_debug_info(t_lexer *head);
 
 //		utilities_misc.c

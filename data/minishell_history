@@ -445,3 +445,52 @@ export a+=hey
 env
 export a+=lol
 env
+echo jo haha ok
+export a=""
+cat <$a
+ls
+ls
+ok
+echo jo haha ok
+export a=""
+cat <$a
+ls
+ok
+export a+=jo
+env
+export a+= hoe gaat het?
+env
+export a+=" hoe gaat het?"
+env
+export a+=jo
+env | grep a
+export a+=" hoe gaat het?"
+env
+export a+= hoe gaat het?
+env
+export a=jo
+export a+= hoe gaat het?
+export a+= hoe gaat het?
+env
+export a+= b=hoe c=gaat c+=het?
+env
+export a+="hey hoe gaat het?"
+env
+export a+="hey hoe gaat het?"
+env
+export SHELL+="ok"
+env | grep SHELL
+export SHELL+="ok"
+export SHELL+="ok"
+export SHELL+="ok"
+export SHELL+="ok"
+export SHELL+="ok"
+export SHELL+="ok"
+export SHELL="ok"
+env
+export
+export
+export
+ls
+cat << eof1 <<eof2
+ls

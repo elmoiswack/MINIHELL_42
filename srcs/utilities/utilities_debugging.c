@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:40 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 13:34:26 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/01 16:36:24 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,14 +150,29 @@
 // 	fprintf(stderr, "\033[0m");
 // 	return ;
 // }
-//
-// void	print_debug_info(t_lexer *head)
-// {
-// 	printing_lexer(head);
-// 	print_cmd_lst(head);
-// }
+
+void	print_debug_info(t_lexer *head)
+{
+	printing_lexer(head);
+	print_cmd_lst(head);
+}
 
 void	print_double_array(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i++])
+	{
+		if (arr[i])
+		{
+			ft_putstr_fd(arr[i], STDOUT_FILENO);
+			ft_putstr_fd("\n", STDOUT_FILENO);
+		}
+	}
+}
+
+void	print_double_array_quotes(char **arr)
 {
 	int	i;
 

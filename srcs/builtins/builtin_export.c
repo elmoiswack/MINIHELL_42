@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:15:31 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/11/01 13:49:08 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/01 16:36:02 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*expand_value(char *content, char *var, char *env_cpy[])
 	int		eq_index;
 
 	eq_index = ft_strchr_index(content, '=');
-	value = ft_substr(content, eq_index + 1, ft_strlen(content + eq_index + 1));
+	value = ft_substr(content, eq_index + 1, ft_strlen(&content[eq_index + 1]));
 	if (var_exists(env_cpy, value) == -1)
 		return (free(value), content);
 	var = ft_substr(content, 0, eq_index + 1);
@@ -80,15 +80,15 @@ int	export_content(char *content, t_minishell *shell, bool append)
 		var = ft_substr(content, 0, eq_index);
 	replace_index = var_exists(shell->env_cpy, var);
 	if (replace_index >= 0 && append)
-		return (shell->env_cpy[replace_index] = append_to_env(content,
-				shell->env_cpy[replace_index]), 0);
+		return (free(var), shell->env_cpy[replace_index]
+			= append_to_env(content, shell->env_cpy[replace_index]), 0);
 	content = expand_value(content, var, shell->env_cpy);
 	if (replace_index >= 0)
 		shell->env_cpy = ft_replace_str_in_array(shell->env_cpy,
 				content, replace_index);
 	else
 		shell->env_cpy = ft_append_to_double_array(shell->env_cpy, content);
-	return (0);
+	return (free(var), 0);
 }
 
 int	execute_export(t_minishell *shell, t_lexer *node)
@@ -99,13 +99,13 @@ int	execute_export(t_minishell *shell, t_lexer *node)
 	i = 1;
 	err = 0;
 	if (!node->content[1])
-		return (print_double_array(shell->env_cpy), 0);
-	else if (!ft_containschar(node->content[1], '='))
-		return (err);
-	else if (!valid_identifier(node->content[1]))
-		return (err_log(E_IDENT, node->content[1]));
+		return (print_double_array_quotes(shell->env_cpy), 0);
 	while (node->content[i] && err != 1)
 	{
+		if (!ft_containschar(node->content[i], '='))
+			return (err);
+		else if (!valid_identifier(node->content[i]))
+			return (err_log(E_IDENT, node->content[i]));
 		err = export_content(node->content[i], shell, false);
 		i++;
 	}
