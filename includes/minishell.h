@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:51 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/31 16:41:52 by dantehussai      ###   ########.fr       */
+/*   Updated: 2023/11/01 16:23:35 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,21 +170,9 @@ int		is_metacharachter(char c);
 
 		//split_quotes.c
 char	**split_with_quotes(char *line, t_lexer *info_list);
-char	**split_intoarray(char *line, t_lexer *info_list, char **temp_quotes);
-char	**replace_quotes_array(char **split_array, char	**temp_quotes);
 
-		//splitquo_quotefts.c
-char	*remove_spaces_quotes_line(char *line, \
-	char *new_line, int index_n, int index_l);
-char	**store_all_quote_data(char *line, char **temp);
-char	*quote_data_inarray(char *line, char **temp, \
-	int index_temp, int index_l);
-
-		//split_quotes_utils.c
-int		how_many_quotes(char *line);
+		//splitquo_utils.c
 int		get_end_quote(char *line, int end, int which);
-char	*strcpy_splitquo(char *line, int begin, int end);
-int		how_many_spaces_quotes(char *line, int index_l);
 
 		//get_path.c
 char	*get_path_of_command(char *command, char **env_cpy);
@@ -266,8 +254,21 @@ t_lexer	*default_echo_data(t_lexer *info_list, char **splitted_line);
 		//variable_expander.c
 char	**replace_var_expander(t_lexer *info_list, \
 	char **splitted_line, char **env_cpy, int *enum_array);
+char	*env_expander_loop(char *word_var, char **env_cpy);
+char	*expand_variable(char *word_var, int *index, char **env_cpy);
+char	*replace_expanded_variable(char *word_var, char *exp_var, int start);
+char	*finish_new_line(char *new, char *word_var, char *exp_var, int index);
+
+		//varexp_utils.c
 int		check_for_envvar(char **splitted_line);
+char	*remove_dollar_sign(char *old);
+char	*get_variable_string(char *word_var, char *exp_var, int begin, int end);
+char	*get_expanded_variable(char *exp_var, char **env_cpy);
+
+		//remove_quotes.c
 char	*remove_quotes_string(char **splitted_line, int index);
+char	*remove_single_quotes(char *word_var);
+char	*remove_double_quotes(char *word_var);
 
 		//file_delim_func.c
 int		get_number_delim(int *enum_array);

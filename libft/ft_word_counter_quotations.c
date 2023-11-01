@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                       ::::::::             */
-/*   ft_word_counter_quotations.c                      :+:    :+:             */
-/*                                                    +:+                     */
-/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
-/*                                                  +#+                       */
-/*   Created: 2023/05/30 15:51:58 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/05/30 15:59:24 by fvan-wij      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_word_counter_quotations.c                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/30 15:51:58 by fvan-wij          #+#    #+#             */
+/*   Updated: 2023/11/01 15:53:14 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 static void	ft_skip_delimiter(char const *s, char c, int *i)
 {
-	while (s[*i] == c && s[*i])
+	while (s[*i] && s[*i] == c)
 		(*i)++;
 }
 
 static void	ft_skip_text(char const *s, char c, int *i)
 {
-	while (s[*i] != c && s[*i])
+	while (s[*i] && (s[*i] != c && s[*i] != '\'' && s[*i] != '"'))
 		(*i)++;
 }
 
-static int	ft_skip_till_quotations(char const *s, int *i)
+static int	ft_skip_till_quotations(char const *s, int *i, char c)
 {
 	while (s[*i])
 	{
 		(*i)++;
-		if (s[*i] == 39 || s[*i] == 34)
+		if (s[*i] == c)
 			return ((*i)++);
 	}
 	return (*i);
@@ -45,8 +46,10 @@ int	ft_word_counter_quotations(char const *s, char c)
 	ft_skip_delimiter(s, c, &i);
 	while (s[i])
 	{
-		if (s[i] == 39 || s[i] == 34)
-			ft_skip_till_quotations(s, &i);
+		if (s[i] == '\'' )
+			ft_skip_till_quotations(s, &i, '\'');
+		else if (s[i] == '"')
+			ft_skip_till_quotations(s, &i, '"');
 		else
 			ft_skip_text(s, c, &i);
 		w_count++;

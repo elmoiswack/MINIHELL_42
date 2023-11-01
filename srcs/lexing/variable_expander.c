@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variable_expander.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:47 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/31 17:37:45 by dantehussai      ###   ########.fr       */
+/*   Updated: 2023/11/01 13:25:07 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,101 +15,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char	*remove_quotes_string(char **splitted_line, int index)
+char	*finish_new_line(char *new, char *exp_var, char *word_var, int index)
 {
-	char	*new_line;
-	int		index_l;
-	int		index_x;
+	int	index_exp;
+	int	index_word;
 
-	index_l = 0;
-	index_x = 0;
-	new_line = ft_calloc(ft_strlen(splitted_line[index]) + 1, sizeof(char));
-	if (!new_line)
-		return (NULL);
-	while (splitted_line[index][index_x])
+	index_exp = 0;
+	index_word = index;
+	while (exp_var[index_exp])
 	{
-		if (splitted_line[index][index_x] != '"' && splitted_line[index][index_x] != '\'')
-		{
-			new_line[index_l] = splitted_line[index][index_x];
-			index_l++;
-		}
-		index_x++;
-	}
-	free(splitted_line[index]);
-	return (new_line);
-}
-
-int	check_for_envvar(char **splitted_line)
-{
-	int	index;
-	int	index_x;
-
-	index = 0;
-	while (splitted_line[index])
-	{
-		index_x = 0;
-		while (splitted_line[index][index_x])
-		{
-			if (splitted_line[index][index_x] == '$')
-			{
-				index_x++;
-				if (splitted_line[index][index_x] == '\0')
-					break ;
-				if (ft_isalpha(splitted_line[index][index_x]) == 1)
-					return (1);
-			}
-			index_x++;
-		}
+		new[index] = exp_var[index_exp];
 		index++;
+		index_exp++;
 	}
-	return (-1);
-}
-
-char	*get_variable_string(char *word_var, char *exp_var, int begin, int end)
-{
-	int	index;
-
-	index = 0;
-	while (begin < end)
+	if (word_var[index_word] == '$')
+		index_word++;
+	while (word_var[index_word] && (ft_isalpha(word_var[index_word]) || word_var[index_word] == '_'))
+		index_word++;
+	while (word_var[index_word])
 	{
-		exp_var[index] = word_var[begin];
+		new[index] = word_var[index_word];
 		index++;
-		begin++;
+		index_word++;
 	}
-	return (exp_var);
-}
-
-char	*remove_dollar_sign(char *old)
-{
-	char	*new;
-	int		index_n;
-	int		index_o;
-	
-	new = ft_calloc(ft_strlen(old), sizeof(char));
-	if (!new)
-		return (NULL);
-	index_n = 0;
-	index_o = 0;
-	while (old[index_o])
-	{
-		if (old[index_o] != '$')
-		{
-			new[index_n] = old[index_o];
-			index_n++;
-		}
-		index_o++;
-	}
-	free(old);
 	return (new);
-}
-
-char	*get_expanded_variable(char *exp_var, char **env_cpy)
-{
-	char *expanded;
-	
-	expanded = ft_getenv(exp_var, env_cpy);
-	free(exp_var);
-	return (expanded);
 }
 
 char	*replace_expanded_variable(char *word_var, char *exp_var, int start)
@@ -131,22 +60,9 @@ char	*replace_expanded_variable(char *word_var, char *exp_var, int start)
 		index++;
 		index_word++;
 	}
-	while (exp_var[index_exp])
-	{
-		new_line[index] = exp_var[index_exp];
-		index++;
-		index_exp++;
-	}
-	if (word_var[index_word] == '$')
-		index_word++;
-	while (word_var[index_word] && (ft_isalpha(word_var[index_word]) || word_var[index_word] == '_'))
-		index_word++;
-	while (word_var[index_word])
-	{
-		new_line[index] = word_var[index_word];
-		index++;
-		index_word++;
-	}
+	new_line = finish_new_line(new_line, exp_var, word_var, index);
+	free(word_var);
+	free(exp_var);
 	return (new_line);
 }
 

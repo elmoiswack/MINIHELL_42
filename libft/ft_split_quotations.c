@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                       ::::::::             */
-/*   ft_split_quotations.c                             :+:    :+:             */
-/*                                                    +:+                     */
-/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
-/*                                                  +#+                       */
-/*   Created: 2023/05/30 15:49:39 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/06/22 15:36:26 by flip          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_split_quotations.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/30 15:49:39 by fvan-wij          #+#    #+#             */
+/*   Updated: 2023/11/01 16:02:11 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 static void	free_substrings(char **strings_array, int j)
 {
@@ -28,7 +29,7 @@ static int	word_length(char const *s, int i, char c)
 	int	j;
 
 	j = 0;
-	while (s[i] != c && s[i])
+	while (s[i] && s[i] != c)
 	{
 		i++;
 		j++;
@@ -41,7 +42,7 @@ static int	sentence_length(char const *s, int i)
 	int	j;
 
 	j = 0;
-	while ((s[i] != 39 && s[i] != 34) && s[i])
+	while (s[i] && (s[i] != '\'' && s[i] != '"'))
 	{
 		i++;
 		j++;
@@ -61,9 +62,9 @@ static char	**split_words_quotations(char **str_array,
 	len = 0;
 	while (j < words && s[i])
 	{
-		while (s[i] == c || ((s[i] == 39 || s[i] == 34) && s[i + 1] == c))
+		while (s[i] == c || ((s[i] == '\'' || s[i] == '"') && s[i + 1] == c))
 			i++;
-		if (s[i] == 39 || s[i] == 34)
+		if (s[i] == '\'' || s[i] == '"')
 			len = sentence_length(s, ++i);
 		else
 			len = word_length(s, i, c);
@@ -84,9 +85,9 @@ char	**ft_split_quotations(char const *s, char c)
 	words = ft_word_counter_quotations(s, c);
 	str_array = ft_calloc(words + 1, sizeof(char *));
 	if (!str_array)
-		return (0);
+		return (NULL);
 	str_array = split_words_quotations(str_array, s, c, words);
 	if (!str_array)
-		return (0);
+		return (NULL);
 	return (str_array);
 }
