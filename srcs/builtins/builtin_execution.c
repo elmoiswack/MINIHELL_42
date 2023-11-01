@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:25:02 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/25 16:20:26 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/01 13:54:18 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	execute_builtin(t_minishell *shell, t_builtin builtin, t_lexer *node)
 		return (execute_echo(shell->cmd_lst->content, shell->env_cpy,
 				shell->status));
 	else if (builtin == CD)
-		return (execute_cd(shell));
+		return (execute_cd(shell, node, 0));
 	else if (builtin == PWD)
 		return (execute_pwd(shell->env_cpy));
 	else if (builtin == ENV)

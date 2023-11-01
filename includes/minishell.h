@@ -70,6 +70,7 @@ typedef enum e_error {
 	E_CMDNFND,
 	E_FORK,
 	E_EXIT,
+	E_ERR,
 }	t_error;
 
 //Builtin enumerator - defines the different types of possible builtins;
@@ -315,6 +316,8 @@ char	*ft_getenv(char *var_name, char **env);
 void	print_cmd_lst(t_lexer *head);
 void	printing_lexer(t_lexer *info_lexer);
 void	print_double_array(char **arr);
+void	print_double_array_quotes(char **arr);
+void	print_debug_info(t_lexer *head);
 
 //		utilities_misc.c
 void	add_cmd_id(t_lexer *head);
@@ -324,14 +327,14 @@ int		wait_on_child_processes(t_lexer *head, pid_t *pid, int status);
 pid_t	create_child_process(void);
 
 //		execution_cd.c
-int		execute_cd(t_minishell *shell);
+int		execute_cd(t_minishell *shell, t_lexer *node, int err);
 //		execution_echo.c
 int		execute_echo(char **raw_input, char *envp[], int status);
 //		execution_env.c
 int		execute_env(char *envp[], t_lexer *node);
 //		execution_export.c
 int		execute_export(t_minishell *shell, t_lexer *node);
-int		export_content(char *content, t_minishell *shell);
+int		export_content(char *content, t_minishell *shell, bool append);
 //		execution_pwd.c
 int		execute_pwd(char *env_cpy[]);
 //		execution_unset.c
@@ -358,7 +361,7 @@ int		create_heredoc_loop(t_lexer *head, char *env_cpy[]);
 //		execution_heredoc_utilities.c
 void	change_permission_heredoc_tmp(void);
 void	clean_tmp_files(t_lexer *head, char *envp[]);
-int		fetch_exit_status_hd(pid_t pid, t_lexer *head, char *env_cpy[]);
+int		fetch_exit_status_hd(pid_t pid);
 
 //		execution_heredoc_expansion.c
 char	*expand_heredoc_line(char *heredoc_line, char *env_cpy[]);

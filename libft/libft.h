@@ -6,7 +6,7 @@
 /*   By: fvan-wij <fvan-wij@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:46:37 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/10/26 13:02:20 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/01 13:37:33 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 # include <stddef.h>
 # include <stdarg.h>
+# include <stdbool.h>
 
 typedef struct s_list
 {
@@ -76,6 +77,7 @@ void			ft_lstclear(t_list **lst, void (*del)(void*));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
+int				ft_wordcount(char const *s, char delim);
 
 // GET_NEXT_LINE
 char			*get_next_line(int fd);
@@ -99,6 +101,7 @@ char			**ft_split_quotations(char const *s, char c);
 int				ft_find_envp_path_index(char *envp[]);
 void			ft_del_2d(char **arr);
 int				ft_strisalpha(char *str);
+bool			ft_containschar(char *content, char c);
 
 char			**ft_copy_double_array(char **array);
 char			**ft_append_to_double_array(char **src, char *str);

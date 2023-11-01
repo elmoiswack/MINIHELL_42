@@ -77,6 +77,8 @@ SRC			:=	ft_arrlen.c \
 			ft_replace_str_in_array.c \
 			ft_remove_str_from_array.c \
 			ft_inject_str_in_array.c \
+			ft_wordcount.c \
+			ft_containschar.c \
 
 
 

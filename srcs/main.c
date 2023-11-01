@@ -28,11 +28,11 @@ void	main_execute_input(t_minishell *shell, char *line)
 	shell->cmd_lst = lexing(line, shell->env_cpy);
 	if (!shell->cmd_lst)
 	{
-		err_log(E_ALLOC, NULL);
 		shell->status = -1;
 		return ;
 	}
 	add_cmd_id(shell->cmd_lst);
+	print_debug_info(shell->cmd_lst);
 	builtin = is_builtin(shell->cmd_lst);
 	if (builtin != NO_BUILTIN && !shell->cmd_lst->next
 		&& !shell->cmd_lst->infile && !shell->cmd_lst->outfile)
@@ -82,7 +82,7 @@ t_minishell	init_minishell(int argc, char *envp[])
 
 	if (argc != 1)
 	{
-		err_log(E_INPUT, NULL);
+		err_log(E_INPUT, "argc");
 		exit(1);
 	}
 	shell.cmd_lst = malloc(sizeof(t_lexer));
@@ -94,7 +94,7 @@ t_minishell	init_minishell(int argc, char *envp[])
 	shell.env_cpy = ft_copy_double_array(envp);
 	if (!shell.env_cpy)
 		err_log(E_ALLOC, "'env_cpy'");
-	if (export_content(Z_THEME, &shell) != 0)
+	if (export_content(Z_THEME, &shell, false) != 0)
 		err_log(E_ALLOC, "'LS_COLORS'");
 	shell.status = 0;
 	shell.builtin = NO_BUILTIN;
