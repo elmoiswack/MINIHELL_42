@@ -13,7 +13,6 @@ SRCS		:= 	main.c \
 				lexing/get_path.c \
 				lexing/eddit_line.c \
 				lexing/split_quotes.c \
-				lexing/splitquo_quotefts.c \
 				lexing/split_quotes_utils.c \
 				lexing/data_org.c \
 				lexing/dataorg_cases.c \
@@ -27,8 +26,10 @@ SRCS		:= 	main.c \
 				lexing/parser_cat.c \
 				lexing/parsing_echo.c \
 				lexing/variable_expander.c \
+				lexing/varexp_utils.c \
 				lexing/file_delim_func.c \
 				lexing/list_checks.c \
+				lexing/remove_quotes.c \
 				error/error.c \
 				error/err_log.c \
 				error/free.c \

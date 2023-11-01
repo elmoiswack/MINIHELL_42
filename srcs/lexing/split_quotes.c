@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:28 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/31 19:01:48 by dantehussai      ###   ########.fr       */
+/*   Updated: 2023/11/01 18:03:52 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,112 +15,90 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char	*get_line_quote(char *word_var, char *temp_var)
+int	get_len_quote(char *line, int index, char which)
 {
-	char *new;
-	int	index_n;
-	int	index_te;
-	int	index;
+	int	count;
 
-	index = 0;
-	index_n = 0;
-	index_te = 0;
-	new = ft_calloc(ft_strlen(word_var) + ft_strlen(temp_var), sizeof(char));
-	if (!new)
+	count = 0;
+	while (line[index] && line[index] != which)
 	{
-		free(word_var);
-		return (NULL);
-	}
-	while (word_var[index] && word_var[index] != '"' && word_var[index] != '\'')
-	{
-		new[index_n] = word_var[index];
 		index++;
-		index_n++;
+		count++;
 	}
-	while (temp_var[index_te])
+	while (line[index] && line[index] != ' ')
 	{
-		new[index_n] = temp_var[index_te];
-		index_n++;
-		index_te++;
-	}
-	index++;
-	while (word_var[index] && word_var[index] != '"' && word_var[index] != '\'')
 		index++;
-	while (word_var[index])
-	{
-		new[index_n] = word_var[index];
-		index_n++;
-		index++;
+		count++;
 	}
-	free(word_var);
-	return (new);
+	return (count);
 }
 
-char	**replace_quotes_array(char **split_array, char	**temp_quotes)
+int	get_len_word(char *line, int index)
 {
-	int	index;
-	int	index_x;
-	int	index_tmp;
+	int	count;
 
-	index = 0;
-	index_tmp = 0;
-	while (split_array[index])
+	count = 0;
+	while (line[index] && line[index] != ' ')
 	{
-		index_x = 0;
-		while (split_array[index][index_x])
+		if (line[index] == '=')
 		{
-			if (split_array[index][index_x] == '"' || split_array[index][index_x] == '\'')
-			{
-				split_array[index] = get_line_quote(split_array[index], temp_quotes[index_tmp]);
-				index_tmp++;
-				break ;
-			}
-			index_x++;
+			count++;
+			count += get_len_quote(line, index + 2, '"') + 1;
+			return (count);
 		}
 		index++;
+		count++;
 	}
-	return (split_array);
+	return (count);
 }
 
-char	**split_intoarray(char *line, t_lexer *info_list, char **temp_quotes)
-{
-	char	**split_array;
-	char	*temp_line;
 
-	temp_line = ft_calloc(ft_strlen(line), sizeof(char));
-	if (!temp_line)
-		return (NULL);
-	temp_line = remove_spaces_quotes_line(line, temp_line, 0, 0);
-	if (!temp_line)
+int	get_len_next(char *line, int i_line)
+{
+	int	len;
+
+	if (line[i_line] == '\'')
+		len = get_len_quote(line, i_line + 1, '\'') + 1;
+	else if (line[i_line] == '"')
+		len = get_len_quote(line, i_line + 1, '"') + 1;
+	else
+		len = get_len_word(line, i_line);
+	return (len);
+}
+
+char	**fill_array(char **split_array, char *line, int words)
+{
+	int	begin;
+	int	i_sp;
+	int	i_line;
+	int	len;
+
+	i_sp = 0;
+	i_line = 0;
+	while (line[i_line] && words > 0)
 	{
-		free_double_array(temp_quotes);
-		return (error_lex(info_list, 3, "split_quotes.c/L53"), NULL);
+		while (line[i_line] == ' ')
+			i_line++;
+		begin = i_line;
+		len = get_len_next(line, i_line);
+		split_array[i_sp] = ft_substr(line, begin, len);
+		i_sp++;
+		words--;
+		i_line += len;
 	}
-	split_array = ft_split(temp_line, ' ');
-	free(temp_line);
-	if (!split_array)
-	{
-		free_double_array(temp_quotes);
-		return (error_lex(info_list, 3, "split_quotes.c/L59"), NULL);
-	}
-	split_array = replace_quotes_array(split_array, temp_quotes);
+	split_array[i_sp] = NULL;
 	return (split_array);
 }
 
 char	**split_with_quotes(char *line, t_lexer *info_list)
 {
 	char	**split_array;
-	char	**temp_quotes;
-	int		ammount_quotes;
+	int		words;
 
-	ammount_quotes = how_many_quotes(line);
-	temp_quotes = ft_calloc(ammount_quotes + 1, sizeof(char *));
-	if (!temp_quotes)
-		return (error_lex(info_list, 3, "split_quotes.c/L77"), NULL);
-	temp_quotes = store_all_quote_data(line, temp_quotes);
-	if (!temp_quotes)
-		return (error_lex(info_list, 3, "split_quotes.c/L80"), NULL);
-	split_array = split_intoarray(line, info_list, temp_quotes);
-	free_double_array(temp_quotes);
+	words = ft_word_counter_quotations(line, ' ');
+	split_array = ft_calloc(words + 1, sizeof(char *));
+	if (!split_array)
+		return (error_lex(info_list, 3, "split_quotes.c/L25"), NULL);
+	split_array = fill_array(split_array, line, words);
 	return (split_array);
 }
