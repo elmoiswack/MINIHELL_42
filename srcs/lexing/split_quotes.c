@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:28 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 18:03:52 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/01 20:50:36 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	get_len_word(char *line, int index)
 	int	count;
 
 	count = 0;
-	while (line[index] && line[index] != ' ')
+	while (line[index] && (line[index] != '"' \
+		&& line[index] != '\'' && line[index] != ' '))
 	{
 		if (line[index] == '=')
 		{
@@ -49,9 +50,12 @@ int	get_len_word(char *line, int index)
 		index++;
 		count++;
 	}
+	if (line[index] == '"')
+		count += get_len_quote(line, index + 1, '"') + 1;
+	else if (line[index] == '\'')
+		count += get_len_quote(line, index + 1, '\'') + 1;
 	return (count);
 }
-
 
 int	get_len_next(char *line, int i_line)
 {
@@ -98,7 +102,7 @@ char	**split_with_quotes(char *line, t_lexer *info_list)
 	words = ft_word_counter_quotations(line, ' ');
 	split_array = ft_calloc(words + 1, sizeof(char *));
 	if (!split_array)
-		return (error_lex(info_list, 3, "split_quotes.c/L25"), NULL);
+		return (error_lex(info_list, 3, "split_quotes.c/L103"), NULL);
 	split_array = fill_array(split_array, line, words);
 	return (split_array);
 }

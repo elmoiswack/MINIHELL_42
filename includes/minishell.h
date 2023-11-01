@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                       :+:    :+:             */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:51 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 18:28:00 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/01 20:38:29 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,7 +255,7 @@ t_lexer	*default_echo_data(t_lexer *info_list, char **splitted_line);
 		//variable_expander.c
 char	**replace_var_expander(t_lexer *info_list, \
 	char **splitted_line, char **env_cpy, int *enum_array);
-char	*env_expander_loop(char *word_var, char **env_cpy);
+char	*env_expander_loop(char *word_var, char **env_cpy, int index);
 char	*expand_variable(char *word_var, int *index, char **env_cpy);
 char	*replace_expanded_variable(char *word_var, char *exp_var, int start);
 char	*finish_new_line(char *new, char *word_var, char *exp_var, int index);
@@ -265,11 +265,6 @@ int		check_for_envvar(char **splitted_line);
 char	*remove_dollar_sign(char *old);
 char	*get_variable_string(char *word_var, char *exp_var, int begin, int end);
 char	*get_expanded_variable(char *exp_var, char **env_cpy);
-
-		//remove_quotes.c
-char	*remove_quotes_string(char **splitted_line, int index);
-char	*remove_single_quotes(char *word_var);
-char	*remove_double_quotes(char *word_var);
 
 		//file_delim_func.c
 int		get_number_delim(int *enum_array);

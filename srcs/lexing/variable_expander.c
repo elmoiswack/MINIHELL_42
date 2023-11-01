@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:47 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 13:25:07 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/01 20:51:39 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ char	*finish_new_line(char *new, char *exp_var, char *word_var, int index)
 	}
 	if (word_var[index_word] == '$')
 		index_word++;
-	while (word_var[index_word] && (ft_isalpha(word_var[index_word]) || word_var[index_word] == '_'))
+	while (word_var[index_word] && \
+		(ft_isalpha(word_var[index_word]) || word_var[index_word] == '_'))
 		index_word++;
 	while (word_var[index_word])
 	{
@@ -47,8 +48,9 @@ char	*replace_expanded_variable(char *word_var, char *exp_var, int start)
 	int		index;
 	int		index_word;
 	int		index_exp;
-	
-	new_line = ft_calloc(ft_strlen(word_var) + ft_strlen(exp_var) + 1, sizeof(char));
+
+	new_line = ft_calloc(ft_strlen(word_var) + \
+		ft_strlen(exp_var) + 1, sizeof(char));
 	if (!new_line)
 		return (NULL);
 	index = 0;
@@ -93,14 +95,16 @@ char	*expand_variable(char *word_var, int *index, char **env_cpy)
 	return (word_var);
 }
 
-char	*env_expander_loop(char *word_var, char **env_cpy)
+char	*env_expander_loop(char *word_var, char **env_cpy, int index)
 {
-	int	index;
+	int	check;
 
-	index = 0;
+	check = 1;
 	while (word_var[index])
 	{
-		if (word_var[index] == '\'')
+		if (word_var[index] == '"')
+			check = check * -1;
+		if (check > 0 && word_var[index] == '\'')
 		{
 			index++;
 			while (word_var[index] != '\'')
@@ -108,7 +112,8 @@ char	*env_expander_loop(char *word_var, char **env_cpy)
 			if (word_var[index] == '\0')
 				return (word_var);
 		}
-		if (word_var[index] == '$' && word_var[index + 1] && ft_isalpha(word_var[index + 1]))
+		if (word_var[index] == '$' \
+			&& word_var[index + 1] && ft_isalpha(word_var[index + 1]))
 		{
 			word_var = expand_variable(word_var, &index, env_cpy);
 			if (!word_var)
@@ -129,7 +134,8 @@ char	**replace_var_expander(t_lexer *info_list, char **splitted_line, \
 	{
 		if (enum_array[index] != DELIMITER)
 		{
-			splitted_line[index] = env_expander_loop(splitted_line[index], env_cpy);
+			splitted_line[index] = \
+				env_expander_loop(splitted_line[index], env_cpy, 0);
 			if (!splitted_line[index])
 			{
 				free_double_array(splitted_line);

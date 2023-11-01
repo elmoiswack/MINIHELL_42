@@ -1,0 +1,73 @@
+export a="      test     "
+$a
+echo $USER $USER$USER "dsadsa $USER dsadsa" '$USER' "dsadsa$USER dsa" "dsad'$USER'das"
+echo "dsdsa4vsadw frehbtfs"' dsa'
+echo "dsdsa4vsadw frehbtfs"' dsa'
+echo "dsdsa4vsadw frehbtfs"' dsa'
+echo "dsdsa4vsadw frehbtfs"' dsa'
+echo "dsdsa4vsadw frehbtfs"' dsa'
+cat Makefile >test1 >test2
+cat test2
+cat test1
+rm -rf test1 test2
+ls
+rm -rf test1 test2
+echo "dsdsa4vsadw frehbtfs"' dsa'
+echo "dsdsa4vsadw frehbtfs"' dsa'
+echo "dsdsa4vsadw frehbtfs"' dsa'
+echo $USER $USER$USER "dsadsa $USER dsadsa" '$USER' "dsadsa$USER dsa" "dsad'$USER'das"
+export a="      test     "
+$a
+echo $USER $USER$USER "dsadsa $USER dsadsa" '$USER' "dsadsa$USER dsa" "dsad'$USER'das"
+echo $USER $USER$USER "dsadsa $USER dsadsa" '$USER' "dsadsa$USER dsa" "dsad'$USER'das"
+echo $USER $USER$USER "dsadsa $USER dsadsa" '$USER' "dsadsa$USER dsa" "dsad'$USER'das"
+echo $USER $USER$USER "dsadsa $USER dsadsa" '$USER' "dsadsa$USER dsa" "dsad'$USER'das"
+echo "dsad'$USER'das"
+echo "dsad'$USER'das"
+echo "dsad '$USER' das"
+echo dsa"dsad '$USER' das"
+echo dsa"dsad '$USER' das"
+echo dsa"dsad '$USER' das"
+echo dsa"dsad '$USER' das"
+echo dsa"dsad '$USER' das"
+echo dsa"dsad '$USER' das"
+echo $USER $USER$USER "dsadsa $USER dsadsa" '$USER' "dsadsa$USER dsa" "dsad'$USER'das"
+echo $USER $USER$USER "dsadsa $USER dsadsa" '$USER' "dsadsa$USER dsa" "dsad'$USER'das"
+ls
+ppwd
+pwd
+echo $USER $USER$USER "dsadsa $USER dsadsa" '$USER' "dsadsa$USER dsa" "dsad'$USER'das"
+exit
+echo dsa"dsad '$USER' das"
+pwd
+ls
+cat Makefile >test1 >test2 >test3
+cat test1 | cat test2 | cat test3
+cat test1 | cat test2
+rm test1 test2 test3
+export a="      t     "
+env
+export
+echo $a
+export a="      test     "
+$a
+echo "dsadsadefacsa fergriahfa fadsad"' dsa'
+echo "dsadsadefacsa fergriahfa fadsa'd"' dsa'
+echo "dsadsadefacsa fergriahfa fadsa'd'"' dsa'
+echo "dsadsadefacsa fergriahfa fadsa'd'"' dsa''
+echo "dsadsadefacsa fergriahfa fadsa'd'"' dsa'''
+echo "dsadsadefacsa fergriahfa fadsa'd'"' 'dsa'
+echo "dsadsadefacsa fergriahfa fadsa'd'"' "dsa'
+echo '$USER'$USER
+echo '$USER'$USER"$USER"
+<Makefile <<ja cat | grep lib << b cat
+export a=""
+env
+cat <$a
+cat << eof | cat << eof
+exit 1 2
+exit 12
+<Makefile <<ja cat | grep lib <<b cat
+<Makefile cat | grep lib
+<out cat | grep lib
+exit

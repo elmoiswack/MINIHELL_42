@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   into_list_cases.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:24 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/31 16:07:18 by dantehussai      ###   ########.fr       */
+/*   Updated: 2023/11/01 20:55:49 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,9 @@ t_lexer	*into_linklist_command(t_lexer *info_list, char *word_var)
 	}
 	else
 	{
-		if (!info_list->content[1])
-			info_list->content[1] = ft_calloc(1, sizeof(char));
-		if (!info_list->content[1])
-			return (error_lex(info_list, 3, "into_list_cases.c/L32"), NULL);
 		if (info_list->content[1][0] != '\0')
-			info_list->content[1] = ft_strjoin_and_free(info_list->content[1], " ");
+			info_list->content[1] = \
+				ft_strjoin_and_free(info_list->content[1], " ");
 		if (!info_list->content[1])
 			return (error_lex(info_list, 3, "into_list_cases.c/L32"), NULL);
 		info_list->content[1] = ft_strjoin_and_free(info_list->content[1], \
