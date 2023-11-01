@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:15:31 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/11/01 16:36:02 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/01 18:27:47 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	execute_export(t_minishell *shell, t_lexer *node)
 	i = 1;
 	err = 0;
 	if (!node->content[1])
-		return (print_double_array_quotes(shell->env_cpy), 0);
+		return (print_double_array(shell->env_cpy), 0);
 	while (node->content[i] && err != 1)
 	{
 		if (!ft_containschar(node->content[i], '='))
