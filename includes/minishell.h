@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:51 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 20:38:29 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/01 22:21:49 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,7 +271,7 @@ int		get_number_delim(int *enum_array);
 t_lexer	*allocate_files(t_lexer *info_list, int *enum_array);
 
 		//list_check.s
-t_lexer	*check_quotes_list(t_lexer *info_list);
+t_lexer	*check_quotes_list(t_lexer *l, t_lexer *head);
 
 //###############################################################
 //		ERROR AND FREE FUNCTIONS

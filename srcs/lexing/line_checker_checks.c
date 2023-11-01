@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:48 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/23 15:39:49 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/01 22:12:31 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 
 int	check_pipe(char *line, int index, t_lexer *info_list)
 {
+	int	temp;
+
+	temp = index;
+	while (temp > 0 && ft_isalpha(line[temp]) != 1)
+		temp--;
+	if (temp == 0)
+		return (error_lex(info_list, 2, \
+			"something needs to be infront of the pipe!"), -1);
 	index++;
 	while (line[index] == ' ')
 		index++;

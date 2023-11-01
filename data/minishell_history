@@ -71,3 +71,73 @@ exit 12
 <Makefile cat | grep lib
 <out cat | grep lib
 exit
+echo 'hello world'
+echo "hello world"
+echo hello""world
+echo "aspas ->'"
+echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
+echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<'
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "$"
+echo "$?"
+echo $?HELLO
+export HELLO=123
+env
+export A-
+env
+export A-
+echo $?
+export HELLO="123 A-"
+env
+export HELLO-=123
+export =
+env
+export 123
+env
+unset
+env
+cd $PWD
+pwd
+cd ../
+pwd
+cd $OLDPWD hi
+exit "+100"
+exit "-100"
+exit "100"
+env | sort | grep -v SHLVL | grep -v ^_
+env | sort | grep -v SHLVL | grep -v 
+env | sort | grep -v SHLVL | grep -v 
+env | sort | grep -v SHLVL | grep -v _
+env | sort | grep -v SHLVL | grep -v ^_
+cat Makefile | grep oi
+cat Makefile | grep C
+cat minishell.h | grep ");"$
+cat includes/minishell.h | grep ");"$
+cat includes/minishell.h | grep ");"
+cat includes/minishell.h | grep ');'
+export GHOST=123 | env | grep GHOST
+export
+env
+cd 
+echo hi < ./Makefile C
+echo hi < Makefile C
+cat <"1""2""3""4""5"
+cat <"M""a""k""e""f""i""l""e"
+cat <"Makefile"
+cat < "Makefile"
+cat < "Makefile 'hey' $USER"
+cat <Makefile 
+echo hi |  "|"
+echo hi |  "|"
+echo hi | > >>
+echo hi | > >>
+| echo oi
+>>
+<
+|
+| ha
+<>
+><
+| ls
+    | ls
+cat <"Makefile"

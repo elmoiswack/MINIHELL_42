@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:42 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 20:47:47 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/01 22:20:15 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,6 @@ t_lexer	*lexing(char *line, char **env_cpy)
 	if (!new_line)
 		return (error_lex(info_list, 3, "lexer.c/L116"), NULL);
 	info_list = set_variables(info_list, new_line);
-	info_list = check_quotes_list(info_list);
+	info_list = check_quotes_list(info_list, info_list);
 	return (info_list);
 }

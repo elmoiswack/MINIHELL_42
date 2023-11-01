@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:57 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 20:50:02 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/01 22:23:26 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,31 +81,50 @@ char	*remove_quotes_loop(char *word_var)
 	return (new);
 }
 
-t_lexer	*check_quotes_list(t_lexer *info_list)
+char	**quotes_loop(char **array, t_lexer *info_list)
 {
-	t_lexer	*head;
-	int		index;
+	int	index;
 
 	index = 0;
-	head = info_list;
-	while (info_list)
+	while (array[index])
 	{
-		if (info_list->content)
+		if (check_for_quotes(array[index]) == 1)
 		{
-			while (info_list->content[index])
-			{
-				if (check_for_quotes(info_list->content[index]) == 1)
-				{
-					info_list->content[index] = \
-						remove_quotes_loop(info_list->content[index]);
-					if (!info_list->content[index])
-						return (error_lex(info_list, 3, \
-							"list_last_check.c/L35"), NULL);
-				}
-				index++;
-			}
+			array[index] = \
+				remove_quotes_loop(array[index]);
+			if (!array[index])
+				return (error_lex(info_list, 3, \
+					"list_last_check.c/L94"), NULL);
 		}
-		info_list = info_list->next;
+		index++;
+	}
+	return (array);
+}
+
+t_lexer	*check_quotes_list(t_lexer *l, t_lexer *head)
+{
+	head = l;
+	while (l)
+	{
+		if (l->content)
+		{
+			l->content = quotes_loop(l->content, l);
+			if (!l->content)
+				return (NULL);
+		}
+		if (l->outfile)
+		{
+			l->content = quotes_loop(l->content, l);
+			if (!l->content)
+				return (NULL);
+		}
+		if (l->infile)
+		{
+			l->content = quotes_loop(l->content, l);
+			if (!l->content)
+				return (NULL);
+		}
+		l = l->next;
 	}
 	return (head);
 }

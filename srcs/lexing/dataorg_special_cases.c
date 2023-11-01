@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:38:57 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/26 14:25:55 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/01 22:22:27 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_lexer	*which_special_case(t_lexer *info_list, char **splitted_line, \
 	info_list = other_special_case(info_list, splitted_line, enum_array, 0);
 	if (!info_list)
 		return (NULL);
-	info_list = check_quotes_list(info_list);
+	info_list = check_quotes_list(info_list, info_list);
 	return (info_list);
 }
 
