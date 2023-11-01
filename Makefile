@@ -27,10 +27,6 @@ SRCS		:= 	main.c \
 				lexing/parser_cat.c \
 				lexing/parsing_echo.c \
 				lexing/variable_expander.c \
-				lexing/varexp_replacevars.c \
-				lexing/varexp_utils.c \
-				lexing/varexp_arrayft.c \
-				lexing/varexp_lineft.c \
 				lexing/file_delim_func.c \
 				lexing/list_checks.c \
 				error/error.c \
@@ -77,7 +73,7 @@ Bold		= "\033[1m"			# Text Style Bold
 ######################################################
 
 ifdef DEBUG
-	COMPILER += -g
+	COMPILER += -g -fsanitize=address
 	LIBFT_DEBUG += DEBUG=1
 	DEBUG_MODE += "(debug mode)"
 endif

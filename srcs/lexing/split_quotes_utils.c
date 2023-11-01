@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_quotes_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:16 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/23 15:40:24 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:54:12 by dantehussai      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:51 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/27 16:49:57 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/31 16:41:52 by dantehussai      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,37 +266,8 @@ t_lexer	*default_echo_data(t_lexer *info_list, char **splitted_line);
 		//variable_expander.c
 char	**replace_var_expander(t_lexer *info_list, \
 	char **splitted_line, char **env_cpy, int *enum_array);
-char	*env_expander_loop(char **splitted_line, int index, char **env_cpy);
-char	*get_env_var(char *line, char **env_cpy, int ammount_env);
-
-		//varexp_teplacevars.c
-char	*replace_variables(char *line, char **env_temp);
-char	*replace_vars_loop(char *line, char *new_line, \
-	char **env_temp, int index);
-void	rplc_vars_loop_cpy(char *line, \
-	char *new_line, int *index_new, int *index);
-
-		//varexp_arrayft.c
-char	**expand_env_variables(char **env_temp, char **env_cpy);
-char	*expand_variable(char *line, char **env_cpy);
-char	**fill_array_env(char *line, int ammount_env, \
-	char **env_temp, int index);
-char	**check_quotes_env(char **splitted_line);
-char	*remove_quotes_string_env(char **splitted_line, int index);
-
-		//varexp_lineft.c
-char	*get_variable(char *line, int begin, int end);
-char	*remove_quotes_string(char **splitted_line, int index);
-char	*rm_quote_string_loop(char **splitted_line, int index, char *new_line);
-char	*remove_dollar_sign(char *line);
-char	*put_env_in_line(char *new_line, int index_l, \
-	char **env_temp, int index_env);
-
-		//varexp_utils.c
-int		how_many_env_var(char *line);
-int		get_env_end(char *line, int index);
-int		get_size_strings(char *line, char **env_temp);
 int		check_for_envvar(char **splitted_line);
+char	*remove_quotes_string(char **splitted_line, int index);
 
 		//file_delim_func.c
 int		get_number_delim(int *enum_array);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:28 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/25 16:08:06 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/10/31 19:01:48 by dantehussai      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,67 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+char	*get_line_quote(char *word_var, char *temp_var)
+{
+	char *new;
+	int	index_n;
+	int	index_te;
+	int	index;
+
+	index = 0;
+	index_n = 0;
+	index_te = 0;
+	new = ft_calloc(ft_strlen(word_var) + ft_strlen(temp_var), sizeof(char));
+	if (!new)
+	{
+		free(word_var);
+		return (NULL);
+	}
+	while (word_var[index] && word_var[index] != '"' && word_var[index] != '\'')
+	{
+		new[index_n] = word_var[index];
+		index++;
+		index_n++;
+	}
+	while (temp_var[index_te])
+	{
+		new[index_n] = temp_var[index_te];
+		index_n++;
+		index_te++;
+	}
+	index++;
+	while (word_var[index] && word_var[index] != '"' && word_var[index] != '\'')
+		index++;
+	while (word_var[index])
+	{
+		new[index_n] = word_var[index];
+		index_n++;
+		index++;
+	}
+	free(word_var);
+	return (new);
+}
+
 char	**replace_quotes_array(char **split_array, char	**temp_quotes)
 {
 	int	index;
+	int	index_x;
 	int	index_tmp;
 
 	index = 0;
 	index_tmp = 0;
 	while (split_array[index])
 	{
-		if (split_array[index][0] == '"' || split_array[index][0] == '\'')
+		index_x = 0;
+		while (split_array[index][index_x])
 		{
-			free(split_array[index]);
-			split_array[index] = \
-				ft_calloc(ft_strlen(temp_quotes[index_tmp]) + 1, sizeof(char));
-			if (!split_array[index])
+			if (split_array[index][index_x] == '"' || split_array[index][index_x] == '\'')
 			{
-				free_double_array(split_array);
-				return (NULL);
+				split_array[index] = get_line_quote(split_array[index], temp_quotes[index_tmp]);
+				index_tmp++;
+				break ;
 			}
-			ft_strcpy(split_array[index], temp_quotes[index_tmp]);
-			index_tmp++;
+			index_x++;
 		}
 		index++;
 	}
