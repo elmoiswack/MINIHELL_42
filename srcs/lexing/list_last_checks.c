@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:57 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 22:23:26 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/06 14:33:53 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ char	*remove_single_quotes(char *new, int *i_new, char *word_var, int *index)
 		new_i++;
 		word_i++;
 	}
-	*index = word_i + 1;
+	if (word_var[word_i] != '\0')
+		*index = word_i + 1;
+	else
+		*index = word_i;
 	*i_new = new_i;
 	return (new);
 }
@@ -48,7 +51,10 @@ char	*remove_double_quotes(char *new, int *i_new, char *word_var, int *index)
 		new_i++;
 		word_i++;
 	}
-	*index = word_i + 1;
+	if (word_var[word_i] != '\0')
+		*index = word_i + 1;
+	else
+		*index = word_i;
 	*i_new = new_i;
 	return (new);
 }
@@ -114,14 +120,14 @@ t_lexer	*check_quotes_list(t_lexer *l, t_lexer *head)
 		}
 		if (l->outfile)
 		{
-			l->content = quotes_loop(l->content, l);
-			if (!l->content)
+			l->outfile = quotes_loop(l->outfile, l);
+			if (!l->outfile)
 				return (NULL);
 		}
 		if (l->infile)
 		{
-			l->content = quotes_loop(l->content, l);
-			if (!l->content)
+			l->infile = quotes_loop(l->infile, l);
+			if (!l->infile)
 				return (NULL);
 		}
 		l = l->next;

@@ -141,3 +141,4 @@ echo hi | > >>
 | ls
     | ls
 cat <"Makefile"
+echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
