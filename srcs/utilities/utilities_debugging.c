@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:40 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 20:49:44 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/06 14:39:18 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,12 @@
 // 	}
 // 	fprintf(stderr, "\033[0m");
 // 	return ;
+// }
+
+// void	print_debug_info(t_lexer *node)
+// {
+// 	printing_lexer(node);
+// 	print_cmd_lst(node);
 // }
 
 void	print_double_array(char **arr)

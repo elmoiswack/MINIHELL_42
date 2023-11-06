@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:28 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 20:50:36 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/06 14:34:14 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,12 @@ char	**fill_array(char **split_array, char *line, int words)
 		begin = i_line;
 		len = get_len_next(line, i_line);
 		split_array[i_sp] = ft_substr(line, begin, len);
+		if (!split_array[i_sp])
+			return (free_double_array(split_array), NULL);
 		i_sp++;
 		words--;
+		if (words == 0)
+			break ;
 		i_line += len;
 	}
 	split_array[i_sp] = NULL;
