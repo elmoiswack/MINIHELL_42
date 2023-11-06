@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:37 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/23 15:39:38 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:23:47 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,27 +71,13 @@ int	check_for_quotes(char *line)
 	return (-1);
 }
 
-int	check_spaces_in_quotes(char *line)
+int	is_metacharachter(char c)
 {
-	int	index;
-
-	index = 0;
-	while (line[index])
-	{
-		if (line[index] == '"' || line[index] == '\'')
-		{
-			index++;
-			while (line[index] && (line[index] != '"' && line[index] != '\''))
-			{
-				if (line[index] == ' ')
-					return (1);
-				index++;
-			}
-			if (line[index] == '\0')
-				return (-1);
-		}
-		if (line[index] != '\0')
-			index++;
-	}
+	if (c == '<')
+		return (1);
+	if (c == '|')
+		return (1);
+	if (c == '>')
+		return (1);
 	return (-1);
 }

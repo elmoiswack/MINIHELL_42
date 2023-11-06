@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:08 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/06 14:34:28 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:34:09 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-int	is_metacharachter(char c)
-{
-	if (c == '<')
-		return (1);
-	if (c == '|')
-		return (1);
-	if (c == '>')
-		return (1);
-	return (-1);
-}
 
 int	edit_line_cases(char *old, int index_o)
 {
@@ -38,7 +27,8 @@ int	edit_line_cases(char *old, int index_o)
 		&& ((old[index_o + 1] == '$') \
 		|| (ft_isalpha(old[index_o + 1]) == 1)))
 		return (1);
-	if ((is_metacharachter(old[index_o]) == 1) && (old[index_o + 1] && old[index_o + 1] == '"'))
+	if ((is_metacharachter(old[index_o]) == 1) \
+		&& (old[index_o + 1] && old[index_o + 1] == '"'))
 		return (1);
 	return (-1);
 }
@@ -64,6 +54,35 @@ char	*quote_loop(char *new, char *old, int *index_o, char which)
 	return (new);
 }
 
+char	*edit_quote_loop(char *new, char *old, int *index_o)
+{
+	int	i_o;
+
+	i_o = *index_o;
+	if (old[i_o] == '"')
+	{
+		while (old[i_o] == '"')
+		{
+			new = quote_loop(new, old, &i_o, '"');
+			*index_o = i_o;
+			if (old[i_o] == '\0')
+				return (new);
+		}
+	}
+	else if (old[i_o] == '\'')
+	{
+		while (old[i_o] == '\'')
+		{
+			new = quote_loop(new, old, &i_o, '\'');
+			*index_o = i_o;
+			if (old[i_o] == '\0')
+				return (new);
+		}
+	}
+	*index_o = i_o;
+	return (new);
+}
+
 char	*edit_line(char *old, char *new)
 {
 	int	index_n;
@@ -74,25 +93,12 @@ char	*edit_line(char *old, char *new)
 	while (old[index_o])
 	{
 		new[index_n] = old[index_o];
-		if (old[index_o] == '"')
+		if (old[index_o] == '\'' || old[index_o] == '"')
 		{
-			while (old[index_o] == '"')
-			{
-				new = quote_loop(new, old, &index_o, '"');
-				index_n = ft_strlen(new) - 1;
-				if (old[index_o] == '\0')
-					return (new);
-			}
-		}
-		else if (old[index_o] == '\'')
-		{
-			while (old[index_o] == '\'')
-			{
-				new = quote_loop(new, old, &index_o, '\'');
-				index_n = ft_strlen(new) - 1;
-				if (old[index_o] == '\0')
-					return (new);
-			}
+			new = edit_quote_loop(new, old, &index_o);
+			index_n = ft_strlen(new) - 1;
+			if (old[index_o] == '\0')
+				return (new);
 		}
 		if (edit_line_cases(old, index_o) == 1)
 		{

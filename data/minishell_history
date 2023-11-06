@@ -154,3 +154,53 @@ cat <"Makefile"
 | echo oi
 echo "dfdsfds dsad" '"' "dsad ds"
 exit
+ls
+pwd
+echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
+cat <"M""a""k""e""f""i""l""e"
+cat minishell.h | grep ");"$ >outfile
+cat includes/minishell.h | grep ");"$ >outfile
+cat outfile 
+rm outfile 
+exit
+cat includes/minishell.h | grep ");"$ >outfile
+cat outfile 
+cat <"M""a""k""e""f""i""l""e"
+echo 'exit_code ->$? user ->$USER home -> $HOME'
+echo "dfdsfds dsad" '"' "dsad ds"
+<Makefile cat | grep lib
+exit
+echo "cat lol.c | cat >lol.c"'test'
+echo "cat lol.c | cat >lol.c" 'test'
+export a="       test    "
+$a
+echo $a
+echo '$USER'$USER
+echo $USER'$USER'$USER
+echo "dsa $USER"'$USER'"dsad$USER"
+cat <Makefile >out >out1
+cat out1
+cat out
+rm out out1
+export a=""
+cat <$a
+export a=""
+cat <$a
+cat << eof | cat << eof
+<Makefile <<ja cat | grep lib <<b cat
+cat <"M""a""k""e""f""i""l""e"
+echo "dsa $USER"'$USER'"dsad$USER"
+export a="       test    "
+echo $a
+export a="       test    "
+echo $a
+cat <"M""a""k""e""f""i""l""e"
+cat <"M""a""k""e""f""i""l""e"
+cat <"M""a""k""e""f""i""l""e"
+cat <"M""a""k""e""f""i""l""e"
+cat <"M""a""k""e""f""i""l""e"
+cat <"M""a""k""e""f""i""l""e"
+cat <"M""a""k""e""f""i""l""e"
+export a="       test    "
+echo $a
+echo "dsa $USER"'$USER'"dsad$USER"

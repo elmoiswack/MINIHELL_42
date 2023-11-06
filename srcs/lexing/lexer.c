@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:42 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 22:20:15 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:22:17 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_lexer	*set_variables(t_lexer *info_list, char *line)
 	info_list->output = STDOUT_OUT;
 	info_list->error_code = -1;
 	info_list->index_delim = 0;
-	if (check_for_quotes(line) == 1 && check_spaces_in_quotes(line) == 1)
+	if (check_for_quotes(line) == 1)
 		splitted_line = split_with_quotes(line, info_list);
 	else
 		splitted_line = ft_split(line, ' ');
