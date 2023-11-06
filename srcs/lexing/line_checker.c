@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:53 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/23 15:39:53 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/06 14:37:44 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,22 @@ int	input_line_check(char *line, t_lexer *info_list)
 	}
 	while (line[index])
 	{
+		if (line[index] == '"')
+		{
+			index++;
+			while (line[index] && line[index] != '"')
+				index++;
+			if (line[index] == '\0')
+				return (1);
+		}
+		if (line[index] == '\'')
+		{
+			index++;
+			while (line[index] && line[index] != '\'')
+				index++;
+			if (line[index + 1] == '\0')
+				return (1);
+		}
 		if (inputline_other_checks(line, info_list, index) == -1)
 			return (-1);
 		index++;

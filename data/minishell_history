@@ -142,3 +142,15 @@ echo hi | > >>
     | ls
 cat <"Makefile"
 echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
+echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
+echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<'
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo 'exit_code ->$? user ->$USER home -> $HOME'
+cat includes/minishell.h | grep ");"$ >outfile
+cat outfile 
+rm outfile 
+cat <"M""a""k""e""f""i""l""e"
+cat <"Makefile"
+| echo oi
+echo "dfdsfds dsad" '"' "dsad ds"
+exit
