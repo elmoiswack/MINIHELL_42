@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:57 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/06 15:09:47 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/10 11:59:35 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,6 @@ t_lexer	*check_quotes_list(t_lexer *l, t_lexer *head)
 		}
 		l = l->next;
 	}
+	head = other_list_checks(head);
 	return (head);
 }

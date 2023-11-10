@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   into_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:31 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 20:54:51 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:19:19 by dantehussai      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,28 @@
 #include "../../libft/libft.h"
 #include <stdio.h>
 
-t_lexer	*one_two_word_lexer(t_lexer *info_list, char **splitted_line)
+t_lexer	*one_two_word_lexer(t_lexer *info_list, char **splitted_line, int *enum_array)
 {
-	info_list->content = splitted_line;
-	info_list->path = get_path_of_command(info_list->content[0], \
-		info_list->env_copy);
+	int i;
+
+	i = 0;
+	while (splitted_line[i])
+	{
+		if (is_metacharachter(splitted_line[i][0]) == 1)
+			break ;
+		i++;
+	}
+	if (splitted_line[i] != NULL && is_metacharachter(splitted_line[i][0]) == 1)
+	{
+		info_list = organizing_data(info_list, splitted_line, enum_array, 0);
+		if (!info_list)
+			return (NULL);
+	}
+	else
+		info_list->content = splitted_line;
+	if 	(info_list->content)
+		info_list->path = get_path_of_command(info_list->content[0], \
+			info_list->env_copy);
 	info_list->input = STDIN_IN;
 	info_list->output = STDOUT_OUT;
 	info_list->next = NULL;

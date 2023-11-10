@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:42 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/06 15:22:17 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/10 13:08:24 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_lexer	*parsing_array(t_lexer *info_list, \
 	if (ammount_words == 1 || ammount_words == 2)
 	{
 		info_list->check_free = 1;
-		info_list = one_two_word_lexer(info_list, splitted_line);
+		info_list = one_two_word_lexer(info_list, splitted_line, enum_array);
 	}
 	if (ammount_words > 2)
 		info_list = organizing_data(info_list, splitted_line, enum_array, 0);
@@ -99,7 +99,7 @@ t_lexer	*set_variables(t_lexer *info_list, char *line)
 	return (info_list);
 }
 
-t_lexer	*lexing(char *line, char **env_cpy)
+t_lexer	*lexing(char *line, char **env_cpy, int status)
 {
 	t_lexer	*info_list;
 	char	*new_line;
@@ -113,6 +113,7 @@ t_lexer	*lexing(char *line, char **env_cpy)
 		return (NULL);
 	}
 	info_list->env_copy = env_cpy;
+	info_list->exit_status = status;
 	new_line = put_spaces_in_line(line, info_list);
 	free(line);
 	if (!new_line)

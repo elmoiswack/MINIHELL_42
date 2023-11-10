@@ -29,6 +29,7 @@ SRCS		:= 	main.c \
 				lexing/varexp_utils.c \
 				lexing/file_delim_func.c \
 				lexing/list_last_checks.c \
+				lexing/listlastcheck_other.c \
 				error/error.c \
 				error/err_log.c \
 				error/free.c \

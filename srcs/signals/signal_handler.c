@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:21:41 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/11/01 12:39:04 by dantehussai      ###   ########.fr       */
+/*   Updated: 2023/11/10 11:47:00 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

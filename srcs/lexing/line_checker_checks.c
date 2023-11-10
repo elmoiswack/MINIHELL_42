@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:48 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 22:12:31 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/10 13:14:35 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_pipe(char *line, int index, t_lexer *info_list)
 	temp = index;
 	while (temp > 0 && ft_isalpha(line[temp]) != 1)
 		temp--;
-	if (temp == 0)
+	if (temp == 0 && ft_isalnum(line[temp]) != 1)
 		return (error_lex(info_list, 2, \
 			"something needs to be infront of the pipe!"), -1);
 	index++;
@@ -120,7 +120,7 @@ int	check_the_quotes(char *line)
 			count = check_quotes_loop(line, index, count, '"');
 			index = get_end_quote(line, index, 1);
 		}
-		if (line[index] == '\'')
+		else if (line[index] == '\'')
 		{
 			count = check_quotes_loop(line, index, count, '\'');
 			index = get_end_quote(line, index, 0);

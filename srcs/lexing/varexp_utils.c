@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 20:48:02 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 20:52:03 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/10 13:19:25 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	check_for_envvar(char **splitted_line)
 				index_x++;
 				if (splitted_line[index][index_x] == '\0')
 					break ;
-				if (ft_isalpha(splitted_line[index][index_x]) == 1)
+				if (ft_isalpha(splitted_line[index][index_x]) == 1 \
+					|| splitted_line[index][index_x] == '?')
 					return (1);
 			}
 			index_x++;

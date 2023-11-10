@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:30:25 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/11/06 14:39:29 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/10 12:21:28 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@ void	main_execute_input(t_minishell *shell, char *line)
 
 	add_history(line);
 	add_to_history_file(line);
-	shell->cmd_lst = lexing(line, shell->env_cpy);
+	shell->cmd_lst = lexing(line, shell->env_cpy, shell->status);
 	if (!shell->cmd_lst)
 	{
 		shell->status = -1;
 		return ;
 	}
 	add_cmd_id(shell->cmd_lst);
+	print_debug_info(shell->cmd_lst);
 	builtin = is_builtin(shell->cmd_lst);
 	if (builtin != NO_BUILTIN && !shell->cmd_lst->next
 		&& !shell->cmd_lst->infile && !shell->cmd_lst->outfile)
