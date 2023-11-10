@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_last_checks.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:57 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/09 18:32:32 by dantehussai      ###   ########.fr       */
+/*   Updated: 2023/11/10 11:59:35 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,46 +107,6 @@ char	**quotes_loop(char **array, t_lexer *info_list)
 	return (array);
 }
 
-t_lexer *check_chmod(t_lexer *info_list)
-{
-	t_lexer *head;
-	char	**temp;
-	char	**random;
-	
-	head = info_list;
-	while (info_list)
-	{
-		if (ft_strncmp(info_list->content[0], "chmod", ft_strlen("chmod")) == 0)
-			break ;
-		info_list = info_list->next;
-	}
-	if (!info_list)
-		return (head);
-	int i = 0;
-	while (info_list->content[i])
-		i++;
-	if (i == 3)
-		return (head);
-	temp = ft_copy_double_array(info_list->content);
-	random = ft_split(temp[1], ' ');
-	free_double_array(info_list->content);
-	info_list->content = allocate_2d_arr(ft_strlen("chmod"), info_list);
-	info_list->content[0] = ft_strjoin_and_free(info_list->content[0], "chmod");
-	i = 0;
-	int j = 1;
-	while (random[i])
-	{
-		info_list->content[j] = ft_calloc(1, sizeof(char));
-		info_list->content[j] = ft_strjoin_and_free(info_list->content[j], random[i]);
-		i++;
-		j++;
-	}
-	info_list->content[j] = NULL;
-	free_double_array(temp);
-	free_double_array(random);
-	return (head);
-}
-
 t_lexer	*check_quotes_list(t_lexer *l, t_lexer *head)
 {
 	head = l;
@@ -172,7 +132,6 @@ t_lexer	*check_quotes_list(t_lexer *l, t_lexer *head)
 		}
 		l = l->next;
 	}
-	head = listlastcheck_path(head);
-	head = check_chmod(head);
+	head = other_list_checks(head);
 	return (head);
 }

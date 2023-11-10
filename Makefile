@@ -29,7 +29,7 @@ SRCS		:= 	main.c \
 				lexing/varexp_utils.c \
 				lexing/file_delim_func.c \
 				lexing/list_last_checks.c \
-				lexing/listlastcheck_path.c \
+				lexing/listlastcheck_other.c \
 				error/error.c \
 				error/err_log.c \
 				error/free.c \
@@ -74,7 +74,7 @@ Bold		= "\033[1m"			# Text Style Bold
 ######################################################
 
 ifdef DEBUG
-	COMPILER += -g -fsanitize=address
+	COMPILER += -g
 	LIBFT_DEBUG += DEBUG=1
 	DEBUG_MODE += "(debug mode)"
 endif

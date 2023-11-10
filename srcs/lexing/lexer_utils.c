@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:37 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/06 15:23:47 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/10 13:12:28 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	check_for_quotes(char *line)
 		{
 			return (1);
 		}
-		if (line[index] == 39)
+		if (line[index] == '\'')
 		{
 			return (1);
 		}

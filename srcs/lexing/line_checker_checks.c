@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_checker_checks.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:48 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/09 17:08:56 by dantehussai      ###   ########.fr       */
+/*   Updated: 2023/11/10 13:14:35 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	check_the_quotes(char *line)
 			count = check_quotes_loop(line, index, count, '"');
 			index = get_end_quote(line, index, 1);
 		}
-		if (line[index] == '\'')
+		else if (line[index] == '\'')
 		{
 			count = check_quotes_loop(line, index, count, '\'');
 			index = get_end_quote(line, index, 0);

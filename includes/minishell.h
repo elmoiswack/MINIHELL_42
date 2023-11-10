@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:51 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/09 18:15:27 by dantehussai      ###   ########.fr       */
+/*   Updated: 2023/11/10 13:04:43 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct lexerinfo {
 	char				**env_copy;
 	int					error_code;
 	const char			*error_str;
+	int					exit_status;
 	struct lexerinfo	*next;
 }	t_lexer;
 
@@ -134,7 +135,7 @@ typedef struct s_minishell {
 //###############################################################
 
 		//lexer.c
-t_lexer	*lexing(char *line, char **env_cpy);
+t_lexer	*lexing(char *line, char **env_cpy, int status);
 t_lexer	*set_variables(t_lexer *info_list, char *line);
 t_lexer	*which_case(t_lexer	*info_list, char **splitted_line, int *enum_array);
 int		info_list_checker(t_lexer *info_list, \
@@ -255,7 +256,7 @@ t_lexer	*default_echo_data(t_lexer *info_list, char **splitted_line);
 		//variable_expander.c
 char	**replace_var_expander(t_lexer *info_list, \
 	char **splitted_line, char **env_cpy, int *enum_array);
-char	*env_expander_loop(char *word_var, char **env_cpy, int index);
+char	*env_expander_loop(char *word_var, char **env_cpy, int index, t_lexer *info_list);
 char	*expand_variable(char *word_var, int *index, char **env_cpy);
 char	*replace_expanded_variable(char *word_var, char *exp_var, int start);
 char	*finish_new_line(char *new, char *word_var, char *exp_var, int index);
@@ -265,6 +266,7 @@ int		check_for_envvar(char **splitted_line);
 char	*remove_dollar_sign(char *old);
 char	*get_variable_string(char *word_var, char *exp_var, int begin, int end);
 char	*get_expanded_variable(char *exp_var, char **env_cpy);
+char	*expand_exit_status(char *word_var, t_lexer *info_list);
 
 		//file_delim_func.c
 int		get_number_delim(int *enum_array);
@@ -273,6 +275,8 @@ t_lexer	*allocate_files(t_lexer *info_list, int *enum_array);
 		//list_check.s
 t_lexer	*check_quotes_list(t_lexer *l, t_lexer *head);
 t_lexer *listlastcheck_path(t_lexer *info_list);
+
+t_lexer	*other_list_checks(t_lexer *info_list);
 
 //###############################################################
 //		ERROR AND FREE FUNCTIONS

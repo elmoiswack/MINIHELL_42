@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:30:25 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/11/09 17:07:58 by dantehussai      ###   ########.fr       */
+/*   Updated: 2023/11/10 12:21:28 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	main_execute_input(t_minishell *shell, char *line)
 
 	add_history(line);
 	add_to_history_file(line);
-	shell->cmd_lst = lexing(line, shell->env_cpy);
+	shell->cmd_lst = lexing(line, shell->env_cpy, shell->status);
 	if (!shell->cmd_lst)
 	{
 		shell->status = -1;
@@ -44,8 +44,7 @@ void	main_execute_input(t_minishell *shell, char *line)
 
 void	main_input_error(int *terminate)
 {
-	//rl_clear_history();
-	clear_history();
+	rl_clear_history();
 	*terminate = 1;
 	ft_putstr_fd("exit\n", STDERR_FILENO);
 	exit(0);

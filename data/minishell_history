@@ -278,3 +278,122 @@ chmod 777 test
 ls -la
 ls -la
 chmod 777 test
+ls
+pwd
+./srcs/
+./srcs
+l|l|l
+l|l|l
+l|l|l
+l|l|l
+l|l|l
+l|l|l
+l|l|l
+l|l|l
+l |l |l
+l |l |l
+l |l |l
+"l" | l | l
+'' | l | l
+l | l | l
+<ll | <l
+ls | >l
+ls
+[wd
+pwd
+ls | >l
+ls | >l
+lsof -c
+lsof -c
+lsof c
+lsof -c
+lsof -c minishell
+touch test
+chmod 000 tes
+chmod 000 test
+ls -la
+chmod 000 test dsadsa
+chmod 000 test dsadsa dsagrsag
+chmod 000 test dsadsa dsagrsag jeaf
+chmod 000 test dsadsa dsagrsag jeaf frjsghs
+echo $? + $?
+echo ls | cat -e
+'l'"s"
+chmod 000 test dsadsa dsagrsag jeaf frjsghs
+export a=a
+export a=
+env
+export a=whahhahaha
+export a=whahhahaha
+env
+unset a
+ls
+env
+cat | grep
+cat | grep
+cat | grep
+cat | grep
+exit | echo -n
+''
+"        "
+l
+ls -la
+<test cat
+cat test
+./test
+./Makefile 
+$?
+<l
+<l
+<l
+lsof minishell
+lsof -c minishell
+$?
+$?
+$?
+$?
+$?
+$?
+$?
+$?
+$?
+'$?'
+'     '
+'$?'
+$?
+echo $?
+echo $?
+expr $? + $?
+expr $? + $?
+expr $? + $?
+"$?"
+"$?"
+expr $? + $?
+'$?'
+'$?'
+"$?"
+lsof minishell 
+./Makefile
+"
+'
+"
+"
+"
+"
+'
+''
+""
+"       "
+"ls"
+"ls"
+"       "
+''
+'
+"
+"       "
+./Makefile
+"       "
+$?
+echo $?
+env | grep CWD
+./srcs

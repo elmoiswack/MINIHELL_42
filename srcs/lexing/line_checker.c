@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:53 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/09 18:03:41 by dantehussai      ###   ########.fr       */
+/*   Updated: 2023/11/10 12:47:21 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	check_only_quotes(char *line)
 	index = 0;
 	while (line[index])
 	{
-		if (ft_isalnum(line[index]) == 1)
+		if (ft_iswhitespace(line[index]) != 1 && (line[index] != '\'' && line[index] != '"'))
 			return (-1);
 		index++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variable_expander.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:47 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/09 17:41:30 by dantehussai      ###   ########.fr       */
+/*   Updated: 2023/11/10 13:03:50 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,44 @@ char	*expand_variable(char *word_var, int *index, char **env_cpy)
 	return (word_var);
 }
 
-char	*env_expander_loop(char *word_var, char **env_cpy, int index)
+char	*expand_exit_status(char *word_var, t_lexer *info_list)
+{
+	char	*new_var;
+	char	*status;
+	int		index;
+	int		temp;
+
+	index = 0;
+	while (word_var[index] && word_var[index] != '$')
+		index++;
+	new_var = ft_substr(word_var, 0, index);
+	if (!new_var)
+		return (error_lex(info_list, 3, "varexp_utils.c/L101"), NULL);
+	status = ft_itoa(info_list->exit_status);
+	if (!status)
+	{
+		free(new_var);
+		return (error_lex(info_list, 3, "varexp_utils.c/L104"), NULL);
+	}
+	new_var = ft_strjoin_and_free(new_var, status);
+	free(status);
+	if (!new_var)
+		return (error_lex(info_list, 3, "varexp_utils.c/L110"), NULL);
+	index += 2;
+	temp = ft_strlen(word_var) - index;
+	status = ft_substr(word_var, index, temp);
+	if (!status)
+	{
+		free(new_var);
+		return (error_lex(info_list, 3, "varexp_utils.c/L114"), NULL);
+	}		
+	new_var = ft_strjoin_and_free(new_var, status);
+	free(status);
+	free(word_var);
+	return (new_var);
+}
+
+char	*env_expander_loop(char *word_var, char **env_cpy, int index, t_lexer *info_list)
 {
 	int	check;
 
@@ -117,6 +154,14 @@ char	*env_expander_loop(char *word_var, char **env_cpy, int index)
 			if (!word_var)
 				return (NULL);
 		}
+		if (word_var[index] == '$' \
+			&& word_var[index + 1] && word_var[index + 1] == '?')
+		{
+
+			word_var = expand_exit_status(word_var, info_list);
+			if (!word_var)
+				return (NULL);
+		}
 		index++;
 	}
 	return (word_var);
@@ -133,7 +178,7 @@ char	**replace_var_expander(t_lexer *info_list, char **splitted_line, \
 		if (enum_array[index] != DELIMITER)
 		{
 			splitted_line[index] = \
-				env_expander_loop(splitted_line[index], env_cpy, 0);
+				env_expander_loop(splitted_line[index], env_cpy, 0, info_list);
 			if (!splitted_line[index])
 			{
 				free_double_array(splitted_line);
