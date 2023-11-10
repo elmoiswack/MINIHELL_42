@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variable_expander.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:47 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 20:51:39 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:41:30 by dantehussai      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ char	*replace_expanded_variable(char *word_var, char *exp_var, int start)
 	char	*new_line;
 	int		index;
 	int		index_word;
-	int		index_exp;
 
 	new_line = ft_calloc(ft_strlen(word_var) + \
 		ft_strlen(exp_var) + 1, sizeof(char));
@@ -55,7 +54,6 @@ char	*replace_expanded_variable(char *word_var, char *exp_var, int start)
 		return (NULL);
 	index = 0;
 	index_word = 0;
-	index_exp = 0;
 	while (index_word < start)
 	{
 		new_line[index] = word_var[index_word];

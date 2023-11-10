@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:53 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/06 15:20:39 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:03:41 by dantehussai      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,20 @@ int	input_check_loop(char *line, t_lexer *info_list)
 	return (1);
 }
 
+int	check_only_quotes(char *line)
+{
+	int	index; 
+
+	index = 0;
+	while (line[index])
+	{
+		if (ft_isalnum(line[index]) == 1)
+			return (-1);
+		index++;
+	}
+	return (1);
+}
+
 int	input_line_check(char *line, t_lexer *info_list)
 {
 	if (check_whitespaces(line) == -1)
@@ -104,6 +118,8 @@ int	input_line_check(char *line, t_lexer *info_list)
 	{
 		if (check_the_quotes(line) == -1)
 			return (error_lex(info_list, 2, "unclosed quote!"), -1);
+		if (check_only_quotes(line) == 1)
+			return (error_lex(info_list, 2, "only quotes is not a valid command!"), -1);
 	}
 	if (input_check_loop(line, info_list) == -1)
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:21:41 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/11/01 12:39:04 by dantehussai      ###   ########.fr       */
+/*   Updated: 2023/11/09 17:06:57 by dantehussai      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	handle_parent_signals(int signum)
 	if (signum == SIGINT)
 	{
 		write(STDOUT_FILENO, "\n", 1);
-		rl_replace_line("", 0);
+		//rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}

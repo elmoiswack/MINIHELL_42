@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:30:25 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/11/06 14:39:29 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:07:58 by dantehussai      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	main_execute_input(t_minishell *shell, char *line)
 		return ;
 	}
 	add_cmd_id(shell->cmd_lst);
+	print_debug_info(shell->cmd_lst);
 	builtin = is_builtin(shell->cmd_lst);
 	if (builtin != NO_BUILTIN && !shell->cmd_lst->next
 		&& !shell->cmd_lst->infile && !shell->cmd_lst->outfile)
@@ -43,7 +44,8 @@ void	main_execute_input(t_minishell *shell, char *line)
 
 void	main_input_error(int *terminate)
 {
-	rl_clear_history();
+	//rl_clear_history();
+	clear_history();
 	*terminate = 1;
 	ft_putstr_fd("exit\n", STDERR_FILENO);
 	exit(0);

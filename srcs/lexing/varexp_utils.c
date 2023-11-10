@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   varexp_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 20:48:02 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 20:52:03 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:41:41 by dantehussai      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

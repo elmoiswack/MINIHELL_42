@@ -204,3 +204,77 @@ cat <"M""a""k""e""f""i""l""e"
 export a="       test    "
 echo $a
 echo "dsa $USER"'$USER'"dsad$USER"
+ls
+pwd
+ls
+ls
+l|l|l
+l|l|l
+ll|l|l
+echo $?
+echo $?
+echo $?
+<l <l
+lsof -c
+touch test
+chmod 000 test
+chmod -v test
+ls -la
+chmod 000 test
+echo '$?'
+echo '$?'
+echo $?
+echo $?
+echo $?
+echo $?
+echo $?
+echo $?
+expr $? + $?
+expr $? + $?
+echo $?
+echo $?
+echo $?
+expr $? + $?
+expr $? + $?
+expr $? + $?
+expr $? + $?
+expr $? + $?
+echo ls | cat -e
+echo ls | cat -e
+echo ls | cat -e
+"l"'s'
+"l"'s'
+chmod 000 test 
+''
+''
+'adsada'
+'adsada'
+''
+'   '
+' dsadas'
+exit 1 | echo -n
+chmod 777 test
+ls -la
+<l|<l
+<|
+<l
+<l
+<l
+<l
+<l
+<l
+<l
+<l
+<l
+<l
+<l
+<l
+chmod 777 test
+chmod 777 test
+chmod 777 test
+chmod 777 test
+chmod 777 test
+chmod 777 test
+ls -la
+ls -la
+chmod 777 test

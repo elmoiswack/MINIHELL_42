@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:51 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/01 22:21:49 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:15:27 by dantehussai      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ t_lexer	*other_special_case(t_lexer	*info_list, char **splitted_line, \
 t_lexer	*special_case_files(t_lexer *info_list, char **splitted_line);
 
 		//into_list.c
-t_lexer	*one_two_word_lexer(t_lexer *info_list, char **splitted_line);
+t_lexer	*one_two_word_lexer(t_lexer *info_list, char **splitted_line, int *enum_array);
 t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var);
 
 		//into_list_cases.c
@@ -272,6 +272,7 @@ t_lexer	*allocate_files(t_lexer *info_list, int *enum_array);
 
 		//list_check.s
 t_lexer	*check_quotes_list(t_lexer *l, t_lexer *head);
+t_lexer *listlastcheck_path(t_lexer *info_list);
 
 //###############################################################
 //		ERROR AND FREE FUNCTIONS

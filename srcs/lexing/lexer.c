@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:42 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/06 15:22:17 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:15:36 by dantehussai      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_lexer	*parsing_array(t_lexer *info_list, \
 	if (ammount_words == 1 || ammount_words == 2)
 	{
 		info_list->check_free = 1;
-		info_list = one_two_word_lexer(info_list, splitted_line);
+		info_list = one_two_word_lexer(info_list, splitted_line, enum_array);
 	}
 	if (ammount_words > 2)
 		info_list = organizing_data(info_list, splitted_line, enum_array, 0);
@@ -95,6 +95,12 @@ t_lexer	*set_variables(t_lexer *info_list, char *line)
 		return (error_lex(info_list, 3, "lexer.c/91"), NULL);
 	}
 	enum_array = into_enum_array(splitted_line, enum_array, 0);
+	int i = 0;
+	while (splitted_line[i])
+	{
+		printf("enum = %i\n", enum_array[i]);
+		i++;
+	}
 	info_list = which_case(info_list, splitted_line, enum_array);
 	return (info_list);
 }
