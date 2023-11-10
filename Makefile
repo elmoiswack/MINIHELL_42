@@ -8,6 +8,7 @@ SRCS		:= 	main.c \
 				lexing/lexer.c \
 				lexing/line_checker.c \
 				lexing/line_checker_checks.c \
+				lexing/line_checker_quotes.c \
 				lexing/lexer_utils.c \
 				lexing/enum_arrayfts.c \
 				lexing/get_path.c \
@@ -27,6 +28,7 @@ SRCS		:= 	main.c \
 				lexing/parsing_echo.c \
 				lexing/variable_expander.c \
 				lexing/varexp_utils.c \
+				lexing/varexp_exit_status.c \
 				lexing/file_delim_func.c \
 				lexing/list_last_checks.c \
 				lexing/listlastcheck_other.c \

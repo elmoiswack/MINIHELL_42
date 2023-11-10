@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:51 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/10 13:04:43 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/10 14:14:34 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,16 +146,23 @@ t_lexer	*parsing_array(t_lexer *info_list, \
 		//line_checker.c
 int		input_line_check(char *line, t_lexer *info_list);
 int		inputline_other_checks(char *line, t_lexer *info_list, int index);
-int		inputline_other_checks(char *line, t_lexer *info_list, int index);
+int		input_check_loop(char *line, t_lexer *info_list);
+int		check_whitespaces(char *line);
 
-		//linechecker_checks.c
+		//line_checker_checks.c
 int		check_outredirect(char *line, int index, t_lexer *info_list);
 int		check_inredirect(char *line, int index, t_lexer *info_list);
 int		check_pipe(char *line, int index, t_lexer *info_list);
+
+		//line_checker_quotes.c
 int		check_the_quotes(char *line);
+int		check_quotes_loop(char *line, int index, int count, char c);
+int		input_check_quote(char *line, int *index, char which);
+int		check_only_quotes(char *line);
 
 		//enum_arrayfts.c
 int		*into_enum_array(char **splitted_line, int *enum_array, int index);
+int		into_enum_cases(char **splitted_line, int *enum_array, int index);
 int		which_enum(char **splitted_line, int index);
 
 		//lexer_utils.c
@@ -163,15 +170,21 @@ int		skip_spaces(char *line, int index);
 int		ammount_of_words(char *line);
 int		get_max_array(char **array);
 int		check_for_quotes(char *line);
-int		check_spaces_in_quotes(char *line);
+int		is_metacharachter(char c);
 
 		//eddit_line.c
 char	*put_spaces_in_line(char *line, t_lexer *info_list);
 char	*edit_line(char *old, char *new);
-int		is_metacharachter(char c);
+char	*edit_quote_loop(char *new, char *old, int *index_o);
+char	*quote_loop(char *new, char *old, int *index_o, char which);
+int		edit_line_cases(char *old, int index_o);
 
 		//split_quotes.c
 char	**split_with_quotes(char *line, t_lexer *info_list);
+char	**fill_array(char **split_array, char *line, int words);
+int		get_len_next(char *line, int i_line);
+int		get_len_word(char *line, int index);
+int		get_len_quote(char *line, int index, char which);
 
 		//splitquo_utils.c
 int		get_end_quote(char *line, int end, int which);
@@ -218,7 +231,8 @@ t_lexer	*other_special_case(t_lexer	*info_list, char **splitted_line, \
 t_lexer	*special_case_files(t_lexer *info_list, char **splitted_line);
 
 		//into_list.c
-t_lexer	*one_two_word_lexer(t_lexer *info_list, char **splitted_line, int *enum_array);
+t_lexer	*one_two_word_lexer(t_lexer *info_list, \
+	char **splitted_line, int *enum_array);
 t_lexer	*into_linklist(t_lexer *info_list, char *word_var, int enum_var);
 
 		//into_list_cases.c
@@ -227,7 +241,7 @@ t_lexer	*into_linklist_command(t_lexer *info_list, char *word_var);
 t_lexer	*into_linklist_infile(t_lexer *info_list, char *word_var);
 t_lexer	*into_linklist_outfile(t_lexer *info_list, char *word_var);
 
-		//intolist_special.c
+		//intolist_other.c
 t_lexer	*intolist_commands(t_lexer *info_list, \
 	char **splitted_line, int *enum_array);
 
@@ -256,27 +270,44 @@ t_lexer	*default_echo_data(t_lexer *info_list, char **splitted_line);
 		//variable_expander.c
 char	**replace_var_expander(t_lexer *info_list, \
 	char **splitted_line, char **env_cpy, int *enum_array);
-char	*env_expander_loop(char *word_var, char **env_cpy, int index, t_lexer *info_list);
+char	*env_expander_loop(char *word_var, \
+	char **env_cpy, int index, t_lexer *info_list);
+char	*envexp_loop_other(char *word_var, int *index, \
+	char **env_cpy, t_lexer *info_list);
 char	*expand_variable(char *word_var, int *index, char **env_cpy);
 char	*replace_expanded_variable(char *word_var, char *exp_var, int start);
-char	*finish_new_line(char *new, char *word_var, char *exp_var, int index);
 
 		//varexp_utils.c
 int		check_for_envvar(char **splitted_line);
 char	*remove_dollar_sign(char *old);
 char	*get_variable_string(char *word_var, char *exp_var, int begin, int end);
 char	*get_expanded_variable(char *exp_var, char **env_cpy);
+char	*finish_new_line(char *new, char *exp_var, char *word_var, int index);
+
+		//varexp_exit_status.c
 char	*expand_exit_status(char *word_var, t_lexer *info_list);
+char	*replace_and_cat_line(char *new_var, \
+	char *word_var, int index, t_lexer *info_list);
 
 		//file_delim_func.c
 int		get_number_delim(int *enum_array);
+t_lexer	*alloc_infile(t_lexer *info_list, int *enum_array);
 t_lexer	*allocate_files(t_lexer *info_list, int *enum_array);
 
-		//list_check.s
+		//list_last_checks.c
 t_lexer	*check_quotes_list(t_lexer *l, t_lexer *head);
-t_lexer *listlastcheck_path(t_lexer *info_list);
+char	**quotes_loop(char **array, t_lexer *info_list);
+char	*remove_quotes_loop(char *word_var);
+char	*remove_double_quotes(char *new, \
+	int *i_new, char *word_var, int *index);
+char	*remove_single_quotes(char *new, \
+	int *i_new, char *word_var, int *index);
 
+		//listlastcheck_other.c
+t_lexer	*listlastcheck_path(t_lexer *info_list);
 t_lexer	*other_list_checks(t_lexer *info_list);
+t_lexer	*check_chmod(t_lexer *info_list);
+t_lexer	*replacing_content(t_lexer *info_list, char **array);
 
 //###############################################################
 //		ERROR AND FREE FUNCTIONS

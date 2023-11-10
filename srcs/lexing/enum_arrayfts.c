@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:12 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/10 13:19:52 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/10 13:29:25 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	which_enum(char **splitted_line, int index)
 		return (FLAG);
 	if (ft_isdigit(splitted_line[index][0]) == 1)
 		return (FLAG);
-	if ((splitted_line[index][0] == '+') || (splitted_line[index][0] == '-')\
-		 || (splitted_line[index][0] == '*'))
+	if ((splitted_line[index][0] == '+') || (splitted_line[index][0] == '-') \
+		|| (splitted_line[index][0] == '*'))
 		return (FLAG);
 	return (COMMAND);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   into_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:31 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/09 18:19:19 by dantehussai      ###   ########.fr       */
+/*   Updated: 2023/11/10 13:30:14 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 #include "../../libft/libft.h"
 #include <stdio.h>
 
-t_lexer	*one_two_word_lexer(t_lexer *info_list, char **splitted_line, int *enum_array)
+t_lexer	*one_two_word_lexer(t_lexer *info_list, \
+	char **splitted_line, int *enum_array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (splitted_line[i])
@@ -33,7 +34,7 @@ t_lexer	*one_two_word_lexer(t_lexer *info_list, char **splitted_line, int *enum_
 	}
 	else
 		info_list->content = splitted_line;
-	if 	(info_list->content)
+	if (info_list->content)
 		info_list->path = get_path_of_command(info_list->content[0], \
 			info_list->env_copy);
 	info_list->input = STDIN_IN;

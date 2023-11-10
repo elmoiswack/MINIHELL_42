@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dantehussain <dantehussain@student.42.f    +#+  +:+       +#+        */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:04 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/09 17:53:11 by dantehussai      ###   ########.fr       */
+/*   Updated: 2023/11/10 13:35:38 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ t_lexer	*echo_meta_intolist(t_lexer *info_list, \
 			splitted_line[index]);
 		if (!info_list->content[1])
 			return (error_lex(info_list, 3, "parsing_echo.c/L37"), NULL);
-		if (splitted_line[index + 1] != NULL && is_metacharachter(splitted_line[index + 1][0]) != 1)
+		if (splitted_line[index + 1] != NULL \
+			&& is_metacharachter(splitted_line[index + 1][0]) != 1)
 			info_list->content[1] = ft_strjoin_and_free(info_list->content[1], \
 				" ");
 		if (!info_list->content[1])
