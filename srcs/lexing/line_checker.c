@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:53 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/10 12:47:21 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/10 13:34:41 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,6 @@ int	check_whitespaces(char *line)
 	return (1);
 }
 
-int	input_check_quote(char *line, int *index, char which)
-{
-	int	i;
-
-	i = *index;
-	if (line[i] == which)
-	{
-		i++;
-		while (line[i] && line[i] != which)
-			i++;
-		if (line[i] == '\0')
-			return (1);
-	}
-	*index = i;
-	return (-1);
-}
-
 int	input_check_loop(char *line, t_lexer *info_list)
 {
 	int	index;
@@ -96,20 +79,6 @@ int	input_check_loop(char *line, t_lexer *info_list)
 	return (1);
 }
 
-int	check_only_quotes(char *line)
-{
-	int	index; 
-
-	index = 0;
-	while (line[index])
-	{
-		if (ft_iswhitespace(line[index]) != 1 && (line[index] != '\'' && line[index] != '"'))
-			return (-1);
-		index++;
-	}
-	return (1);
-}
-
 int	input_line_check(char *line, t_lexer *info_list)
 {
 	if (check_whitespaces(line) == -1)
@@ -119,7 +88,8 @@ int	input_line_check(char *line, t_lexer *info_list)
 		if (check_the_quotes(line) == -1)
 			return (error_lex(info_list, 2, "unclosed quote!"), -1);
 		if (check_only_quotes(line) == 1)
-			return (error_lex(info_list, 2, "only quotes is not a valid command!"), -1);
+			return (error_lex(info_list, 2, \
+				"only quotes is not a valid command!"), -1);
 	}
 	if (input_check_loop(line, info_list) == -1)
 		return (-1);

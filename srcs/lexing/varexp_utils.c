@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 20:48:02 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/10 13:19:25 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/10 13:54:49 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,31 @@ char	*get_expanded_variable(char *exp_var, char **env_cpy)
 	expanded = ft_getenv(exp_var, env_cpy);
 	free(exp_var);
 	return (expanded);
+}
+
+char	*finish_new_line(char *new, char *exp_var, char *word_var, int index)
+{
+	int	index_exp;
+	int	index_word;
+
+	index_exp = 0;
+	index_word = index;
+	while (exp_var[index_exp])
+	{
+		new[index] = exp_var[index_exp];
+		index++;
+		index_exp++;
+	}
+	if (word_var[index_word] == '$')
+		index_word++;
+	while (word_var[index_word] && \
+		(ft_isalpha(word_var[index_word]) || word_var[index_word] == '_'))
+		index_word++;
+	while (word_var[index_word])
+	{
+		new[index] = word_var[index_word];
+		index++;
+		index_word++;
+	}
+	return (new);
 }
