@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:25:02 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/11/16 14:49:30 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/16 15:42:53 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,24 @@
 
 int	is_builtin(t_lexer *node)
 {
+	int len;
+
+	len = ft_strlen(node->content[0]);
 	if (!node->content)
 		return (NO_BUILTIN);
-	else if (ft_strncmp(node->content[0], "exit", 4) == 0)
+	else if (ft_strncmp(node->content[0], "exit", 4) == 0 && len == 4)
 		return (EXIT);
-	else if (ft_strncmp(node->content[0], "echo", 4) == 0)
+	else if (ft_strncmp(node->content[0], "echo", 4) == 0 && len == 4)
 		return (ECHO);
-	else if (ft_strncmp(node->content[0], "cd", 2) == 0)
+	else if (ft_strncmp(node->content[0], "cd", 2) == 0 && len == 2)
 		return (CD);
-	else if (ft_strncmp(node->content[0], "pwd", 3) == 0)
+	else if (ft_strncmp(node->content[0], "pwd", 3) == 0 && len == 3)
 		return (PWD);
-	else if (ft_strncmp(node->content[0], "env", 3) == 0)
+	else if (ft_strncmp(node->content[0], "env", 3) == 0 && len == 3)
 		return (ENV);
-	else if (ft_strncmp(node->content[0], "export", 6) == 0)
+	else if (ft_strncmp(node->content[0], "export", 6) == 0 && len == 6)
 		return (EXPORT);
-	else if (ft_strncmp(node->content[0], "unset", 5) == 0)
+	else if (ft_strncmp(node->content[0], "unset", 5) == 0 && len == 5)
 		return (UNSET);
 	else
 		return (NO_BUILTIN);

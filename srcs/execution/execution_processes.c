@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:48 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/16 14:53:44 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/16 15:54:22 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,11 @@ static void	run_child_process(int in, int *pipe_fd, t_lexer *node,
 
 	err = -1;
 	builtin = is_builtin(node);
-	// if (node->next && ((builtin == ECHO && ft_strncmp(node->next->content[0], "exit", 4) == 0) || (builtin == EXIT && ft_strncmp(node->next->content[0], "echo", 4) == 0)))
-	// 	err = execute_builtin(shell, builtin, node);
 	change_signal_profile(CHILD);
 	close(pipe_fd[PIPE_READ]);
 	route_input(in, node);
 	route_output(pipe_fd[PIPE_WRITE], node);
-	if (!node->content)
+	if (!node->content || node->content[0][0] == '\0')
 		exit (err);
 	else if (is_directory(node->content[0]))
 		err = err_log(E_DIR, node->content[0]);
@@ -83,7 +81,6 @@ static pid_t	*run_and_route_processes(pid_t *pid, t_lexer *head,
 	int		pipe_fd[2];
 	int		prev_pipe;
 	int		i;
-	t_builtin builtin;
 
 	prev_pipe = STDIN_FILENO;
 	current = head;
@@ -92,9 +89,6 @@ static pid_t	*run_and_route_processes(pid_t *pid, t_lexer *head,
 	{
 		if (pipe(pipe_fd) < 0)
 			perror("pipe()");
-		builtin = is_builtin(current);
-		if (builtin != NO_BUILTIN)
-			execute_builtin(shell, builtin, current);
 		pid[i] = create_child_process();
 		change_signal_profile(WAITING);
 		if (pid[i] == 0)

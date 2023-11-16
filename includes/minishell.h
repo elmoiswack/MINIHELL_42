@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:51 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/16 12:17:54 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/16 15:44:10 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -356,6 +356,8 @@ int		cmd_amount(t_lexer *head);
 pid_t	*allocate_pid_array(int n);
 int		wait_on_child_processes(t_lexer *head, pid_t *pid, int status);
 pid_t	create_child_process(void);
+
+//		utilities_misc2.c
 bool	is_directory(char *content);
 
 //		execution_cd.c
