@@ -6,7 +6,7 @@
 /*   By: fvan-wij <fvan-wij@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:38:07 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/10/19 13:13:08 by flip          ########   odam.nl         */
+/*   Updated: 2023/11/16 14:45:53 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = 0;
 	else if (ft_strlen(s + start) < len)
 		len = ft_strlen(s + start);
-	substr = malloc(len + 1 * sizeof(char));
+	substr = ft_calloc(len + 1, sizeof(char));
 	if (substr == NULL)
 		return (NULL);
 	while (j < len && s[i] != '\0')

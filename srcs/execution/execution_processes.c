@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:48 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/31 15:12:15 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/16 14:53:44 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@
 #include <sys/wait.h>
 #include <errno.h>
 
-static void	run_cmd(char *path, char *content[], char *env_cpy[])
+static int	run_cmd(char *path, char *content[], char *env_cpy[])
 {
 	if (execve(path, content, env_cpy) < 0)
 		perror("execve");
+	return (errno);
 }
 
 static void	run_child_process(int in, int *pipe_fd, t_lexer *node,
@@ -34,20 +35,28 @@ static void	run_child_process(int in, int *pipe_fd, t_lexer *node,
 
 	err = -1;
 	builtin = is_builtin(node);
+	// if (node->next && ((builtin == ECHO && ft_strncmp(node->next->content[0], "exit", 4) == 0) || (builtin == EXIT && ft_strncmp(node->next->content[0], "echo", 4) == 0)))
+	// 	err = execute_builtin(shell, builtin, node);
 	change_signal_profile(CHILD);
 	close(pipe_fd[PIPE_READ]);
 	route_input(in, node);
 	route_output(pipe_fd[PIPE_WRITE], node);
-	node->content = colorize_cmd(node->content);
-	if (is_absolute_path(node))
-		run_cmd(node->path, node->content, shell->env_cpy);
-	if (builtin != NO_BUILTIN)
+	if (!node->content)
+		exit (err);
+	else if (is_directory(node->content[0]))
+		err = err_log(E_DIR, node->content[0]);
+	else if (is_absolute_path(node))
+		err = run_cmd(node->path, node->content, shell->env_cpy);
+	else if (builtin != NO_BUILTIN)
 		err = execute_builtin(shell, builtin, node);
 	else if (!cmd_exists(node->content[0], shell->env_cpy))
 		err = err_log(E_CMDNFND, (node->content[0]));
 	else
-		run_cmd(node->path, node->content, shell->env_cpy);
-	clean_up(shell);
+	{
+		node->content = colorize_cmd(node->content);
+		err = run_cmd(node->path, node->content, shell->env_cpy);
+	}
+	free_ll(&shell->cmd_lst);
 	exit(err);
 }
 
@@ -74,6 +83,7 @@ static pid_t	*run_and_route_processes(pid_t *pid, t_lexer *head,
 	int		pipe_fd[2];
 	int		prev_pipe;
 	int		i;
+	t_builtin builtin;
 
 	prev_pipe = STDIN_FILENO;
 	current = head;
@@ -82,6 +92,9 @@ static pid_t	*run_and_route_processes(pid_t *pid, t_lexer *head,
 	{
 		if (pipe(pipe_fd) < 0)
 			perror("pipe()");
+		builtin = is_builtin(current);
+		if (builtin != NO_BUILTIN)
+			execute_builtin(shell, builtin, current);
 		pid[i] = create_child_process();
 		change_signal_profile(WAITING);
 		if (pid[i] == 0)
