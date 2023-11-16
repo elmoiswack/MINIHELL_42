@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:36:19 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/10/23 15:39:06 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/16 13:29:36 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <errno.h>
+#include <stdio.h>
 
 static bool	is_cmd_executable(char *paths[], char *slash_cmd)
 {
@@ -65,8 +67,14 @@ void	parse_node_absolute_path(t_lexer *node)
 {
 	char	*new_cmd;
 
+	new_cmd = NULL;
 	if (!node->path)
 		node->path = ft_strdup(node->content[0]);
+	if (!node->path)
+	{
+		err_log(E_ALLOC, "strdup");
+		return ;
+	}
 	new_cmd = (ft_strrchr(node->content[0], '/') + 1);
 	node->content[0] = new_cmd;
 }

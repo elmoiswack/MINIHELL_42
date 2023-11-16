@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:49:26 by fvan-wij          #+#    #+#             */
-/*   Updated: 2023/10/25 18:54:16 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/16 15:50:10 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	init_ascii_art(void)
 		header_line = get_next_line(sc_fd);
 	}
 	ft_printf("\033[0m");
+	close(sc_fd);
 }
 
 void	init_history(void)
@@ -58,6 +59,7 @@ void	init_history(void)
 		free(history_line);
 		history_line = get_next_line(history_fd);
 	}
+	close(history_fd);
 }
 
 void	add_to_history_file(char *line)
@@ -70,6 +72,7 @@ void	add_to_history_file(char *line)
 		return ;
 	ft_putstr_fd(line, history_fd);
 	ft_putstr_fd("\n", history_fd);
+	close(history_fd);
 }
 
 void	remove_ctl_echo(void)
@@ -83,7 +86,7 @@ void	remove_ctl_echo(void)
 
 char	**colorize_cmd(char *content[])
 {
-	int	n_of_args;
+	int		n_of_args;
 
 	n_of_args = 0;
 	while (content[n_of_args])
@@ -95,7 +98,7 @@ char	**colorize_cmd(char *content[])
 	{
 		if (n_of_args == 1)
 			content = ft_append_to_double_array(content, "--color=auto");
-		else
+		else if (n_of_args > 1)
 			content = ft_inject_str_in_array(content, "--color=auto", 1);
 		return (content);
 	}

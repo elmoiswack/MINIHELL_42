@@ -55,6 +55,7 @@ SRCS		:= 	main.c \
 				interface/interface_frontend.c \
 				utilities/utilities_debugging.c \
 				utilities/utilities_misc.c \
+				utilities/utilities_misc2.c \
 				signals/signal_handler.c \
 
 SRCDIR 		:= 	./srcs

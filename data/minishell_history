@@ -1,9 +1,0 @@
-ls
-pwd
-$?
-'$?'
-"$?"
-pwd
-echo $USER$USER
-echo $USER$USER'$USER'
-exit

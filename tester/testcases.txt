@@ -1,0 +1,5 @@
+ls
+ls -l
+echo hey
+echo 'jo'
+ech -nnnn jo

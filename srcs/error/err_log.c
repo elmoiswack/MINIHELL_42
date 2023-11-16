@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/26 12:38:57 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/11/01 13:34:01 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/16 12:18:30 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,15 @@ static void	error_allocation(char *input)
 		ft_putstr_fd_nl(")", STDERR_FILENO);
 }
 
+static void	error_is_dir(char *input)
+{
+	if (input)
+	{
+		ft_putstr_fd(input, STDERR_FILENO);
+		ft_putstr_fd(": is a directory\n", STDERR_FILENO);
+	}
+}
+
 int	err_log(t_error err, char *input)
 {
 	if (err == E_ALLOC)
@@ -64,5 +73,7 @@ int	err_log(t_error err, char *input)
 		return (ft_putstr_fd(input, STDERR_FILENO), 1);
 	else if (err == E_ERR)
 		return (ft_putstr_fd_nl(input, STDERR_FILENO), 1);
+	else if (err == E_DIR)
+		return (error_is_dir(input), 126);
 	return (err);
 }

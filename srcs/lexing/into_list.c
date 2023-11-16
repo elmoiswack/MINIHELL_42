@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   into_list.c                                        :+:      :+:    :+:   */
+/*   into_list.c                                       :+:    :+:             */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:31 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/10 13:30:14 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/16 13:12:28 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdio.h>
+
+static t_lexer *no_metacharacter(t_lexer *info_list, char **splitted_line)
+{
+	info_list->content = splitted_line;
+	if (info_list->content)
+		info_list->path = get_path_of_command(info_list->content[0], \
+				info_list->env_copy);
+	info_list->input = STDIN_IN;
+	info_list->output = STDOUT_OUT;
+	info_list->next = NULL;
+	return (info_list);
+}
 
 t_lexer	*one_two_word_lexer(t_lexer *info_list, \
 	char **splitted_line, int *enum_array)
@@ -29,17 +41,12 @@ t_lexer	*one_two_word_lexer(t_lexer *info_list, \
 	if (splitted_line[i] != NULL && is_metacharachter(splitted_line[i][0]) == 1)
 	{
 		info_list = organizing_data(info_list, splitted_line, enum_array, 0);
+		free_double_array(splitted_line);
 		if (!info_list)
 			return (NULL);
 	}
 	else
-		info_list->content = splitted_line;
-	if (info_list->content)
-		info_list->path = get_path_of_command(info_list->content[0], \
-			info_list->env_copy);
-	info_list->input = STDIN_IN;
-	info_list->output = STDOUT_OUT;
-	info_list->next = NULL;
+		info_list = no_metacharacter(info_list, splitted_line);
 	return (info_list);
 }
 

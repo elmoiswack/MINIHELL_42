@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   minishell.h                                       :+:    :+:             */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:51 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/10 14:14:34 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/16 15:44:10 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@
 // Text_Off		= "\001\033[0m\002"			# Text Style Off
 // Bold			= "\001\033[1m\002"			# Text Style Bold
 
-# define CURSED "\001\033[0;31m\002 \
+# define CURSED "\001\033[0;31m\002\
 \001\033[1m\002 Ç̈ͮ̾ͫ̆ͯ̏U̷͂̎Rͩ̀S̶̽ͮ̑̋̉ͩ̃Ë̷́̓̾͆ͫḐ͒̆̚̚_ > \
 \001\033[0m\002"
 
-# define NON_CURSED "\001\033[1m\002 \
+# define NON_CURSED "\001\033[1m\002\
 Z_SHELL_ > \001\033[0m\002"
 
 # define Z_THEME "LS_COLORS=rs=0:di=01;31:ln=01;36:\
@@ -71,6 +71,7 @@ typedef enum e_error {
 	E_FORK,
 	E_EXIT,
 	E_ERR,
+	E_DIR,
 }	t_error;
 
 //Builtin enumerator - defines the different types of possible builtins;
@@ -355,6 +356,9 @@ int		cmd_amount(t_lexer *head);
 pid_t	*allocate_pid_array(int n);
 int		wait_on_child_processes(t_lexer *head, pid_t *pid, int status);
 pid_t	create_child_process(void);
+
+//		utilities_misc2.c
+bool	is_directory(char *content);
 
 //		execution_cd.c
 int		execute_cd(t_minishell *shell, t_lexer *node, int err);
