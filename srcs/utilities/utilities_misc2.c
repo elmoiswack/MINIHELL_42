@@ -1,3 +1,4 @@
+#include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdlib.h>
 #include <sys/wait.h>

@@ -138,11 +138,11 @@
 // 	return ;
 // }
 
-//  void	print_debug_info(t_lexer *node)
-//  {
-//  	printing_lexer(node);
-//  	print_cmd_lst(node);
-//  }
+// void	print_debug_info(t_lexer *node)
+// {
+// 	printing_lexer(node);
+// 	print_cmd_lst(node);
+// }
 
 void	print_double_array(char **arr)
 {
