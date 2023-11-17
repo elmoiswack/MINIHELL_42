@@ -75,3 +75,14 @@ expr 5 + 5
 expr 5 + 5
 man expr
 expr 5 + 5
+unset PWD
+pwd
+cd ..
+unset PWD
+pwd
+echo $PWD
+env | grep PWD
+cd ..
+env | grep PWD
+l
+l| l | l
