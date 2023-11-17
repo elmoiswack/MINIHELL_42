@@ -77,7 +77,7 @@ Bold		= "\033[1m"			# Text Style Bold
 ######################################################
 
 ifdef DEBUG
-	COMPILER += -g
+	COMPILER += -g -fsanitize=address
 	LIBFT_DEBUG += DEBUG=1
 	DEBUG_MODE += "(debug mode)"
 endif

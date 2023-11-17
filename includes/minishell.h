@@ -60,6 +60,7 @@ typedef enum e_error {
 	E_EXIT,
 	E_ERR,
 	E_DIR,
+	E_PWD,
 }	t_error;
 
 //Builtin enumerator - defines the different types of possible builtins;
@@ -348,6 +349,8 @@ pid_t	create_child_process(void);
 
 //		utilities_misc2.c
 bool	is_directory(char *content);
+void	add_env(t_minishell *shell, char *env);
+void	go_to_home(char *env_cpy[]);
 
 //		execution_cd.c
 int		execute_cd(t_minishell *shell, t_lexer *node, int err);
@@ -359,7 +362,7 @@ int		execute_env(char *envp[], t_lexer *node);
 int		execute_export(t_minishell *shell, t_lexer *node);
 int		export_content(char *content, t_minishell *shell, bool append);
 //		execution_pwd.c
-int		execute_pwd(char *env_cpy[]);
+int		execute_pwd(t_minishell *shell);
 //		execution_unset.c
 int		execute_unset(t_minishell *shell);
 //		execution_exit.c

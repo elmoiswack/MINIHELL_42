@@ -35,7 +35,7 @@ int	execute_builtin(t_minishell *shell, t_builtin builtin, t_lexer *node)
 	else if (builtin == CD)
 		return (execute_cd(shell, node, 0));
 	else if (builtin == PWD)
-		return (execute_pwd(shell->env_cpy));
+		return (execute_pwd(shell));
 	else if (builtin == ENV)
 		return (execute_env(shell->env_cpy, node));
 	else if (builtin == EXPORT)
