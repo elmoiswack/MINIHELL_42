@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilities_debugging.c                             :+:    :+:             */
+/*   utilities_debugging.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:40 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/16 15:52:52 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/16 16:13:41 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 // 	int		n;
 // 	t_builtin builtin;
 // 	int i = 0;
-//
+
 // 	current = head;
 // 	n = 0;
 // 	fprintf(stderr, "\n\033[0;36m--------EXECUTIONER--------\n");
@@ -150,11 +150,11 @@
 // 	return ;
 // }
 
- // void	print_debug_info(t_lexer *node)
- // {
- // 	printing_lexer(node);
- // 	print_cmd_lst(node);
- // }
+//  void	print_debug_info(t_lexer *node)
+//  {
+//  	printing_lexer(node);
+//  	print_cmd_lst(node);
+//  }
 
 void	print_double_array(char **arr)
 {

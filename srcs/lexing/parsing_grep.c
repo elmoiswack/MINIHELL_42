@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:08 by dhussain          #+#    #+#             */
-/*   Updated: 2023/10/25 16:02:47 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/16 16:01:21 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,10 @@ t_lexer	*rm_quotes_grep(t_lexer *info_list)
 	return (head);
 }
 
-t_lexer	*add_flag_grep(t_lexer *info_list, char **splitted_line)
+t_lexer	*add_flag_grep(t_lexer *info_list, char **splitted_line, int index)
 {
 	t_lexer	*head;
-	int		index;
 
-	index = 0;
 	head = info_list;
 	while (info_list)
 	{
@@ -89,6 +87,8 @@ t_lexer	*add_flag_grep(t_lexer *info_list, char **splitted_line)
 		index++;
 	}
 	index++;
+	if (splitted_line[index] == NULL)
+		return (head);
 	info_list->content[1] = ft_calloc(ft_strlen(splitted_line[index]) + 1, \
 		sizeof(char));
 	if (!info_list->content[1])
@@ -110,7 +110,7 @@ t_lexer	*grep_parser(t_lexer *info_list, char **splitted_line)
 	}
 	if (!info_list->content[1])
 	{
-		info_list = add_flag_grep(info_list, splitted_line);
+		info_list = add_flag_grep(info_list, splitted_line, 0);
 		if (!info_list)
 			return (NULL);
 	}
