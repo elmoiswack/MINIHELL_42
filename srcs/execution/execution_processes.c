@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:48 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/16 15:54:22 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/17 10:26:37 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 static int	run_cmd(char *path, char *content[], char *env_cpy[])
 {
+	change_signal_profile(CHILD);
 	if (execve(path, content, env_cpy) < 0)
 		perror("execve");
 	return (errno);
@@ -35,7 +36,6 @@ static void	run_child_process(int in, int *pipe_fd, t_lexer *node,
 
 	err = -1;
 	builtin = is_builtin(node);
-	change_signal_profile(CHILD);
 	close(pipe_fd[PIPE_READ]);
 	route_input(in, node);
 	route_output(pipe_fd[PIPE_WRITE], node);

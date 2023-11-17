@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:24:07 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/11/01 13:57:28 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/17 12:25:31 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,22 @@ static void	pwd(char *cwd)
 	write(1, "\033[0;31m", 8);
 	write(1, ft_strrchr(cwd, '/'), ft_strlen(ft_strrchr(cwd, '/')));
 	write(1, "\033[0m\n", 6);
-	free(cwd);
 	return ;
 }
 
-int	execute_pwd(char *env_cpy[])
+int	execute_pwd(t_minishell *shell)
 {
-	char	*cwd;
+	char	cwd[PWD_SIZE];
+	char	*temp;
 
-	cwd = ft_getenv("PWD", env_cpy);
-	if (!cwd)
-		return (perror("getcwd()"), 1);
-	else
-		return (pwd(cwd), 0);
 	if (getcwd(cwd, PWD_SIZE) == NULL)
-		return (perror("getcwd()"), 1);
+	{
+		temp = ft_getenv("PWD", shell->env_cpy);
+		if (!temp)
+			return (err_log(E_ERR, "PWD is not set"), 1);
+		pwd(temp);
+		return (free(temp), 0);
+	}
 	else
 		return (pwd(cwd), 0);
 }

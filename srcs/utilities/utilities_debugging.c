@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:40 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/16 15:52:52 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/17 12:29:07 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,11 +150,11 @@
 // 	return ;
 // }
 
- // void	print_debug_info(t_lexer *node)
- // {
- // 	printing_lexer(node);
- // 	print_cmd_lst(node);
- // }
+// void	print_debug_info(t_lexer *node)
+// {
+// 	printing_lexer(node);
+// 	print_cmd_lst(node);
+// }
 
 void	print_double_array(char **arr)
 {

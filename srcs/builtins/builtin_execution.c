@@ -6,7 +6,7 @@
 /*   By: fvan-wij <marvin@42.fr>                     +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/23 15:25:02 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/11/16 15:42:53 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/17 12:21:45 by fvan-wij      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	is_builtin(t_lexer *node)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(node->content[0]);
 	if (!node->content)
@@ -47,7 +47,7 @@ int	execute_builtin(t_minishell *shell, t_builtin builtin, t_lexer *node)
 	else if (builtin == CD)
 		return (execute_cd(shell, node, 0));
 	else if (builtin == PWD)
-		return (execute_pwd(shell->env_cpy));
+		return (execute_pwd(shell));
 	else if (builtin == ENV)
 		return (execute_env(shell->env_cpy, node));
 	else if (builtin == EXPORT)
