@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:51 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/17 10:26:58 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/17 11:09:36 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,7 +308,7 @@ char	*remove_single_quotes(char *new, \
 		//listlastcheck_other.c
 t_lexer	*listlastcheck_path(t_lexer *info_list);
 t_lexer	*other_list_checks(t_lexer *info_list);
-t_lexer	*check_chmod(t_lexer *info_list);
+t_lexer	*check_very_special(t_lexer *info_list, int i);
 t_lexer	*replacing_content(t_lexer *info_list, char **array);
 
 //###############################################################
