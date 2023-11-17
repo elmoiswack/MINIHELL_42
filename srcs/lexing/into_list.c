@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   into_list.c                                       :+:    :+:             */
+/*   into_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:31 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/16 13:12:28 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/16 16:10:45 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../libft/libft.h"
 #include <stdio.h>
 
-static t_lexer *no_metacharacter(t_lexer *info_list, char **splitted_line)
+t_lexer	*no_metacharacter(t_lexer *info_list, char **splitted_line)
 {
 	info_list->content = splitted_line;
 	if (info_list->content)

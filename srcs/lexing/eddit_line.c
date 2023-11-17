@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eddit_line.c                                      :+:    :+:             */
+/*   eddit_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:08 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/16 15:17:12 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/16 16:11:09 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,9 @@ char	*put_spaces_in_line(char *line, t_lexer *info_list)
 	space_to_add = 0;
 	while (line[index])
 	{
-		if (line[index] != ' ' && (line[index + 1] && is_metacharachter(line[index + 1]) != 1))
+		if (line[index] != ' ' \
+			&& (line[index + 1] \
+				&& is_metacharachter(line[index + 1]) != 1))
 			space_to_add += 2;
 		index++;
 	}

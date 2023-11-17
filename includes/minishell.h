@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                       :+:    :+:             */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:51 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/16 15:44:10 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/17 10:26:58 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ int		check_whitespaces(char *line);
 int		check_outredirect(char *line, int index, t_lexer *info_list);
 int		check_inredirect(char *line, int index, t_lexer *info_list);
 int		check_pipe(char *line, int index, t_lexer *info_list);
+int		check_envvar(char *line, int index, t_lexer *info_list);
 
 		//line_checker_quotes.c
 int		check_the_quotes(char *line);
@@ -249,7 +250,7 @@ t_lexer	*intolist_commands(t_lexer *info_list, \
 		//parsing_grep.c
 int		check_for_grep(t_lexer *info_list);
 t_lexer	*grep_parser(t_lexer *info_list, char **splitted_line);
-t_lexer	*add_flag_grep(t_lexer *info_list, char **splitted_line);
+t_lexer	*add_flag_grep(t_lexer *info_list, char **splitted_line, int index);
 t_lexer	*rm_quotes_grep(t_lexer *info_list);
 char	*rm_guotes_loop(t_lexer *info_list, char *temp);
 

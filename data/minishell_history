@@ -1,0 +1,73 @@
+ls -la
+cat Makefile | echo -n jo
+cat Makefile | echo jo
+cat Makefile | echo -n jo
+cat Makefile | echo jo
+cat Makefile | echo jo
+cat Makefile | echo jo
+'
+''
+cat Makefile | echo jo
+cat Makefile | echo jo
+cat Makefile | echo jo
+cat Makefile | echo jo
+cat Makefile | echo jo
+cat | grep
+cat | grep
+cat | grep
+cat Makefile | echo jo
+ls -la
+<Makefile cat|grep 'lib' >out
+cat out 
+rm out 
+mkdir dska
+rm -rf dska/
+;s
+ls
+pwd
+ls
+rm -rf dska/
+<Makefile cat|grep 'lib' >out
+cat out 
+rm out 
+ls -la
+ls -l-a
+ls -l -a
+cat Makefile | echo jo
+ls
+pwd
+echo $USER $USER$USER "dsa $USER dsa" '$USER' "dsada'$USER'dsa" 
+echo $USER $USER$USER "dsa $USER dsa" '$USER' "dsada'$USER'dsa" hehe haha
+echo $USER $USER$USER "dsa $USER dsa" '$USER' "dsada'$USER'dsa" >out
+cat out 
+rm out 
+haha lmao
+export
+export a ="dsada dsa"
+ls
+env
+export a="dsada dsa"
+env
+ls
+export a4="haha"
+export 3a4="haha"
+export 3a4="haha"
+export _a4="haha"
+export _a4="haha"
+export a_a4="haha"
+export ajek*="haha"
+="dsada"
+="dsada"
+="dsada"
+="dsada"
+dsada_dsada="dsada"
+export dsada_dsada="dsada"
+export dsada_dsa2344#da="dsada"
+ls
+pwd
+a=b
+burh=dd2das@
+export burh=dd2das@
+env
+export bu##rh=dd2das@
+export bu##rh=dd2das@

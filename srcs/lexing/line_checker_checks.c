@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:48 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/10 14:02:34 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/17 10:44:59 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,30 @@ int	check_outredirect(char *line, int index, t_lexer *info_list)
 			"a file must follow a redirect out!"), -1);
 	if (line[index] == '|' || line[index] == '<')
 		return (error_lex(info_list, 2, "incorrect use of refirect out!"), -1);
+	return (1);
+}
+
+int	check_envvar(char *line, int index, t_lexer *info_list)
+{
+	if (index == 0)
+		return (error_lex(info_list, 2, "missing an env_var name!"), -1);
+	if (line[index - 1] && line[index - 1] == ' ')
+		return (error_lex(info_list, 2, \
+			"a space can't be infront of an '=' sign!"), -1);
+	index--;
+	while (line[index] && line[index] != ' ')
+	{
+		if (ft_isalnum(line[index]) != 1 && line[index] != '_')
+			return (error_lex(info_list, 2, \
+				"an env_var name can only exist \
+			out of letters, numbers and a '_' sign!"), -1);
+		index--;
+		if (index == 0)
+			break ;
+	}
+	index++;
+	if (ft_isalpha(line[index]) != 1)
+		return (error_lex(info_list, 2, \
+			"an env_var name has to start with a letter of the alphabet!"), -1);
 	return (1);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                       ::::::::             */
-/*   builtin_execution.c                               :+:    :+:             */
-/*                                                    +:+                     */
-/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
-/*                                                  +#+                       */
-/*   Created: 2023/10/23 15:25:02 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/11/16 15:42:53 by fvan-wij      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   builtin_execution.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 15:25:02 by fvan-wij          #+#    #+#             */
+/*   Updated: 2023/11/16 16:11:31 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	is_builtin(t_lexer *node)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(node->content[0]);
 	if (!node->content)

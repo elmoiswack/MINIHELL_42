@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:39:53 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/10 13:34:41 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/17 10:39:23 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ int	inputline_other_checks(char *line, t_lexer *info_list, int index)
 	if (line[index] == '|')
 	{
 		if (check_pipe(line, index, info_list) == -1)
+			return (-1);
+	}
+	if (line[index] == '=')
+	{
+		if (check_envvar(line, index, info_list) == -1)
 			return (-1);
 	}
 	return (1);
