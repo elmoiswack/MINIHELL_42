@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_execution.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/17 12:40:18 by dhussain          #+#    #+#             */
+/*   Updated: 2023/11/17 13:00:43 by dhussain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdlib.h>
@@ -6,10 +18,10 @@ int	is_builtin(t_lexer *node)
 {
 	int	len;
 
-	len = ft_strlen(node->content[0]);
 	if (!node->content)
 		return (NO_BUILTIN);
-	else if (ft_strncmp(node->content[0], "exit", 4) == 0 && len == 4)
+	len = ft_strlen(node->content[0]);
+	if (ft_strncmp(node->content[0], "exit", 4) == 0 && len == 4)
 		return (EXIT);
 	else if (ft_strncmp(node->content[0], "echo", 4) == 0 && len == 4)
 		return (ECHO);

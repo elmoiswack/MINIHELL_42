@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:51:03 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/10 13:54:15 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:49:52 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*replace_and_cat_line(char *new_var, \
 		return (error_lex(info_list, 3, "varexp_utils.c/L114"), NULL);
 	}
 	new_var = ft_strjoin_and_free(new_var, status);
+	free(status);
 	return (new_var);
 }
 
@@ -56,7 +57,6 @@ char	*expand_exit_status(char *word_var, t_lexer *info_list)
 	if (!new_var)
 		return (error_lex(info_list, 3, "varexp_utils.c/L110"), NULL);
 	new_var = replace_and_cat_line(new_var, word_var, index, info_list);
-	free(status);
 	free(word_var);
 	return (new_var);
 }

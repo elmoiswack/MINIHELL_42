@@ -82,6 +82,12 @@ ifdef DEBUG
 	DEBUG_MODE += "(debug mode)"
 endif
 
+ifdef VAL
+	COMPILER += -g
+	LIBFT_DEBUG += DEBUG=1
+	DEBUG_MODE += "(debug mode)"
+endif
+
 all: $(NAME)
 
 $(NAME): $(OBJS)

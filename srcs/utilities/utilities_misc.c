@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                       ::::::::             */
-/*   utilities_misc.c                                  :+:    :+:             */
-/*                                                    +:+                     */
-/*   By: fvan-wij <marvin@42.fr>                     +#+                      */
-/*                                                  +#+                       */
-/*   Created: 2023/10/26 13:13:27 by fvan-wij      #+#    #+#                 */
-/*   Updated: 2023/11/16 15:43:33 by fvan-wij      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   utilities_misc.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/26 13:13:27 by fvan-wij          #+#    #+#             */
+/*   Updated: 2023/11/17 13:43:25 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
 #include <stdlib.h>
@@ -53,12 +54,10 @@ pid_t	*allocate_pid_array(int n)
 {
 	pid_t	*pid;
 
-	pid = malloc(sizeof(pid_t) * n);
+	pid = ft_calloc(sizeof(pid_t), n);
 	if (!pid)
 		return (NULL);
-	else
-		return (pid);
-	ft_memset(pid, 1, sizeof(pid));
+	return (pid);
 }
 
 int	wait_on_child_processes(t_lexer *head, pid_t *pid, int status)

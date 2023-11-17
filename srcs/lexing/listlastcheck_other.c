@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:38:54 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/17 11:09:41 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:43:35 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,8 @@ t_lexer	*listlastcheck_path(t_lexer *info_list)
 	return (head);
 }
 
-t_lexer	*replacing_content(t_lexer *info_list, char **array)
+t_lexer	*replacing_content_loop(t_lexer *info_list, char **array, int i, int j)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 1;
-	free(info_list->content[1]);
 	while (array[i])
 	{
 		info_list->content[j] = ft_calloc(1, sizeof(char));
@@ -51,6 +45,27 @@ t_lexer	*replacing_content(t_lexer *info_list, char **array)
 		j++;
 	}
 	info_list->content[j] = NULL;
+	return (info_list);
+}
+
+t_lexer	*replacing_content(t_lexer *info_list, char **array)
+{
+	int		i;
+	int		j;
+	char	*temp;
+
+	i = 0;
+	j = 1;
+	temp = ft_strdup(info_list->content[0]);
+	free_double_array(info_list->content);
+	info_list->content = ft_calloc(get_max_array(array) + 2, sizeof(char *));
+	if (!info_list->content)
+		return (error_lex(info_list, 3, "listlastcheck_other.c/L43"), NULL);
+	info_list->content[0] = ft_strdup(temp);
+	if (!info_list->content[0])
+		return (error_lex(info_list, 3, "listlastcheck_other.c/L43"), NULL);
+	free(temp);
+	info_list = replacing_content_loop(info_list, array, i, j);
 	return (info_list);
 }
 

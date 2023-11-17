@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution_processes.c                             :+:    :+:             */
+/*   execution_processes.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:09:48 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/17 10:26:37 by fvan-wij      ########   odam.nl         */
+/*   Updated: 2023/11/17 13:42:53 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,21 +75,21 @@ static int	fetch_exit_status(pid_t *pid, t_lexer *head)
 }
 
 static pid_t	*run_and_route_processes(pid_t *pid, t_lexer *head,
-		t_minishell *shell)
+		t_minishell *shell, int i)
 {
 	t_lexer	*current;
 	int		pipe_fd[2];
 	int		prev_pipe;
-	int		i;
 
 	prev_pipe = STDIN_FILENO;
 	current = head;
-	i = 0;
 	while (current)
 	{
 		if (pipe(pipe_fd) < 0)
-			perror("pipe()");
+			return (perror("pipe()"), pid);
 		pid[i] = create_child_process();
+		if (pid[i] == -1)
+			return (close(pipe_fd[PIPE_WRITE]), close(pipe_fd[PIPE_READ]), pid);
 		change_signal_profile(WAITING);
 		if (pid[i] == 0)
 			run_child_process(prev_pipe, pipe_fd, current, shell);
@@ -112,6 +112,6 @@ int	execute_cmds(t_minishell *shell, t_lexer *head, char *env_cpy[])
 		return (err_log(E_ALLOC, "'pid array'"));
 	if (create_heredoc_loop(head, env_cpy) != 0)
 		return (free(pid), 130);
-	pid = run_and_route_processes(pid, head, shell);
+	pid = run_and_route_processes(pid, head, shell, 0);
 	return (fetch_exit_status(pid, head));
 }

@@ -6,7 +6,7 @@
 /*   By: dhussain <dhussain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:40:47 by dhussain          #+#    #+#             */
-/*   Updated: 2023/11/10 14:15:32 by dhussain         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:48:11 by dhussain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,10 @@ char	*env_expander_loop(char *word_var, \
 		}
 		word_var = envexp_loop_other(word_var, \
 			&index, env_cpy, info_list);
-		index++;
+		if (index < (int) ft_strlen(word_var))
+			index++;
+		if (index >= (int) ft_strlen(word_var))
+			break ;
 	}
 	return (word_var);
 }
